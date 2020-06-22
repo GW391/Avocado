@@ -1,0 +1,95 @@
+#menu {
+    position: absolute;
+/*float: none;*/
+    width: 100%;
+    background: #8888FF; /*#FFFFFF;*/
+    left: 0%;
+    right: 0%;
+    top: 100px;
+    z-index: 10;
+}
+#menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 11em;
+}
+
+#menu a, #menu h2 {
+    font: bold 14px arial, helvetica, sans-serif;
+    display: block;
+    border-width: 2px 2px 0px 2px;
+    border-style: solid;
+    border-color: #ccc #888 #555 #bbb;
+    margin: 0;
+    padding: 2px 3px;
+
+}
+
+#menu h2 {
+    color: #fff;
+    background: #000;
+    text-transform: uppercase;
+}
+
+#menu a {
+    color: #000;
+    background: #8888FF;
+    text-decoration: none;
+    text-align: center;
+}
+
+#menu a:hover {
+    color: #a00;
+    background: #CCCCFF;
+}
+
+/* position the popout */
+
+#menu li {position: relative;}
+
+#menu ul ul {
+    position: absolute;
+    z-index: 500;
+            filter:alpha(opacity=85);
+-moz-opacity:0.85;
+-khtml-opacity: 0.85;
+opacity: 0.85;
+}
+
+#menu ul ul ul {
+    top: 0;
+    left: 100%;
+}
+
+/* hiding the Hovers */
+
+div#menu ul ul,
+div#menu ul li:hover ul ul,
+div#menu ul ul li:hover ul ul
+{display: none;}
+
+div#menu ul li:hover ul,
+div#menu ul ul li:hover ul,
+div#menu ul ul ul li:hover ul
+{display: block;}
+
+
+.box {
+  display: none;
+}
+#menu .close {
+  display: none;
+}
+
+.collapsibleList label {
+  display: none;
+}
+
+.collapsibleList li > input + * {
+ display: none;
+}
+.collapsibleList li > input {
+ display: none;
+}
