@@ -46,7 +46,7 @@ if (isset($target)){
         $die = "Sorry there is a problem on the page, please try again later.";
         $sort = null;
 
-        $result = SQL($Select, $From, $die, $where, $Limit, $sort);
+        $result = SQL($Select, $From, $die, $where, $Limit, $sort, null);
         $row=fetch_array($result);
         if (isset($row['dispname'])){
             $subsection_d = validate($row['dispname'], 'hd');

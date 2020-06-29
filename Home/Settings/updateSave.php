@@ -11,9 +11,8 @@ $extra = validate($_POST['eextra'],'h');
 $security = validate($_POST['esecurity'],'h');
 $sortorder = validate($_POST['esortorder'],'h');
 
-echo "ETLD: " . $_POST["eTLD"];
+//echo "ETLD: " . $_POST["eTLD"];
 if (isset($_POST["eTLD"])){
-
     if (is_null($_POST["eTLD"]) || strlen($_POST["eTLD"])==0){
     $TLD = 0;
 }else{
@@ -21,7 +20,7 @@ if (isset($_POST["eTLD"])){
 }}else{
     $TLD = 0;
 }
-echo "TLD: " . $TLD;
+//echo "TLD: " . $TLD;
 
 if (isset($_POST['ehistory'])){
     $History = validate($_POST['ehistory'],'h');

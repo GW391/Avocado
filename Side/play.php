@@ -2,10 +2,20 @@
 <tr>
 <td colspan=2 align=center>
 <h3>
-<?php echo $_REQUEST["d"]; ?>
+<?php 
+if (isset($_REQUEST["d"]) && strlen($_REQUEST["d"])!=0) {
+    $PodCastfile = validate($_REQUEST["d"],'hd');
+}else{
+    echo "Sorry the selected option is not available";
+}
+ ?>
 <?php
 $addpath='';
 $addext='';
+
+// get podcast URL
+$PodCast = PodCastURL();
+
 ?>
 </h3>
 </td>
@@ -14,19 +24,19 @@ $addext='';
 <td>
 
 <object width="300">
-<param name="src" value="http://www.woodstockbaptistchurch.org.uk/sermons/<?php echo $addpath; ?><?php echo $_REQUEST["d"]; ?><?php echo $addext; ?>.mp3">
+<param name="src" value="<?php echo $PodCast?>/<?php echo $addpath; ?><?php echo $PodCastfile; ?><?php echo $addext; ?>.mp3">
 <param name="autoplay" value="false">
 <param name="controller" value="true">
 <param name="bgcolor" value="#FFFFFF">
-<embed src="http://www.woodstockbaptistchurch.org.uk/sermons/<?php echo $addpath; ?><?php echo $_REQUEST["d"]; ?><?php echo $addext; ?>.mp3" loop="false" width="300" controller="true" bgcolor="#FFFFFF"></embed>
+<embed src="<?php echo $PodCast?>/<?php echo $addpath; ?><?php echo $PodCastfile; ?><?php echo $addext; ?>.mp3" loop="false" width="300" controller="true" bgcolor="#FFFFFF"></embed>
 </object>
 
 </td>
 <td align=right>
 <p>
 <?php
-if(file_exists("sermons/" . $_REQUEST["d"] . ".php")){
-include("./sermons/" . $_REQUEST["d"] . ".php");
+if(file_exists("sermons/" . $PodCastfile . ".php")){
+include("./sermons/" . $PodCastfile . ".php");
 
 
 }

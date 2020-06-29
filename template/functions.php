@@ -52,6 +52,7 @@ global $con;
     return $ParameterReturnValue;
 }
 
+// why do I have 2 of these ???
 function curPageURL($ssl, $uri) {
      $pageURL = 'http';
  if ($_SERVER["HTTPS"] == "on" || $ssl) {$pageURL .= "s";}
@@ -202,5 +203,42 @@ if ( in_array($_FILES["file"]["type"], $allowedTypes)
   echo "Extention: " . $extension;
   echo "mime_content_type: " . $_FILES["file"]["tmp_name"];
   }
+}
+
+function PodCastURL(){
+    $PodCast = '';
+    if (parameters('Podcast_URL')){
+        $PodCast .= validate(parameters('Podcast_URL'),'hd');
+    }else{
+
+        $PodCast .= curURL(parameters('SSL'), 0);
+ 
+    $PodCast .= dirname($_SERVER['PHP_SELF']);
+        global $nofolder;
+        if (!isset($nofolder) || $nofolder == 0){
+            if (parameters('Podcast_Folder')){
+                $PodCast .= '/'. validate(parameters('Podcast_Folder'),'hd');
+            }else{
+                $PodCast .= '/podcast';
+            }
+        }
+    
+    }
+    return $PodCast;
+    }
+    
+function Displaycaptcha(){
+    //quick and dirty for the moment drop a hidden filed into the form
+    echo "<label style=\"visibility:collapse\"> Leave blank</label>";
+    echo "<input type=\"text\" name=\"Captcha\" value=\"\" style=\"visibility:collapse\">";
+    
+}
+
+function CheckCaptcha(){
+    if (isset($_REQUEST['Captcha']) && strlen($_REQUEST['Captcha'] !=0)){
+        return true;
+    }else{
+        return false;
+    }
 }
 ?>

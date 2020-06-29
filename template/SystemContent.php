@@ -1,7 +1,7 @@
 <?php
 
-if(file_exists("./system/" . $SystemPage . ".php")){
-    require "./system/" . $SystemPage . ".php";
+if(file_exists("System/" . $SystemPage . ".php")){
+    require "System/" . $SystemPage . ".php";
 }
 
 

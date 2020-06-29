@@ -52,8 +52,8 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (55,'CalendarUpdateRecordText', 'Event Updated', NULL, NULL, NULL, '0', '1', '50', 'Enter the text for successfully updating a calendar entry', ' ', 'Calendar'),
     (56,'ShowNonBookableDays', '1', NULL, NULL, NULL, '0', 'B', '0', 'Select if you want to see non-bookable days in calendar', ' ', 'Calendar'),
     (57,'PublicCalendarViews', 'List\nCalendar\nDay\nWeek', NULL, NULL, NULL, '0', 'M', '50', 'Select any Calendar views you wish to be visible to public visitors', 'List\nCalendar\nDay\nWeek', 'Calendar'),
-    (59,'SystemPages', 'Calendar\nContact', NULL, NULL, NULL, '0', '5', '50', 'List of System pages that can be selected in page edit.', ' ', 'General')
-    ('60', 'DataUsage', '<p>
+    (59,'SystemPages', 'Calendar\nContact', NULL, NULL, NULL, '0', '5', '50', 'List of System pages that can be selected in page edit.', ' ', 'General'),
+    (60, 'DataUsage', '<p>
 We store data on this site for the sole provision of the service to you, by registering you agree that we can use this data for this purpose.
 the data we hold is:
 <ul>
@@ -69,26 +69,27 @@ All data is encrypted, and stored on a shared hosting server which is not contro
 For more information see our Privicy Notice
 </div>
 
-', NULL, NULL, NULL, '0', '10', '50', 'Enter a Data Usage Details', NULL, 'General'),
-('61', 'NewsDefaultSubject', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter the default subject to use for news letters', NULL, 'News'),
-('62', 'NewsDefaultMessage', NULL, NULL, NULL, NULL, '0', '10', '30', 'Enter the default message to use for news letters, use :name to enter the name of the recipient', NULL, 'News'),
-('63', 'NewsSubscribeConformationSubject', NULL, NULL, NULL, NULL, '0', '1', '30', NULL, NULL, 'News'),
-('64', 'NewsSubscriptionDefaultMessage', 'Dear  :name,
+', NULL, NULL, NULL, '0', '10', '50', 'Enter a Data Usage Details', ' ', 'General'),
+(61, 'NewsDefaultSubject', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter the default subject to use for news letters', NULL, 'News'),
+(62, 'NewsDefaultMessage', NULL, NULL, NULL, NULL, '0', '10', '30', 'Enter the default message to use for news letters, use :name to enter the name of the recipient', NULL, 'News'),
+(63, 'NewsSubscribeConformationSubject', NULL, NULL, NULL, NULL, '0', '1', '30', NULL, ' ', 'News'),
+(64, 'NewsSubscriptionDefaultMessage', 'Dear  :name,
 
 Thank you for choosing to subscribe to our news letter.
 
 Please click the link below to activate your account.', NULL, NULL, NULL, '0', '10', '30', NULL, NULL, 'News'),
-('65', 'maxfileuploadsize', '20000000', 0, 'N', 10, 'Enter the maximim size of a file for uploading in Bytes, default is 20000000. Note your server settings myst be sert to allow this size too.', 'Security'),
-('66', 'newsletterfails', '5', 0, 'N', 10, 'Enter the number of failed newsletter sends before deleting the subscribed user, 0 allows for unlimited. This only covers send failures, not bounceback emails.', 'News'),
-('67', 'PasswordResetEmailMessage', 'Thank you for requesting to reset your username and/or password.
+(65, 'maxfileuploadsize', '20000000', NULL, NULL, NULL, '0', 'N', '10', 'Enter the maximim size of a file for uploading in Bytes, default is 20000000. Note your server settings myst be sert to allow this size too.', NULL, 'Security'),
+(66, 'newsletterfails', '5', NULL, NULL, NULL, '0', 'N', '10', 'Enter the number of failed newsletter sends before deleting the subscribed user, 0 allows for unlimited. This only covers send failures, not bounceback emails.', NULL, 'News'),
+(67, 'PasswordResetEmailMessage', 'Thank you for requesting to reset your username and/or password.
 
 Please click the link below to reset your account details
 
 :link', NULL, NULL, NULL, '0', '10', '30', 'Enter the message to email for password resets use :link to include the reset link', NULL, 'User'),
-('68', 'PasswordResetEmailSubject', 'Password Reset', NULL, NULL, NULL, '0', '1', '30', 'Enter the subject for the password reset email', NULL, 'User'),
-('69', 'UserRegistrationFromAddress', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter email address which sends the user registration email', NULL, 'User'),
-('70', 'ArticleApproverEmailAddress', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter the email address for Artcile approvers', NULL, 'General'),
-('71', 'ExternalSiteDisclaimer', 'We are not responsible for the content of external sites', NULL, NULL, NULL, '0', '1', '50', 'Enter some text as a disclaimer for external sites', NULL, 'General')
+(68, 'PasswordResetEmailSubject', 'Password Reset', NULL, NULL, NULL, '0', '1', '30', 'Enter the subject for the password reset email', NULL, 'User'),
+(69, 'UserRegistrationFromAddress', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter email address which sends the user registration email', NULL, 'User'),
+(70, 'ArticleApproverEmailAddress', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter the email address for Artcile approvers', NULL, 'General'),
+(71, 'ExternalSiteDisclaimer', 'We are not responsible for the content of external sites', NULL, NULL, NULL, '0', '1', '50', 'Enter some text as a disclaimer for external sites', NULL, 'General'),
+(72, 'Bookshop_Affiliate_Tag', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter your bookshop Afiliate tag.', NULL, 'Bookshop')
 
 ";
 

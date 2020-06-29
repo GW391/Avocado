@@ -1,6 +1,8 @@
 <?php
 
+// todo: check validation it does not seem to work when wanting to download the file.
 $filename = $_REQUEST['d'];
+        //validate(,'hd');
 $filename = $filename . '.mp3';
 
 header('Pragma: public');

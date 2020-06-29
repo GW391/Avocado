@@ -3,10 +3,14 @@
 <td colspan=2 align=center>
 <h3>
 <?php
+// todo: check validation
 $file = validate($_REQUEST["d"], 'hd');
 echo $file;
 $addpath='';
 $addext='';
+
+$PodCast = PodCastURL();
+
 ?>
 </h3>
 </td>
@@ -18,11 +22,11 @@ $addext='';
 // embed audio player into page with podcast file.
 ?>
 <object width="300">
-<param name="src" value="https://www.woodstockbaptistchurch.org.uk/sermons/<?php echo $addpath; ?><?php echo $file; ?><?php echo $addext; ?>.mp3">
+<param name="src" value="<?php echo $PodCast?>/<?php echo $addpath; ?><?php echo $file; ?><?php echo $addext; ?>.mp3">
 <param name="autoplay" value="false">
 <param name="controller" value="true">
 <param name="bgcolor" value="#FFFFFF">
-<embed src="https://www.woodstockbaptistchurch.org.uk/sermons/<?php echo $addpath; ?><?php echo $file; ?><?php echo $addext; ?>.mp3" loop="false" width="300" controller="true" bgcolor="#FFFFFF"></embed>
+<embed src="<?php echo parameters('Podcast_Folder')?>/<?php echo $file; ?>.mp3" loop="false" width="300" controller="true" bgcolor="#FFFFFF"></embed>
 </object>
 
 </td>

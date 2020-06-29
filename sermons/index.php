@@ -1,4 +1,27 @@
 <?php
+
+require_once '../template/library/HTMLPurifier.auto.php';
+require_once '../template/functions.php';
+require_once '../template/config.php';
+require_once '../template/hotsprings_'.$DatabaseType.'.php';
+//echo "databse loaded";
+require_once '../template/SQL_'.$DatabaseType.'.php';
+require_once '../template/vars.php';
+require_once '../template/errorlog.php';
+require_once '../template/asc_shift.php';
+
+$URL = curURL(parameters('SSL'), 0);
+
+// build podcast folder to check through for podcast files.
+$nofolder = 1;
+$PodCast = PodCastURL(); 
+$nofolder = 0;
+//add the xml 
+$check_paramater = parameters('Podcast_URL');
+if (!isset($check_paramater) || strlen($check_paramater) == 0){
+    $PodCast .= '/?format=xml';
+}
+
 if ($_REQUEST["format"] == "xml") {
 	header("Content-Type: application/xml");
 
@@ -11,17 +34,17 @@ echo  "<?xml version=\"1.0\" ?>";
       <channel>
 
           <title><?php echo parameters('Podcast_Title'); ?></title>
-      <link>http://www.woodstockbaptistchurch.org.uk</link>
-      <atom:link href="http://www.woodstockbaptistchurch.org.uk/sermons/?format=xml" rel="self" type="application/rss+xml" />
-      <description>Woodstock Baptist Church Sermons</description>
+      <link><?php echo $URL ?></link>
+      <atom:link href="<?php echo $PodCast ?>" rel="self" type="application/rss+xml" />
+      <description><?php echo parameters('Podcast_Title'); ?></description>
       <language>en-gb</language>
-      <copyright><?php echo Date("Y") ?></copyright>
+      <copyright>&#169; <?php echo Date("Y") . parameters('Organisation'); ?></copyright>
 
 	<image>
-		<url>http://www.woodstockbaptistchurch.org.uk/images/albumart.png</url>
+		<url><?php echo $URL; ?>/images/albumart.png</url>
 
-		<title>Woodstock Baptist church Sermons</title>
-		<link>http://www.woodstockbaptistchurch.org.uk/sermons/?format=xml</link>
+		<title><?php echo parameters('Podcast_Title'); ?></title>
+		<link><?php echo $PodCast ?></link>
 		<width>178</width>
 		<height>130</height>
 	</image>
@@ -44,11 +67,13 @@ while ($Adjust < 21) {
 } 
 
 ?>
-      <webMaster>webmaster@woodstockbaptistchurch.org.uk (Webmaster)</webMaster>
       <ttl>5</ttl>
-
-
 <?php
+
+// remove /?format=xml from $PodCast variable, no longer needed
+
+   $PodCast = substr($PodCast, 0, strlen($PodCast)-11);
+
 foreach (glob("*.mp3") as $var_sermon) {
 
 $var_sermon = substr($var_sermon, 0, -4);
@@ -76,11 +101,12 @@ if ($handle) {
     }
     fclose($handle);
 }
+
 echo "</description>\n
 ";
-echo "      <guid isPermaLink=\"true\">http://www.woodstockbaptistchurch.org.uk/sermons/" . $var_sermon . ".mp3</guid>\n
+echo "      <guid isPermaLink=\"true\">" . $PodCast . $var_sermon . ".mp3</guid>\n
 ";
-echo "      <enclosure url=\"http://www.woodstockbaptistchurch.org.uk/sermons/" . $var_sermon . ".mp3\" length=\"" . filesize($var_sermon . ".mp3") . "\" type=\"audio/mpeg\" />\n
+echo "      <enclosure url=\"" . $PodCast  . $var_sermon . ".mp3\" length=\"" . filesize($var_sermon . ".mp3") . "\" type=\"audio/mpeg\" />\n
 ";
 echo "      </item>\n
 ";

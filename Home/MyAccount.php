@@ -65,9 +65,9 @@ $sortnews = null;
 $resultnews = SQL($Selectnews, $Fromnews, $dienews, $wherenews, $Limitnews, $GROUPnews, $sortnews);
 
 if (num_rows($resultnews) > 0){
-    $curURL = curURL(parameters('SSL'), 1);
+   // $curURL = curURL(parameters('SSL'), 1);
     
-    $URL = $curURL . "?target=news&section=subscribe&Unsubscribe=" . urlencode("$id");
+    //$URL = $curURL . "?target=news&section=subscribe&Unsubscribe=" . urlencode("$id");
     ?>
 <h2>Manage newsletter subscriptions</h2>
 <br />

@@ -1,3 +1,4 @@
+<br />
 <?php
 $system = true;
 function spamcheck($field)
@@ -13,13 +14,18 @@ function spamcheck($field)
     return FALSE;
     }
   }
+  
 
 //if "email" is filled out, send email
 if (isset($_REQUEST['email']))
   {
   //check if the email address is invalid
   $mailcheck = spamcheck($_REQUEST['email']);
-  if ($mailcheck==TRUE)
+  // check captcha 
+  $captcha = CheckCaptcha();
+
+  
+  if ($mailcheck==TRUE && captcha==TRUE) 
     {
     echo "Invalid input";
     }
@@ -39,9 +45,10 @@ if (isset($_REQUEST['email']))
 else
 //if "email" is not filled out, display the form
   {
+    //todo: form action should not be hard coded location should be dynamic.
   echo "
       <div id=\"editbox\">
-          <form method='post' action='?target=about&amp;section=contact'>
+          <form method='post' action='?target=contact'>
 <table>
 <tr>
 <td>Email:
@@ -77,6 +84,11 @@ Message:
 <tr>
 <td>
 </td>
+<td>";
+
+Displaycaptcha();
+
+echo "</td>
 <td align=right>
 <p>
   <input type='submit' />

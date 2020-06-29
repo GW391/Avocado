@@ -88,7 +88,7 @@ if (isset($_REQUEST["font"])){
 			unset($_SESSION["font"]);
 		}
 	}else{
-		$_SESSION['font'] = validate($_REQUEST['font']);
+		$_SESSION['font'] = validate($_REQUEST['font'],'hd');
 	}
 }
 

@@ -147,14 +147,16 @@ if (isset($_POST['Npassword'])){
 		$row = fetch_array($result);
 		$email = decrypt($row['PEL']);
 
+                //TODO: ## fully parameterise message
+                
 		$subject = "Account reset confirmed";
-    		$message = "Thank you for resetting your Woodstock Baptist church username and/or password. \n\r Note: If you have not changed your username or password, please check your account now, it may have been compromised \n\r";
+    		$message = "Thank you for resetting your " . parameters('Organisation') . " username and/or password. \n\r Note: If you have not changed your username or password, please check your account now, it may have been compromised \n\r";
                 $mailfrom = parameters('UserRegistrationFromAddress');
-//TODO: ## parameterise email address
+
                 mail($email, "$subject",
     		$message, "From: $mailfrom " );
 
-		echo "Thank you for resetting your Woodstock Baptist church username and password, you should now be able to log in.";
+		echo "Thank you for resetting your " . parameters('Organisation') . " username and password, you should now be able to log in.";
 
 	}
 

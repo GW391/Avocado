@@ -59,12 +59,14 @@ if (isset($_SESSION['security'])){
 
                 // parameterise account approval email
 		$row = fetch_array($result);
+                
 		$email = decrypt($row['PEL']);
-
+                $mailfrom = parameters('UserRegistrationFromAddress');
+                //TODO: parameterise message
 		$subject = "Account Permissions Set";
-    		$message = "Thank you for registering with the Woodstock Baptist church website, the site administrator has now set your permissions. \n\r";
+    		$message = "Thank you for registering with the " . parameters('Organisation') . " website, the site administrator has now set your permissions. \n\r";
     		mail($email, "$subject",
-    		$message, "From: no_reply@woodstockbaptistchurch.org.uk " );
+    		$message, "From: $mailfrom " );
 
 			sqlclose($con);
 

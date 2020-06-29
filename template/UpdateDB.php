@@ -29,7 +29,7 @@ mysqli_query($con, $sql_InsertSettingsData);
 }else{
     echo "Settings Updated<br />";
 }
-
+/*
 $sql_AlterContent ="
         
 DROP PROCEDURE IF EXISTS $DatabaseName.?;
@@ -59,3 +59,5 @@ mysqli_query($con, $sql_AlterContent);
 }else{
     echo "Content Table Updated<br />";
 }
+ * 
+ */

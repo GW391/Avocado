@@ -11,13 +11,13 @@ if(preg_match("/".'editor'."/i", $_SESSION['security'])){
 ?>
 <div id="editbox">
 <p>
-Upload a new image (Maximum file size <?php echo floor(parameters(maxfileuploadsize)/1024/1024) ?> MB): 
+Upload a new image (Maximum file size <?php echo floor(parameters('maxfileuploadsize')/1024/1024) ?> MB): 
 </p>
 <form action="?target=<?php echo $target; ?>&amp;section=<?php echo $section; ?>&amp;subsection=saveimage" method="post" enctype="multipart/form-data">
 <table>
     <tr>
         <td>
-<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo parameters(maxfileuploadsize) ?>" />
+<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo parameters('maxfileuploadsize') ?>" />
 <label for="file">Filename:</label>
         </td>
         <td>
@@ -97,25 +97,22 @@ function all_files($dir) {
     $file_tmp1 = glob($dir."*.{jpg,png,gif,bmp,PNG,JPG,GIF,BMP}", GLOB_BRACE | GLOB_MARK | GLOB_NOSORT);
     $file_tmp2 = glob($dir."*/*.{jpg,png,gif,bmp,BMP,PNG,JPG,GIF}", GLOB_BRACE | GLOB_MARK | GLOB_NOSORT);
  
-
 $file_tmp = array_merge($file_tmp1, $file_tmp2);
  
-
     //$c=1;
     global $tinyMCEImage;
     //$intable=0;
     $comma = 0;
     $intable = 0;
     
-           // $title = explode("/", $item);
+      //      $title = explode("/", $item);
             echo "<div class=\"gallery\"><center>";
             echo "<h3><strong><center>";
-            echo ucfirst(str_replace('_', ' ', $title[1]));
+      //      echo ucfirst(str_replace('_', ' ', $title[1]));
             echo "</center></strong></h3>";
             echo "<table border=\"1\" padding=\"1\"><tr><td>";
             $c=1;
             $intable = 1;
-
 
             // look for and display each image in the file_tmp array
     foreach($file_tmp as $item){
@@ -178,7 +175,5 @@ echo "</ceneter>\n";
     return $files;
 
 }
-
-
 ?>
 

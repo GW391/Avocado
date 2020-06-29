@@ -11,9 +11,9 @@ if (isset($_REQUEST['Activate'])) {
         $lookup = SQL($select, $from, null, $where, null, null, null);
 
         while ($row = fetch_assoc($lookup)) {
-            $target = $row["target"];
-            $section = $row["section"];
-            $subsection = $row["subsection"];
+            $target = validate($row["target"],'h');
+            $section = validate($row["section"],'h');
+            $subsection = validate($row["subsection"],'h');
         }
 
         $num_rows = num_rows($lookup);
@@ -222,7 +222,7 @@ echo "Nothing to do";
     $section = $esection;
     $subsection = $esubsection;
 echo "</div>";
-require ('content.php');
+require ('template/content.php');
 }
     }
 ?>

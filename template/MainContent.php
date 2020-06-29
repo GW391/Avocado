@@ -1,10 +1,13 @@
 <?php 
 // display result message
+// this is system messages, including welcome message on login, die message on failure etc.
 if (isset($message)){
 	echo validate($message, 'hd');
 }
 // display login message
-require "./System/login/message.php";
+// currently a hardcoded message can be displayed to all users at login, to change this message edit the 
+// system/login/message.php file, you can use PHP in this file for dynamic content. 
+require "System/login/message.php";
 
 //display content from database
 
@@ -15,7 +18,7 @@ while ($row = fetch_array($ContentResult))
    $format=validate($row['format'],'hd');
    //check if database entry shows system page
    if (isset($row['System']) && strlen(trim($row['System']))!=0){
-        $SystemPage=validate($row['System'],'hd');
+        $SystemPage= strtolower(validate($row['System'],'hd'));
         require "SystemContent.php";
    }else{
    

@@ -110,7 +110,7 @@ if (isset($_POST['Username']) && $referrer) {
 	$count=num_rows($result);
         
             if($count==1){
-                echo 'Old Login';
+               // echo 'Old Login';
                 //set to old login method
                 $Old = true;
                 welcome($result, $Old);
@@ -154,10 +154,7 @@ function welcome($result, $Old){
 }
 
 if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
-	//unset($_SESSION['user']);
-	//unset($_SESSION['security']);
-	//unset($_SESSION['uuid']);
-        //unset($_SESSION['security_array']);
+
         session_unset();
 }
 
@@ -217,25 +214,22 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
         <?php include("template/menu.php"); ?>
 
        <?php if (parameters('Breadcrumbs')){ ?>
-                   <?php // breadcrumbs ?>
-        <div id="breadcrumbs">
-<?php require("template/breadcrumbs.php"); ?>
-        </div>
-       <?php } ?>
+           <?php // if breadcrumbs has been requested put it in ?>
+           <div id="breadcrumbs">
+               <?php require("template/breadcrumbs.php"); ?>
+           </div>
+      <?php } ?>
 </div>
 </div>
 
-       
         <div id="maincontent">
  
-     <?php // content ?>       
-<?php include("template/content.php"); ?>
+     <?php // insert page content 
+     include("template/content.php"); ?>
         
     <div id="footer">
-    <?php // footer ?>
-<?php
-// echo "footer";
-include ("./template/footer.php");
+    <?php // insert page footer 
+    include ("./template/footer.php");
 ?>
 </div>
 </div>

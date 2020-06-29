@@ -8,21 +8,12 @@ $system = true;
 <p>
 <?php 
 // build podcast folder to check through for podcast files.
-$PodCast = '';
-    if (parameters('Podcast_URL')){
-        $PodCast .= validate(parameters('Podcast_URL'),'hd');
-    }else{
-
-        $PodCast .= curURL();
- 
-    $PodCast .= dirname($_SERVER['PHP_SELF']);
-        if (parameters('Podcast_Folder')){
-        $PodCast .= '/'. validate(parameters('Podcast_Folder'),'hd');
-    }else{
-        $PodCast .= '/podcast';
-    }
-$PodCast .= '/?format=xml';
-   }
+$PodCast = PodCastURL(); 
+//add the xml 
+$check_paramater = parameters('Podcast_URL');
+if (!isset($check_paramater) || strlen($check_paramater) == 0){
+    $PodCast .= '/?format=xml';
+}
 ?>
 
 Podcast URL:  <a href="<?php echo validate($PodCast, 'hd'); ?>"><?php echo validate($PodCast, 'hd'); ?></a><br />
@@ -45,6 +36,7 @@ $today->modify("-1 day");
 
 $var_sermon = $today->format("d-m-Y");
 // dispaly podcast
+// todo: get folder name parmaeter
 if(file_exists("sermons/" . $var_sermon . ".mp3")){
     include("template/sermonlinks.php");
 }

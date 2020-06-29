@@ -53,11 +53,13 @@ if($_SERVER['HTTPS']!="on"){
 if(parameters('SSL')){
     echo '<p class="small">Concerened about security?  <a href="';
 
+    // Old host did not allow ssl on main URL, they used a global certificate.  I suspect this is no longer a problem
+    // but left parameter and if statment. 
     if (parameters('SSLURL')){
         echo parameters('SSLURL');
         echo $_SERVER["REQUEST_URI"];
     }else{
-        echo curPageURL(true);
+        echo curPageURL(parameters('SSL'), 1);
     }
 
     echo '">Switch to our secure site</a></p>';

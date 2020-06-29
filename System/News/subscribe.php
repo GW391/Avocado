@@ -159,7 +159,7 @@ if ($_POST['Submit'] == 'Subscribe'){
 //  echo $id;
 
 
-$curURL = curURL(parameters('SSL'), true);
+$curURL = curURL(parameters('SSL'), 1);
 
 $email = validate($_POST['Email'],'hd');    
 $subject = parameters('NewsSubscribeConformationSubject');
