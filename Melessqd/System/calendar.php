@@ -4,7 +4,7 @@ $system = true;
 
 if (!isset($CalendarStyle)){
 if (isset($_GET['CalendarStyle'])){
-    $CalendarStyle = validate($_GET['CalendarStyle'], 'h');
+    $CalendarStyle = validate($_REQUEST['CalendarStyle'], 'h');
 }else{
     $CalendarStyle = parameters('CalendarStyle');
 }

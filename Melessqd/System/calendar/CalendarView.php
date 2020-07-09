@@ -8,21 +8,19 @@ $system = true;
 	if (isset($_SESSION['security']) || parameters('CalendarPublicPost')) {
                     //if(stripos($_SESSION['security'], 'editor') || stripos($_SESSION['security'], 'Calendar')){
 if(stripos($_SESSION['security'], parameters('CalendarEditor')) || parameters('CalendarPublicPost')){
-                if (parameters('CalendarPublicPost')){
-                    echo "<form method=\"post\" name=\"Add\" action=\"?target=calendar&amp;section=publicupdate\">";
+    echo "<div id='editbox'>";
+                if (stripos($_SESSION['security'], parameters('CalendarEditor'))){
+                    echo "<form method=\"post\" name=\"Add\" action=\"?target=System&amp;section=calendar&amp;subsection=update\">";
                 }else{
-			echo "<form method=\"post\" name=\"Add\" action=\"?target=calendar&amp;section=update\">";
+			echo "<form method=\"post\" name=\"Add\" action=\"?target=System&amp;section=calendar&amp;subsection=publicupdate\">";
                 }
 			echo "<input type=\"submit\" value=\" Add Event \" />";
 			echo "</form>";
+                        echo "</div>";
 		}
 	}
 
-
 $date = date('Ymd');
-//if (isset($_GET['Month'])){
-//  $date->modify('+ ' . validate($_GET['Month'], 'n') . ' month');
-//}
 
 $Where = "Date>=$date AND Deleted!=1";
 
@@ -47,9 +45,6 @@ $result = SQL($Select, $From, $die, $Where, $Limit, $GROUP, $sort);
 
 ?>
 
-
-
-
 <?php
 $tmpdate = new DateTime(date('Y-m-d'));
 if (isset($_GET['Month'])){
@@ -61,7 +56,7 @@ else{
 }
 $Month = $tmpdate->format("m");
 
-$num = cal_days_in_month(CAL_GREGORIAN, $Month, date('Y')); // 30
+$num = cal_days_in_month(CAL_GREGORIAN, $Month, $tmpdate->format('Y')); // 30
 
 $Month = $tmpdate->format("M");
 
@@ -71,26 +66,28 @@ drawCalendar("large", $tmpdate, $num, $nextMonth);
 
 ?>
 
-
 <?php
-
-	if (isset($_SESSION['security'])){
-            if(stripos($_SESSION['security'], parameters('CalendarEditor'))){
-                   // if(stripos($_SESSION['security'], 'editor') !== false){
-			echo "<form method=\"post\" name=\"Add\" action=\"?target=calendar&amp;section=update\">";
+	if (isset($_SESSION['security']) || parameters('CalendarPublicPost')) {
+                    //if(stripos($_SESSION['security'], 'editor') || stripos($_SESSION['security'], 'Calendar')){
+if(stripos($_SESSION['security'], parameters('CalendarEditor')) || parameters('CalendarPublicPost')){
+    echo "<div id='editbox'>";
+                if (stripos($_SESSION['security'], parameters('CalendarEditor'))){
+                    echo "<form method=\"post\" name=\"Add\" action=\"?target=System&amp;section=calendar&amp;subsection=update\">";
+                }else{
+			echo "<form method=\"post\" name=\"Add\" action=\"?target=System&amp;section=calendar&amp;subsection=publicupdate\">";
+                }
 			echo "<input type=\"submit\" value=\" Add Event \" />";
 			echo "</form>";
 		}
+                echo "</div>";
 	}
 ?>
 
 <?php
-
 function drawCalendar($size, $Month, $num, $nextMonth){
 
     $dom=0;
 	$dow=0;
-
 	$month = $Month->format("m");
         
 	echo "<table border=\"1\" width=\"100%\" height=\"75%\">";
@@ -98,18 +95,36 @@ function drawCalendar($size, $Month, $num, $nextMonth){
 	echo "<td colspan=\"7\">";
 	echo "<div class=\"alerts\">";
 	echo "<div class=\"top\">";
+        // create links to previous and next month
         global $CalendarStyle;
         global $target;
+        global $section;
+        global $subsection;
         if ($nextMonth > 0){
             $PrevMonth = $nextMonth-1;
-        echo '<a style="float:left" href="?target='.$target.'&amp;CalendarStyle='.$CalendarStyle.'&amp;Month=' . $PrevMonth . '">Previous</a>';}
+        echo '<a style="float:left" href="?target='.$target.'&amp;';
+                if (isset($section)){
+                    echo 'section='.$section.'&amp;';
+                }
+                if (isset($subsection)){
+                    echo 'subsection='.$subsection.'&amp;';
+                }
+        echo 'CalendarStyle='.$CalendarStyle.'&amp;Month=' . $PrevMonth . '">Previous</a>';}
 	echo "<strong>" . $Month->format('F') . "</strong>";
         $nextMonth = $nextMonth+1;
-        echo '<a style="float:right" href="?target='.$target.'&amp;CalendarStyle='.$CalendarStyle.'&amp;Month=' . $nextMonth . '">Next';
+        echo '<a style="float:right" href="?target='.$target.'&amp;';
+                if (isset($section)){
+                    echo 'section='.$section.'&amp;';
+                }
+                if (isset($subsection)){
+                    echo 'subsection='.$subsection.'&amp;';
+                }
+        echo 'CalendarStyle='.$CalendarStyle.'&amp;Month=' . $nextMonth . '">Next';
 	echo "</div>";
 	echo "</div>";
 	echo "</td>";
 	echo "</tr>";
+        //build the calander
 	echo "<tr>";
 	echo "<td>";
 	echo "<strong>Sun</strong>";
@@ -145,7 +160,6 @@ function drawCalendar($size, $Month, $num, $nextMonth){
 	while ($i<$dow){
 		echo "<td HEIGHT=\"22\" WIDTH=\"79\" valign=\"top\" style=\"height: 100px;\">";
 		echo "</td>";
-
 		$i++;
 	}
 	$d=1;
@@ -179,8 +193,6 @@ if (isset($_SESSION['security'])){
 
     $result = SQL($select, $From, $die, $Where, null, null, $sort);
     $count=num_rows($result);
-
-
 		if ($count >= 1) {
 			echo "<b>". str_pad($d, 2, "0", STR_PAD_LEFT) . "</b>";
 			//echo $Month->format("m");
@@ -208,9 +220,9 @@ if (isset($_SESSION['security'])){
 
 		}else{
 			if ($d < date('d') && ($Month->format('Ym') == date('Ym'))){
-				echo '<font color="#999999">' . $d . "</font>";
+				echo '<font color="#999999">' . str_pad($d, 2, "0", STR_PAD_LEFT) . "</font>";
 			}else{
-				echo $d;
+				echo str_pad($d, 2, "0", STR_PAD_LEFT);
 			}
 		}
 		echo "</td>";

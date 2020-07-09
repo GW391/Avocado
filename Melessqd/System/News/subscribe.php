@@ -2,7 +2,7 @@
 
 function displayform() {
     echo "<div id=\"editbox\">";
-	echo "<form method=\"post\" action=\"?target=news&section=register\">";
+	echo "<form method=\"post\" action=\"?target=news&section=subscribe\">";
 	echo "<table>";
 
 	echo "<tr>";
@@ -15,7 +15,7 @@ function displayform() {
 	echo "</td>";
 	echo "<td>";
 	if (isset($_POST['RName'])){
-		echo "	<input type=\"text\" name=RName size=\"35\" value=\"" . $_POST['RName'] . "\" />";
+		echo "	<input type=\"text\" name=RName size=\"35\" value=\"" . validate($_POST['RName'],'hd') . "\" />";
 	}else{
 		echo "	<input type=\"text\" name=RName size=\"35\" />";
 	}
@@ -31,7 +31,7 @@ function displayform() {
 	echo "</td>";
 	echo "<td>";
 	if (isset($_POST['Email'])){
-		echo "	<input type=\"text\" name=Email size=\"35\" value=\"" . $_POST['Email'] . "\" />";
+		echo "	<input type=\"text\" name=Email size=\"35\" value=\"" . validate($_POST['Email'],'hd') . "\" />";
 	}else{
 		echo "	<input type=\"text\" name=Email size=\"35\" />";
 	}

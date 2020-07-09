@@ -1,8 +1,8 @@
 <?php
 
-//todo: paramaterise datbase name & port
+//set up database connection
 
-$con = mysqli_connect("localhost:3306", $DatabaseAdminName, $DatabaseAdminPassword);
+$con = mysqli_connect($DatabaseServerName . ":" . $DatabaseServerPort, $DatabaseAdminName, $DatabaseAdminPassword);
 
 // Create Database
         $sql="CREATE DATABASE IF NOT EXISTS $DataBaseName /*!40100 DEFAULT CHARACTER SET latin1 */";

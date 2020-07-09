@@ -3,51 +3,47 @@
 $tmpdate = new DateTime(date('Y-m-d'));
 $Month = $tmpdate->format("m");
 
-$num = cal_days_in_month(CAL_GREGORIAN, $Month, date('Y')); // 30
-
-
-$Month = $tmpdate->format("M");
-
-draw("large", $tmpdate, $num);
-
-//echo "<br />";
-
-$tmpdate = new DateTime(date('Y-m-d'));
-$tmpdate->modify("+1 month");
-$Month = $tmpdate->format("m");
-
-$num = cal_days_in_month(CAL_GREGORIAN, $Month, date('Y')); // 31
-$Month = $tmpdate->format("M");
-draw("large", $tmpdate, $num);
-
-//echo "<br />";
-
-$tmpdate = new DateTime(date('Y-m-d'));
-$tmpdate->modify("+2 month");
-$Month = $tmpdate->format("m");
-
-$num = cal_days_in_month(CAL_GREGORIAN, $Month, date('Y')); // 31
-$Month = $tmpdate->format("M");
-
-draw("small", $tmpdate, $num);
-//echo "<br />";
-
-function draw($size, $Month, $num){
+// draw the calendar 
+// how many months do we want
+$months = 3;
+// initilise to loop
+$i=1;
+while ($i <= $months){
+    $num = cal_days_in_month(CAL_GREGORIAN, $Month, $tmpdate->format('Y')); // 31
+    //$Month = $tmpdate->format("M");
+?>
+    <div style="display: inline-block; vertical-align: top; align-items: center;">
+    <br />
+    <?php
+    draw($tmpdate, $num);
+    ?>
+    </div>
+    <?php
+    $tmpdate = new DateTime(date('Y-m-d'));
+    $day = $tmpdate->format("j");
+    echo $day;
+    if ($day > 29){
+        $tmpdate->modify("-3 day");  
+    }
+    $tmpdate->modify("+$i month");
+    $Month = $tmpdate->format("m");
+    $i++;
+}
+?>
+    <?php
+function draw($Month, $num){
 	$dom=0;
 	$dow=0;
 
 	$month = $Month->format("m");
 
-	if ($size == "small") {
-		$font = 7;
-	}else{
-		$font = 12;
-	}
 	echo "<table border=\"1\">";
 	echo "<tr>";
 	echo "<td colspan=\"7\">";
 	echo "<div class=\"alerts\">";
 	echo "<div class=\"top\">";
+        // echo month name
+        // TODO: make a link so we can link to the full size month.
 	echo "<center><strong>" . $Month->format('F') . "</strong></center>";
 	echo "</div>";
 	echo "</div>";

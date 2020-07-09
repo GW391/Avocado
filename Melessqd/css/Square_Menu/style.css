@@ -510,12 +510,13 @@ img {
     width: 100%;
 }
 
-/* ok so not really the most helful name, but this sliedes large text up the page at the top level */
+/* ok so not really the most helful name, but this sliedes large text up the page at the top level 
+over anything underneath. */
 /* todo: extract code to make selectable div function */
 .centered {
   position: absolute;
-  top: 0%;
-  left: 0;
+  top: 3%;
+  left: 1%;
   width: 50%;
   height: 100%;
   animation-name: TextOver;
@@ -542,7 +543,7 @@ img {
   top: 300px;
   }
   to {width: 50%;
-      top: 0px;
+      top: 3%;
   color: rgba(255,255,255,1);
   opancy: 1;
   background-repeat: no-repeat;

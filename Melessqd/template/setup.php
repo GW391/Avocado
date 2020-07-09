@@ -28,6 +28,8 @@ if (isset($_POST['DatabaseType'])){
         <?php
     $" . "DatabaseType = \"" . validate($_POST['DatabaseType'],'hd') . "\";
     $" . "DatabaseName = \"" . validate($_POST['DatabaseName'],'hd') . "\";
+    $" . "DatabaseServerName = \"" . validate($_POST['DatabaseServerName'],'hd') . "\";
+    $" . "DatabaseServerPort = \"" . validate($_POST['DatabaseServerPort'],'hd') . "\";
     $" . "DatabaseUserName = \"" . validate($_POST['DatabaseUserName'],'hd') . "\";
     $" . "DatabasePassword = \"" . validate($_POST['DatabasePassword'],'hd') . "\";
     $" . "DataKey = \"" . $DataKey . "\";
@@ -114,13 +116,29 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
         </select>
     <td>Please select the Database type being used. Note. Use MySQL only for Old versions &lt; 5.2 of PHP </td>
     </tr>
+        <tr>
+    <th>Database Server Name </th>
+    <td>
+             <input type="text" name="DatabaseServerName" size="50" value="localhost"/>
+        </select>
+    </td>
+    <td>Please Enter the Database Server Name being used</td>
+    </tr>
+        <tr>
+    <th>Database Server Port </th>
+    <td>
+             <input type="text" name="DatabaseServerPort" size="50" value="3306"/>
+        </select>
+    </td>
+    <td>Please Enter the Database Name being used</td>
+    </tr>
     <tr>
     <th>Database Name </th>
     <td>
              <input type="text" name="DatabaseName" size="50" />
         </select>
     </td>
-    <td>Please Enter the Database Name being used, This is only used to create the Database, it is not stored</td>
+    <td>Please Enter the Database Name being used</td>
     </tr>
         <tr>
     <th>Database Admin Username </th>
@@ -128,7 +146,7 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
              <input type="text" name="DatabaseAdminUserName" size="50" />
         </select>
     </td>
-    <td>Please Enter the SQL Administrator Username being used</td>
+    <td>Please Enter the SQL Administrator Username being used, this is only used during the setup and is not stored</td>
     </tr>
         <tr>
     <th>Database Admin Password </th>
@@ -145,7 +163,7 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
              <input type="text" name="DatabaseUserName" size="50" />
         </select>
     </td>
-    <td>Please Enter the Database Username being used, At this time this needs to be setup in advance</td>
+    <td>Please Enter the Database Username being used</td>
     </tr>
         <tr>
     <th>Database Password </th>
@@ -153,7 +171,7 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
              <input type="text" name="DatabasePassword" size="50" />
         </select>
     </td> 
-    <td>Please Enter the Database Password being used, At this time this needs to be setup in advance</td>
+    <td>Please Enter the Database Password being used</td>
         </tr>
         
         <tr>

@@ -1,15 +1,27 @@
 <?php
 $system = true;
 
-$DispName = validate($_POST['eDispName'],'h');
-$target = validate($_POST['etarget'],'h');
-$section = validate($_POST['esection'],'h');
-$subsection = validate($_POST['esubsection'],'h');
-if (isset($_POST['eextra'])){
-$extra = validate($_POST['eextra'],'h');
+if (isset($_POST['eDispName'])){
+    $DispName = validate($_POST['eDispName'],'h');
 }
-$security = validate($_POST['esecurity'],'h');
-$sortorder = validate($_POST['esortorder'],'h');
+if (isset($_POST['etarget'])){
+    $target = validate($_POST['etarget'],'h');
+}
+if (isset($_POST['esection'])){
+    $section = validate($_POST['esection'],'h');
+}
+if (isset($_POST['esubsection'])){
+    $subsection = validate($_POST['esubsection'],'h');
+}
+if (isset($_POST['eextra'])){
+    $extra = validate($_POST['eextra'],'h');
+}
+if (isset($_POST['esecurity'])){
+    $security = validate($_POST['esecurity'],'h');
+}
+if (isset($_POST['esortorder'])){
+    $sortorder = validate($_POST['esortorder'],'h');
+}
 
 //echo "ETLD: " . $_POST["eTLD"];
 if (isset($_POST["eTLD"])){
@@ -25,8 +37,12 @@ if (isset($_POST["eTLD"])){
 if (isset($_POST['ehistory'])){
     $History = validate($_POST['ehistory'],'h');
 }
-$Articles = validate($_POST['earticles'],'h');
-$ShortArticle = validate($_POST['eShortArticle'],'n');
+if (isset($_POST['earticles'])){
+    $Articles = validate($_POST['earticles'],'h');
+}
+if (isset($_POST['eShortArticle'])){
+    $ShortArticle = validate($_POST['eShortArticle'],'n');
+}
 if (isset($_POST['deleted'])){
     $Deleted = validate($_POST['deleted'],'n');
 }
@@ -37,19 +53,15 @@ $DateCreate = Date('Ymd');
 if (isset($_POST['eContName'])){
     $ContName = validate($_POST['eContName'],'h');
 }
-$PublicPost = validate($_POST['ePublic'],'n');
-
+if (isset($_POST['ePublic'])){
+    $PublicPost = validate($_POST['ePublic'],'n');
+}
 //echo $ContName;
 
 if(isset($_POST['ID'])){
-
-
 //echo $_POST['ID'];
-
 $ID = validate(decryptfe($_POST['ID']),'h');
-
 //echo $ID;
-
 $select = 'UUID, target';
 $from = "tblmenu";
 $where = "UUID = '$ID'";

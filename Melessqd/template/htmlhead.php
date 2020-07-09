@@ -102,7 +102,7 @@ if (isset($_SESSION["font"])){
 			unset($_SESSION["font"]);
 		}
 	}else{
-		$style = validate($_SESSION["font"]);
+		$style = validate($_SESSION["font"],'hd');
 	}
 }else{
 		$style = "";

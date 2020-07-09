@@ -27,8 +27,21 @@ mysqli_query($con, $sql_InsertSettingsData);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "Settings Updated<br />";
+    echo "New Settings Inserted<br />";
 }
+
+$sql_UpdateSettingsData = "UPDATE $DatabaseName.tblsettings SET Value='Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView' WHERE UUID='59';";
+
+mysqli_query($con, $sql_UpdateSettingsData);
+      if (!$con) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}else{
+    echo "New Settings Inserted<br />";
+}
+
 /*
 $sql_AlterContent ="
         
