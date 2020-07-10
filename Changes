@@ -1,0 +1,9 @@
+	- Fixed setup procedure
+	- Enabled server and port choices during setup
+
+ Calendar and setup improvements
+	- added 3 month view to calendar
+	- fixed some bugs in adding & updating calendar entries
+	- fixed bug in subscribing to news letters
+	- updated parameters for SQL server and port address during setup
+	- moved news update files to System
