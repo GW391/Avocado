@@ -1,7 +1,6 @@
 <?php 
 // set up searches for content
 
-
 $FromMenu = "tblmenu";
 $SelectMenu = "UUID, target, section, subsection, Articles, ShortArticle, PublicPost, ContName";
 $Select = "UUID, header, page, security, target, section, subsection, sdate, fdate, format, active, System";
@@ -99,9 +98,6 @@ $ContentResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 $ContentRows = num_rows($ContentResult);
 
 // is there a databse record for parameters
-
-
-
 
 // <!--page content goes here -->
 

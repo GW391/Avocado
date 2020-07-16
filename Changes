@@ -1,3 +1,8 @@
+Menu Bugfix
+
+	- fixed menu bug on high reselution screens
+
+Setup
 	- Fixed setup procedure
 	- Enabled server and port choices during setup
 
