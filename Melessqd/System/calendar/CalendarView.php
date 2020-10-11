@@ -78,8 +78,8 @@ if(stripos($_SESSION['security'], parameters('CalendarEditor')) || parameters('C
                 }
 			echo "<input type=\"submit\" value=\" Add Event \" />";
 			echo "</form>";
+                        echo "</div>";
 		}
-                echo "</div>";
 	}
 ?>
 

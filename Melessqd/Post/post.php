@@ -46,14 +46,14 @@ $system = true;
 
         <tr>
     <td>
-        <textarea rows="30" cols="98" name="page"><?php echo validate($row['page'],'hd') ?></textarea>
+        <textarea rows="30" cols="98" name="page"><?php if(isset($row['page'])){echo validate($row['page'],'hd');} ?></textarea>
          </td>
     </tr>
 <tr>
 <td valign="top">
 Email:
 <input name='email' type='text' size='30' /><br />
-Note: The email address will not appear in the posting, and is only used for refernce.
+Note: The email address will not appear in the posting, and is only used for reference.
 </td>
 </tr>
  <tr>

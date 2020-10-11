@@ -110,8 +110,9 @@ include("./template/content.php");
 $ref= explode("?",$HTTP_REFERER);
 		?>
 		<form method="post" action="?target=login">
+                    <div id="loginbox">
         <input type="hidden" name="ref" value="<?php echo $ref[1]; ?>">
-		<table class="loginbox" width="90%" border="1">
+		<table class="loginbox">
 		<tr>
                     <td>Username:</td><td> <input type="text" name="Username" /></td>
 		</tr>
@@ -126,6 +127,7 @@ $ref= explode("?",$HTTP_REFERER);
 		<p>
 		Note:  Password is case sensitive
 		</p>
+                
 <?php
 
 // check if user is using SSL before login, should not be needed anymore, but left it.
@@ -156,7 +158,7 @@ if(parameters('SSL')){
                 }
 ?>
                 <p class="small"><a href="?target=login&amp;section=retrieve">Forgotten Username or Password</a></p>
-
+</div>
  		<?php
  
 	}

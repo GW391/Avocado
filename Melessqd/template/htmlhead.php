@@ -50,8 +50,8 @@ if (strlen(trim($author)) != 0){
 // see if there is any special extra headers files.
 // todo: get this from databse
 if (isset($target)){
-    if(file_exists("./template/" . $target . ".head")){
-        require_once "./template/" . $target . ".head";
+    if(file_exists("./template/" . $target . ".head.php")){
+        require_once "./template/" . $target . ".head.php";
     }
 }
 ?>

@@ -61,7 +61,7 @@ var tinyMCEImageList = new Array(
 
 
 if (isset($_GET['imname'])){
-$image = validate($_GET['imname'],hd);
+$image = validate($_GET['imname'],'hd');
 
 echo "<center>";
 echo "<H2> $image </H2>";

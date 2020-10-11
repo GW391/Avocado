@@ -4,7 +4,11 @@
 */
 
 //global $con;
-$con = mysqli_connect($DatabaseServerName . ":" . $DatabaseServerPort, $DatabaseUserName, $DatabasePassword, $DatabaseName);
+if (isset($DatabaseServerPort)){
+    $DatabaseServerName .= ":" . $DatabaseServerPort;
+    //echo $DatabaseServerName;
+}
+$con = mysqli_connect($DatabaseServerName, $DatabaseUserName, $DatabasePassword, $DatabaseName);
 
 if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;

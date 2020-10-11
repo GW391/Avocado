@@ -106,7 +106,7 @@ $Email= validate(decrypt($row['PEL']),'hd');
         $SecurityArray = explode('<br />', trim($Security));
         $num = count($SecurityArray);
         $i = 0;
-while ($num >= $i) {
+while ($num > $i) {
     echo "<option value=\"" . trim($SecurityArray[$i]) . "\"";
     if(preg_match("/".trim($SecurityArray[$i])."/i", validate($row['PSY'],'hd')))
         {

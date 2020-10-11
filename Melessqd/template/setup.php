@@ -49,9 +49,11 @@ if (isset($_POST['DatabaseType'])){
         <?php
     $" . "DatabaseType = \"" . validate($_POST['DatabaseType'],'hd') . "\";
     $" . "DatabaseName = \"" . validate($_POST['DatabaseName'],'hd') . "\";
-    $" . "DatabaseServerName = \"" . validate($_POST['DatabaseServerName'],'hd') . "\";
-    $" . "DatabaseServerPort = \"" . validate($_POST['DatabaseServerPort'],'hd') . "\";
-    $" . "DatabaseUserName = \"" . validate($_POST['DatabaseUserName'],'hd') . "\";
+    $" . "DatabaseServerName = \"" . validate($_POST['DatabaseServerName'],'hd') . "\";";
+            if (isset($_POST['DatabaseServerPort']) & strlen($_POST['DatabaseServerPort']) !=0){
+    echo "$" . "DatabaseServerPort = \"" . validate($_POST['DatabaseServerPort'],'hd') . "\";";
+        }
+    echo "$" . "DatabaseUserName = \"" . validate($_POST['DatabaseUserName'],'hd') . "\";
     $" . "DatabasePassword = \"" . validate($_POST['DatabasePassword'],'hd') . "\";
     $" . "DataKey = \"" . $DataKey . "\";
     $" . "PostKey = \"" . $PostKey . "\";
@@ -156,7 +158,7 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
     <tr>
     <th>Database Name </th>
     <td>
-             <input type="text" name="DatabaseName" size="50" />
+             <input type="text" name="DatabaseName" size="50" requred />
         </select>
     </td>
     <td>Please Enter the Database Name being used</td>
@@ -164,7 +166,7 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
         <tr>
     <th>Database Admin Username </th>
     <td>
-             <input type="text" name="DatabaseAdminUserName" size="50" />
+             <input type="text" name="DatabaseAdminUserName" size="50" requred />
         </select>
     </td>
     <td>Please Enter the SQL Administrator Username being used, this is only used during the setup and is not stored</td>
@@ -172,7 +174,7 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
         <tr>
     <th>Database Admin Password </th>
     <td>
-             <input type="password" name="DatabaseAdminPassword" size="50" />
+             <input type="password" name="DatabaseAdminPassword" size="50" requred />
         </select>
     </td> 
     <td>Please Enter the SQL Administrator Password being used, This is only used to create the Database, it is not stored</td>
@@ -181,18 +183,18 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
             <tr>
     <th>Database Username </th>
     <td>
-             <input type="text" name="DatabaseUserName" size="50" />
+             <input type="text" name="DatabaseUserName" size="50" requred />
         </select>
     </td>
-    <td>Please Enter the Database Username being used</td>
+    <td>Please Enter the Database Username being created to use</td>
     </tr>
         <tr>
     <th>Database Password </th>
     <td>
-             <input type="text" name="DatabasePassword" size="50" />
+             <input type="text" name="DatabasePassword" size="50"  requred />
         </select>
     </td> 
-    <td>Please Enter the Database Password being used</td>
+    <td>Please Enter the Database Password being created to use</td>
         </tr>
         
         <tr>
@@ -201,14 +203,14 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
          <tr>
     <th>Admin Username </th>
     <td>
-             <input type="text" name="NUsername" size="50" />
+             <input type="text" name="NUsername" size="50" required />
         </select>
     </td> 
     <td>Please Enter the system's Administrator name</td>
     </tr>    <tr>
     <th>Admin Password </th>
     <td>
-             <input type="text" name="Npassword" size="50" />
+             <input type="text" name="Npassword" size="50" requred />
         </select>
     </td> 
     <td>Please Enter the System's Administrator password</td>
@@ -216,7 +218,7 @@ echo encrypt(validate(strtolower($_POST['Email']), 'enc')) . '<br />';
         <tr>
     <th>Admin email address </th>
     <td>
-             <input type="text" name="Email" size="50" />
+             <input type="text" name="Email" size="50" requred />
         </select>
     </td> 
     <td>Please Enter the Admin email address</td>
