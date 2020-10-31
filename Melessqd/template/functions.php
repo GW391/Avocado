@@ -236,9 +236,26 @@ function Displaycaptcha(){
 
 function CheckCaptcha(){
     if (isset($_REQUEST['Captcha']) && strlen($_REQUEST['Captcha'] !=0)){
-        return true;
+        return TRUE;
     }else{
-        return false;
+        return FALSE;
     }
 }
+
+function Junk_Check($Check){
+    $count = 0;
+    
+    $JunkCheck = strtolower(parameters('Junk_Check'));
+    $JunkCheckArray = explode(PHP_EOL, trim($JunkCheck));
+    str_replace($JunkCheckArray, ' ', strtolower($Check), $count);
+    //echo "Check: " . strtolower($Check) . "<br />";
+    //echo "JunkCheck: " . $JunkCheck . "<br />";
+    //print_r($JunkCheckArray);
+    //echo $count;
+    if ($count != 0){
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+    }
 ?>

@@ -16,7 +16,7 @@ require 'template/config.php';
 //require_once 'template/errorlog.php';
 //require_once 'template/asc_shift.php';
 
-include 'template\default\SettingsData.php';
+include 'template/default/SettingsData.php';
 //echo $tblSettingsData;
 $sql_InsertSettingsData = "INSERT IGNORE INTO $DatabaseName.tblsettings VALUES " . $tblSettingsData;
 

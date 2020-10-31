@@ -1,12 +1,16 @@
-Menu Bugfix
 
+SPAM Protection
+	- Added improvements to the contact us SPAM protection
+	- New Parameter for blocked words, populated by default with list
+
+Menu Bugfix
 	- fixed menu bug on high reselution screens
 
 Setup
 	- Fixed setup procedure
 	- Enabled server and port choices during setup
 
- Calendar and setup improvements
+Calendar and setup improvements
 	- added 3 month view to calendar
 	- fixed some bugs in adding & updating calendar entries
 	- fixed bug in subscribing to news letters
