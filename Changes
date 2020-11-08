@@ -1,3 +1,7 @@
+SPAM Protection improvements
+	- Added Spam scoring
+	- block messages based on high spam score
+	- block messages on repeated retry
 
 SPAM Protection
 	- Added improvements to the contact us SPAM protection

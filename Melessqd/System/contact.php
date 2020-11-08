@@ -38,6 +38,13 @@ function spamcheck($field)
               }
               echo "' readonly />
                   <input name='time' type='hidden' value='" . time() . "' readonly />
+                  <input name='times' type='hidden' value='";
+                  if (isset($_REQUEST['times'])){
+                      echo validate($_REQUEST['times'],'hd')+1;
+                  }else{
+                      echo 0;
+                  }
+                  echo "' readonly />
 <table>
 <tr>
 <td>Email:
@@ -130,19 +137,39 @@ if (isset($_REQUEST['email']))
             Referrer: " . validate($_REQUEST['referrer'],'hd') . "
             Referrer: " . $_SERVER['HTTP_REFERER'] . " 
             TimeStamp: " . validate($_REQUEST['time'],'hd');
-   $ProcessTime = time() - validate($_REQUEST['time'],'hd');
+            $ProcessTime = time() - validate($_REQUEST['time'],'hd');
    
    $message .= " 
            ProcessTime: " . $ProcessTime . " 
-           WordCount: " . str_word_count(validate($_REQUEST['message'],'hd'),0);
+           WordCount: " . str_word_count(validate($_REQUEST['message'],'hd'),0) . "
+           Times Loaded: " . validate($_REQUEST['times'],'hd');
+   
+   $spamvalue = 0;
+   if (strlen(validate($_REQUEST['referrer'],'hd'))==0){
+       $spamvalue++;
+   }
+   if (validate($_REQUEST['referrer'],'hd')== $_SERVER['HTTP_REFERER']){
+       $spamvalue++;
+   }
+   if (str_word_count(validate($_REQUEST['message'],'hd'),0)/$ProcessTime >= 4){
+       $spamvalue += round((str_word_count(validate($_REQUEST['message'],'hd'),0)/$ProcessTime));
+   }
+   if (validate($_REQUEST['times'],'hd') != 1){
+       $spamvalue += validate($_REQUEST['times'],0);
+   }
+   $message .= "
+           SpamValue: " . $spamvalue;
         
     if ($mailcheck==TRUE || $captcha==TRUE || $Junk_Check==TRUE)
     {
     echo parameters('JunkCheckFailMessage');
     // todo: update to log, pause and lock out junk users
-    sleep(10); // pause before re-displaying
+    sleep(1+(10*$spamvalue)); // pause before re-displaying
+    if ($spamvalue >= 50 || validate($_REQUEST['times'],0) >= 5){
+        
+    }else{
     displaycontactform();
-    }
+    }}
   else
     { 
     //send email
