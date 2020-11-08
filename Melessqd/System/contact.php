@@ -138,6 +138,9 @@ if (isset($_REQUEST['email']))
             Referrer: " . $_SERVER['HTTP_REFERER'] . " 
             TimeStamp: " . validate($_REQUEST['time'],'hd');
             $ProcessTime = time() - validate($_REQUEST['time'],'hd');
+            if ($ProcessTime <= 1){
+                $ProcessTime = 1;
+            }
    
    $message .= " 
            ProcessTime: " . $ProcessTime . " 
@@ -157,17 +160,24 @@ if (isset($_REQUEST['email']))
    if (validate($_REQUEST['times'],'hd') != 1){
        $spamvalue += validate($_REQUEST['times'],0);
    }
+   str_replace('   ', '3', strtolower(validate($_REQUEST['message'],'hd')), $count1);
+   $spamvalue += $count1;
+      str_replace('  ', '2', strtolower(validate($_REQUEST['message'],'hd')), $count2);
+   $spamvalue += $count2;
+   
    $message .= "
            SpamValue: " . $spamvalue;
         
-    if ($mailcheck==TRUE || $captcha==TRUE || $Junk_Check==TRUE)
+    if ($mailcheck==TRUE || $captcha==TRUE || $Junk_Check==TRUE || $spamvalue >= 50)
     {
     echo parameters('JunkCheckFailMessage');
     // todo: update to log, pause and lock out junk users
-    sleep(1+(10*$spamvalue)); // pause before re-displaying
-    if ($spamvalue >= 50 || validate($_REQUEST['times'],0) >= 5){
-        
+    
+    if (validate($_REQUEST['times'],0) >= 5){
+        // do not re-display 
     }else{
+        echo $spamvalue;
+    sleep(1+(2*$spamvalue)); // pause before re-displaying
     displaycontactform();
     }}
   else
