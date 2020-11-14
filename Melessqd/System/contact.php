@@ -127,15 +127,16 @@ if (isset($_REQUEST['email']))
   $captcha = CheckCaptcha();
   
   $message = validate($_REQUEST['message'],'hd');
-  $Junk_Check = Junk_Check($message);
+  $subject = validate($_REQUEST['subject'],'hd');
+  $orignialmessage = $message;
+  $Junk_Check = Junk_Check($message . " " . $subject);
+  $wordcount = str_word_count($orignialmessage,0);
   
    $message .= "
-       
-
             Data: " . validate($_REQUEST['data'],'hd') . "  
             Captcha: " . validate($_REQUEST['Captcha'],'hd') . " : $captcha
             Referrer: " . validate($_REQUEST['referrer'],'hd') . "
-            Referrer: " . $_SERVER['HTTP_REFERER'] . " 
+            Referrer: " . validate($_SERVER['HTTP_REFERER'],'hd') . " 
             TimeStamp: " . validate($_REQUEST['time'],'hd');
             $ProcessTime = time() - validate($_REQUEST['time'],'hd');
             if ($ProcessTime <= 1){
@@ -144,31 +145,30 @@ if (isset($_REQUEST['email']))
    
    $message .= " 
            ProcessTime: " . $ProcessTime . " 
-           WordCount: " . str_word_count(validate($_REQUEST['message'],'hd'),0) . "
+           WordCount: " . $wordcount . "
            Times Loaded: " . validate($_REQUEST['times'],'hd');
    
    $spamvalue = 0;
    if (strlen(validate($_REQUEST['referrer'],'hd'))==0){
        $spamvalue++;
    }
-   if (validate($_REQUEST['referrer'],'hd')== $_SERVER['HTTP_REFERER']){
+   if (validate($_REQUEST['referrer'],'hd') == validate($_SERVER['HTTP_REFERER'],'hd')){
        $spamvalue++;
    }
-   if (str_word_count(validate($_REQUEST['message'],'hd'),0)/$ProcessTime >= 4){
-       $spamvalue += round((str_word_count(validate($_REQUEST['message'],'hd'),0)/$ProcessTime));
+   if (str_word_count($orignialmessage . " " . $subject,0)/$ProcessTime >= 4){
+       $spamvalue += round((str_word_count($orignialmessage . " " . $subject,0)/$ProcessTime));
    }
    if (validate($_REQUEST['times'],'hd') != 1){
        $spamvalue += validate($_REQUEST['times'],0);
    }
-   str_replace('   ', '3', strtolower(validate($_REQUEST['message'],'hd')), $count1);
+   // #todo: paramerterise the spamscore words.
+   str_replace(["    ","   ","  ","https","!","earning"], ["    ","   ","  ","https","!","earning"], strtolower($orignialmessage . " " . $subject), $count1);
    $spamvalue += $count1;
-      str_replace('  ', '2', strtolower(validate($_REQUEST['message'],'hd')), $count2);
-   $spamvalue += $count2;
    
    $message .= "
            SpamValue: " . $spamvalue;
         
-    if ($mailcheck==TRUE || $captcha==TRUE || $Junk_Check==TRUE || $spamvalue >= 50)
+    if ($mailcheck==TRUE || $captcha=='Fail' || $Junk_Check==TRUE || $spamvalue >= 50 || $spamvalue >= $wordcount)
     {
     echo parameters('JunkCheckFailMessage');
     // todo: update to log, pause and lock out junk users
