@@ -185,7 +185,7 @@ $temp = explode(".", $_FILES["file"]["name"]);
 $_FILES["file"]["name"];
 $extension = strtolower(end($temp));
 if ( in_array($_FILES["file"]["type"], $allowedTypes)
-&& ($_FILES["file"]["size"] < parameters(maxfileuploadsize)) // 20000000
+&& ($_FILES["file"]["size"] < parameters('maxfileuploadsize')) // 20000000
 && in_array($extension, $allowedExts)
 //&& in_array(mime_content_type($_FILES["file"]["tmp_name"]), $allowedTypes)  
         )
@@ -236,9 +236,9 @@ function Displaycaptcha(){
 
 function CheckCaptcha(){
     if (isset($_REQUEST['Captcha']) && strlen($_REQUEST['Captcha'] !=0)){
-        return TRUE;
+        return 'Fail';
     }else{
-        return FALSE;
+        return 'Pass';
     }
 }
 

@@ -3,8 +3,9 @@
 <?php
 $system = true;
         if(stripos($_SESSION['security'], 'editor') !== false){
-free_results($result);
-
+            if (isset($result)){
+                free_results($result);
+            }
 // creat limit links
 
 $Select = "target";

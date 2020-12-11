@@ -1,3 +1,8 @@
+Sitemap & Calendar
+	- Added auto generated sitemap 
+	- Added new compact list Calendar view
+	- Added YouTube content page
+
 SPAM Protection improvements
 	- Added Spam scoring
 	- block messages based on high spam score

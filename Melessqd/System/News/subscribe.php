@@ -100,21 +100,19 @@ if (isset($_POST['RName'])){
 }
 
 if (isset($_POST['Email'])){
-	if (strlen(trim($_POST['Email'])) == 0){
-		unset($_POST['Email']);
+    if (strlen(trim($_POST['Email'])) == 0){
+        unset($_POST['Email']);
 	$FAIL="missing field(s)";
-	}
-	
-	//check if the email address is invalid
-  $mailcheck = spamcheck($_POST['Email']);
-  if ($mailcheck==TRUE)
-    {
-	$FAIL="Invalid email address";
+    }else{
+        //check if the email address is invalid
+        $mailcheck = spamcheck($_POST['Email']);
+        if ($mailcheck==TRUE)
+            {
+	        $FAIL="Invalid email address";
+            }
     }
-
-
 }else{
-	$FAIL="missing field(s)";
+    $FAIL="missing field(s)";
 }
 
 if (isset($_POST['Submit']) && ($_POST['Submit'] == 'Subscribe')){

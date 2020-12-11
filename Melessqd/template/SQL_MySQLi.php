@@ -1,8 +1,6 @@
 <?php
-
 // Read SQL Data
 function SQL($select, $from, $die, $where, $limit, $Group, $sort){
-
 $query = "SELECT $select
 ";
 $query =  $query . "FROM $from
@@ -35,8 +33,6 @@ if (isset($limit)){
 //echo $query;
 global $con;
 $result = mysqli_query($con, "$query") or die(logerror($die));
-
-
 return $result;
 }
 
@@ -94,9 +90,6 @@ function sqlerror(){
     return mysqli_error($con);
 }
 
-
-
 function sqlclose($con){
     return mysqli_close($con);
-}
-?>
+}?>

@@ -12,37 +12,37 @@ require "System/login/message.php";
 //display content from database
 
 if ($ContentRows > 0){
-while ($row = fetch_array($ContentResult))
+while ($Pagerow = fetch_array($ContentResult))
   {
 
-   $format=validate($row['format'],'hd');
+   $format=validate($Pagerow['format'],'hd');
    //check if database entry shows system page
-   if (isset($row['System']) && strlen(trim($row['System']))!=0){
-        $SystemPage= strtolower(validate($row['System'],'hd'));
+   if (isset($Pagerow['System']) && strlen(trim($Pagerow['System']))!=0){
+        $SystemPage= strtolower(validate($Pagerow['System'],'hd'));
         require "SystemContent.php";
    }else{
    
 
 // check the security of the page, can we display
-   if(stripos($_SESSION['security'], strval($row['security'])) !== false || $row['security'] == null || strlen($row['security']) == 0){
+   if(stripos($_SESSION['security'], strval($Pagerow['security'])) !== false || $Pagerow['security'] == null || strlen($Pagerow['security']) == 0){
 
 // is the page active or not
-    if($row['active'] == 0){
+    if($Pagerow['active'] == 0){
 echo "<div id=\"inactive" . $side . "\">";
 echo "<div id=\"Edit" . $side . "\">";
         echo "Article Preview";
         echo "</div>";
-    }elseif ( strtotime($row['sdate']) > strtotime("now")){
+    }elseif ( strtotime($Pagerow['sdate']) > strtotime("now")){
         echo "<div id=\"inactive" . $side . "\">";
         echo "<div id=\"Edit" . $side . "\">";
-        echo "Automaticaly live on " . date('d-m-Y', strtotime($row['sdate']));
+        echo "Automaticaly live on " . date('d-m-Y', strtotime($Pagerow['sdate']));
         echo "</div>";
    }else{
          echo "<div id=\"article" . $side . "\">";
    }
  
    //   display the header, if configured
-   if (isset($row['header']) && strlen(trim($row['header'])) != 0 ){
+   if (isset($Pagerow['header']) && strlen(trim($Pagerow['header'])) != 0 ){
      echo "<p>";
      // check if page format has been selected as text
    if (strtoupper($format) == 'TEXT'){
@@ -50,21 +50,21 @@ echo "<div id=\"Edit" . $side . "\">";
            $HeaderTag = parameters('HeaderTag');
            $HeadStart = substr($HeaderTag,0,strpos($HeaderTag,'Header'));
            $HeadEnd = substr($HeaderTag,strpos($HeaderTag,'Header')+6,strlen($HeaderTag));
-           echo validate($HeadStart . nl2br(($row['header'])) . $HeadEnd, 'hd');
+           echo validate($HeadStart . nl2br(($Pagerow['header'])) . $HeadEnd, 'hd');
 }else{
     // otherwise assume HTML and don't add <br /> or header HTML tags
-       echo validate(($row['header']), 'hd');
+       echo validate(($Pagerow['header']), 'hd');
  }
    echo "</p>";
 }
   echo "<p>";
-   if (isset($row['page']) && strlen(trim($row['page'])) != 0 ){
+   if (isset($Pagerow['page']) && strlen(trim($Pagerow['page'])) != 0 ){
        if (strtoupper($format) == 'TEXT'){
            // if data is text then set new lines to <br />
-        $page =  nl2br($row['page']);
+        $page =  nl2br($Pagerow['page']);
 }else{
     // otherwise assume HTML and don't add <br />
-      $page = ($row['page']);
+      $page = ($Pagerow['page']);
      }
 }
           // check if articles should be short
@@ -90,7 +90,7 @@ echo "<div id=\"Edit" . $side . "\">";
             if (isset($subsection)) {
             $page = $page . "&amp;subsection=$subsection";
             }
-            $page = $page . "&amp;Article=" . urlencode(encryptfe($row['UUID'])) . "\"> ... more </a>";
+            $page = $page . "&amp;Article=" . urlencode(encryptfe($Pagerow['UUID'])) . "\"> ... more </a>";
             
       echo validate($page,'hd');  
     }else{
@@ -103,17 +103,8 @@ echo "<div id=\"Edit" . $side . "\">";
    echo "</p>";
 
     echo "</div>";
-      if(stripos($_SESSION['security'], $ArticleEditor)){
-
-      echo "<div id=\"edit\">";
-      echo "&nbsp;&nbsp;&nbsp; <a href=\"?target=Page_Edit&amp;section=edit&amp;Edit=" . urlencode(encryptfe($row['UUID'])) . "\"> Edit </a>&nbsp;&nbsp;&nbsp;";
-      if($row['active'] == 0){
-      echo "&nbsp;&nbsp;&nbsp;<a href=\"?target=Page_Edit&amp;section=updateSave&amp;Activate=" . urlencode(encryptfe($row['UUID'])) . "\"> Activate </a>&nbsp;&nbsp;&nbsp;";
-      }
-      echo "&nbsp;&nbsp;&nbsp;<a href=\"?target=Page_Edit&amp;section=Delete&amp;DEL=" . urlencode(encryptfe($row['UUID'])) . "\"> Delete </a>&nbsp;&nbsp;&nbsp;";
-      echo "&nbsp;&nbsp;&nbsp; <a href=\"?target=Page_Edit&amp;section=edit&amp;etarget=$target\">Add Article</a>";
-      echo "</div>";
-  }
+  // }
+      
 
   }elseif($ContentRows == 1){
       echo "Sorry you do not have the permission to view this page";
@@ -121,11 +112,29 @@ echo "<div id=\"Edit" . $side . "\">";
   else{
       $ContentRows--;
   }  
-  }}
+  }
+  
+  if(stripos($_SESSION['security'], $ArticleEditor)){
+
+      echo "<div id=\"edit\">";
+      if(isset($Pagerow['UUID'])){
+      echo "&nbsp;&nbsp;&nbsp; <a href=\"?target=Page_Edit&amp;section=edit&amp;Edit=" . urlencode(encryptfe($Pagerow['UUID'])) . "\"> Edit </a>&nbsp;&nbsp;&nbsp;";
+      if(isset($Pagerow['active']) and $Pagerow['active'] == 0){
+          echo "&nbsp;&nbsp;&nbsp;<a href=\"?target=Page_Edit&amp;section=updateSave&amp;Activate=" . urlencode(encryptfe($Pagerow['UUID'])) . "\"> Activate </a>&nbsp;&nbsp;&nbsp;";
+      }
+      echo "&nbsp;&nbsp;&nbsp;<a href=\"?target=Page_Edit&amp;section=Delete&amp;DEL=" . urlencode(encryptfe($Pagerow['UUID'])) . "\"> Delete </a>&nbsp;&nbsp;&nbsp;";
+      }
+      echo "&nbsp;&nbsp;&nbsp; <a href=\"?target=Page_Edit&amp;section=edit&amp;etarget=$target\">Add Article</a>";
+      echo "</div>";
+  }
+  
+  }
 }else{
  // no databse record, check for files that fit.
 include "MainContentFile.php";
 }
+
+
   /*     if(strpos($_SESSION['security'], $ArticleEditor)){
         echo "<div id=\"edit\">";
         

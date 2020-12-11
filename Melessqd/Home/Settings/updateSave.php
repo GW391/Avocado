@@ -19,6 +19,16 @@ if (isset($_POST['eextra'])){
 if (isset($_POST['esecurity'])){
     $security = validate($_POST['esecurity'],'h');
 }
+
+if (isset($_POST["esitemap"])){
+    if (is_null($_POST["esitemap"]) || strlen($_POST["esitemap"])==0){
+    $sitemap = 0;
+}else{
+    $sitemap = 1;
+}}else{
+    $sitemap = 0;
+}
+
 if (isset($_POST['esortorder'])){
     $sortorder = validate($_POST['esortorder'],'h');
 }
@@ -118,6 +128,11 @@ if (!isset($security) || strlen(trim($security)) == 0 ){
      $set .= ", security = NULL";
 }else{
     $set .= ", security = '$security'";
+}
+if (!isset($sitemap) || strlen(trim($sitemap)) == 0 ){
+     $set .= ", sitemap = 0";
+}else{
+    $set .= ", sitemap = '$sitemap'";
 }
 if (!isset($sortorder) || strlen(trim($sortorder)) == 0 ){
     $set .= ", sortorder = NULL";
@@ -223,7 +238,11 @@ echo "Nothing to do";
         $cols .= ", security";
         $vals .= ",'$security'";
         }
-
+    if (!isset($sitemap) || strlen(trim($sitemap)) == 0){
+    }else{
+        $cols .= ", sitemap";
+        $vals .= ",'$sitemap'";
+        }
     if (!isset($sortorder) || strlen(trim($sortorder)) == 0){
     }else{
         $cols .= ", sortorder";

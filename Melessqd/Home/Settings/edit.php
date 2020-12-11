@@ -28,7 +28,7 @@ if (isset($_POST['Edit'])){
 $UUID = validate(decryptfe($_POST['Edit']),'hd');
 
 // get settings
-$select = "UUID, target, section, subsection, extra, security, sortorder, DispName, ShortArticle, Articles, PublicPost , ContName, TLD, notloggedin";
+$select = "UUID, target, section, subsection, extra, security, sortorder, DispName, ShortArticle, Articles, PublicPost , ContName, TLD, notloggedin, sitemap";
 $From = "tblmenu";
 $Where = "UUID  = '$UUID'";
 $die = "Sorry there is a problem on this page please try again later";
@@ -82,6 +82,12 @@ echo ">" . trim($SecurityArray[$i]) . "</option>\r\n";
 }
         ?>
 </select>    </tr>
+    
+       <tr>
+<th>Include in Sitemap</th>
+    <td><input type="checkbox" <?php if(validate($row['sitemap'],'hd')==1){echo "checked";}?>  name="esitemap" size="25" /> </td>
+    </tr>
+    
     <tr>
         
 <th>Sort Order</th>
@@ -227,6 +233,10 @@ echo ">" . trim($SecurityArray[$i]) . "</option>\r\n";
         ?>
 </select>
     </td>
+    </tr>
+          <tr>
+<th>Include in Sitemap</th>
+    <td><input type="checkbox" checked  name="esitemap" /> </td>
     </tr>
     <tr>
 <th>Sort Order</th>

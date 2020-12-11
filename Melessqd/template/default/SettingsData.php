@@ -51,8 +51,8 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (54,'CalendarCreateRecordText', 'Event Created', NULL, NULL, NULL, '0', '1', '50', 'Enter the text for successfully creating a calendar entry', ' ', 'Calendar'),
     (55,'CalendarUpdateRecordText', 'Event Updated', NULL, NULL, NULL, '0', '1', '50', 'Enter the text for successfully updating a calendar entry', ' ', 'Calendar'),
     (56,'ShowNonBookableDays', '1', NULL, NULL, NULL, '0', 'B', '0', 'Select if you want to see non-bookable days in calendar', ' ', 'Calendar'),
-    (57,'PublicCalendarViews', 'List\nCalendar\nDay\nWeek', NULL, NULL, NULL, '0', 'M', '50', 'Select any Calendar views you wish to be visible to public visitors', 'List\nCalendar\nDay\nWeek', 'Calendar'),
-    (59,'SystemPages', 'Calendar\nContact', NULL, NULL, NULL, '0', '5', '50', 'List of System pages that can be selected in page edit.', ' ', 'General'),
+    (57,'PublicCalendarViews', 'List\nCalendar\nDay\nWeek\nCompactList', NULL, NULL, NULL, '0', 'M', '50', 'Select any Calendar views you wish to be visible to public visitors', 'List\nCalendar\nDay\nWeek', 'Calendar'),
+    (59,'SystemPages', 'Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView\nYouTube', NULL, NULL, NULL, '0', '5', '50', 'List of System pages that can be selected in page edit.', ' ', 'General'),
     (60, 'DataUsage', '<p>
 We store data on this site for the sole provision of the service to you, by registering you agree that we can use this data for this purpose.
 the data we hold is:

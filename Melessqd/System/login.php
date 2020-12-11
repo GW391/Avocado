@@ -174,11 +174,11 @@ if (isset($_SESSION['user'])){
 echo ' You are currently logged in and do not need to again ';
 }else{
     if (isset($_SERVER['HTTP_REFERER'])){
-                $HTTP_REFERER =validate($_SERVER['HTTP_REFERER'],'hd');
-$ref= explode("?",$HTTP_REFERER);
+        $HTTP_REFERER = validate($_SERVER['HTTP_REFERER'],'hd');
+        $ref=explode("?",$HTTP_REFERER);
     }else{
-    $ref=null;
-}
+        $ref=null;
+    }
 ?>
                 <div id="loginbox">
 <form method="post" action="?target=login">

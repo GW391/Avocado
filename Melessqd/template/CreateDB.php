@@ -135,6 +135,7 @@ $sql_tblMenu="CREATE TABLE IF NOT EXISTS $DataBaseName.tblmenu (
   PublicPost tinyint(1) NOT NULL DEFAULT '0',
   ContName varchar(45) DEFAULT NULL,
   Extra varchar(45) DEFAULT NULL,
+  sitemap tinyint(1) NOT NULL DEFAULT '1',
   notloggedin varchar(45) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT '0',
   PRIMARY KEY (UUID)
   )";

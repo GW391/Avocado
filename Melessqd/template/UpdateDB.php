@@ -42,35 +42,36 @@ mysqli_query($con, $sql_UpdateSettingsData);
     echo "New Settings Inserted<br />";
 }
 
-/*
-$sql_AlterContent ="
-        
-DROP PROCEDURE IF EXISTS $DatabaseName.?;
-DELIMITER //
-CREATE PROCEDURE $DatabaseName.?()
-BEGIN
-  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
-  ALTER TABLE $DatabaseName.tblcontent ADD COLUMN System VARCHAR(45) DEFAULT NULL;
-END //
-DELIMITER ;
-CALL $DatabaseName.?();
-DROP PROCEDURE $DatabaseName.?;
+// add / update columns
+echo "checking Database Structure";
+updateColumns('tblmenu','sitemap','tinyint(1)','NOT NULL', '1');
 
-ALTER TABLE $DatabaseName.tblcontent CHANGE COLUMN page page LONGTEXT CHARACTER SET 'utf8' NULL
-ALTER TABLE $DatabaseName.tblsettings CHANGE COLUMN Value Value LONGTEXT NULL DEFAULT NULL;
-        ";
-        //. ""
-        //. "ALTER TABLE $DatabaseName.tblcontent ADD COLUMN System VARCHAR(45) DEFAULT NULL AFTER sortorder, "
-        //. " CHANGE COLUMN page page LONGTEXT CHARACTER SET 'utf8' NULL" ;
-
-mysqli_query($con, $sql_AlterContent);
+function updateColumns($TableName, $ColumnName, $ColumnType, $NULL, $Default){
+    global $DatabaseName;
+    global $con;
+    $ShowColumns = "SHOW COLUMNS FROM $DatabaseName.$TableName LIKE '$ColumnName'";
+    $ColumnCheck = mysqli_query($con, $ShowColumns);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "Content Table Updated<br />";
+$exists = (mysqli_num_rows($ColumnCheck))?TRUE:FALSE;
+if($exists) {
+    echo "exists";
+ //  print_r($ColumnCheck);
+}else{
+    $InsertColumn="alter table $DatabaseName.$TableName add column $ColumnName $ColumnType $NULL DEFAULT $Default";
+    mysqli_query($con, $InsertColumn);
+      if (!$con) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}else{
+    echo "Database Updated $ColumnName added to $TableName<br />";
 }
- * 
- */
+}
+}
+}
