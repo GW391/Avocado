@@ -8,7 +8,7 @@ function logerror($error){
         echo validate($error,'hd');
         //error in SQL, trying to run an update
         echo "<br />There is an error, trying to run an update <br />";
-        include "template/updateDB.php";
+        include "template/UpdateDB.php";
         echo "Update complete try relaoding the page <br />";
         }
 

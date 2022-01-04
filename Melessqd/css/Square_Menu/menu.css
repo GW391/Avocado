@@ -128,6 +128,9 @@ transition: 300ms ease-in;
 
 @media only screen and (max-device-width: 1024px) and (orientation: landscape), (max-width: 1025px){
     
+    #menu1{
+
+    }
 h1 {
   text-align: center;
   margin: 10px 0;
@@ -274,9 +277,11 @@ h1 {
   }
   #menu{
     width: 100%;
+    
   }
   .Menucontainer {
-      width: 50%;
+    width: 50%;
+   
   }
 }
 
@@ -358,7 +363,7 @@ h1 {
 }
 #menu .content {
   max-height: 100%;
-  overflow: auto;
+
 }
 .collapsibleList li > img:checked + * {
   -webkit-transform: rotate(90deg);

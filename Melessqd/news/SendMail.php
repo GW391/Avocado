@@ -83,7 +83,7 @@ while ($row = fetch_array($result)){
                 // check if enough fails to auto delete subscriber.
                 $fails = validate($row['fails'], 'hd');
                 $id = validate($row['idtblnewsletter'],'hd');
-                $allowedFails = parameters(newsletterfails);
+                $allowedFails = parameters('newsletterfails');
                 if ( $allowedFails > 0){
                 if ($row['fails'] >= $allowedFails){
                     $where = "idtblnewsletter = $id";

@@ -3,6 +3,7 @@
 <td colspan=2 align=center>
 <h3>
 <?php
+if (isset($_REQUEST["d"])){
 // todo: check validation
 $file = validate($_REQUEST["d"], 'hd');
 echo $file;
@@ -50,6 +51,9 @@ if (isset($passage)){
 <iframe src="https://www.biblegateway.com/passage/?search=<?php echo $passage ?>;&amp;version=<?php echo $version ?>" width="100%" height="500" border="0" marginwidth="0" frameborder="0"></iframe>
 </tr>
 <?php
+}
+}else{
+echo "No file selected to play";
 }
 ?>
 </table>

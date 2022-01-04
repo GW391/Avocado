@@ -59,7 +59,7 @@ function updateColumns($TableName, $ColumnName, $ColumnType, $NULL, $Default){
 }else{
 $exists = (mysqli_num_rows($ColumnCheck))?TRUE:FALSE;
 if($exists) {
-    echo "exists";
+ //   echo "exists";
  //  print_r($ColumnCheck);
 }else{
     $InsertColumn="alter table $DatabaseName.$TableName add column $ColumnName $ColumnType $NULL DEFAULT $Default";

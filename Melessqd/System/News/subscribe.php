@@ -188,8 +188,23 @@ echo " Unsubscribed";
 
 }elseif (isset($_REQUEST['Unsubscribe'])){
 
-$ID = validate(decrypt($_REQUEST['Unsubscribe']),'hd');
+$ID = validate($_REQUEST['Unsubscribe'],'enc');
 
+
+echo "<div id=\"editbox\">";
+echo "<h1>Clicking the Confirm Unsubscribe button will unsubscribe you from the news letter</h1>";
+	echo "<form method=\"post\" action=\"?target=news&section=subscribe\">";
+        echo "<input type=\"hidden\" name=\"ConfirmUnsubscribe\" value=\"". $ID . "\">";
+	echo "<table>";
+        echo "<tr>";
+        echo "<td>";
+	echo "<input type=\"submit\" name=\"Submit\" value=\"Confirm Unsubscribe\">";
+        echo "</td></tr>";
+        echo "</table>";
+
+}elseif (isset($_POST['ConfirmUnsubscribe'])){
+    
+$ID = validate(decrypt($_REQUEST['ConfirmUnsubscribe']),'hd');
 $where = "idtblnewsletter = '$ID'";
 $update = "tblnewsletter";
 $limit = "1";

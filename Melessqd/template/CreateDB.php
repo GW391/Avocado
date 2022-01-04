@@ -190,7 +190,7 @@ $sql_tblnewsletter = "CREATE TABLE IF NOT EXISTS $DataBaseName.tblnewsletter (
   Deleted tinyint(1) NOT NULL DEFAULT '0',
   fails VARCHAR(45) NULL DEFAULT 0,
   PRIMARY KEY (`idtblnewsletter`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1$$";
+)";
 
 mysqli_query($con, $sql_tblnewsletter);
       if (!$con) {

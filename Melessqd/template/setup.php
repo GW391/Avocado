@@ -34,10 +34,9 @@ if (isset($_POST['DatabaseType'])){
     $Salt = generateRandomString(20);
     $DataKey = generateRandomString(55);
     $PostKey = generateRandomString(33);
-    $sqltypes = [MySQLi, MySQL];
-    
-    
-    if (in_array($sqltypes, $_POST['DatabaseType'], true)){
+    $sqltypes = ['MySQLi', 'MySQL'];
+        
+    if (in_array($_POST['DatabaseType'], $sqltypes, true)){
         require 'template/SQL_'.$_POST['DatabaseType'].'.php';
     }else{
         // no Database type specified, assume MySQLi
@@ -51,9 +50,9 @@ if (isset($_POST['DatabaseType'])){
     $" . "DatabaseName = \"" . validate($_POST['DatabaseName'],'hd') . "\";
     $" . "DatabaseServerName = \"" . validate($_POST['DatabaseServerName'],'hd') . "\";";
             if (isset($_POST['DatabaseServerPort']) & strlen($_POST['DatabaseServerPort']) !=0){
-    echo "$" . "DatabaseServerPort = \"" . validate($_POST['DatabaseServerPort'],'hd') . "\";";
+    $config .= "$" . "DatabaseServerPort = \"" . validate($_POST['DatabaseServerPort'],'hd') . "\";";
         }
-    echo "$" . "DatabaseUserName = \"" . validate($_POST['DatabaseUserName'],'hd') . "\";
+    $config .= "$" . "DatabaseUserName = \"" . validate($_POST['DatabaseUserName'],'hd') . "\";
     $" . "DatabasePassword = \"" . validate($_POST['DatabasePassword'],'hd') . "\";
     $" . "DataKey = \"" . $DataKey . "\";
     $" . "PostKey = \"" . $PostKey . "\";

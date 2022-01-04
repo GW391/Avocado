@@ -22,7 +22,8 @@ date_default_timezone_set('Europe/London');
 //start session
 $time = 3600;
 $ses = 'Session';
-session_set_cookie_params($time);
+$httpolny = true;
+session_set_cookie_params($time, $path=null, $domain=null, $secure=true, $httponly=true);
 session_name($ses);
 session_start();
 

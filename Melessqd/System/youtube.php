@@ -17,7 +17,5 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-
-<iframe width="707" height="398" src="<?php echo validate($page,'hd')?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<iframe width="707" height="398" src="https://www.youtube.com/embed/7TgtgOKDNUs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         
