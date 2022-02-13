@@ -92,23 +92,9 @@ Please click the link below to reset your account details
 (72, 'Bookshop_Affiliate_Tag', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter your bookshop Afiliate tag.', NULL, 'Bookshop'),
 (73, 'Junk_Check', 'bit.ly\r\nviagra\r\nv1agra\r\nincrease sales\r\nprofitability\r\nGet a quote\r\nget more leads\r\nSEO\r\nincrease sales\r\nLive Demo\r\nFREE TEST\r\nready to buy\r\npayment systems\r\nwebsite upgrades\r\nMagento\r\naffordable prices\r\nHere_s\r\nyou_d\r\ngenerate more leads\r\nPay a ransom\r\n', NULL, NULL, NULL, '0', '10', '30', 'Enter words and phrases as spam check, each line represets a phrase, entering a single word on a line any ocurrance of that word will triger a spam falure,  ', NULL, 'Security'),
 (74, 'JunkCheckFailMessage', 'Invalid input', NULL, NULL, NULL, '0', '1', '30', 'Enter message for failed junk input check', NULL, 'Security'),
-(75,'AvailableFonts','---Serif---
-Georgia, serif
-\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif
-\'Times New Roman\', Times, serif
----Sans-Serif---
-Arial, Helvetica, sans-serif
-\'Arial Black\', Gadget, sans-serif
-\'Comic Sans MS\', cursive, sans-serif
-Impact, Charcoal, sans-serif
-\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif
-Tahoma, Geneva, sans-serif
-\'Trebuchet MS\', Helvetica, sans-serif
-Verdana, Geneva, sans-serif
----Monospace---
-\'Courier New\', Courier, monospace
-\'Lucida Console\', Monaco, monospace
-', '0', '10, '50', 'Available Fonts for use, Plese only add web compatable fonts', 'Style')
+(75, 'AvailableFonts','Georgia=Georgia, serif\r\nPalatino Linotype=Palatino Linotype, Book Antiqua, Palatino, serif\r\nTimes New Roman=Times New Roman, Times, serif\r\nArial=Arial, Helvetica, sans-serif\r\nArial Black=Arial Black, Gadget, sans-serif\r\nComic Sans MS=Comic Sans MS, cursive, sans-serif\r\nImpact=Impact, Charcoal, sans-serif\r\nLucida Sans Unicode=Lucida Sans Unicode, Lucida Grande, sans-serif\r\nTahoma=Tahoma, Geneva, sans-serif\r\nTrebuchet MS=Trebuchet MS, Helvetica, sans-serif\r\nVerdana=Verdana, Geneva, sans-serif\r\nCourier New=Courier New, Courier, monospace\r\nLucida Console=Lucida Console, Monaco, monospace', NULL, NULL, NULL, '0', '10', '50', 'Available Fonts for use, Please only add web compatable fonts in the format:\r\nFont Name=Font 1, Font 2, Font 3...', NULL, 'Style'),
+(76, 'TinyMCEKey', '', NULL, NULL, NULL, '0', '1', '50', 'Enter key for TinyMCE editor, get it from tinyMCE www.tiny.cloud', NULL, 'General'),
+(77, 'ArticleHeader', '0', NULL, NULL, NULL, '0', 'B', '0', 'Display Article Header field', NULL, 'General')
 ";
 
 ?>

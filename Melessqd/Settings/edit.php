@@ -176,12 +176,14 @@ while ($num != $i) {
         echo "<optgroup label=\"" . trim($OptionsArray[$i]) . "\">";
         $optgroup = 1;
     }else{
-            
-    echo "<option style=\"font-family: " . trim($OptionsArray[$i]) . "\" value=\"" . trim($OptionsArray[$i]) . "\"";
-    if(preg_match("/".trim($OptionsArray[$i])."/i", trim(validate($row['value'],'hd')))){
+            if (($tmp = strstr(trim($OptionsArray[$i]), '=')) !== false) {
+    $str = substr($tmp, 1);
+}
+    echo "<option style=\"font-family: " . trim($str) . "\" value=\"" . trim($str) . "\"";
+    if(preg_match("/".trim($str)."/i", trim(validate($row['value'],'hd')))){
             echo " selected ";
             }
-echo ">" . trim($OptionsArray[$i]) . "</option>\r\n";
+echo ">" . trim(strtok($OptionsArray[$i],'=')) . "</option>\r\n";
     }
     
     }

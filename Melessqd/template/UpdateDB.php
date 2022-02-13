@@ -30,7 +30,7 @@ mysqli_query($con, $sql_InsertSettingsData);
     echo "New Settings Inserted<br />";
 }
 
-$sql_UpdateSettingsData = "UPDATE $DatabaseName.tblsettings SET Value='Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView' WHERE UUID='59';";
+$sql_UpdateSettingsData = "UPDATE $DatabaseName.tblsettings SET `Value`='Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView' WHERE UUID='59'";
 
 mysqli_query($con, $sql_UpdateSettingsData);
       if (!$con) {
@@ -39,8 +39,20 @@ mysqli_query($con, $sql_UpdateSettingsData);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "New Settings Inserted<br />";
+    echo "Settings Updatd<br />";
 }
+
+$sql_UpdateSettingsData2 = "UPDATE $DatabaseName.tblsettings SET `Options`='parameter:AvailableFonts' WHERE UUID='38';";
+mysqli_query($con, $sql_UpdateSettingsData2);
+      if (!$con) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}else{
+    echo "Settings Updatd<br />";
+}
+
 
 // add / update columns
 echo "checking Database Structure";

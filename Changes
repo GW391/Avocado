@@ -1,3 +1,10 @@
+Fonts Management and editor improvements
+	- further improved fonts management to enable custom fonts in tinyMCE edit boxes
+	- selectivly remove header on article edit page
+	- paramerterise tinyMCE key
+	- tidy up edit page
+	- move tinyMCE code to include
+
 various small changes
 	- Added user defined system fonts
 	- update newletter unsubscribe process
