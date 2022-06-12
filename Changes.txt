@@ -5,8 +5,6 @@ Vertical menu Style, ability to Move articles, system menu
 	- enable drop down to link article to calendar
 	- Add System Menu
 	- Move system menu items to new system menu from home menu
-	- added manul article sort
-	- fixed issue with displying article/page after updating.
 
 Fonts Management and editor improvements
 	- further improved fonts management to enable custom fonts in tinyMCE edit boxes

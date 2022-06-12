@@ -226,7 +226,7 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
 
         
         <?php include("template/header.php"); ?>
-        
+
         <!-- menu -->
         <?php include("template/menu.php"); ?>
 
@@ -236,21 +236,22 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
                <?php require("template/breadcrumbs.php"); ?>
            </div>
       <?php } ?>
-</div>
-</div>
+        </div>
+    </div>
+
+    
+    
 
         <div id="maincontent">
  
      <?php // insert page content 
      include("template/content.php"); ?>
-        
+        </div>
     <div id="footer">
     <?php // insert page footer 
     include ("./template/footer.php");
 ?>
 </div>
-</div>
-
 <!--</center>-->
 </body>
 </html>

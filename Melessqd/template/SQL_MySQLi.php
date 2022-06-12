@@ -1,6 +1,11 @@
 <?php
 // Read SQL Data
 function SQL($select, $from, $die, $where, $limit, $Group, $sort){
+
+//if(parameters('developer_mode') == '1'){
+//    $die .= sqlerror($con);
+ //   }
+
 $query = "SELECT $select
 ";
 $query =  $query . "FROM $from
@@ -40,7 +45,7 @@ return $result;
 
 function SQLI($db, $cols, $values, $die){
 global $con;
-mysqli_query($con,"INSERT INTO $db ($cols) VALUES ($values)") or die($die . mysqli_error($con));
+mysqli_query($con,"INSERT INTO $db ($cols) VALUES ($values)") or die(logerror($die));
 
 return mysqli_insert_id($con);
 }
@@ -57,7 +62,7 @@ if (isset($limit)){
 }
 // echo $update;
 global $con;
-$result = mysqli_query($con,"$update") or die($die . mysqli_error($con));
+$result = mysqli_query($con,"$update") or die(logerror($die));
 }
 
 function free_results($result) {

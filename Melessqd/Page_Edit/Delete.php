@@ -14,6 +14,25 @@ if (isset($_GET['DEL'])){
 
 $UUID = validate(decryptfe($_GET['DEL']),'hd');
 
+        $select = 'UUID, target, section, subsection';
+        $from = "tblcontent";
+        $lookupwhere = "UUID = '$UUID'";
+        $lookupLimit = '1';
+
+
+        $lookup = SQL($select, $from, null, $lookupwhere, $lookupLimit, null, null);
+
+        while ($row = fetch_assoc($lookup)) {
+            $target = validate($row["target"],'h');
+            if (isset($row["section"])){
+            $section = validate($row["section"],'h');}else{
+            unset( $section);}
+            if (isset($row["subsection"])){
+            $subsection = validate($row["subsection"],'h');}else{
+            unset( $subsection);}
+        }
+
+
 $where = "UUID = '$UUID'";
 $update = "tblcontent";
 $limit = "1";
@@ -31,6 +50,7 @@ $message = " Deleted";
 
 }
 
+/*
 $HTTP_REFERER =validate($_SERVER['HTTP_REFERER'],'hd');
 $ref= explode("?",$HTTP_REFERER);
 $query=validate($ref[1],'hd');
@@ -52,6 +72,7 @@ $section = $var;
 $var = str_replace("article=","",$var);
 $article = $var;
 }
-}
-echo "</div>";
-include("./template/content.php");
+}*/
+//echo "</div>";
+require ('template/content.php');
+?>

@@ -97,7 +97,7 @@ $var = str_replace("article=","",$var);
 $article = $var;
 }
 }
-echo "</div>";
+//echo "</div>";
 include("./template/content.php");
 
 	} else {

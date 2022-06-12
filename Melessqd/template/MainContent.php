@@ -1,4 +1,6 @@
 <?php 
+
+//echo 'maincontent';
 // display result message
 // this is system messages, including welcome message on login, die message on failure etc.
 if (isset($message)){
@@ -10,7 +12,6 @@ if (isset($message)){
 require "System/login/message.php";
 
 //display content from database
-
 if ($ContentRows > 0){
 while ($Pagerow = fetch_array($ContentResult))
   {
@@ -117,6 +118,10 @@ echo "<div id=\"Edit" . $side . "\">";
   if(stripos($_SESSION['security'], $ArticleEditor)){
 
       echo "<div id=\"edit\">";
+      if (isset ($Pagerow['previoussort']) and ($Pagerow['previoussort'] != NULL)){
+      $previoustsort = validate($Pagerow['previoussort'],'n')-1;
+      echo "&nbsp;&nbsp;&nbsp;<a href=\"?target=Page_Edit&amp;section=updateSave&amp;Move=" . urlencode(encryptfe($Pagerow['UUID'])) . "&amp;sortorder=" . $previoustsort . "\"> Move Up </a>&nbsp;&nbsp;&nbsp;";
+      }
       if(isset($Pagerow['UUID'])){
       echo "&nbsp;&nbsp;&nbsp; <a href=\"?target=Page_Edit&amp;section=edit&amp;Edit=" . urlencode(encryptfe($Pagerow['UUID'])) . "\"> Edit </a>&nbsp;&nbsp;&nbsp;";
       if(isset($Pagerow['active']) and $Pagerow['active'] == 0){
@@ -124,8 +129,38 @@ echo "<div id=\"Edit" . $side . "\">";
       }
       echo "&nbsp;&nbsp;&nbsp;<a href=\"?target=Page_Edit&amp;section=Delete&amp;DEL=" . urlencode(encryptfe($Pagerow['UUID'])) . "\"> Delete </a>&nbsp;&nbsp;&nbsp;";
       }
-      echo "&nbsp;&nbsp;&nbsp; <a href=\"?target=Page_Edit&amp;section=edit&amp;etarget=$target\">Add Article</a>";
+      ?>
+      <?php
+      /*
+                    <form method="post" name="na<?php echo validate(encryptfe($Pagerow['uuid']),'enc')?>" action="?target=Page_Edit&amp;section=edit">
+            <input type="hidden" name="etarget" value="<?php echo $target?>" />
+            <input type="hidden" name="esection" value="<?php echo $section?>" />
+            <input type="hidden" name="esubsection" value="<?php echo $subsection?>" />
+            <input type="submit" name="submit" value="Add Article" />
+	<button class="custombutton" type="submit" name="Add Article" value="New">
+            <img src="images/icons/detail.png" alt="Add Article" name="Add Article" title="Add Article" />
+        </button>
+        </form>
+*/?>
+        <?php      
+      echo "&nbsp;&nbsp;&nbsp; <a href=\"?target=Page_Edit&amp;section=edit&amp;etarget=$target";
+      if(isset($section)){
+      echo "&amp;esection=$section";
+      }
+      if(isset($section)){
+      echo "&amp;esubsection=$subsection";
+      }
+      echo "&amp;sortorder=" . validate($Pagerow['nextsort'],'n');
+      echo "\">Add Article</a>";
+
+      
+    if (isset ($Pagerow['nextsort']) and ($Pagerow['nextsort'] != NULL)){
+      $nextsort = validate($Pagerow['nextsort'],'n')+1;
+      echo "&nbsp;&nbsp;&nbsp;<a href=\"?target=Page_Edit&amp;section=updateSave&amp;Move=" . urlencode(encryptfe($Pagerow['UUID'])) . "&amp;sortorder=" . $nextsort . "\"> Move Down </a>&nbsp;&nbsp;&nbsp;";
+      }
+
       echo "</div>";
+      
   }
   
   }

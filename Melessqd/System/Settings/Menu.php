@@ -19,10 +19,10 @@ $result = SQL($Select, $From, $die, $where, $Limit, $GROUP, $sort);
 
 echo "<p>Limit: ";
 if (isset($_GET['limit'])){
-    echo "<a href=\"?target=Home&section=Settings&subsection=Menu\"> All </a>: ";
+    echo "<a href=\"?target=System&section=Settings&subsection=Menu\"> All </a>: ";
 }
         while ($row = fetch_array($result)){
-            echo "<a href=\"?target=Home&section=Settings&subsection=Menu&limit=". validate($row['target'],'hd') . "\">" . validate($row['target'],'hd') . "</a>: ";
+            echo "<a href=\"?target=System&section=Settings&subsection=Menu&limit=". validate($row['target'],'hd') . "\">" . validate($row['target'],'hd') . "</a>: ";
         }
 echo "</p>";
 free_results($result);
@@ -32,7 +32,7 @@ free_results($result);
 //Default is Home - Settings - Menu
 //Set to default until programming to locate correctly can be written
 
-$target = "Home";
+$target = "System";
 $section = "Settings";
 $subsection = "Menu";
 

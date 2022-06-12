@@ -1,6 +1,6 @@
-<center><h1>
+<!--<center><h1>
 Calendar
-</h1></center>
+</h1></center>-->
 
 <?php
 $system = true;
@@ -36,7 +36,7 @@ if (isset($_SESSION['security'])){
     $Where .= " AND Restricted!=1";
 }
 
-$Select = " UID, Date, Event, venue, Time, ETime, target, section, Restricted, flyers";
+$Select = " UID, Date, Event, venue, Time, ETime, target, section, subsection, Restricted, flyers";
         $From = "Pcalder";
         $Limit = null;
         $die = "Sorry no events found ";
@@ -72,6 +72,11 @@ if (isset($row['target'])){
 		if (isset($row['section'])){
                     if (strlen(trim($row['section'])) != 0){
 			echo '&amp;section=' . validate($row['section'], 'hd');
+                    }
+		}
+		if (isset($row['subsection'])){
+                    if (strlen(trim($row['subsection'])) != 0){
+			echo '&amp;subsection=' . validate($row['subsection'], 'hd');
                     }
 		}
                 echo '">';
@@ -115,7 +120,6 @@ if (isset($row['target'])){
                echo '<a href="?target=contact&amp;section=contact">Contact us</a>';
             }
 	}else{
-		//if ($row['venue'] == 'Church' || $row['venue'] == 'church'){
             if(stripos(parameters('PublicVenues'), $row['venue'])){
 			echo validate($row['venue'], 'hd');
 		}else{
@@ -131,7 +135,6 @@ if (isset($row['target'])){
 	}
 
 }else{
-		//if ($row['venue'] == 'Church' || $row['venue'] == 'church'){
                     if(stripos(parameters('PublicVenues'), $row['venue'])){
 			echo validate($row['venue'], 'hd');
 		}else{
@@ -170,7 +173,7 @@ if (isset($row['flyers'])){
 if (isset($row['Restricted'])){
     if ($row['Restricted']){
     echo '<div align="right">';
-    echo parameters('CalendarRestrictedText'); //'church booking, by invite only';
+    echo parameters('CalendarRestrictedText');
     echo '</div>';
 }
 }

@@ -34,7 +34,7 @@ global $con;
     $ParameterFrom = "tblsettings";
     $Parameterwhere = "Name = '$ParameterName'";
     $ParameterLimit = "1";
-    $Parameterdie = "Sorry there is a problem on the page, please try again later." . sqlerror($con);
+    $Parameterdie = "Sorry there is a problem on the page, please try again later.";
 
     $ParameterResult = SQL($ParameterSelect, $ParameterFrom, $Parameterdie, $Parameterwhere, $ParameterLimit, null, null);
     // check for a result

@@ -1,0 +1,612 @@
+body {
+margin: 0;
+padding: 0;
+font-size: .7em;
+line-height: 2.4em;
+background-repeat: repeat-y;
+text-align: center;
+}
+
+table {
+margin: 0;
+padding: 0;
+font-size: 1.1em;
+}
+
+.lockheader {
+	position:fixed;
+	top:0px;
+	width:100%;
+	z-index:1;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+   /* height: 105px;*/
+    top: 0px;
+    left: 0%;
+    padding: auto;
+    text-align: center;
+    z-index: 100;
+}
+
+.header img {
+    float: left;
+    margin-left: 0px;
+    top: 0;
+    right:0;
+}
+
+.header h1 {
+    font-size: 40px;
+    font-size: 3.1vw;
+}
+
+.header form {
+    float: right;
+    margin-right: 0px;
+    top: 20px;
+    right:0;
+}
+
+div#footer {
+    position: relative;
+    float: left;
+    padding: 1%;
+    text-align: right;
+    font-size: 8pt;
+    width: 98%;
+    /*height: 40px;*/
+    bottom: -100px;
+    left: 0%;
+}
+div#maincontent {
+position: relative;
+padding: 0;
+text-align: justify;
+width: 80%;
+top: 100px;
+left: 19%;
+clear: both;
+float: left;
+}
+@media only screen and (min-width: 1800px) {  
+div#maincontent {
+top: 100px;
+}
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+div#breadcrumbs {
+/*float: none;*/
+    position: relative;
+    width: 100%;
+    /*top: 116px; 122*/
+    left: 0%;
+    text-align: left;
+    float: left;
+    vertical-align: middle;
+    font-size: 1.6em;
+    /*height: 50px;*/
+    z-index: 2;
+}
+div#breadcrumbs #right{
+    float: right;
+}
+div#edit {
+/*float: none;*/
+    position: relative;
+    width: 100%;
+    top: -0px;  /*122*/
+/*    left: 4%; */
+    text-align: left;
+    float: left;
+    background-color: #aaaaaa;
+    vertical-align: top;
+    font-size: 1.3em;
+    height: 30px;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+}
+
+div#edit a {
+   font-size: 15px;
+   border: 2px;
+   border-style: solid;
+   border-radius: 20px/50px;
+   padding: 3px;
+   padding-right: 1.5vw
+   padding-left: 1.5vw
+   font-weight: bold;    
+}
+div#edit a:hover {
+   border: 3px;
+}
+
+div#leftcolumn {
+padding: 2%;
+float: left;
+text-align: left;
+width: 15%;
+position: fixed;
+}
+
+div#rightcolumn {
+padding: 0px;
+float: right;
+width: 20%;
+clear: both;
+}
+
+.loginbox table {
+padding: 2%;
+float:left;
+text-align: left;
+width: 40%;
+position:relative;
+top: 50%;
+left: 40%;
+}
+
+div#loginbox {
+  display: block;
+  opacity: 0.8;
+  width: 40%;
+  margin: 0 auto;
+  padding: 25px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+div#loginbox td{
+  font-size: 15px;
+  font-weight: bold; 
+}
+div#loginbox input {
+    border-radius: 20px/50px;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    /*: none;  <-- This thing here */
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    width: 95%;
+}
+
+div#loginbox input:focus {
+  
+}
+
+div#editbox td{
+  font-size: 15px;
+  font-weight: bold; 
+}
+div#editbox input {
+    border-radius: 20px/50px;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none; /* <-- This thing here */
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+}
+div#editbox option {
+    border-radius: 20px/50px;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none; /* <-- This thing here */
+    border-style: solid;
+    border-width: 1px;
+}
+
+div#editbox input:focus {
+  
+}
+
+div#editbox input[type=submit]:hover {
+}
+
+div#editbox textarea {
+    border-radius: 20px/50px;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none; /* <-- This thing here */
+    border:solid 1px #ccc;
+    border-radius: 10px;
+}
+
+div#editbox textarea:focus {
+}
+
+p {
+font-size: 12pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+padding-left: 0.4em;
+padding-right: 0.4em;
+}
+
+span
+{
+font-size: 22pt;
+}
+
+td {
+font-size: 12pt;
+}
+
+td input {
+font-size: 12pt;
+}
+
+td textarea {
+font-size: 12pt;
+width:99%;
+}
+td submit {
+font-size: 12pt;
+}
+
+li {
+font-size: 12pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+}
+ul {
+margin-top: 0;
+}
+
+a {position: relative;}
+a span {display: none;}
+
+a:hover span {
+  position: absolute;
+  top: 17px;
+  left: -120px;
+  width: 180px;
+  display: block;
+  border-width: 0px;
+  border-style: solid;
+  font-size: 12pt;
+  font-weight: bold;
+  z-index: 1;
+}
+
+a.link {
+font-size: 12pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: underline;
+}
+
+a.visited {
+font-size: 12pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+}
+
+a.hover {
+text-decoration: none;
+}
+
+.small {
+font-size: 8pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+}
+
+a.small {
+font-size: 8pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: capitalize;
+text-decoration: underline;
+}
+
+p.small {
+font-size: 8pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+}
+
+h2 {
+font-size: 16pt;
+font-weight: bold;
+text-decoration: none;
+text-align: center;
+}
+
+div#alerts .txt {
+padding: 8px;
+padding-right: 8px;
+border-right-width: 2px; 
+border-right-style: solid;
+border-left-width: 2px; 
+border-left-style: solid;
+border-bottom-width: 2px; 
+border-bottom-style: solid;
+line-height: 18px;
+font-size: 10pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+text-align: left;
+}
+
+.alerts .top {
+margin-top: 10px;
+height: 22px;
+text-align: center;
+font-weight: bold;
+padding-right: 11px;
+font-size: 16px;
+line-height: 20px;
+}
+
+.alerts a {
+font-size: 12px;
+}
+
+.alerts .top a {
+font-size: 16px;
+text-decoration: underline;
+}
+
+.alerts .top a:hover {
+font-size: 16px;
+text-decoration: none;
+}
+
+#article{
+    float: left;
+    color: inherit;
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 100%;
+    /*  border-bottom: 2px groove darkblue;*/
+    position: relative;
+    /* bottom: -20px;*/
+}
+
+#articlenarrow{
+    float: left;
+    color: inherit;
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 80%;
+    font-family: serif;
+    border-bottom-width: 2px;
+    border-bottom-style: groove;
+    position: relative;
+    bottom: -20px;
+}
+
+
+div#inactive{
+    float: left;
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 100%;
+    border-bottom-width: 2px;
+    border-bottom-style: groove;
+    position: relative;
+}
+
+div#inactivenarrow {
+    float: left;
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 80%;
+    border-bottom-width: 2px;
+    border-bottom-style: groove;
+    position: relative;
+    bottom: -20px;
+}
+
+#article p{
+	color: inherit;
+        font-size: 1.7em;
+}
+#articlenarrow p{
+	color: inherit;
+}
+
+.blur{
+	margin-left: 4px;
+	margin-top: 4px;
+	width: 55%;
+}
+
+.shadow,
+.content-lb,
+.content-db{
+	position: relative;
+	bottom: 2px;
+	right: 2px;
+}
+
+.shadow{
+}
+
+.content-lb{
+	border-width: 1px;
+        border-style: solid;
+	padding: .5em 2ex;
+}
+.content-db{
+	border-width: 1px;
+        border-style: solid;
+	padding: .5em 2ex;
+}
+
+#highlight tr:hover{
+}
+
+/* Remove border from Image buttons */
+.custombutton {
+    padding:0;
+    margin:0;
+    border:none;
+    background:none;
+    cursor:pointer;
+    /*position: relative;*/
+   float: left;
+}
+
+img {
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+  background-color: white;
+}
+
+.img100 img {
+    width: 100%;
+}
+
+/* ok so not really the most helful name, but this sliedes large text up the page at the top level 
+over anything underneath. */
+/* todo: extract code to make selectable div function */
+.centered {
+  position: absolute;
+  top: 3%;
+  left: 1%;
+  width: 50%;
+  height: 60%;
+  animation-name: TextOver;
+  animation-duration: 10s;
+  font-size: 50px;
+  font-size: 6vw;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  line-height: 1;
+}
+
+@keyframes TextOver {
+  from {width: 50%;
+  color: rgba(255,255,255,0);
+  background: rgba(120,120,120,0);
+  background-position: -200;
+  opancy: 0;
+  background-repeat: no-repeat;
+  height: 0%;
+  font-size: 50px;
+    font-size: 6vw;
+  overflow: hidden;
+  top: 30%;
+  }
+  to {width: 50%;
+      top: 3%;
+  color: rgba(255,255,255,1);
+  opancy: 1;
+  background-repeat: no-repeat;
+  background
+  height: 60%;
+  font-size: 50px;
+  font-size: 6vw;}
+}
+
+@media screen and (min-width: 1024px){
+
+.header .logo {
+display: block;
+}
+.header .MobileLogo {
+display: none;
+}
+
+.header .right img{
+   float: right;
+margin-right: 0px;
+top: 0;
+right:0; 
+}
+}
+@media screen and (max-width: 1025px){
+    .header {
+            height: 40px;
+    }
+.header h1 {
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-size: 40px;
+    font-size: 3.5vw;
+
+ /*   color: #000000;*/
+}
+
+.header .right img{
+display: none;
+}
+.header .logo {
+display: none;
+}
+.header .MobileLogo {
+display: block;
+z-index: 100;
+position: absolute;
+right:0px;
+}
+
+
+div#maincontent {
+    top: 50px;
+    left: 4%;
+    width: 92%;
+}
+}

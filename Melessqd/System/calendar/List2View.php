@@ -1,19 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
-
-<channel>
-  <title>Calendar</title>
-  <link>https://www.w3schools.com</link>
-  <description>Free web building tutorials</description>
-  <item>
-    <title>RSS Tutorial</title>
-    <link>https://www.w3schools.com/xml/xml_rss.asp</link>
-    <description>New RSS tutorial on W3Schools</description>
-  </item>
-</channel>
-
-</rss> 
-
 <center><h1>
 Calendar
 </h1></center>
@@ -52,7 +36,7 @@ if (isset($_SESSION['security'])){
     $Where .= " AND Restricted!=1";
 }
 
-$Select = " UID, Date, Event, venue, Time, ETime, target, section, Restricted, flyers";
+$Select = " UID, Date, Event, venue, Time, ETime, target, section, subsection, Restricted, flyers";
         $From = "Pcalder";
         $Limit = null;
         $die = "Sorry no events found ";
@@ -62,31 +46,60 @@ $Select = " UID, Date, Event, venue, Time, ETime, target, section, Restricted, f
 $result = SQL($Select, $From, $die, $Where, $Limit, $GROUP, $sort);
 
 ?>
-
-<table border="1" width="100%">
-<tr>
-	<td><strong>Date</strong></td>
-	<td><strong>Time</strong></td>
-	<td><strong>Event</strong></td>
-	<td><strong>Venue</strong></td>
-</tr>
+<center>
 
 <?php
 while ($row = fetch_array($result)){
+ //  echo "<div id='loginbox'>";
+    echo "<table border=\"0\" width=\"60%\" bgcolor=\"white\">";
 echo "<tr>";
 echo "<td valign=\"top\">";
 echo '<a name="';
 echo date('dm', strtotime($row['Date']));
 echo '"></a>';
 
-	echo date('l', strtotime($row['Date'])); 
-	echo " ";
-	echo date('d M', strtotime($row['Date']));
+
 // echo "</a>";
 echo "</td>";
 
 echo "<td valign=\"top\">";
-if (($row['Time']) <> "00:00:00"){
+
+
+if (isset($row['target'])){
+	if (strlen($row['target'])!=0){
+		//echo '<div align="right">';
+		echo '<a href="?target=' . validate($row['target'], 'hd');
+		if (isset($row['section'])){
+                    if (strlen(trim($row['section'])) != 0){
+			echo '&amp;section=' . validate($row['section'], 'hd');
+                    }
+		}
+		if (isset($row['subsection'])){
+                    if (strlen(trim($row['subsection'])) != 0){
+			echo '&amp;subsection=' . validate($row['subsection'], 'hd');
+                    }
+		}
+                echo '">';
+}
+
+                    }
+        echo  validate($row['Event'], 'hd');
+        if (isset($row['target'])){
+	echo '</a>';
+        
+        ?>
+<table width="99%">
+    <tr>
+        <td>
+            <?php 
+            echo date('l', strtotime($row['Date']));
+            echo " ";
+            echo date('d M', strtotime($row['Date'])); 
+            ?>
+        </td>
+        <td>
+            <?php 
+            if (($row['Time']) <> "00:00:00"){
 	echo date('H:i', strtotime($row['Time']));
         if (($row['ETime']) <> "00:00:00" && $row['ETime'] != NULL){
             echo ' - ' . date('H:i', strtotime($row['ETime']));
@@ -94,49 +107,11 @@ if (($row['Time']) <> "00:00:00"){
 }else{
 	echo '<a href="?target=contact&amp;section=contact">Contact us</a>';
 }
-
-echo "</td>";
-echo "<td valign=\"top\">";
-
-echo  validate($row['Event'], 'hd');
-if (isset($row['target'])){
-
-	if (strlen($row['target'])!=0){
-		echo '<div align="right">';
-		echo '<a href="?target=' . validate($row['target'], 'hd');
-		if (isset($row['section'])){
-                    if (strlen(trim($row['section'])) != 0){
-			echo '&amp;section=' . validate($row['section'], 'hd');
-                    }
-		}
-	echo '">more...</a>';
-	echo '</div>';
-	}
-}
-
-if (isset($row['flyers'])){
-
-	if (strlen($row['flyers'])!=0){
-	echo '<div align="right">';
-	echo '<a href="flyers/' . validate($row['flyers'], 'hd');
-		
-	echo '">' . validate($row['flyers'], 'hd') . '</a>';
-	echo '</div>';
-        }
-}
-
-
-if (isset($row['Restricted'])){
-    if ($row['Restricted']){
-    echo '<div align="right">';
-    echo parameters('CalendarRestrictedText');
-    echo '</div>';
-}
-}
-
-echo "</td>";
-echo "<td valign=\"top\">";
-if (isset($_SESSION['security'])){
+?>
+        </td>
+        <td>
+            <?php
+            if (isset($_SESSION['security'])){
             if(stripos($_SESSION['security'], 'Attendee')){
 
            if (strlen($row['venue'])!=0){
@@ -174,6 +149,35 @@ if (isset($_SESSION['security'])){
 
 		}
 }
+            ?>
+        </td>
+    </tr>
+</table>
+<?php
+	//echo '</div>';
+	}
+//}
+
+if (isset($row['flyers'])){
+
+	if (strlen($row['flyers'])!=0){
+	echo '<div align="right">';
+	echo '<a href="flyers/' . validate($row['flyers'], 'hd');
+		
+	echo '">' . validate($row['flyers'], 'hd') . '</a>';
+	echo '</div>';
+        }
+}
+
+
+if (isset($row['Restricted'])){
+    if ($row['Restricted']){
+    echo '<div align="right">';
+    echo parameters('CalendarRestrictedText');
+    echo '</div>';
+}
+}
+
 echo "</td>";
 
 	if (isset($_SESSION['security'])){
@@ -202,6 +206,9 @@ if(stripos($_SESSION['security'], parameters('CalendarEditor'))){
 	}
 
 echo "</tr>\n\r";
-
+echo "</table>\n\r";
+//echo "</div>\n\r";
+echo "<br />\n\r";
 }?>
-</table>
+
+</center>

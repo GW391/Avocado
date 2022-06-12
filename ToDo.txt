@@ -1,0 +1,14 @@
+Podcasts to DB
+Images to DB
+editable Header
+Editable footer
+right colum to DB
+colour chooser
+image picker in editor
+style thumnail
+style editor
+skin/style uploader
+rss feed
+System parameteres (read only)
+article sortorder
+sort order improvements

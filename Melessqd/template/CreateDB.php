@@ -217,6 +217,16 @@ $sql_tblErrorLog="CREATE TABLE IF NOT EXISTS $DataBaseName.tblelg (
   PRIMARY KEY (idtblelg)
 )";
 
+// Create Attachemnts table
+$sql_tblErrorLog="CREATE TABLE IF NOT EXISTS $DataBaseName.tblattachment (
+  UUID int(10) unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(45) DEFAULT NULL,
+  type varchar(45) DEFAULT NULL,
+  size float(50) NOT NULL,
+  file_type varchar(45) DEFAULT NULL
+  PRIMARY KEY (name)
+)";
+
 mysqli_query($con, $sql_tblErrorLog);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;

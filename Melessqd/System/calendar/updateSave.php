@@ -34,9 +34,9 @@ $DateCreate = Date('Ymd');
 $WhoCreate = validate($_SESSION['user'], 'h');
 $DateUpdate = Date('Ymd');
 $WhoUpdate = validate($_SESSION['user'], 'h');
-$target = validate($_POST['ltarget'], 'h');
-$section = validate($_POST['lsection'], 'h');
-$subsection = validate($_POST['lsubsection'], 'h');
+$target = validate($_POST['etarget'], 'h');
+$section = validate($_POST['esection'], 'h');
+$subsection = validate($_POST['esubsection'], 'h');
 $flyer = validate($_POST['lflyer'], 'h');
 
 

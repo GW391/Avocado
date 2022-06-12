@@ -64,9 +64,12 @@ if (isset($_SERVER['HTTP_REFERER'])){
 
     if (!isset($logged)){
     $db = "tblelg";
-    $die = " Sorry there has been an unrecoverable error please try again later. ..." . sqlerror($con);
+    $die = " Sorry there has been an unrecoverable error please try again later. ...";
+ //   if(parameters('developer_mode') == '1'){
+ //   $die .= validate(sqlerror($con),'hd');
+ //   }
     SQLI($db, $cols, $values, $die);
-    $logged=true;
+    $logged = true;
     }
     include("template/footer.php");
 }

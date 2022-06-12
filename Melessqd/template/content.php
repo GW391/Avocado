@@ -1,9 +1,19 @@
 <?php 
+/*
+echo 'content: ';
+echo $target; 
+if (isset($section)){
+echo $section; 
+}
+if (isset($subsection)){
+echo $subsection;
+}
+*/
 // set up searches for content
 
 $FromMenu = "tblmenu";
 $SelectMenu = "UUID, target, section, subsection, Articles, ShortArticle, PublicPost, ContName";
-$Select = "UUID, header, page, security, target, section, subsection, sdate, fdate, format, active, System";
+$Select = "UUID, header, page, security, target, section, subsection, sdate, CDate, fdate, format, active, System, sortorder, lag(sortorder) OVER ( order by sortorder) AS previoussort, LEAD(sortorder) OVER ( order by sortorder) AS nextsort";
 $From = "tblcontent";
 $die = "404 ...  " ;
 
@@ -17,6 +27,7 @@ if (isset($_GET['Article'])){
 }else{
 // check parameters
 if (isset($target)){
+//echo 'T: ' . $target;
 	$where = "target='$target'";
 }else{
     if((parameters('homepage') != null) && (parameters('homepage') != '')) {
@@ -44,7 +55,7 @@ $whereMenu = $where;
 //echo $whereMenu;
 
 $Limit = null;
-$sort = "CDate Desc";
+$sort = "sortorder, CDate Desc";
 
 // find the max number of articles to show on page
 $resultmenu = SQL($SelectMenu, $FromMenu, $die, $whereMenu, $Limit, null, null);
@@ -102,10 +113,10 @@ $ContentRows = num_rows($ContentResult);
 // <!--page content goes here -->
 
 // <!-- right column goes here -->
-require_once "SideContent.php";
+require "SideContent.php";
 
 // <!-- Main Page Content goes here -->
 
-require_once "MainContent.php";
+require "MainContent.php";
 
 //    <!-- end of content -->

@@ -35,10 +35,10 @@ $PodCast = PodCastURL();
 <td align=right>
 <p>
 <?php
-if(file_exists("sermons/" . $PodCastfile . ".php")){
-include("./sermons/" . $PodCastfile . ".php");
-
-
+if(file_exists($PodCast . "/" . $addpath . $PodCastfile . $addext. ".php")){
+//if(file_exists("sermons/" . $PodCastfile . ".php")){
+//include("./sermons/" . $PodCastfile . ".php");
+include("./" . $PodCast . "/" . $addpath . $PodCastfile . $addext . ".php");
 }
 ?>
 </p>

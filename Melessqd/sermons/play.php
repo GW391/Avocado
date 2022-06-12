@@ -35,8 +35,8 @@ $PodCast = PodCastURL();
 <p>
 <?php
 // insert podcast info file
-if(file_exists("sermons/" . $file . ".php")){
-    include("./sermons/" . $file . ".php");
+if(file_exists(parameters('Podcast_Folder'). "/" . $file . ".php")){
+    include("./" . parameters('Podcast_Folder'). "/" . $file . ".php");
 }
 ?>
 </p>
