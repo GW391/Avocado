@@ -226,7 +226,7 @@ if(parameters('SSL')){
 
 <p class="small"><a href="?target=login&amp;section=retrieve">Forgotten Username or Password</a></p>
 
-                </div>
+            </div>
 <?php
 }
 }

@@ -251,17 +251,19 @@ $TargeResult = getTargetMenu();
 $etfound=0;
 while ($Trow = fetch_array($TargeResult)){?>
             <option value = "<?php echo validate($Trow['Rtarget'],'hd') ?>"
-                    <?php if (validate($row['target'],'hd') == validate($Trow['Rtarget'],'hd')){
+                    <?php if(isset($row['target'])){
+                    if (validate($row['target'],'hd') == validate($Trow['Rtarget'],'hd')){
                         echo "selected";
                         $etfound++;
-                    } ?>
+                    }} ?>
                     ><?php echo validate($Trow['DispName'],'hd') ?></option>
 <?php } 
 
-if ($etfound == 0) { ?>
+if ($etfound == 0) { 
+if(isset($row['target'])){?>
 
 <option value = "<?php echo validate($row['target'],'hd') ?>" selected ><?php echo validate($Trow['target'],'hd') ?></option>
-    <?php }
+    <?php }}
 ?>
 
          </select>
@@ -281,17 +283,22 @@ if ($etfound == 0) { ?>
 <option value = ""></option>
 
 <?php 
+if(isset($row['target'])){
 $etarget = validate($row['target'],'hd');
+}else{
+$etarget = null;
+}
     $secresult = getSectionMenu($etarget);
 $esfound=0;
 while ($Secrow = fetch_array($secresult)){?>
             <option value = "<?php echo validate($Secrow['section'],'hd') ?>"
             <?php 
+             if(isset($row['section'])){
                 if (validate($row['section'],'hd') != NULL){
                     if (validate($row['section'],'hd') == validate($Secrow['section'],'hd')){
                         echo "selected";
                         $esfound++;
-                    }} ?>
+                    }}} ?>
                     ><?php echo validate($Secrow['section'],'hd') ?></option>
 <?php } 
 

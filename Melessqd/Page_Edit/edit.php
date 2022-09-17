@@ -229,7 +229,7 @@ while ($Trow = fetch_array($TargeResult)){?>
 <?php } 
 
 if ($etfound == 0) { ?>
-    <option value = "<?php echo validate($row['target'],'hd') ?>" selected ><?php echo validate($Trow['target'],'hd') ?></option>
+    <option value = "<?php echo validate($row['target'],'hd') ?>" selected ><?php echo validate($row['target'],'hd') ?></option>
     <?php }
 ?>
 

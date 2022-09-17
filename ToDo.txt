@@ -10,5 +10,4 @@ style editor
 skin/style uploader
 rss feed
 System parameteres (read only)
-article sortorder
 sort order improvements

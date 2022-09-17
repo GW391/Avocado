@@ -1,4 +1,12 @@
-Vertical menu Style, ability to Move articles, system menu
+Bug fixes 17-09-2022
+	- various bug vixes to fix errors found in log files
+	- function re-declare error in contact form
+	- blank article display text from previous article
+	- article as system page does not save with NULL atical content
+	- Calendar public views not working
+	- edit article target drop down not displaying current selected target
+
+Vertical menu Style, ability to Move articles, system menu - 12-06-2022
 	- Add Vertical menu style
 	- add drop downs to choose menu location in article
 	- enable move article during edit

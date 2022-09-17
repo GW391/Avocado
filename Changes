@@ -1,3 +1,10 @@
+bug fixes
+	- various bug vixes to fix errors found in log files
+	- function re-declare error in contact form
+	- blank article display text from previous article
+	- article as system page does not save with NULL atical content
+	- Calendar public views not working
+
 Vertical menu Style, ability to Move articles, system menu
 	- Add Vertical menu style
 	- add drop downs to choose menu location in article

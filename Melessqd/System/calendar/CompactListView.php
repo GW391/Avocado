@@ -24,6 +24,8 @@ $date = date('Ymd');
 //  $date->modify('+ ' . validate($_GET['Month'], 'n') . ' month');
 //}
 
+
+
 $Where = "Date>=$date AND Deleted!=1";
 
 if (isset($_SESSION['security'])){
@@ -38,7 +40,13 @@ if (isset($_SESSION['security'])){
 
 $Select = " UID, Date, Event, venue, Time, ETime, target, section, subsection, Restricted, flyers";
         $From = "Pcalder";
-        $Limit = null;
+        if (isset($Page)){
+        //extract number from Page field and limit by number.
+        $Limit = (int)filter_var($Page, FILTER_SANITIZE_NUMBER_INT);
+          //  $Limit = val($Page);
+        }else{
+            $Limit = null;
+        }
         $die = "Sorry no events found ";
         $sort = "Date, Time";
         $GROUP = null;
@@ -111,6 +119,9 @@ if (isset($row['target'])){
         </td>
         <td>
             <?php
+//            echo ": " . parameters('PublicVenues');
+  //          Echo ": " . $row['venue'];
+            
             if (isset($_SESSION['security'])){
             if(stripos($_SESSION['security'], 'Attendee')){
 
@@ -120,7 +131,7 @@ if (isset($row['target'])){
                echo '<a href="?target=contact&amp;section=contact">Contact us</a>';
             }
 	}else{
-            if(stripos(parameters('PublicVenues'), $row['venue'])){
+            if(stripos(parameters('PublicVenues'), $row['venue']) !== false){
 			echo validate($row['venue'], 'hd');
 		}else{
 		echo '<a href="?target=contact&amp;section=contact">Contact us</a>';
@@ -135,7 +146,7 @@ if (isset($row['target'])){
 	}
 
 }else{
-                    if(stripos(parameters('PublicVenues'), $row['venue'])){
+                    if(stripos(parameters('PublicVenues'), $row['venue']) !== false){
 			echo validate($row['venue'], 'hd');
 		}else{
 		echo '<a href="?target=contact&amp;section=contact">Contact us</a>';
@@ -209,6 +220,10 @@ echo "</tr>\n\r";
 echo "</table>\n\r";
 //echo "</div>\n\r";
 echo "<br />\n\r";
-}?>
+}
+if (isset($Page)){
+    unset($Page);
+}
+?>
 
 </center>

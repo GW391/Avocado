@@ -15,11 +15,15 @@ require "System/login/message.php";
 if ($ContentRows > 0){
 while ($Pagerow = fetch_array($ContentResult))
   {
+  unset($page);
 
    $format=validate($Pagerow['format'],'hd');
    //check if database entry shows system page
    if (isset($Pagerow['System']) && strlen(trim($Pagerow['System']))!=0){
-        $SystemPage= strtolower(validate($Pagerow['System'],'hd'));
+    if (isset($Pagerow['page']) && strlen(trim($Pagerow['page']))!=0){
+     $Page = validate($Pagerow['page'],'hd');
+}
+        $SystemPage= validate($Pagerow['System'],'hd');
         require "SystemContent.php";
    }else{
    
@@ -63,11 +67,11 @@ echo "<div id=\"Edit" . $side . "\">";
        if (strtoupper($format) == 'TEXT'){
            // if data is text then set new lines to <br />
         $page =  nl2br($Pagerow['page']);
-}else{
+        }else{
     // otherwise assume HTML and don't add <br />
       $page = ($Pagerow['page']);
-     }
-}
+        }
+    }
           // check if articles should be short
           global $short; 
           if ($short){
@@ -147,7 +151,7 @@ echo "<div id=\"Edit" . $side . "\">";
       if(isset($section)){
       echo "&amp;esection=$section";
       }
-      if(isset($section)){
+      if(isset($subsection)){
       echo "&amp;esubsection=$subsection";
       }
       echo "&amp;sortorder=" . validate($Pagerow['nextsort'],'n');

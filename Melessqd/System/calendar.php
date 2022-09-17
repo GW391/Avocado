@@ -23,7 +23,9 @@ require 'System/calendar/' . $CalendarStyle . 'View.php';
         $num = count($PublicCalendarViewsArray);
         $i = 0;
 while ($num > $i) {
+if (isset($target)){
     echo "<a href=\"?target=$target";
+    }
     if (isset($section)){
     echo "&amp;section=$section";
     }
@@ -37,7 +39,7 @@ while ($num > $i) {
         </center>
 
 <!--
-<center> List">List View</a> <a href="?target=<?php echo $target ?>&amp;CalendarStyle=CompactList">Compact List View</a> <a href="?target=calendar&amp;CalendarStyle=Calendar">Calendar View</a> <a href="?target=<?php echo $target ?>&amp;CalendarStyle=Week">Week View</a></center>?>
+<center> List">List View</a> <a href="?target=<?php //echo $target ?>&amp;CalendarStyle=CompactList">Compact List View</a> <a href="?target=calendar&amp;CalendarStyle=Calendar">Calendar View</a> <a href="?target=<?php //echo $target ?>&amp;CalendarStyle=Week">Week View</a></center>?>
 -->
 </div>
 

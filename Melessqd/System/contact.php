@@ -1,6 +1,8 @@
 <br />
 <?php
 $system = true;
+if (function_exists('spamcheck')){
+}else{
 function spamcheck($field)
   {
  
@@ -14,7 +16,10 @@ function spamcheck($field)
     return FALSE;
     }
   }
+  }
   
+  if (function_exists('displaycontactform')){
+}else{
   function displaycontactform()
   {
       global $target;
@@ -115,6 +120,7 @@ echo "</td>
 </table>
   </form>
   </div>";
+  }
   }
   
 
