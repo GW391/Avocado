@@ -1,5 +1,23 @@
+<center><h1>
+Calendar
+</h1></center>
+
 <?php
 $system = true;
+
+	if (isset($_SESSION['security']) || parameters('CalendarPublicPost')) {
+                    //if(stripos($_SESSION['security'], 'editor') || stripos($_SESSION['security'], 'Calendar')){
+if(stripos($_SESSION['security'], parameters('CalendarEditor')) || parameters('CalendarPublicPost')){
+    echo "<div id='edit'>";
+                if (parameters('CalendarPublicPost')){
+                    echo "<a href = \"?target=calendar&amp;section=publicupdate\"> Add Event </a>";
+                }else{
+			echo "<a href = \"?target=calendar&amp;section=update\"> Add Event </a>";
+            echo "<a href = \"?target=Settings&amp;limit=calendar\"> Calendar Settings </a>";
+                }
+echo '</div>';
+		}
+	}
 // get the calendar Style.
 
 if (!isset($CalendarStyle)){

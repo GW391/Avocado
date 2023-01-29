@@ -1,3 +1,4 @@
+29-01-2023
  - System\calendar\CompactListView.php
  - template\CreateDB.php
  - template\UpdateDB.php
@@ -18,7 +19,9 @@
  - System/login.php
  - template/functions.php
  - index.php
- - System/rsspodcast.php
+ - template/rsspodcast.php
+ - System\calendar.php
+ - System\calendar\ListView.php
 
 
 17-09-2022

@@ -1,10 +1,6 @@
-<center><h1>
-Calendar
-</h1></center>
-
 <?php
 $system = true;
-
+/*
 	if (isset($_SESSION['security']) || parameters('CalendarPublicPost')) {
                     //if(stripos($_SESSION['security'], 'editor') || stripos($_SESSION['security'], 'Calendar')){
 if(stripos($_SESSION['security'], parameters('CalendarEditor')) || parameters('CalendarPublicPost')){
@@ -17,7 +13,7 @@ if(stripos($_SESSION['security'], parameters('CalendarEditor')) || parameters('C
 			echo "</form>";
 		}
 	}
-
+*/
 
 $date = date('Ymd');
 //if (isset($_GET['Month'])){

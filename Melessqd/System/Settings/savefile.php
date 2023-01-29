@@ -54,8 +54,7 @@ if (isset($_POST['Date'])){
 $WhoCreate = validate($_SESSION['puid'],'h');
 $DateUpdate = Date('Ymd');
 $WhoUpdate = validate($_SESSION['puid'],'h');
-$DateCreate = Date('Ymd'); 
-
+$DateCreate = Date('Ymd');
 
 echo "type: ". $type;
 switch ($type){
@@ -90,14 +89,15 @@ echo "location: " . $location;
     echo "Size: " . $Size  . " kB<br>" ;
 //  echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
 
-    if (file_exists("$location/" . $_FILES["file"]["name"]))
+    if (file_exists("$location/" . $file_name))
       {
-      echo $_FILES["file"]["name"] . " already exists. ";
+      echo $file_name . " already exists. ";
       }
     else
      {
-      echo move_uploaded_file($_FILES["file"]["tmp_name"], "$location/" . $_FILES["file"]["name"]);
-      echo "Stored in: " . "$location/" . $_FILES["file"]["name"];
+      echo move_uploaded_file($_FILES["file"]["tmp_name"], "$location/" . $file_name);
+      echo "Stored in: " . "$location/" . $file_name;
+      $filetime = validate(filectime($location ."/" . $file_name),'h');
       }
     }
     if (!isset ($file_name) || strlen(trim($file_name)) == 0){
@@ -186,7 +186,12 @@ echo "I have no name";
         $cols .= ", Date";
         $vals .= ", '$Date'";
     }
-    
+if (!isset ($filetime) || strlen(trim($filetime)) == 0){
+
+    }else{
+        $cols .= ", FileTime";
+        $vals .= ", '$filetime'";
+    }
  
 // Add file to databse : 
     $db = "tblattachment";

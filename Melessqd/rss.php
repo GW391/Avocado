@@ -41,9 +41,10 @@ require_once 'template/asc_shift.php';
 date_default_timezone_set('Europe/London');
 
 if (isset($_GET['feed'])){
-    $feed = validate($_GET['feed'],'hd');
-        if(file_exists("System/rss" . $feed . ".php")){
-        require "System/rss" . $feed . ".php";
-    }else{echo "NO feed file - ";}
+    $feed = "template/rss" . validate($_GET['feed'],'hd') . ".php";
+
+        if(file_exists($feed)){
+        require_once $feed;
+    }else{echo "      <channel>      </channel>";}
 }
 ?>

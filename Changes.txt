@@ -1,3 +1,4 @@
+Podcast and Calendar updates - 29-01-2023
 	- add thumbnail to Caledar entries
 	- upgrade htmlpurifier to 4.15.0
 	- tested and confimred working with PHP 8.1.11
@@ -9,7 +10,8 @@
     - fixed session not saving on non-ssl sites
     - moved podcasts to DB
     - created db for file attachemts
-    - create generic RSS feed page 
+    - create generic RSS feed page
+    - updated front end encryption
 
 Bug fixes - 17-09-2022
 	- various bug vixes to fix errors found in log files

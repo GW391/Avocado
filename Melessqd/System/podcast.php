@@ -4,9 +4,10 @@ $system = true;
 
 
 if(preg_match("/".'editor'."/i", $_SESSION['security'])){
-
+echo '<div id="edit">';
 echo '<a href="?target=System&amp;section=Settings&amp;subsection=fileuploads">Upload file</a>';
-
+echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="?target=Settings&amp;limit=podcast">Podcast Settings</a>';
+echo '</div>';
 
 }
 ?>
@@ -56,10 +57,10 @@ Podcast URL:  <a href="<?php echo validate($PodCast, 'hd'); ?>"><?php echo valid
 <?php
 
 // check if podcasts can be located in Database
-$Select = "UUID, name, file_name, type, size, file_type, Meta_1, Meta_2, Meta_3, Meta_4, Description, Date";
+$Select = "UUID, name, file_name, type, size, file_type, Meta_1, Meta_2, Meta_3, Meta_4, Description, Date, deleted";
 $From = "tblattachment";
 $die = "Sorry something went wrong, please try again later";
-$where = "type = 'podcast'";
+$where = "type = 'podcast' && deleted = 0";
 if (isset($History)){
  $where .= " and Month(Date) = $History";
 }
@@ -71,7 +72,7 @@ $PodcastResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 //get months for history
 $Select = "Month(Date) as Month";
 $Limit = 12;
-$where = "type = 'podcast'";
+$where = "type = 'podcast' && deleted = 0";
 $Group = "Month(Date)";
 $HistoryResult = SQL($Select, $From, $die, $where, $Limit, $Group, $sort);
 
@@ -104,6 +105,7 @@ $Meta_3 = validate($PodCastRow['Meta_3'],'hd');
 $Meta_4 = validate($PodCastRow['Meta_4'],'hd');
 $fsize = round(validate($PodCastRow['size'],'hd')/1024,2);
 $Date = validate($PodCastRow['Date'],'d');
+
 
 ?>
 <table width="75%" class="sermons">

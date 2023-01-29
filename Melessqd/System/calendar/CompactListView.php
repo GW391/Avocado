@@ -5,18 +5,7 @@ Calendar
 <?php
 $system = true;
 
-	if (isset($_SESSION['security']) || parameters('CalendarPublicPost')) {
-                    //if(stripos($_SESSION['security'], 'editor') || stripos($_SESSION['security'], 'Calendar')){
-if(stripos($_SESSION['security'], parameters('CalendarEditor')) || parameters('CalendarPublicPost')){
-                if (parameters('CalendarPublicPost')){
-                    echo "<form method=\"post\" name=\"Add\" action=\"?target=calendar&amp;section=publicupdate\">";
-                }else{
-			echo "<form method=\"post\" name=\"Add\" action=\"?target=calendar&amp;section=update\">";
-                }
-			echo "<input type=\"submit\" value=\" Add Event \" />";
-			echo "</form>";
-		}
-	}
+
 
 
 $date = date('Ymd');

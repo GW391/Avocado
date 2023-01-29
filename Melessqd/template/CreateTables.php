@@ -234,6 +234,8 @@ $sql_tblattachment="CREATE TABLE IF NOT EXISTS $DataBaseName.tblattachment (
   WhoCreate varchar(45) NOT NULL,
   DateCreate date NOT NULL,
   Date date DEFAULT NULL,
+  FileTime varchar(15) DEFAULT NULL,
+  deleted varchar(15) DEFAULT NULL,
   PRIMARY KEY (UUID),
   KEY Date (Date),
   KEY name (name)

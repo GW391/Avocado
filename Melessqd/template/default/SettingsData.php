@@ -20,7 +20,7 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (13,'ArticleEditor','Editor','',NULL,'',0,'D',20,'Who has permission to edit Artiles.\nOnly enter a single security group','parameter:Security','Security'),
     (14,'ArticleApproval','Editor','',NULL,'',0,'D',20,'Assign who can approve / activate articles','parameter:Security','Security'),
     (16,'ContactEmail','','',NULL,'',0,'1',50,'Enter the email address for the Contact Us form','','General'),
-    (17,'HeaderTag','<h2>Header</h2>','',NULL,'',0,'',50,'Please enter any HTML tags for the header of an article, please put the tags arround the word Header ','','General'),
+    (17,'HeaderTag','<h2>Header</h2>','',NULL,'',0,'1',50,'Please enter any HTML tags for the header of an article, please put the tags arround the word Header ','','General'),
     (18,'Podcast_Title','','',NULL,'',0,'1',50,'Enter the title for the Podcast page','','Podcast'),
     (19,'Podcast_URL','','',NULL,'',0,'1',50,'URL for podcast, build automatically, use this to overrise the automatic URL','','Podcast'),
     (20,'Podcast_Folder','','',NULL,'',0,'1',50,'Enter a value here to overrise the default forlder for postacsts.  The default is Podcasts.','','Podcast'),
@@ -96,10 +96,10 @@ Please click the link below to reset your account details
 (76, 'TinyMCEKey', '', NULL, NULL, NULL, '0', '1', '50', 'Enter key for TinyMCE editor, get it from tinyMCE www.tiny.cloud', NULL, 'General'),
 (77, 'ArticleHeader', '0', NULL, NULL, NULL, '0', 'B', '0', 'Display Article Header field', NULL, 'General'),
 (78, 'developer_mode', '0', NULL, NULL, NULL, '0', 'B', '0', 'Use Developer Mode, improves on screen errors for development purposes. Do not turn on in producton environment', NULL, 'Security'),
-(79, 'Podcast_Meta_1', NULL, NULL, NULL, NULL, '0', '1', '50', 'Modcast Meta data 1 filed label, leave blank to not use.', NULL, 'Podcast'),
-(80, 'Podcast_Meta_2', NULL, NULL, NULL, NULL, '0', '1', '50', 'Modcast Meta data 2 filed label, leave blank to not use.', NULL, 'Podcast'),
-(81, 'Podcast_Meta_3', NULL, NULL, NULL, NULL, '0', '1', '50', 'Modcast Meta data 3 filed label, leave blank to not use.', NULL, 'Podcast'),
-(82, 'Podcast_Meta_4', NULL, NULL, NULL, NULL, '0', '1', '50', 'Modcast Meta data 4 filed label, leave blank to not use.', NULL, 'Podcast'),
+(79, 'Podcast_Meta_1', NULL, NULL, NULL, NULL, '0', '1', '50', 'Podcast Meta data 1 field label, leave blank to not use.', NULL, 'Podcast'),
+(80, 'Podcast_Meta_2', NULL, NULL, NULL, NULL, '0', '1', '50', 'Podcast Meta data 2 field label, leave blank to not use.', NULL, 'Podcast'),
+(81, 'Podcast_Meta_3', NULL, NULL, NULL, NULL, '0', '1', '50', 'Podcast Meta data 3 field label, leave blank to not use.', NULL, 'Podcast'),
+(82, 'Podcast_Meta_4', NULL, NULL, NULL, NULL, '0', '1', '50', 'Podcast Meta data 4 field label, leave blank to not use.', NULL, 'Podcast'),
 (83, 'PermissionsMessage', 'Sorry you do not have the permission to view this page.', NULL, NULL, NULL, '0', '1', '50', 'Text to use when permissions fail..', NULL, 'Security')
 ";
 
