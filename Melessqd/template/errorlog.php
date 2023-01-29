@@ -15,7 +15,9 @@ function logerror($error){
         global $con;
     if (isset($error)){
         $err = validate($error,'hd');
-                 $err .= validate(sqlerror($con),'hd');
+        if(parameters('developer_mode') == '1'){
+            $err .= validate(sqlerror($con),'hd');
+        }
     }else{
        $err = validate(sqlerror($con),'hd');
     }

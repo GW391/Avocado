@@ -198,7 +198,7 @@ echo ' You are currently logged in and do not need to again ';
 </form>
                 <?php
 
-if($_SERVER['HTTPS']!="on"){
+if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS']!="on"){
 if(parameters('SSL')){
     echo '<p class="small">Concerened about security?  <a href="';
 

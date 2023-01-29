@@ -55,7 +55,7 @@ global $con;
 // why do I have 2 of these ???
 function curPageURL($ssl, $uri) {
      $pageURL = 'http';
- if ($_SERVER["HTTPS"] == "on" || $ssl) {$pageURL .= "s";}
+ if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" || $ssl) {$pageURL .= "s";}
  $pageURL .= "://";
   if ($_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443") {
   $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"];
@@ -168,8 +168,8 @@ function security_check($required_security){
 }
 
 function upload_check(){
-$allowedExts = array("gif", "jpeg", "jpg", "png", "pdf");
-$allowedTypes = array("image/gif", "image/jpeg", "image/jpg", "image/pjpeg", "image/x-png", "image/png", "application/pdf");
+$allowedExts = array("gif", "jpeg", "jpg", "png", "pdf" , "mp3");
+$allowedTypes = array("image/gif", "image/jpeg", "image/jpg", "image/pjpeg", "image/x-png", "image/png", "application/pdf", "audio/mpeg");
 $temp = explode(".", $_FILES["file"]["name"]);
 //print_r ($temp);
 

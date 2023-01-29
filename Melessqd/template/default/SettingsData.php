@@ -24,7 +24,7 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (18,'Podcast_Title','','',NULL,'',0,'1',50,'Enter the title for the Podcast page','','Podcast'),
     (19,'Podcast_URL','','',NULL,'',0,'1',50,'URL for podcast, build automatically, use this to overrise the automatic URL','','Podcast'),
     (20,'Podcast_Folder','','',NULL,'',0,'1',50,'Enter a value here to overrise the default forlder for postacsts.  The default is Podcasts.','','Podcast'),
-    (21,'Podcast_Text','','',NULL,'',0,'1',50,'Enter some informative test to descibe the podcast','','Podcast'),
+    (21,'Podcast_Text','','',NULL,'',0,'5',50,'Enter some informative test to descibe the podcast','','Podcast'),
     (22,'CalendarStyle','Week','',NULL,'',0,'D',10,'Select the default Calendar view','List\nCompactList\nCalendar\nDay\nWeek\nThreeMonth\nrss\nList2','Calendar'),
     (23,'SendNewsSecurity','Admin','',NULL,'',0,'D',20,'Assign who can Send News letters / See the news letter subscription list','parameter:Security','News'),
     (25,'NewsReg','0','',NULL,'',0,'B',0,'Can users sign up for news letter.','','News'),
@@ -52,7 +52,7 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (55,'CalendarUpdateRecordText', 'Event Updated', NULL, NULL, NULL, '0', '1', '50', 'Enter the text for successfully updating a calendar entry', ' ', 'Calendar'),
     (56,'ShowNonBookableDays', '1', NULL, NULL, NULL, '0', 'B', '0', 'Select if you want to see non-bookable days in calendar', ' ', 'Calendar'),
     (57,'PublicCalendarViews', 'List\nCompactList\nCalendar\nDay\nWeek\nThreeMonth\nrss\nList2', NULL, NULL, NULL, '0', 'M', '50', 'Select any Calendar views you wish to be visible to public visitors', 'List\nCompactList\nCalendar\nDay\nWeek\nThreeMonth\nrss\nList2', 'Calendar'),
-    (59,'SystemPages', 'Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView\nYouTube', NULL, NULL, NULL, '0', '5', '50', 'List of System pages that can be selected in page edit.', ' ', 'General'),
+    (59,'SystemPages', 'Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView\ncalendar/CompactListView\nYouTube\npodcast', NULL, NULL, NULL, '0', '5', '50', 'List of System pages that can be selected in page edit.', ' ', 'General'),
     (60, 'DataUsage', '<p>
 We store data on this site for the sole provision of the service to you, by registering you agree that we can use this data for this purpose.
 the data we hold is:
@@ -95,7 +95,12 @@ Please click the link below to reset your account details
 (75, 'AvailableFonts','Georgia=Georgia, serif\r\nPalatino Linotype=Palatino Linotype, Book Antiqua, Palatino, serif\r\nTimes New Roman=Times New Roman, Times, serif\r\nArial=Arial, Helvetica, sans-serif\r\nArial Black=Arial Black, Gadget, sans-serif\r\nComic Sans MS=Comic Sans MS, cursive, sans-serif\r\nImpact=Impact, Charcoal, sans-serif\r\nLucida Sans Unicode=Lucida Sans Unicode, Lucida Grande, sans-serif\r\nTahoma=Tahoma, Geneva, sans-serif\r\nTrebuchet MS=Trebuchet MS, Helvetica, sans-serif\r\nVerdana=Verdana, Geneva, sans-serif\r\nCourier New=Courier New, Courier, monospace\r\nLucida Console=Lucida Console, Monaco, monospace', NULL, NULL, NULL, '0', '10', '50', 'Available Fonts for use, Please only add web compatable fonts in the format:\r\nFont Name=Font 1, Font 2, Font 3...', NULL, 'Style'),
 (76, 'TinyMCEKey', '', NULL, NULL, NULL, '0', '1', '50', 'Enter key for TinyMCE editor, get it from tinyMCE www.tiny.cloud', NULL, 'General'),
 (77, 'ArticleHeader', '0', NULL, NULL, NULL, '0', 'B', '0', 'Display Article Header field', NULL, 'General'),
-(78, 'developer_mode', '0', NULL, NULL, NULL, '0', 'B', '0', 'Use Developer Mode, improves on screen errors for development purposes. Do not turn on in producton environment', NULL, 'Security')
+(78, 'developer_mode', '0', NULL, NULL, NULL, '0', 'B', '0', 'Use Developer Mode, improves on screen errors for development purposes. Do not turn on in producton environment', NULL, 'Security'),
+(79, 'Podcast_Meta_1', NULL, NULL, NULL, NULL, '0', '1', '50', 'Modcast Meta data 1 filed label, leave blank to not use.', NULL, 'Podcast'),
+(80, 'Podcast_Meta_2', NULL, NULL, NULL, NULL, '0', '1', '50', 'Modcast Meta data 2 filed label, leave blank to not use.', NULL, 'Podcast'),
+(81, 'Podcast_Meta_3', NULL, NULL, NULL, NULL, '0', '1', '50', 'Modcast Meta data 3 filed label, leave blank to not use.', NULL, 'Podcast'),
+(82, 'Podcast_Meta_4', NULL, NULL, NULL, NULL, '0', '1', '50', 'Modcast Meta data 4 filed label, leave blank to not use.', NULL, 'Podcast'),
+(83, 'PermissionsMessage', 'Sorry you do not have the permission to view this page.', NULL, NULL, NULL, '0', '1', '50', 'Text to use when permissions fail..', NULL, 'Security')
 ";
 
 ?>

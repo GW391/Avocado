@@ -1,0 +1,93 @@
+ - System\calendar\CompactListView.php
+ - template\CreateDB.php
+ - template\UpdateDB.php
+ - System\Settings\images.php
+ - System\Settings\chooseimage.php
+ - System\Settings\insertimage.php
+ - template\CreateTables.php
+ - Sermons.php -> System\podcast.php
+ - rss.php
+ - template\default\SettingsData.php
+ - System\Settings\fileuploads.php
+ - Settings.php
+ - System\Settings\fileuploads.php
+ - template\errorlog.php
+ - css\3colum_vertical_Menu\menu.css
+ - sermons\mp3.php
+ - System/default/MenuData.php
+ - System/login.php
+ - template/functions.php
+ - index.php
+ - System/rsspodcast.php
+
+
+17-09-2022
+ - System\calendar.php
+ - System\contact.php
+ - template\MainContent.php
+ - template\UpdateDB.php
+ - System\login.php
+ - System\Calendar\CompactListView.php
+ - template\SystemContent.php
+ - Page_Edit\edit.php
+
+12-06-2022
+ - System\Calendar\CompactListView
+ - template\content.php
+ - template\functions.php
+ - template\errorlog.php
+ - template\SQL_MySQLi.php
+ - template\CreateDB.php
+ - System\Settings\saveimage.php
+ - Page_Edit\Delete.php
+ - Page_Edit\updateSave.php
+ - template\MainContent.php
+ - System\login.php
+ - Page_Edit\edit.php
+ - Page_Edit\updateSave.php
+ - ajax-Target.php
+ - ajax-Section.php
+ - System\calendar\updateSave.php
+ - System\calendar\update.php
+ - System\calendar.php
+ - css\3colum_vertical_Menu\style.css
+ - template\default\SettingsData.php
+ - template\UpdateDB.php
+ - template\default\MenuData.php
+ - System\Settings\Menu.php
+
+move
+ - Home\Settings --> System\Settings
+
+
+06-03-2022
+ - Sermons\play.php
+ - css\3colum_vertical_Menu\DefaultColours.php
+ - css\3colum_vertical_Menu\DefaultManuColours.php
+ - css\3colum_vertical_Menu\menu.css
+ - css\3colum_vertical_Menu\mobilemenu.css
+ - css\3colum_vertical_Menu\style.css
+ - template\default\SettingsData.php
+ - template\UpdateDB.php
+
+02-02-2022
+ - Settings\edit
+ - Page_Edit\edit
+ - template\default\settingsdata
+ - template\TinyMCECloud
+ - template\UpdateDB
+
+-template\default\settingsdata
+-setings\edit
+-settings\menu
+-settings\updatesave
+system\calendar
+-template\systemcontent
+-template\sql_mysqli
+-template\maincontent
+-template\functions
+sermons\index
+sitemap
+
+calendar\compactlistview
+system\youtube

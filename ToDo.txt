@@ -1,8 +1,10 @@
+Todo list in no particular priority order:
+
 Podcasts to DB
 Images to DB
 editable Header
 Editable footer
-right colum to DB
+right column to DB
 colour chooser
 image picker in editor
 style thumnail
@@ -10,4 +12,4 @@ style editor
 skin/style uploader
 rss feed
 System parameteres (read only)
-sort order improvements
+Enable editing series in Calendar

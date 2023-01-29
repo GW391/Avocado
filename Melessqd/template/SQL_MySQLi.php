@@ -4,7 +4,7 @@ function SQL($select, $from, $die, $where, $limit, $Group, $sort){
 
 //if(parameters('developer_mode') == '1'){
 //    $die .= sqlerror($con);
- //   }
+//   }
 
 $query = "SELECT $select
 ";

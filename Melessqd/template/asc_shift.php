@@ -3,6 +3,15 @@
 // To detect if functions are availble to page
 $shiftloaded = True;
 
+function getCipher(){
+//old $ciphering BF-ECB
+   if (!isset($ciphering)){
+      $ciphering = "AES-256-CTR";
+   }
+   return $ciphering;
+}
+
+
 // Old Encrypt/decrypt functuions, backward compatablity
 function asc_shift($string, $amount) {
 
@@ -67,6 +76,10 @@ function decrypt($value){
 
 //Encrypt data for passing front end data
 function encryptfe($value){
+
+   // Store the cipher method
+$ciphering = getCipher();
+
    if(!$value){return false;}
    global $PostKey;
    $key = $PostKey;
@@ -77,16 +90,28 @@ function encryptfe($value){
    //$crypttext = mcrypt_encrypt(MCRYPT_BLOWFISH, $key, $text, MCRYPT_MODE_ECB, $iv);
    //OpenSSL -- New 
    //echo $text;
-   
-       $blockSize = 8;
+   if (!isset($_SESSION['iv'])){
+      $iv = openssl_random_pseudo_bytes(16);
+      $_SESSION['iv']=$iv;
+   }else{
+      $iv = $_SESSION['iv'];
+   }
+
+    $blockSize = 8;
+    $paddingLen= 0;
+   // echo $value;
     $len = strlen($value);
     $paddingLen = intval(($len + $blockSize - 1) / $blockSize) * $blockSize - $len;
     $padding = str_repeat("\0", $paddingLen);
+ //   echo $padding;
     $data = $value . $padding;
-    //$key = make_openssl_blowfish_key($key);
-   // echo $data;
-    $crypttext = openssl_encrypt($data, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
-    
+//    echo $data;
+    // $key = make_openssl_blowfish_key($key);
+    // echo $data;
+//    echo $key;
+ //   echo 'pd:' . $paddingLen;
+    $crypttext = openssl_encrypt($data, $ciphering, $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv);
+ //   echo 'ct: ' . $crypttext;
    //$crypttext = openssl_encrypt($text, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
    //echo $crypttext;
    //echo base64_encode($encrypted);
@@ -96,6 +121,14 @@ function encryptfe($value){
 //Decrypt data passed in font end
 function decryptfe($value){
    if(!$value){return false;}
+   $ciphering = getCipher();
+     if (!isset($_SESSION['iv'])){
+      $iv = openssl_random_pseudo_bytes(16);
+      $_SESSION['iv']=$iv;
+   }else{
+      $iv = $_SESSION['iv'];
+   }
+
    global $PostKey;
    $key = $PostKey;
    $crypttext = base64_decode($value); //decode cookie
@@ -104,7 +137,7 @@ function decryptfe($value){
    //$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
    //$decrypttext = mcrypt_decrypt(MCRYPT_BLOWFISH, $key, $crypttext, MCRYPT_MODE_ECB, $iv);
    //OpenSSL -- New
-   $decrypttext = openssl_decrypt($crypttext, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
+   $decrypttext = openssl_decrypt($crypttext, $ciphering, $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv);
    return trim($decrypttext);
 }
 

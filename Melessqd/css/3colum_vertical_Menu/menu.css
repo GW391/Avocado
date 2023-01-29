@@ -84,22 +84,22 @@ background: rgba(247, 249, 251, 1.1);
 
 #menu ul {
     z-index: 1;
-    width: 100%;
+    width: 103%;
 }
 
 #menu ul ul {
   position: absolute;
-  margin-left: 100%;
+  margin-left: 80%;
   margin-top: -2.2vw; /*-22*/
     z-index: 500;
    /* left: 100%;
     float: outside;
     top: -20px;*/
-    width: 100%;
- /*  filter:alpha(opacity=85);
-    -moz-opacity:0.85;
-    -khtml-opacity: 0.85;
-    opacity: 0.85;*/
+    width: 230%;
+   filter:alpha(opacity=95);
+    -moz-opacity:0.95;
+    -khtml-opacity: 0.95;
+    opacity: 0.95;
 }
 #menu ul ul a {
 
@@ -110,8 +110,9 @@ background: rgba(247, 249, 251, 1.1);
 }
 
 #menu ul ul ul {
-    /*top: -20px;
-    left: 100%;*/
+    /*top: -20px;*/
+    left: -20%;
+    width: 100%;
 }
 
 /* hiding the Hovers */

@@ -21,7 +21,7 @@ $tblMenuData = "(1,'Home',NULL,NULL,NULL,10,'2011-02-16 21:45:17',0,1,0,0,'Home'
         (13,'news','subscribe',NULL,'View',3,'2018-04-29 15:00:09',0,1,0,0,'Subscribe','EV2gjNNFBDs=','2018-04-29',0,'EV2gjNNFBDs=','2018-04-29',0,0,NULL,NULL,0,0),
         (14,'Home','Home',NULL,'View',NULL,'2019-07-09 20:13:46',0,1,0,1,'Logout','EV2gjNNFBDs=','2019-07-09',0,'EV2gjNNFBDs=','2019-07-09',0,0,NULL,'logout=true',0,0),
         (15,'calendar',NULL,NULL,NULL,1,'2020-03-31 15:42:09',0,1,0,1,'Calendar',NULL,NULL,0,'fexNTlH/KoE=','2020-03-31',0,0,NULL,NULL,0,0),
-        (16,'news','ListMail',NULL,NULL,'10','2018-04-29 16:06:32',0,1,0,0,'List Subscribed Users',NULL,NULL,0,'EV2gjNNFBDs=', '2018-04-29',0,0,NULL,NULL,0,0)
-        (17,'System','NULL',NULL,NULL,'10','2018-04-29 16:06:32',0,1,0,0,'System',NULL,NULL,1,'EV2gjNNFBDs=', '2018-04-29',0,0,NULL,NULL,0,0)
+        (16,'news','ListMail',NULL,NULL,'10','2018-04-29 16:06:32',0,1,0,0,'List Subscribed Users',NULL,NULL,0,'EV2gjNNFBDs=', '2018-04-29',0,0,NULL,NULL,0,0),
+        (17,'System',NULL,NULL,NULL,'10','2018-04-29 16:06:32',0,1,0,0,'System',NULL,NULL,1,'EV2gjNNFBDs=', '2018-04-29',0,0,NULL,NULL,0,0)
         ";
 ?>

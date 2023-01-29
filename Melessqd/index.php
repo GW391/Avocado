@@ -23,7 +23,13 @@ date_default_timezone_set('Europe/London');
 $time = 3600;
 $ses = 'Session';
 $httpolny = true;
-session_set_cookie_params($time, $path=null, $domain=null, $secure=true, $httponly=true);
+if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on"){
+    //Use secure cookies when SSL is on
+    session_set_cookie_params($time, $path=null, $domain=null, $secure=true, $httponly=true);
+}else{
+    //dont use secure cookies when SSL is not on
+    session_set_cookie_params($time, $path=null, $domain=null, $secure=false, $httponly=true);
+}
 session_name($ses);
 session_start();
 

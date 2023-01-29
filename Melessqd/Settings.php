@@ -48,6 +48,8 @@ $result = SQL($select, $From, $die, $where,null, null, null);
             echo "<tr>\n\r";
             echo "<th>" . validate($row['Name'],'hd') . "</th>\n\r";
             echo "<td>" . validate($row['Value'],'hd') . "</td>\n\r";
+         //   echo "<td>" . $row['uuid'] . "</td>\n\r";
+         //   echo "<td>" . encryptfe($row['uuid']) . "</td>\n\r";
             ?>
             <td>
                 <form method="post" name="e<?php echo validate(encryptfe($row['uuid']),'hu')?>" action="?target=Settings&amp;section=edit">
@@ -69,5 +71,5 @@ $result = SQL($select, $From, $die, $where,null, null, null);
 </table>
 <?php
 }else
-echo "Sorry you don't have the permission to edit parameters";
+echo parameters('PermissionsMessage');
 ?>

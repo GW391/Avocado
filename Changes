@@ -1,9 +1,23 @@
-bug fixes
+	- add thumbnail to Caledar entries
+	- upgrade htmlpurifier to 4.15.0
+	- tested and confimred working with PHP 8.1.11
+	- fixed bug not creating new tables on update
+	- Update image manager galery
+	- 3 Column Menu bugfix
+    - fixed several bugs in intsall procedure
+    - fixed couple of logged errors with ssl detection on login screen
+    - fixed session not saving on non-ssl sites
+    - moved podcasts to DB
+    - created db for file attachemts
+    - create generic RSS feed page 
+
+bug fixes - 17-09-2022
 	- various bug vixes to fix errors found in log files
 	- function re-declare error in contact form
 	- blank article display text from previous article
 	- article as system page does not save with NULL atical content
 	- Calendar public views not working
+	- edit article target drop down not displaying current selected target
 
 Vertical menu Style, ability to Move articles, system menu
 	- Add Vertical menu style

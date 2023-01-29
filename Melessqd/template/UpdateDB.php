@@ -5,32 +5,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-    // Connect to DB engine
-//echo $DatabaseAdminName;
-//echo $DatabaseAdminPassword;
 global $con;
 require 'template/config.php';
-//require_once 'template/hotsprings_'.$DatabaseType.'.php';
-//require_once 'template/SQL_'.$DatabaseType.'.php';
-//require_once 'template/errorlog.php';
-//require_once 'template/asc_shift.php';
 
+// insert Missing tables into Database
+require 'template/CreateTables.php';
+
+// Grab Settings Data
 include 'template/default/SettingsData.php';
 //echo $tblSettingsData;
+
+// Insert settings data into databse, skip/ignore any dupicates.
 $sql_InsertSettingsData = "INSERT IGNORE INTO $DatabaseName.tblsettings VALUES " . $tblSettingsData;
 
 mysqli_query($con, $sql_InsertSettingsData);
-      if (!$con) {
-    echo "Error: Unable to connect to MySQL." . PHP_EOL;
-    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-    exit;
-}else{
-    echo "New Settings Inserted<br />";
-}
+    if (!$con) {
+        echo "Error: Unable to connect to MySQL." . PHP_EOL;
+        echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+        echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+        exit;
+    }else{
+        echo "New Settings Inserted<br />";
+    }
 
-$sql_UpdateSettingsData = "UPDATE $DatabaseName.tblsettings SET `Value`='Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView\ncalendar/CompactListView' WHERE UUID='59'";
+// Update settings that have changed 
+$sql_UpdateSettingsData = "UPDATE $DatabaseName.tblsettings SET `Value`='Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView\ncalendar/CompactListView\nYouTube\npodcast' WHERE UUID='59'";
 
 mysqli_query($con, $sql_UpdateSettingsData);
       if (!$con) {
@@ -84,6 +83,19 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     echo "Settings Updatd<br />";
 }
 
+$sql_UpdateSettingsData6 = "UPDATE $DatabaseName.tblsettings SET `num_rows`='5' WHERE UUID='21';";
+mysqli_query($con, $sql_UpdateSettingsData5);
+      if (!$con) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}else{
+    echo "Settings Updatd<br />";
+}
+
+// Function to add / Update database columns.
+
 if (function_exists('updateColumns')){
 }else{
     function updateColumns($TableName, $ColumnName, $ColumnType, $NULL, $Default){
@@ -108,6 +120,8 @@ if (function_exists('updateColumns')){
                     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
                     exit;
                 }else{
+                        echo "Database Updated $ColumnName updated in $TableName<br />";
+                    }}else{
                     $InsertColumn="alter table $DatabaseName.$TableName add column $ColumnName $ColumnType $NULL DEFAULT $Default";
                     mysqli_query($con, $InsertColumn);
                     if (!$con) {
@@ -120,10 +134,55 @@ if (function_exists('updateColumns')){
                     }
                 }
             }
-        }
-        // close function
-    }
-} // end if function existis
+        } // close function
+    } // end if function existis
+
+ /*   
+ 
+ // Function to Add and update Indexes 
+    if (function_exists('AddIndex')){
+}else{
+    function AddIndex($TableName, $ColumnName, $IndexName){
+        global $DatabaseName;
+        global $con;
+        $ShowColumns = "SHOW COLUMNS FROM $DatabaseName.$TableName LIKE '$ColumnName'";
+        $ColumnCheck = mysqli_query($con, $ShowColumns);
+        if (!$con) {
+            echo "Error: Unable to connect to MySQL." . PHP_EOL;
+            echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+            echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+            exit;
+        }else{
+            $exists = (mysqli_num_rows($ColumnCheck))?TRUE:FALSE;
+            if($exists) {
+                //   echo "exists";
+                $UpdateColumn = "ALTER TABLE $DatabaseName.$TableName CHANGE COLUMN $ColumnName $ColumnName $ColumnType $NULL DEFAULT $Default";
+                mysqli_query($con, $UpdateColumn);
+                if (!$con) {
+                    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+                    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+                    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+                    exit;
+                }else{
+                        echo "Database Updated $ColumnName updated in $TableName<br />";
+                    }}else{
+                    $InsertColumn="alter table $DatabaseName.$TableName add column $ColumnName $ColumnType $NULL DEFAULT $Default";
+                    mysqli_query($con, $InsertColumn);
+                    if (!$con) {
+                        echo "Error: Unable to connect to MySQL." . PHP_EOL;
+                        echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+                        echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+                        exit;
+                    }else{
+                        echo "Database Updated $ColumnName added to $TableName<br />";
+                    }
+                }
+            }
+        } // close function
+    } // end if function existis
+    ALTER TABLE `pcalder`
+	ADD INDEX `thumbnail` (`thumbnail`);
+	*/
 
 
 // add / update columns
@@ -131,3 +190,5 @@ echo "checking Database Structure";
 updateColumns('tblmenu','sitemap','tinyint(1)','NOT NULL', '1');
 updateColumns('tblcontent','sortorder','INT','NULL', '0');
 updateColumns('tblcontent','page','longtext','NULL', 'NULL');
+updateColumns('pcalder','thumbnail','text','NULL', 'NULL');
+updateColumns('pcalder','seriesID',' bigint(20)','NULL', 'NULL');

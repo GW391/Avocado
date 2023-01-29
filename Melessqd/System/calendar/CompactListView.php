@@ -38,7 +38,7 @@ if (isset($_SESSION['security'])){
     $Where .= " AND Restricted!=1";
 }
 
-$Select = " UID, Date, Event, venue, Time, ETime, target, section, subsection, Restricted, flyers";
+$Select = " UID, Date, Event, venue, Time, ETime, target, section, subsection, Restricted, flyers, thumbnail";
         $From = "Pcalder";
         if (isset($Page)){
         //extract number from Page field and limit by number.
@@ -59,8 +59,27 @@ $result = SQL($Select, $From, $die, $Where, $Limit, $GROUP, $sort);
 <?php
 while ($row = fetch_array($result)){
  //  echo "<div id='loginbox'>";
-    echo "<table border=\"0\" width=\"60%\" bgcolor=\"white\">";
+    echo "<table border=\"0\" width=\"60%\" bgcolor=\"white\" alt=\"Table for formatting purposes\">";
 echo "<tr>";
+echo "<td valign=\"top\">";
+
+if (isset($row['thumbnail'])){
+	if (strlen($row['thumbnail'])!=0){
+        echo "<img src=\"" . validate($row['thumbnail'],'hd') . "\" width=\"75px\" alt=\"image - " . validate($row['thumbnail'],'hd') . " Thumbnail\" />";
+	}
+}else{
+
+	if (isset($_SESSION['security'])){
+                    //if(stripos($_SESSION['security'], parameters('Calendar')) !== false || stripos($_SESSION['security'], 'Calendar') !== false){
+if(stripos($_SESSION['security'], parameters('CalendarEditor'))){
+			echo "<form method=\"post\" name=\"" . $row['UID'] . "\" action=\"?target=Settings&amp;section=chooseimage\">";
+			echo "<input type=\"hidden\" name=\"CALID\" value=\"" . $row['UID'] . "\" readonly=\"readonly\" />";
+			echo "<input type=\"image\" SRC=\"images/icons/edit.png\" value=\" Edit \" alt=\"Edit\" name=\"Edit\" title=\"Edit\" />";
+			echo "</form>";
+}}
+}
+
+echo "</td>";
 echo "<td valign=\"top\">";
 echo '<a name="';
 echo date('dm', strtotime($row['Date']));

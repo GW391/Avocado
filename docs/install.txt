@@ -1,8 +1,11 @@
 Prerequisits:
-Webserver (IIS, Apache, ngnx, etc) with 
-MySQL > 8 / MariaDB 10
-PHP 6+
-TinyMCE  cloud account
+	Webserver (IIS, Apache, ngnx, etc) with 
+	MySQL > 8 / MariaDB 10
+	PHP 6+
+	TinyMCE  cloud account
+
+Included pojects:
+	HTMLPurifier 5.14.0
 
 Install:
 Copy the Melessqd folder to your web server, share this folder on your website.
