@@ -1,3 +1,22 @@
+Podcast - Version 1.24.1 - 29-01-2024
+    - Minor podcast changes bugfixes and updates
+    - Enable read only settings
+    - maintian settings limit when edditing
+    - additional update to front end encryption
+    - minor code tidy up
+    - update to databse encryption
+    - update calander compact list view
+    - update news mail procedure for php 8.1
+    - update to calander event edit page for php 8.1
+    - bug fix for users
+    - add upload, send and test paramaters for news letting mail
+    - added Duration field to podcasts / attachemnts
+    - added explicit flag in Podcast parameters
+    - Added system information page in System Menu
+    - Added version & build numbers
+    - removed some unused / old files
+
+
 Podcast and Calendar updates - 29-01-2023
 	- add thumbnail to Caledar entries
 	- upgrade htmlpurifier to 4.15.0

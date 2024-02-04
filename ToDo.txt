@@ -1,6 +1,5 @@
 Todo list in no particular priority order:
 
-Podcasts to DB
 Images to DB
 editable Header
 Editable footer
@@ -11,5 +10,11 @@ style thumnail
 style editor
 skin/style uploader
 rss feed
-System parameteres (read only)
 Enable editing series in Calendar
+pick podcast album art in settings
+pick default timezone in settings
+change settings UID to the Setting name
+
+System parameteres (read only) - Completed
+Podcasts to DB - Complete
+

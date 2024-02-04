@@ -1,3 +1,37 @@
+ - System\Settings\fileuploads.php -> podcastuploads.php
+ - System\podcast.php
+ - Settings/edit.php
+ - Settings/updateSave.php
+ - Settings.php
+ - template/CreateTables.php
+ - template/UpdateDB.php
+ - System\play.php
+ - System\mp3.php
+ - template/rsspodcast.php
+ - template/default/SettingsData.php
+ - template/asc_shift.php
+ - System/login.php
+ - Home/AccountEdit.php
+ - Home/MyAccount.php
+ - System/login/reset.php
+ - Home/Save.php
+ - Users/Save.php
+ - System/calendar/CompactListView.php
+ - news/ListUnvarafiedMail.php
+ - news/SendMail.php
+ - news/ListMail.php
+ - news/mail.php
+ - template/default/MenuData.php
+ - System/calendar/update.php
+ - index.php
+ - Users.php
+ - css/3colum_vertical_Menu/style.css
+ - template/functions.php
+ - System.php
+ - Page_Edit/edit.php
+ - Page_Edit/updateSave.php
+
+
 29-01-2023
  - System\calendar\CompactListView.php
  - template\CreateDB.php
@@ -14,7 +48,8 @@
  - System\Settings\fileuploads.php
  - template\errorlog.php
  - css\3colum_vertical_Menu\menu.css
- - sermons\mp3.php
+ - sermons\mp3.php -> System\mp3.php
+ - sermons\play.php -> System\play.php
  - System/default/MenuData.php
  - System/login.php
  - template/functions.php
