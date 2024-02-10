@@ -60,11 +60,12 @@ th {
 	</tr>
 	<?php
 while ($row = fetch_array($result)){
-
+		$Name = validate(decrypt($row['RName']),'hd');
+		$email = validate(decrypt($row['Email']),'hd');
         echo "<tr>";
-		echo "<td>" . validate(decrypt($row['RName']),'hd') . "</td>";
+		echo "<td>" . $Name . "</td>";
 		echo "<td>" ;
-		$str = validate(decrypt($row['Email']),'hd');
+		$str = $email;
 		$pattern = '/...@.../i';
 		echo preg_replace($pattern, '***@***', $str);
 		echo  "</td>";

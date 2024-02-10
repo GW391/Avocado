@@ -31,7 +31,7 @@ $ciphering = getCipher();
     // new encryption
     $iv = openssl_random_pseudo_bytes(16);
    $crypttext = openssl_encrypt($text, $ciphering, $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv);
-   //TODO: Get '00' below from paramters for key to use
+   //TODO: Get '00' below from paramters for key to use to enable key rotation
    return trim(base64_encode(date('y') . '00' .$iv . $crypttext)); //encode for cookie
 }
 
@@ -44,10 +44,13 @@ $ciphering = getCipher();
    $key = $DataKey;
    $crypttext = base64_decode($value); //decode cookie
    //OpenSSL -- New Decryption
-   if(intval(substr($crypttext,0,2) < 23)){
-      // 23 or above not found, use old encryption
-   global $DataKey;
-   $key = $DataKey;
+
+    $isnew = intval(substr($crypttext,0,2));
+//    echo "crypttext = " . $isnew;
+   if($isnew < 23){
+ //  echo "23 or above not found, use old encryption";
+//   global $DataKey;
+//   $key = $DataKey;
    $decrypttext = openssl_decrypt($crypttext, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
    }else{
       // which key has been used in the encryption
@@ -58,10 +61,11 @@ $ciphering = getCipher();
       }else{
          global ${'DataKey' . intval(substr($crypttext,2,2))};
          $key =  ${'DataKey' . intval(substr($crypttext,2,2))};
-      }}
+      }
    $iv = substr($crypttext,4,16);
    $crypttext = substr($crypttext,20);
    $decrypttext = openssl_decrypt($crypttext, $ciphering, $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv);
+   }
    return trim($decrypttext);
 }
 

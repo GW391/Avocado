@@ -1,3 +1,14 @@
+
+ - /news/ListMail.php
+ - /news/ListUnvarafiedMail.php
+ - /news/SendMail.php
+ - /System/news/subscribe.php
+ - /System/Settings/savefile.php
+ - /template/asc_shift.php
+ - /template/UpdateDB.php
+
+
+Podcast - Version 1.24.1 - 29-01-2024
  - System\Settings\fileuploads.php -> podcastuploads.php
  - System\podcast.php
  - Settings/edit.php

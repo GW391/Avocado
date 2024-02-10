@@ -127,7 +127,7 @@ if (!isset ($Size) || strlen(trim($Size)) == 0){
     }
 if (!isset ($file_name) || strlen(trim($file_name)) == 0){
 }else{
-    if (file_exists("$location/" . $file_name) || !$edit)
+    if (file_exists("$location/" . $file_name) && !$edit)
       {
       echo $file_name . " already exists. ";
       }

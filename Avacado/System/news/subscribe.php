@@ -139,11 +139,10 @@ if (isset($FAIL)){
 }else{
 if ($_POST['Submit'] == 'Subscribe'){
   
-    	$RNn = encrypt(validate($_POST['RName'],'enc'));
+    $RNn = encrypt(validate($_POST['RName'],'enc'));
 	$EMn = encrypt(validate(strtolower($_POST['Email']), 'enc'));
 	$Date = date("Y-m-d");
-        $GData = '1';
-    
+    $GData = '1';
     $db = 'tblnewsletter';
     $cols = 'RName, Email, Data';
 //PRDate, PLLDate, PLCDate, whoupdate,

@@ -61,11 +61,12 @@ th {
 	<?php
 
 while ($row = fetch_array($result)){
-
-	        echo "<tr>";
-		echo "<td>" . validate(decrypt($row['RName']),'hd') . "</td>";
+		$Name = validate(decrypt($row['RName']),'hd');
+		$email = validate(decrypt($row['Email']),'hd');
+		echo "<tr>";
+		echo "<td>" . $Name . "</td>";
 		echo "<td>" ;
-		$str = validate(decrypt($row['Email']),'hd');
+		$str = $email;
 		$pattern = '/...@..../i';
 		echo preg_replace($pattern, '***@***', $str);
 		echo  "</td>";

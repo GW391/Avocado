@@ -30,10 +30,10 @@ $from = "<" . parameters('NewsFromEmail') . ">";
         $subject = validate($_REQUEST['subject'], 'hd');
         $message = validate($_REQUEST['message'], 'hd');
         $fname = $_FILES["file"]["name"];
-	$filename = "news/" . $fname;
+        $filename = "news/" . $fname;
         $curURL = curURL(parameters('SSL'), 1);
-move_uploaded_file($_FILES["file"]["tmp_name"],
-      $filename);
+        move_uploaded_file($_FILES["file"]["tmp_name"],
+        $filename);
 
 //echo $filename;
 
@@ -41,14 +41,13 @@ if(isset($_REQUEST['send']) && (validate($_REQUEST['send'],'hd') == 'send')){
     echo "send flag is set, send the news letter";
 
 while ($row = fetch_array($result)){
+
     $Name = validate(decrypt($row['RName']),'hd');
-    $id = validate(encrypt($row['idtblnewsletter']),'enc');
     $URL = $curURL . "?target=news&section=subscribe&Unsubscribe=" . urlencode("$id");
     $find = array(":NAME", ":unsubscribe");
     $replace = array($Name, $URL);
     $updatedmessage = str_ireplace($find, $replace, $message);
 
-    
 
     $headers[] = "From: $from";
         // boundary 
@@ -75,8 +74,12 @@ while ($row = fetch_array($result)){
             $emessage .= "--{$mime_boundary}--\n";
     
            // echo "EMessage: " . $emessage;
-            
-        $to = $Name . " <" . validate(decrypt($row['Email']),'hd') . ">";
+             if ($build <= 20240128){
+                $email = validate(decrypt_20240128($row['Email']),'hd');
+             }else{
+                 $email = validate(decrypt($row['Email']),'hd');
+             }
+        $to = $Name . " <" . $email . ">";
         $ok = mail($to, $subject, $emessage, implode("\r\n", $headers));
 	echo "<strong>" .  $Name . ": ";
 	if ($ok) {

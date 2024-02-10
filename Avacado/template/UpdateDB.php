@@ -38,7 +38,18 @@ $build = parameters('build');
 
 if ($build <= 20240128){
 // Update settings that have changed 
-$sql_UpdateSettingsData = "UPDATE $DatabaseName.tblsettings SET `Value`='Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView\ncalendar/CompactListView\nYouTube\npodcast\nnews/subscribe' WHERE UUID='59'";
+    //"UPDATE $update SET $set WHERE $where
+
+    $update = "$DatabaseName.tblsettings";
+    $limit = 1;
+    $die = null;
+
+    $set = "Value='Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView\ncalendar/CompactListView\nYouTube\npodcast\nnews/subscribe'";
+    $where = "UUID='59'";
+
+    SQLU($update, $set, $where, $limit, $die);
+
+/*$sql_UpdateSettingsData = "UPDATE $DatabaseName.tblsettings SET `Value`='Calendar\nContact\nData\ncalendar/WeekView\ncalendar/ThreeMonthView\ncalendar/CompactListView\nYouTube\npodcast\nnews/subscribe' WHERE UUID='59'";
 
 mysqli_query($con, $sql_UpdateSettingsData);
       if (!$con) {
@@ -48,7 +59,7 @@ mysqli_query($con, $sql_UpdateSettingsData);
     exit;
 }else{
     echo "Settings Updatd<br />";
-}
+}*/
 
 $sql_UpdateSettingsData2 = "UPDATE $DatabaseName.tblsettings SET `Options`='parameter:AvailableFonts' WHERE UUID='38';";
 mysqli_query($con, $sql_UpdateSettingsData2);
@@ -102,7 +113,13 @@ mysqli_query($con, $sql_UpdateSettingsData5);
 }else{
     echo "Settings Updatd<br />";
 }
+
+}elseif ($build <= 20240128){
+
+
 }
+
+
 // Function to add / Update database columns.
 
 if (function_exists('updateColumns')){
@@ -211,4 +228,16 @@ updateColumns('tblattachment','duration','varchar(45)','NULL', '0');
 updateColumns('tblattachment','WhoUpdate','varchar(45)','NULL', '0');
 updateColumns('tblattachment','DateUpdate','date','NULL', '0');
 updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
+}elseif ($build <= 20240128){
+
 }
+
+// finally update the build number
+    $update = "$DatabaseName.tblsettings";
+    $limit = 1;
+    $die = null;
+
+    $set = "Value='20240209'";
+    $where = "UUID='89'";
+
+    SQLU($update, $set, $where, $limit, $die);
