@@ -232,7 +232,7 @@ if (isset($Title) && $Title !=NULL){
 <tr width="30%">
 <td>
 - <a href="download.php?target=podcast&amp;d=<?php echo $File_Name; ?>">Download</a><br />
-- <a href="?target=play&amp;d=<?php echo encryptfe(validate($PodCastRow['UUID'],'hd')); ?>">Play</a><br />
+- <a href="?target=<?php echo $target; ?>&amp;section=play&amp;d=<?php echo encryptfe(validate($PodCastRow['UUID'],'hd')); ?>">Play</a><br />
 <?php
 if(preg_match("/".'editor'."/i", $_SESSION['security'])){
     //echo '<p class="right">';

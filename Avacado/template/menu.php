@@ -31,7 +31,7 @@
         $result = SQL($Select, $From, $die, $where, $Limit, $group, $sort);
 
         while ($row=fetch_array($result)){
-            if(preg_match("/".trim(validate($row['security'],'hd'))."/i", $_SESSION['security'])){
+            if(isset($_SESSION['security']) && preg_match("/".trim(validate($row['security'],'hd'))."/i", $_SESSION['security'])){
             ?>
     
         <ul  class="collapsibleList">
@@ -66,16 +66,10 @@
         if (num_rows($secresult) >= 1){
 ?>
         
-        <label for="<?php echo trim(validate($row['target'],'hd')) ?>">
-            <img src="images/icons/left_arrow.png" width="32px" />
-        </label>
-        <input type="checkbox" id="<?php echo trim(validate($row['target'],'hd')) ?>" />
-        
+        <label for="<?php echo trim(validate($row['target'],'hd')) ?>">&lt;</label> <input type="checkbox" id="<?php echo trim(validate($row['target'],'hd')) ?>" />
         <ul class="collapsibleList">
-
   <?php
-
-global $con;
+    global $con;
             while ($secrow=fetch_array($secresult)){
                 // check menu item security
                 if (isset($secrow['security'])){
@@ -177,7 +171,7 @@ function subsection($target, $section){
         $ssecresult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
         if (num_rows($ssecresult) >= 1){
     ?>
-<label for="<?php echo trim(validate($section,'hd')) ?>"><img src="images/icons/left_arrow.png" width="32px" /></label><input type="checkbox" id="<?php echo trim(validate($section,'hd')) ?>" />
+<label for="<?php echo trim(validate($section,'hd')) ?>">&lt;<!--<img src="images/icons/left_arrow.png" width="32px" />--></label><input type="checkbox" id="<?php echo trim(validate($section,'hd')) ?>" />
            <ul>
   <?php
             while ($ssecrow=fetch_array($ssecresult)){

@@ -1,15 +1,14 @@
 
-<div class="logo">
-<a href="?"><img src="images/logo_small.png" height="100" hspace="0" vspace="0" border="0" alt="<?php echo $Organisation ?> Logo" title="<?php echo $Organisation ?> Logo" /></a>
-</div>
+<?php
 
-<div class="MobileLogo">
-<a href="?"><img src="images/logo_mobile.png" width="40px" hspace="0" vspace="0" border="0" alt="<?php echo $Organisation ?> Logo" title="<?php echo $Organisation ?> Logo" /></a>
-</div>
+    $Header = parameters('Header');
+    $find = array(":Organisation", ":IncYear");
+    $replace = array(parameters('Organisation'), parameters('IncYear'));
+    $UpdatedHeaderValue = str_ireplace($find, $replace, $Header);
 
-<div class="right">
-    <img src="images/image4871.jpg" height="100" hspace="0" vspace="0" border="0" alt="<?php echo $Organisation ?> Logo" title="<?php echo $Organisation ?> Logo" /></a>
-</div>
+    echo $UpdatedHeaderValue;
+?>
+
 
 <?php if (parameters('GoogleSearch')=='Header') { ?>
 <!-- Search Google -->
@@ -42,4 +41,3 @@ Search results are provided by Google.
 </form>
 <!-- Search Google -->
 
-<h1><?php echo $Organisation ?></h1>

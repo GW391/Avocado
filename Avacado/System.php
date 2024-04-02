@@ -11,30 +11,44 @@ div.Settings {
 </style>
 
 <?php
+
+require 'template/class/settingBox.php';
+
 $system = true;
 
 
 
-if(preg_match("/".'editor'."/i", $_SESSION['security'])){
+//if(preg_match("/".'editor'."/i", $_SESSION['security'])){
 
-  echo "<div class='Settings'><h2>About </h2>";
+$security = new securityCheck('editor');
+if ($security->output)
+{
+
+//  echo new securityCheck('Rota');
+
+echo "<div class='Settings'><h2>About </h2>";
 echo "Version: " . parameters('version') . "<br>";
 echo "Build: " . parameters('build') . "<br></div>";
 
-$Select = "Target";
-$From = "tblcontent";
-$die = "Sorry there is a problem on this page please, try again later";
-$where = "active = 1";
-$GROUP = null;
+$Group = null;
 $Limit = null;
 $sort = null;
-$ActiveResult = SQL($Select, $From, $die, $where, $Limit, $GROUP, $sort);
+
+$Select = "Target";
+$From = "tblcontent";
+$die = "Sorry something went wrong, please try again later";
+$where = "active = 1";
+$activeArticles = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 $where = "active != 1";
-$InactiveResult = SQL($Select, $From, $die, $where, $Limit, $GROUP, $sort);
+$inactiveArticles = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+
 
 echo "<div class='Settings'><h2>Articles </h2>";
-echo "Active Articles: " . num_rows($ActiveResult) . "<br>";
-echo "Inactive Articles: " . num_rows($InactiveResult) . "<br></div>";
+//$activeArticles = new settingBox("Target", "tblcontent", "active = 1");
+//echo "Active Articles: " . $activeArticles = new settingBox("Target", "tblcontent", "active = 1") . "<br>";
+//echo "Inactive Articles: " . $inactiveArticles = new settingBox("Target", "tblcontent", "active != 1") . "<br></div>";
+echo "Active Articles: " . num_rows($activeArticles) . "<br>";
+echo "Inactive Articles: " . num_rows($inactiveArticles) . "<br></div>";
 
 
 $Select = "UUID";

@@ -20,19 +20,19 @@ $ciphering = getCipher();
    $key = $DataKey;
    $text = $value;
    //OPENSSL -- New encryption
-   $blockSize = 8;
+    $blockSize = 8;
     $len = strlen($value);
     $paddingLen = intval(($len + $blockSize - 1) / $blockSize) * $blockSize - $len;
     $padding = str_repeat("\0", $paddingLen);
     $text = $value . $padding;
     // old encryption - no longer used for any encryption
-   // $crypttext = openssl_encrypt($text, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
+    // $crypttext = openssl_encrypt($text, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
 
     // new encryption
     $iv = openssl_random_pseudo_bytes(16);
-   $crypttext = openssl_encrypt($text, $ciphering, $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv);
-   //TODO: Get '00' below from paramters for key to use to enable key rotation
-   return trim(base64_encode(date('y') . '00' .$iv . $crypttext)); //encode for cookie
+    $crypttext = openssl_encrypt($text, $ciphering, $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv);
+    //TODO: Get '00' below from paramters for key to use to enable key rotation
+    return trim(base64_encode(date('y') . '00' .$iv . $crypttext)); //encode for cookie
 }
 
 // Decrypt Saved Data
@@ -47,6 +47,7 @@ $ciphering = getCipher();
 
     $isnew = intval(substr($crypttext,0,2));
 //    echo "crypttext = " . $isnew;
+//    echo $isnew;
    if($isnew < 23){
  //  echo "23 or above not found, use old encryption";
 //   global $DataKey;
@@ -63,7 +64,9 @@ $ciphering = getCipher();
          $key =  ${'DataKey' . intval(substr($crypttext,2,2))};
       }
    $iv = substr($crypttext,4,16);
+ //  echo $iv;
    $crypttext = substr($crypttext,20);
+//   echo $crypttext;
    $decrypttext = openssl_decrypt($crypttext, $ciphering, $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv);
    }
    return trim($decrypttext);

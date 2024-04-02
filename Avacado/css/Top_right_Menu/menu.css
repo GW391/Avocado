@@ -1,0 +1,441 @@
+/*large screen */
+@media only screen and (min-width: 1025px) {
+#Menucontainer {
+  width: 0%;
+  position: relative;
+  right: 0px;
+  text-align: right;
+  /*top: 100px;*/
+  display: block;
+    border: black;
+    border-style: solid;
+    border-width: 0px;
+}
+
+#menu {
+    position: absolute;
+    top: 0%;
+    right: 0px;
+    width: 50%;
+    border: 2px;
+   /*transform: translate(-25%, -25%);*/
+   /* border-radius: 0px;
+    margin-left: auto;
+    margin-right: auto;*/
+    z-index: 10;
+    display:inline-block;
+    /*border: black;*/
+    border-style: solid;
+    border-width: 2px;
+    white-space: nowrap;
+    border-radius: 50px 0px 0px 50px;
+}
+#menu ul {
+    list-style: none;
+    margin: auto;
+    padding: 0;
+    float: right;
+    /*width: 11px;*/
+    border-radius: 0px;
+    transition: 200ms ease all;
+}
+
+#menu a, #menu h2 {
+    font-weight: bold;
+    font-size: 15px;
+    font-size: 1.5vw;
+    display: block;
+    border-width: 2px 2px 2px 2px;
+    border-style: solid;
+    margin: auto;
+    padding-right: 2px;
+    margin: 0px;
+    border-radius: 30px;
+}
+
+#menu h2 {
+    text-transform: uppercase;
+    border-radius: 0px;
+}
+
+#menu a {
+    text-decoration: none;
+    text-align: right;
+    border-radius: 0px;
+}
+
+#menu a:hover {
+    transition: 300ms ease-in;
+}
+#menu #selected a {
+    transition: 300ms ease-in;
+}
+
+/* position the popout */
+
+#menu li {position: relative;}
+
+#menu ul ul {
+    position: absolute;
+    z-index: 500;
+    /*filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;*/
+}
+#menu ul ul a {
+
+}
+
+#menu ul ul a:hover {
+    transition: 300ms ease-in;
+}
+
+#menu ul ul ul {
+    top: 0;
+    right: 100%;
+}
+
+/* hiding the Hovers */
+
+div#menu ul ul,
+div#menu ul li:hover ul ul,
+div#menu ul ul li:hover ul ul
+{display: none;
+transition: 300ms ease-in;
+}
+
+div#menu ul li:hover ul,
+div#menu ul ul li:hover ul,
+div#menu ul ul ul li:hover ul
+{display: block;
+transition: 300ms ease-in;
+}
+
+.box {
+  display: none;
+}
+#menu .close {
+  display: none;
+}
+
+.collapsibleList label {
+  display: none;
+}
+
+.collapsibleList li > input + * {
+ display: none;
+}
+.collapsibleList li > input {
+ display: none;
+}
+}
+
+/*Small screen */
+
+@media only screen and (max-device-width: 1024px) and (orientation: landscape), (max-width: 1025px){
+    
+    #menu1{
+
+    }
+h1 {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.box {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 50px;
+  margin: 0 auto;
+  padding: 5px;
+  border-width: 1px; 
+  border-style: solid;
+  text-align: right;
+  z-index: -1;
+  border-radius: 50px 0px 0px 50px;
+}
+
+.menuicon_container {
+  position: absolute;
+  cursor: pointer;
+  opacity: 100;
+  width: 35px;
+  transition: 0.8s;
+  top: 0px;
+  right: 0px;
+}
+.menuicon_menu-Line {
+  width: 30px;
+  height: 5px;
+  margin: 6px 0;
+  border-radius:  50px 0px 0px 50px;
+ }
+
+.menuicon_container:hover {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.menucloseicon_container {
+  position: absolute;
+  cursor: pointer;
+  opacity: 100;
+  width: 35px;
+  transition: 0.8s;
+  top: 1px;
+  right: 0px;
+   
+}
+.menucloseicon_menu-Line1 {
+  width: 35px;
+  height: 5px;
+  margin: 6px 0;
+  border-radius:  50px 0px 0px 50px;
+  -webkit-transform:
+            translateY(-20px)
+            translateX(7px)
+            rotate(45deg); 
+  position: absolute;
+  top: 35px;
+  right: 10px;
+ }
+
+ .menucloseicon_menu-Line2 {
+     float: top;
+    position: absolute;
+ /*   top: -45px;*/
+  width: 35px;
+  height: 5px;
+  margin: 6px 0;
+  border-radius: 50px/50px;
+  -webkit-transform:
+            translateY(-20px)
+            translateX(7px)
+            rotate(-45deg); 
+  top: 35px;
+  right: 10px;
+  position: absolute;
+ }
+
+.button {
+  position: relative;
+  top: 0px;
+  right: 0px;
+  padding: 8px;
+  border-width: 0px;
+  border-style: solid;
+  border-radius: 50px 0px 0px 50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+  font-size: 20px;
+  font-weight: bold;
+}
+.button:hover {
+}
+
+.Menucontainer {
+  position: absolute;
+  top: 40px;
+  bottom: 0px;
+  right: 0;
+  display: none;
+  opacity: 0;
+  z-index: 1;
+  width:30%;
+}
+.Menucontainer:target {
+  display: block;
+  opacity: 1;
+}
+
+#menu {
+  margin: 0px;
+  padding: 0px;
+  border-radius: 5px;
+  width: 100%;
+  position: absolute;
+  transition: all .1s ease-in-out;
+  font-size: 20px;
+  font-weight: bold;
+  right: 0%;
+  /*transform: translate(-50%, 0%);*/
+}
+
+.menu ul a:hover {
+}
+.collapsibleList label:hover {
+}
+
+
+@media only screen and (max-device-width: 700px), (max-width: 700px){
+  .box{
+    width: 100%;
+  }
+  .Menucontainer {
+      width: 100%;
+  }
+}
+
+@media only screen and (max-device-width:900px) and (min-device-width: 700px), (max-width: 900px) and (min-width: 700px){
+  .box{
+    width: 50px;
+  }
+  #menu{
+    width: 30%;
+    
+  }
+  .Menucontainer {
+    width: 100%;
+   
+  }
+}
+
+#menu ul a {
+    font-weight: bold;
+    font-size: 20px;
+    top: 0%;
+    left: 0%;
+    /*transform: translate(-50%, -50%);*/
+    z-index: 10;
+    text-align: center;
+    width: 50%;
+    text-decoration: none;
+}
+
+#menu ul{
+  margin: 0px auto;
+  padding: 1px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  list-style: none;  
+  width: 100%;
+}
+
+#menu li{
+  margin: 0px auto;
+  padding: 1px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  width: 100%;
+}
+
+#menu li:hover {
+}
+
+#menu li li{
+  margin: 0px auto;
+  padding: 0px;
+  border-radius: 0px;
+ /* background-image: linear-gradient(to bottom, #6941E0 0%, #41B9E0 100%);*/
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+#menu ul li li a {
+    font-weight: bold;
+    font-size: 20px;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    text-decoration: none;
+}
+
+#menu h2 {
+  margin-top: 0;
+}
+
+#menu .close {
+  position: absolute;
+  top: -45px;
+  right: 0px;
+  width: 50px;
+  height: 45px;
+  transition: all 10ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  z-index: 1;
+
+  
+}
+#menu .close:hover {
+}
+#menu .content {
+  max-height: 100%;
+
+}
+.collapsibleList li > img:checked + * {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+  
+.collapsibleList li > input + * {
+ display: none;
+}
+ 
+.collapsibleList li > input:checked + * {
+ display: block;
+}
+
+.collapsibleList li > img:checked + * {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.collapsibleList li  > input:checked + img {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.collapsibleList li > input {
+ display: none;
+}
+
+.collapsibleList label {
+  position: relative;
+  top: 0px;
+  float: right;
+  padding-right: 10%;
+  padding-left: 75%;
+  transition: all 20ms;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  list-style: none;
+  transform: translate(0%, -100%);
+  overflow:hidden;
+}
+.collapsibleList label:hover {
+
+}
+.collapsibleList a:hover {
+
+}
+
+.collapsibleList li li> input + * {
+ display: none;
+}
+ 
+.collapsibleList li li> input:checked + * {
+ display: block;
+}
+
+.collapsibleList li li> input {
+ display: none;
+}
+
+.dheader {
+    display: none;
+}
+}
+

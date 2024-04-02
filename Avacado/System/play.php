@@ -159,14 +159,6 @@ if (isset($fsize) && $fsize !=NULL){
 </tr>
 <?php
 
-if (isset($Meta_2)){
-?>
-<tr>
-<td colspan="2">
-<iframe src="https://www.biblegateway.com/passage/?search=<?php echo $Meta_2 ?>;&amp;version="NIV" width="100%" height="500" border="0" marginwidth="0" frameborder="0"></iframe>
-</tr>
-<?php
-}
 }else{
 echo "No file selected to play";
 }

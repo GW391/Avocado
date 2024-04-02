@@ -33,7 +33,7 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (32,'CalendarEditor','Calendar',' ',NULL,'',0,'D',20,'Security group that can create Calendar Entries','parameter:Security','Calendar'),
     (33,'CalendarRestrictedText','',' ',NULL,'',0,'1',20,'Enter text to appear on venue for restricted calendar items',' ','Calendar'),
     (34,'Style','Square_Menu',' ',NULL,'',0,'D',20,'Select the Style for the site','parameter:AvailableStyles','Style'),
-    (35,'AvailableStyles','Blue_Square_Menu\r\nWhite_Square_Menu\r\nWhite_Rounded_Steel_Menu\r\nSquare_Menu\r\n3colum_vertical_Menu',' ',NULL,'',0,'10',20,'Available Styles, Sperate by Carraadge Return','parameter:AvailableStyles','Style'),
+    (35,'AvailableStyles','Blue_Square_Menu\r\nWhite_Square_Menu\r\nWhite_Rounded_Steel_Menu\r\nSquare_Menu\r\n3colum_vertical_Menu\r\nTot_Right_Menu',' ',NULL,'',0,'10',20,'Available Styles, Sperate by Carraadge Return','parameter:AvailableStyles','Style'),
     (36,'Breadcrumbs','0',' ',NULL,'',0,'B',0,'Show Breadcrums',' ','Style'),
     (37,'GoogleSearch','',' ',NULL,'',0,'D',20,'Show Google Search Box','Header\nFooter\nRight\nLeft\n','Style'),
     (38,'MainFont','Georgia, serif',' ',NULL,'',0,'F',30,'Which Font would you like to use','parameter:AvailableFonts','Style'),
@@ -106,7 +106,21 @@ Please click the link below to reset your account details
 (86, 'Podcast_category', '', NULL, NULL, NULL, '0', '3', '50', 'podcast category, add multiple categorys to new lines .', NULL, 'Podcast'),
 (87, 'Podcast_Language', '', NULL, NULL, NULL, '0', '1', '50', 'Enter the standard ISO lanage code for the podacst language, e.g. zh-hk for Hong Kong, en-gb for English Great Britain, etc. .', NULL, 'Podcast'),
 (88, 'version', '1.24.1', NULL, NULL, NULL, '0', 'R', '50', 'NULL', NULL, 'System'),
-(89, 'build', '240128', NULL, NULL, NULL, '0', 'R', '50', 'NULL', NULL, 'System')
+(89, 'build', '2400331', NULL, NULL, NULL, '0', 'R', '50', 'NULL', NULL, 'System'),
+(90, 'MenuBackgroundColour', '#0000cc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Background Colour', NULL, 'Style'),
+(91, 'MenuBorderColour', '#cccccc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Background Colour', NULL, 'Style'),
+(92, 'MenuItemBackgroundColour', '#0000cc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Item Background Colour', NULL, 'Style'),
+(93, 'MenuItemBorderColour', '#cccccc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu item border Colour', NULL, 'Style'),
+(94, 'MenuItemBackgroundColourHover', '#cccccc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Background Colour for hovers', NULL, 'Style'),
+(95, 'MenuItemTextColourHover', '#cccccc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Text Colour for hovers', NULL, 'Style'),
+(96, 'MenuItemBackgroundColourSelected', '#00000', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Background Colour for hovers', NULL, 'Style'),
+(97, 'MenuItemTextColourSelected', '#cccccc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Text Colour for hovers', NULL, 'Style'),
+(98, 'MenuItemTextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Text Colour for hovers', NULL, 'Style'),
+(99, 'BackgroundColour', '#F7F9FB', NULL, NULL, NULL, '0', 'C', '50', 'Select Main body Background Colour', NULL, 'Style'),
+(100, 'TextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Main Body Text Colour', NULL, 'Style'),
+(101, 'H1TextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Main Body Text Colour', NULL, 'Style'),
+(102, 'AlertTopBackgroundColour', '#8FC1E3', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style'),
+(103, 'AlertTopTextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style')
 ";
 
 ?>

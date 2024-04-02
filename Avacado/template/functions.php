@@ -1,4 +1,20 @@
 <?php
+/*
+// load classes when required
+function load_model($class_name)
+{
+	$path_to_file = './template/class/' . $class_name . '.php';
+
+	if (file_exists($path_to_file)) {
+		require $path_to_file;
+	}
+}
+
+
+spl_autoload_register('load_model');
+//end load classes
+*/
+
 function getCharacters(){
       
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -48,7 +64,6 @@ global $con;
     
     $ParameterRow=fetch_array($ParameterResult);
     $ParameterReturnValue = validate(isset($ParameterRow['Value']) ? $ParameterRow['Value'] : NULL ,'hd');
-
     return $ParameterReturnValue;
 }
 

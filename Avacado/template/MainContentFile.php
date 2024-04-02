@@ -9,6 +9,9 @@ if (isset($target)){
                             //if not try to see if it is a system file
                         }elseif (file_exists("System/" . $target . "/" . $section . "/" . $subsection  . ".php")){
                             require_once "./System/" . $target . "/" . $section . "/" . $subsection . ".php";
+                            //if not try to see if it is a system file root
+                        }elseif (file_exists("System/" . $subsection  . ".php")){
+                            require_once "./System/" . $subsection . ".php";
 			}else{
                                if(stripos($_SESSION['security'], $ArticleEditor)){
                                     echo "<div id=\"edit\">";
@@ -30,6 +33,10 @@ if (isset($target)){
                         }elseif(file_exists("System/" . $target . "/" . $section . ".php")){
 
 	        		require_once "./System/" . $target . "/" . $section . ".php";
+                    //see if in system root
+                    }elseif(file_exists("System/" . $section . ".php")){
+
+	        		require_once "./System/" . $section . ".php";
 			}else{
         			if(stripos($_SESSION['security'], $ArticleEditor)){
                                     echo "<div id=\"edit\">";

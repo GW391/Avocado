@@ -6,6 +6,19 @@
  - /System/Settings/savefile.php
  - /template/asc_shift.php
  - /template/UpdateDB.php
+ - /template/menu.php
+ - /template/MainContentFile.php
+ - /template/default/SettingsData.php
+ - /template/default/MenuData.php
+ - /System/podcast.php
+ - /System/play.php
+ - /System/Bible_Gateway.php
+ - /Settings/edit.php
+ - /css/Top_right_Menu/style.css
+ - /css/Top_right_Menu/mobilemenu.css
+ - /css/Top_right_Menu/menu.css
+ - /css/Top_right_Menu/DefaultMenuColours.php
+ - /css/Top_right_Menu/DefaultColours.php
 
 
 Podcast - Version 1.24.1 - 29-01-2024

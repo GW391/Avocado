@@ -157,7 +157,7 @@ if (isset($_POST['Username'])) {
 
         if(!isset($llfail) && $referrer){
             global $namea;
-            		$message = "Welcome <strong>" . $namea[0] . "</strong> ";
+            		$message = "Welcome <strong>" . ucfirst($namea[0]) . "</strong> ";
 			$message .= "login Successful <br />";
 
                         //try to display the page user was on before loging in

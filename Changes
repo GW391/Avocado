@@ -1,6 +1,10 @@
-bugfixes - build 20240209
+bugfixes - build 20240331 - 31-03-2024
     - Minor podcast bugfixes
+    - minor change to podcast play page to alow play to be embedded with other content
     - fixed bug in decrypting old encrypted data
+    - added new theme - Top_right_Menu
+    - enabled menu colours to be chosen in parametrs (only new theme)
+    - move site header to paramater : note will dete current header
 
 Podcast - Version 1.24.1 - 29-01-2024
     - Minor podcast changes bugfixes and updates

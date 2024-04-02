@@ -71,17 +71,6 @@ mysqli_query($con, $sql_UpdateSettingsData2);
 }else{
     echo "Settings Updatd<br />";
 }
-
-$sql_UpdateSettingsData3 = "UPDATE $DatabaseName.tblsettings SET `Value`='Blue_Square_Menu\r\nWhite_Square_Menu\r\nWhite_Rounded_Steel_Menu\r\nSquare_Menu\r\n3colum_vertical_Menu' WHERE UUID='35';";
-mysqli_query($con, $sql_UpdateSettingsData3);
-      if (!$con) {
-    echo "Error: Unable to connect to MySQL." . PHP_EOL;
-    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-    exit;
-}else{
-    echo "Settings Updatd<br />";
-}
 $sql_UpdateSettingsData4 = "UPDATE $DatabaseName.tblsettings SET `Options`='List\r\nCompact List\r\nCalendar\r\nDay\r\nWeek\r\nThree Month\r\nrss\r\nList2' WHERE UUID='57';";
 mysqli_query($con, $sql_UpdateSettingsData4);
       if (!$con) {
@@ -114,8 +103,17 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     echo "Settings Updatd<br />";
 }
 
-}elseif ($build <= 20240128){
+}elseif ($build <= 20240331){
 
+    $update = "$DatabaseName.tblsettings";
+    $limit = 1;
+    $die = null;
+
+    $set = "Value='Blue_Square_Menu\r\nWhite_Square_Menu\r\nWhite_Rounded_Steel_Menu\r\nSquare_Menu\r\n3colum_vertical_Menu\r\nTop_right_Menu'";
+    $where = "UUID='35'";
+
+    SQLU($update, $set, $where, $limit, $die);
+    echo "Settings Updatd<br />";
 
 }
 
@@ -228,7 +226,7 @@ updateColumns('tblattachment','duration','varchar(45)','NULL', '0');
 updateColumns('tblattachment','WhoUpdate','varchar(45)','NULL', '0');
 updateColumns('tblattachment','DateUpdate','date','NULL', '0');
 updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
-}elseif ($build <= 20240128){
+}elseif ($build <= 202400231){
 
 }
 
@@ -237,7 +235,7 @@ updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
     $limit = 1;
     $die = null;
 
-    $set = "Value='20240209'";
+    $set = "Value='20240331'";
     $where = "UUID='89'";
 
     SQLU($update, $set, $where, $limit, $die);

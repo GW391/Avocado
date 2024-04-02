@@ -9,6 +9,7 @@ if (isset($DatabaseServerPort)){
     //echo $DatabaseServerName;
 }
 $con = mysqli_connect($DatabaseServerName, $DatabaseUserName, $DatabasePassword, $DatabaseName);
+//$this->con = new mysqli( $this->$DatabaseServerName, $this->$DatabaseUserName, $this->$DatabasePassword, $this->db_name );
 
 if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;

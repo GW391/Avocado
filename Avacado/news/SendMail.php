@@ -43,9 +43,10 @@ if(isset($_REQUEST['send']) && (validate($_REQUEST['send'],'hd') == 'send')){
 while ($row = fetch_array($result)){
 
     $Name = validate(decrypt($row['RName']),'hd');
+    $id = validate($row['idtblnewsletter'],'hd');
     $URL = $curURL . "?target=news&section=subscribe&Unsubscribe=" . urlencode("$id");
-    $find = array(":NAME", ":unsubscribe");
-    $replace = array($Name, $URL);
+    $find = array(":NAME", ":unsubscribe", ":Organisation", ":IncYear");
+    $replace = array($Name, $URL, parameters('Organisation'), parameters('IncYear'));
     $updatedmessage = str_ireplace($find, $replace, $message);
 
 
@@ -74,11 +75,11 @@ while ($row = fetch_array($result)){
             $emessage .= "--{$mime_boundary}--\n";
     
            // echo "EMessage: " . $emessage;
-             if ($build <= 20240128){
-                $email = validate(decrypt_20240128($row['Email']),'hd');
-             }else{
+ //            if ($build <= 20240128){
+ //               $email = validate(decrypt_20240128($row['Email']),'hd');
+ //            }else{
                  $email = validate(decrypt($row['Email']),'hd');
-             }
+ //            }
         $to = $Name . " <" . $email . ">";
         $ok = mail($to, $subject, $emessage, implode("\r\n", $headers));
 	echo "<strong>" .  $Name . ": ";

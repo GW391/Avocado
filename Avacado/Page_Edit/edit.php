@@ -1,5 +1,8 @@
 <?php 
+// check if TinyMCEKey existis if so import TinyMCE for use.
+if (null != (parameters('TinyMCEKey')) && strlen(trim(parameters('TinyMCEKey'))) != 0){
 require_once 'template/TinyMCECloud.php';
+}
 
 ?>
 

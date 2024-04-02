@@ -214,6 +214,11 @@ echo "</select>";
         </textarea>
         <?php
         break;
+        case 'C':
+            ?>
+        <input type="color" name="value" value="<?php echo validate($row['value'],'hd') ?>" />
+        <?php
+        break;
 }
         ?>
 

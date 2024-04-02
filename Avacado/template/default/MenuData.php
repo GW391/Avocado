@@ -11,8 +11,6 @@ $tblMenuData = "(1,'Home',NULL,NULL,NULL,10,'2011-02-16 21:45:17',0,1,0,0,'Home'
         (3,'System','Settings',NULL,'Editor',2,'2011-03-22 21:45:12',0,1,0,1,'Settings',NULL,NULL,1,'','0000-00-00',0,0,NULL,NULL,0,0),
         (4,'news','calendar',NULL,NULL,20,'2011-03-22 21:45:12',0,0,0,1,'Calendar','EV2gjNNFBDs=','2019-06-04',0,'','0000-00-00',0,0,NULL,NULL,0,0),
         (5,'news',NULL,NULL,'Admin',30,'2011-03-22 21:45:12',0,1,0,0,'News','fexNTlH/KoE=','2020-03-31',0,'','0000-00-00',0,0,NULL,NULL,0,0),
-        (6,'calendar','rota',NULL,'Admin',1,'0000-00-00 00:00:00',0,0,0,0,'Rotas','EV2gjNNFBDs=','2014-04-05',0,'','0000-00-00',0,0,NULL,NULL,0,0),
-        (7,'calendar','development',NULL,'Member',3,'2011-04-05 19:54:31',0,1,0,0,'Development','EV2gjNNFBDs=','2018-04-29',0,'','0000-00-00',0,0,NULL,NULL,0,0),
         (8,'System','Users',NULL,'Admin',3,'2011-04-05 20:43:21',0,1,0,1,'Users','','2011-09-15',0,'','0000-00-00',0,0,NULL,NULL,0,0),
         (9,'System','Settings','Menu','Admin',1,'2011-04-07 19:05:07',0,1,0,0,'Menu','','2012-01-08',1,'','0000-00-00',0,0,NULL,NULL,0,0),
         (10,'System','Settings','images','Editor',5,'2011-07-19 19:58:17',0,1,0,0,'Images','','2011-07-19',1,'','2011-07-19',0,0,NULL,NULL,0,0),

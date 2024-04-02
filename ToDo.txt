@@ -1,10 +1,8 @@
 Todo list in no particular priority order:
 
 Images to DB
-editable Header
 Editable footer
 right column to DB
-colour chooser
 image picker in editor
 style thumnail
 style editor
@@ -14,7 +12,11 @@ Enable editing series in Calendar
 pick podcast album art in settings
 pick default timezone in settings
 change settings UID to the Setting name
+News to DB
 
+Completed:
 System parameteres (read only) - Completed
 Podcasts to DB - Complete
+editable Header - Complete
+colour chooser - new theme only
 
