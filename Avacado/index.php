@@ -18,7 +18,7 @@
  */
     
 date_default_timezone_set('Europe/London');
-  
+
 //start session
 $time = 3600;
 $ses = 'Session';
@@ -141,7 +141,7 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<?php include("template/htmlhead.php"); ?>
+<?php include("template/htmlhead.php");?>
 </head>
 <body>
 

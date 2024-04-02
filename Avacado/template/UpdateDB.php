@@ -115,6 +115,24 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     SQLU($update, $set, $where, $limit, $die);
     echo "Settings Updatd<br />";
 
+    $update2 = "$DatabaseName.tblsettings";
+    $limit = 1;
+    $die = null;
+
+    $set = "Name='Header', Value='<div class=\"logo\">
+<a href=\"?\"><img src=\"images/logo_mobile.png\" height=\"50\" hspace=\"0\" vspace=\"0\" border=\"0\" alt=\":Organisation Logo\" title=\":Organisation Logo\" /></a>
+</div>
+
+<div class=\"MobileLogo\">
+<a href=\"?\"><img src=\"images/logo_mobile.png\" width=\"40\" hspace=\"0\" vspace=\"0\" border=\"0\" alt=\":Organisation Logo\" title=\":Organisation Logo\" /></a>
+</div>
+
+<h1>:Organisation</h1>', help='Please enter any HTML for the header'";
+    $where = "UUID='17'";
+
+    SQLU($update2, $set, $where, $limit, $die);
+    echo "Settings Updatd<br />";
+
 }
 
 

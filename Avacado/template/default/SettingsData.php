@@ -20,7 +20,15 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (13,'ArticleEditor','Editor','',NULL,'',0,'D',20,'Who has permission to edit Artiles.\nOnly enter a single security group','parameter:Security','Security'),
     (14,'ArticleApproval','Editor','',NULL,'',0,'D',20,'Assign who can approve / activate articles','parameter:Security','Security'),
     (16,'ContactEmail','','',NULL,'',0,'1',50,'Enter the email address for the Contact Us form','','General'),
-    (17,'HeaderTag','<h2>Header</h2>','',NULL,'',0,'1',50,'Please enter any HTML tags for the header of an article, please put the tags arround the word Header ','','General'),
+    (17,'Header','<div class=\"logo\">
+<a href=\"?\"><img src=\"images/logo_mobile.png\" height=\"50\" hspace=\"0\" vspace=\"0\" border=\"0\" alt=\":Organisation Logo\" title=\":Organisation Logo\" /></a>
+</div>
+
+<div class=\"MobileLogo\">
+<a href=\"?\"><img src=\"images/logo_mobile.png\" width=\"40\" hspace=\"0\" vspace=\"0\" border=\"0\" alt=\":Organisation Logo\" title=\":Organisation Logo\" /></a>
+</div>
+
+<h1>:Organisation</h1>','',NULL,'',0,'1',50,'Please enter any HTML for the header','','General'),
     (18,'Podcast_Title','','',NULL,'',0,'1',50,'Enter the title for the Podcast page','','Podcast'),
     (19,'Podcast_URL','','',NULL,'',0,'1',50,'URL for podcast, build automatically, use this to overrise the automatic URL','','Podcast'),
     (20,'Podcast_Folder','','',NULL,'',0,'1',50,'Enter a value here to overrise the default forlder for postacsts.  The default is Podcasts.','','Podcast'),
@@ -121,6 +129,7 @@ Please click the link below to reset your account details
 (101, 'H1TextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Main Body Text Colour', NULL, 'Style'),
 (102, 'AlertTopBackgroundColour', '#8FC1E3', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style'),
 (103, 'AlertTopTextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style')
+
 ";
 
 ?>
