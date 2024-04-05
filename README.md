@@ -1,6 +1,6 @@
 # Avacado CMS is an easy to install and use CMS, written in PHP
 # About
-Avacdo CRM has been in developement for many years, trying to be simple to use, yet secure and functional.
+Avacdo CMS has been in developement for many years, trying to be simple to use, yet secure and functional.
 
 # Features
  - Content editing
