@@ -1,1 +1,1 @@
-Avacado CRM is an easy to install and use CRM, written in PHP
+Avacado CMS is an easy to install and use CMS, written in PHP
