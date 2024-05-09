@@ -8,7 +8,7 @@ Avacdo CMS has been in developement for many years, trying to be simple to use, 
  - News Letters
  - Article times delivery
  - Cross Site Scripting protection
- - Session hijecak protection
+ - Session hijack protection
  - Login distributed brute force mittigation
  - Skins
  - and more
@@ -52,8 +52,3 @@ You will by default have a calendar, homepage and login menu, once you login you
 Once complete click next, and you can login, and start playing. 
 
 Thank you for trying Avacado CMS and Enjoy.
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
->>>>>>> Stashed changes
