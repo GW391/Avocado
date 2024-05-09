@@ -48,7 +48,10 @@ $Name = ucfirst(validate(decrypt($row['PRNME']),'hd'));
     <tr>
     <th width="30%">Name</th>
     <td>
-            <?php if(preg_match("/".'admin'."/i", $_SESSION['security'])){
+            <?php
+            //if(preg_match("/".'admin'."/i", $_SESSION['security'])){
+            $security = new securityCheck('admin');
+            if ($security->output) {
                 
         ?>
         <input type="text" name="name" value="<?php echo $Name; ?>" size="25" spellcheck="false" /></td>

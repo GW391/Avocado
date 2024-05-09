@@ -37,7 +37,7 @@ $version = parameters('version');
 $build = parameters('build');
 
 if ($build <= 20240128){
-// Update settings that have changed 
+    // Update settings that have changed
     //"UPDATE $update SET $set WHERE $where
 
     $update = "$DatabaseName.tblsettings";
@@ -233,17 +233,17 @@ if (function_exists('updateColumns')){
 // add / update columns
 echo "checking Database Structure";
 if ($build <= 20240128){
-updateColumns('tblmenu','sitemap','tinyint(1)','NOT NULL', '1');
-updateColumns('tblcontent','sortorder','INT','NULL', '0');
-updateColumns('tblcontent','page','longtext','NULL', 'NULL');
-updateColumns('Pcalder','thumbnail','text','NULL', 'NULL');
-updateColumns('Pcalder','seriesID',' bigint(20)','NULL', 'NULL');
-updateColumns('tblsettings','value','longtext','NULL', 'NULL');
-updateColumns('tblattachment','value','binary(1)','NULL', '0');
-updateColumns('tblattachment','duration','varchar(45)','NULL', '0');
-updateColumns('tblattachment','WhoUpdate','varchar(45)','NULL', '0');
-updateColumns('tblattachment','DateUpdate','date','NULL', '0');
-updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
+    updateColumns('tblmenu','sitemap','tinyint(1)','NOT NULL', '1');
+    updateColumns('tblcontent','sortorder','INT','NULL', '0');
+    updateColumns('tblcontent','page','longtext','NULL', 'NULL');
+    updateColumns('Pcalder','thumbnail','text','NULL', 'NULL');
+    updateColumns('Pcalder','seriesID',' bigint(20)','NULL', 'NULL');
+    updateColumns('tblsettings','value','longtext','NULL', 'NULL');
+    updateColumns('tblattachment','value','binary(1)','NULL', '0');
+    updateColumns('tblattachment','duration','varchar(45)','NULL', '0');
+    updateColumns('tblattachment','WhoUpdate','varchar(45)','NULL', '0');
+    updateColumns('tblattachment','DateUpdate','date','NULL', '0');
+    updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
 }elseif ($build <= 202400231){
 
 }

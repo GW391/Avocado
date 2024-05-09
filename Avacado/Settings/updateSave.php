@@ -9,12 +9,15 @@
 // $Date = date('Ymd', strtotime($_POST['Date']));
 $system = true;
 $ID = validate(decryptfe($_POST['ID']),'h');
+$num_rows = validate($_POST['num_rows'],'h');
 
     //var_dump($_POST['value']);
     if (is_array($_POST['value'])){
         $tempvalue = implode("\n", $_POST['value']);
        // var_dump($tempvalue);
         $value = validate($tempvalue, 'h');
+    }elseif ($num_rows == "P"){
+        $value = encrypt(validate($_POST['value'],'enc'));
     }else{
  $value = validate($_POST['value'],'h');
     }

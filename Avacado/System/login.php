@@ -1,12 +1,12 @@
 <?php
 // set as system page
 $system = true;
-
+//ob_start();
 // have we logged in already
 
 if (isset($_POST['Username']) && $referrer && isset($_POST['password'])) {
-// echo "login";
-//    echo "loging in - please wait";
+    // echo "login";
+    // echo "loging in - please wait";
     flush();
     $credentials = getUNPW(validate($_POST['Username'],'h'), validate($_POST['password'],'h'),1000512);
     $UN = $credentials[0];
@@ -55,11 +55,11 @@ if (isset($_POST['Username']) && $referrer && isset($_POST['password'])) {
 }
 
 function welcome($result, $Old){
-//    echo $Old;
+    // echo $Old;
     $row=fetch_array($result);
     //echo "count = $count";
- global $namea;
-     $namea = str_word_count(decrypt($row['PRNME']), 1);
+    global $namea;
+    $namea = str_word_count(decrypt($row['PRNME']), 1);
     $_SESSION['security'] = validate($row['PSY'],'hd');
     $_SESSION['securty_array'] = explode(" ", validate($row['PSY'],'hd'));
     $_SESSION['user'] = ucfirst($namea[0]);
@@ -72,18 +72,17 @@ function welcome($result, $Old){
     $limit = null;
     $die = "Something has gone wrong, sorry :(";
 
-                if ($Old){
-                 //   echo "in Old";
-                    // we have old method, so replace Username and Password
-                    $credentials = getUNPW($_POST['Username'], $_POST['password'],1000512);
-                    $UNn = $credentials[0];
-                    $PWn = $credentials[1];
-                    $set .= ", PRD = '$PWn'";
-                    $set .= ", PUME = '$UNn'";
-                    $set .= ", PUDate = '$LDate'";
-                }
-
-		SQLU($update, $set, $where, $limit, $die);
+    if ($Old){
+        // echo "in Old";
+        // we have old method, so replace Username and Password
+        $credentials = getUNPW($_POST['Username'], $_POST['password'],1000512);
+        $UNn = $credentials[0];
+        $PWn = $credentials[1];
+        $set .= ", PRD = '$PWn'";
+        $set .= ", PUME = '$UNn'";
+        $set .= ", PUDate = '$LDate'";
+    }
+    SQLU($update, $set, $where, $limit, $die);
 }
 
 
@@ -112,9 +111,13 @@ $FailedLoginDelay = (int)parameters('FailedLoginDelay');
 $wheresleep = "(date >= '$edate')";
 $pause = SQL($select, $From, $die, $wheresleep, $limit, null, null);
 $sleep = (int)num_rows($pause) * $FailedLoginDelay;
+// TODO would like to add countdown timer, but flush not working....
 //echo $sleep;
+//echo "Pausing for $sleep seconds due to failed logins";
+//ob_flush();
 flush();
 sleep($sleep);
+
 
 $LoginFails = (int)parameters('LoginFails');
 $GlobalLoginFails = (int)parameters('GlobalLoginFails');
@@ -193,61 +196,11 @@ include("./template/content.php");
 		error('<font color=\"FF0000\">Login Failure: incorrect username or password</font>');
             }
             $HTTP_REFERER =validate($_SERVER['HTTP_REFERER'],'hd');
-$ref= explode("?",$HTTP_REFERER);
-		?>
-		<form method="post" action="?target=login" spellcheck="false">
-                    <div id="loginbox">
-        <input type="hidden" name="ref" value="<?php echo $ref[1]; ?>">
-		<table class="loginbox">
-		<tr>
-                    <td>Username:</td><td> <input type="text" name="Username" spellcheck="false" /></td>
-		</tr>
-		<tr>
-		<td>Password:</td><td> <input type="password" name="password" spellcheck="false" /></td>
-		</tr>
-		<tr>
-		<td></td><td><input type="submit" name="Login" value="login" /></td>
-		</tr>
-		</table>
-		</form>
-		<p>
-		Note:  Password is case sensitive
-		</p>
-                
-<?php
+            $ref= explode("?",$HTTP_REFERER);
 
-// check if user is using SSL before login, should not be needed anymore, but left it.
-if($_SERVER['HTTPS']!="on"){
-if(parameters('SSL')){
-    // instead of forcing SSL question the user. 
-    echo '<p class="small">Concerened about security?  <a href="';
-    
-    // Old host did not allow ssl on main URL, they used a global certificate.  I suspect this is no longer a problem
-    // but left parameter and if statment. 
-    if (parameters('SSLURL')){
-        echo parameters('SSLURL');
-    }else{
-        //echo 'https://';
-        echo curPageURL(parameters('SSL'), 1);
-    }
-
-    echo '/?target=login">Switch to our secure site</a></p>';
-}
-}
-?>
-                <?php
-                // Allow user Registration ??
-                if(parameters('UserReg')){
-                ?>
-                <p class="small">Don't have a login <a href="?target=login&amp;section=register">register </a> now.</p>
-<?php
-                }
-?>
-                <p class="small"><a href="?target=login&amp;section=retrieve">Forgotten Username or Password</a></p>
-</div>
- 		<?php
- 
-	}
+        //Draw the login form
+        DrawLoginForm();
+ 	}
 } else {
 ?>
 <center>
@@ -265,41 +218,57 @@ echo ' You are currently logged in and do not need to again ';
     }else{
         $ref=null;
     }
+    //Draw the login form
+    DrawLoginForm();
+
 ?>
-                <div id="loginbox">
-<form method="post" action="?target=login" spellcheck="false">
 
-<input type="hidden" name="ref" value="<?php if (isset($ref[1])){ echo $ref[1];} ?>">
-<table class="loginbox">
-<tr>
-<td>Username:</td><td><input type="text" name="Username" size="25" spellcheck="false" /></td>
-</tr>
-<tr>
-<td>Password:</td><td><input type="password" name="password" size="25" spellcheck="false" /></td>
-</tr>
-<tr>
-<td></td><td align="right"><input type="submit" name="Login" value="login" /></td>
-</tr>
-</table>
-</form>
-                <?php
+<?php
+}
+}
 
-if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS']!="on"){
+//function to draw the login box
+function DrawLoginForm(){
+    ?>
+<div id="loginbox">
+    <form method="post" action="?target=login" spellcheck="false" name="loginForm" id="loginForm">
+
+        <input type="hidden" name="ref" value="<?php if (isset($ref[1])){ echo $ref[1];} ?>">
+        <table class="loginbox">
+            <tr>
+                <td>Username:</td><td><input type="text" name="Username" size="25" spellcheck="false" /></td>
+            </tr>
+            <tr>
+                <td>Password:</td><td><input type="password" name="password" size="25" spellcheck="false" /></td>
+            </tr>
+            <tr>
+                <td></td><td align="right"><input type="button" name="Login" id="Login" value="Login" onClick="return LoginBox()"/></td>
+            </tr>
+        </table>
+    </form>
+
+    <?php
+    // check if user is using SSL before login, should not be needed anymore, but left it.
+if($_SERVER['HTTPS']!="on"){
 if(parameters('SSL')){
+    // instead of forcing SSL question the user.
     echo '<p class="small">Concerened about security?  <a href="';
 
+    // Old host did not allow ssl on main URL, they used a global certificate.  I suspect this is no longer a problem
+    // but left parameter and if statment.
     if (parameters('SSLURL')){
         echo parameters('SSLURL');
-        echo $_SERVER["REQUEST_URI"];
     }else{
+        //echo 'https://';
         echo curPageURL(parameters('SSL'), 1);
     }
 
-    echo '">Switch to our secure site</a></p>';
+    echo '/?target=login">Switch to our secure site</a></p>';
 }
 }
-?>
 
+
+?>
                 <?php
                 // Allow user Registration ??
                 if(parameters('UserReg')){
@@ -313,7 +282,24 @@ if(parameters('SSL')){
 <p class="small"><a href="?target=login&amp;section=retrieve">Forgotten Username or Password</a></p>
 
             </div>
+
+
+<script>
+
+function LoginBox() {
+    document.getElementById("loginForm").submit();
+    document.getElementById("loginbox").innerHTML = "Logging you in " + "<br />" + "Please Wait" + "<br /><span id=\"dots\"></span>";
+    dot = ".";
+    for (let i = 0; i < 5; i++) {
+        document.getElementById("dots").innerHTML = dot;
+        dot += ".";
+        setTimeout(document.getElementById("dots").innerHTML = dot, 2000);
+    }
+//return true;
+}
+
+</script>
 <?php
 }
-}
+
 ?>

@@ -14,7 +14,7 @@ if (isset($_POST['username'])){
 if (isset($_POST['name'])){
     if(strlen(trim($_POST['name'])) != 0){
         $name = validate($_POST['name'],'h');
-        $name = encrypt(strtolower($name));
+        $name = new Encrypt(strtolower($name));
     }
 }
 
@@ -50,7 +50,7 @@ if (isset($_POST['password'])){
 if (isset($_POST['email'])){
     if(strlen(trim($_POST['email'])) != 0){
         $email = validate($_POST['email'],'h');
-        $email = encrypt(strtolower($email));
+        $email = new Encrypt(strtolower($email));
     }
 }
 

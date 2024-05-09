@@ -66,11 +66,11 @@ echo "<tr>";
 if (isset($shiftloaded)){
 	if ($shiftloaded){
 	}else{
-                require ("template/config.php");
+		require ("template/config.php");
 		require ("template/asc_shift.php");
 	}
 }else{
-        require ("template/config.php");
+	require ("template/config.php");
 	require ("template/asc_shift.php");
 }
 
@@ -171,7 +171,6 @@ $message .= "\n\r$curURL?target=news/confirm&confirm=$id \n\r";
 } elseif (isset($_POST['Submit']) && $_POST['Submit'] == 'Unsubscribe'){
 
 $EMn = encrypt(validate(strtolower($_POST['Email']), 'enc'));
-
 
 $where = "Email = '$EMn' and Deleted = 0";
 $update = "tblnewsletter";

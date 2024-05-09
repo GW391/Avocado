@@ -143,13 +143,16 @@
             }
         ?></ul>
 
+
     <?php
     free_results($secresult);
         }
-    ?></li>
+    ?>
+    </li>
                 </ul>
 <?php
         }
+
         }
     ?>
 </div>
@@ -230,9 +233,14 @@ function subsection($target, $section){
 <?php
             }
             }
+
             }
+        // add new subsection menu item
+        echo "<li>++</li>";
         ?>
+
         </ul>
+
 <?php
         }
             free_results($ssecresult);

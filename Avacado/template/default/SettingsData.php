@@ -6,6 +6,12 @@
  * and open the template in the editor.
  */
 
+//database structure:
+//ID,NAME,VALUE, WhoCreated, DateUpdated, WhoUpdated,Deleted, NoOfRows, noOfColumns,Help,Options,Grouping
+//NoOfRows used to define filed type:
+//Any Number: Number of rows in text field, N: Number, B: Binary, D:Drop Down, F: Font, C: Colour, R: Read Only, P: Password
+//Options specfies options for Drop down lists, these can also be specified by another parameter by entering Parameter(parameter_name) into options filed.
+//TODO: Add Image and HTML parameters
 $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding year','','General'),
     (2,'Organisation',NULL,'',NULL,'',0,'3',50,'Organisation Name','','General'),
     (3,'Articles','10','',NULL,'',0,'N',5,'Maximum number of articles per page\n- Total Articles dictated by Menu\n','','General'),
@@ -128,8 +134,15 @@ Please click the link below to reset your account details
 (100, 'TextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Main Body Text Colour', NULL, 'Style'),
 (101, 'H1TextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Main Body Text Colour', NULL, 'Style'),
 (102, 'AlertTopBackgroundColour', '#8FC1E3', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style'),
-(103, 'AlertTopTextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style')
-
+(103, 'AlertTopTextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL,
+'Style'),
+(104, 'SMTPHost', 'mail.example.com', NULL, NULL, NULL, '0', '1', '50', 'Mail host', NULL, 'email'),
+(105, 'SMTPPort', '465', NULL, NULL, NULL, '0', 'N', '50', 'Select SMTP Port number', NULL, 'email'),
+(106, 'DefaultFromUsername', '', NULL, NULL, NULL, '0', '1', '50', 'Default Username for email', NULL, 'email'),
+(107, 'DefaultFromPassword', '', NULL, NULL, NULL, '0', 'P', '50', 'Default Password for', NULL, 'email'),
+(108,'DefaultFromEmail','','',NULL,NULL,0,'1',50,'Default from email address.','','email'),
+(109, 'NewsFromUsername', '', NULL, NULL, NULL, '0', '1', '50', 'Username for news email address, will use default if left blank', NULL, 'News'),
+(110, 'NewsFromPassword', '', NULL, NULL, NULL, '0', 'P', '50', 'Password for news email address, will use default if left blank', NULL, 'News')
 ";
 
 ?>

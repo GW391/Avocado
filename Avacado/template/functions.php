@@ -1,5 +1,5 @@
 <?php
-/*
+
 // load classes when required
 function load_model($class_name)
 {
@@ -13,7 +13,6 @@ function load_model($class_name)
 
 spl_autoload_register('load_model');
 //end load classes
-*/
 
 function getCharacters(){
       

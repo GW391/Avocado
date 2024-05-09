@@ -49,10 +49,16 @@ $result = SQL($select, $From, $die, $where, null, null, null);
 <table width="100%" border="1">
     <tbody>   
         <?php
-        while ($row = fetch_array($result)){
+        foreach ($result as $row){
             echo "<tr>\n\r";
-            echo "<th>" . validate($row['Name'],'hd') . "</th>\n\r";
-            echo "<td>" . validate($row['Value'],'hd') . "</td>\n\r";
+            echo "<th>" . validate($row['Name'],'hd') . "</th>\n\r"; // Display setting name
+           if (strtoupper(validate($row['num_rows'],'hd')) == "P"){
+            // value is a password, hide it
+               echo "<td>**********</td>\n\r"; // Display stars for hidden password
+               //TODO: make this more visually appealing
+           }else{
+            echo "<td>" . validate($row['Value'],'hd') . "</td>\n\r"; // Display setting value
+           }
          //   echo "<td>" . $row['uuid'] . "</td>\n\r";
          //   echo "<td>" . encryptfe($row['uuid']) . "</td>\n\r";
             ?>
@@ -63,7 +69,7 @@ $result = SQL($select, $From, $die, $where, null, null, null);
                 ?>
                 <form method="post" name="e<?php echo validate(encryptfe($row['uuid']),'hu')?>" action="?target=Settings&amp;section=edit">
                 <?php if(isset($limit)){
-                    ?>
+                    //check if we have a group selected, if so pass to edit page to preserve ?>
                 <input type="hidden" name="Grouping" value="<?php echo $limit?>">
                 <?php }?>
 
@@ -74,10 +80,6 @@ $result = SQL($select, $From, $die, $where, null, null, null);
 	<?php
             }
             ?>
-
-<!--    	<form method="post" name="e<?php echo validate(encryptfe($row['uuid']),'hu')?>" action="?target=Settings&amp;section=edit">
-	<input type="image" SRC="images/icons/edit.png" value="<?php echo validate(encryptfe($row['uuid']),'hu')?>" alt="Edit" name="Edit" title="Edit" />
-	</form>-->
 </td>
 <?php
             echo "</tr>\n\r";
@@ -88,5 +90,6 @@ $result = SQL($select, $From, $die, $where, null, null, null);
 </table>
 <?php
 }else
-echo parameters('PermissionsMessage');
+    // no rights to view, so lack of permissions message.
+    echo parameters('PermissionsMessage');
 ?>

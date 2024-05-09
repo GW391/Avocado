@@ -51,6 +51,7 @@ echo "Rows " . $row['num_rows'];
     <tr>
     <td>
         <input type="hidden" value="<?php echo validate(encryptfe($row['UUID']),'hd') ?>" name="ID" readonly />
+        <input type="hidden" value="<?php echo validate($row['num_rows'],'hd') ?>" name="num_rows" readonly />
         <strong><?php echo validate($row['name'],'hd') ?></strong></td>
     <td>
         <?php 
@@ -217,6 +218,11 @@ echo "</select>";
         case 'C':
             ?>
         <input type="color" name="value" value="<?php echo validate($row['value'],'hd') ?>" />
+        <?php
+        break;
+        case 'P':
+            ?>
+        <input type="Password" name="value" value="<?php echo validate(decrypt($row['value']),'hd') ?>" />
         <?php
         break;
 }

@@ -8,7 +8,8 @@ Included pojects:
 	HTMLPurifier 6.9.1
 
 Install:
-Copy the Avacado folder to your web server, share this folder on your website.
+Copy the Avacado folder to your web server, you can rename this as needed. 
+share this folder on your website.
 ensure that your new folder can run PHP scrips
 Your web server should be able to access all folders, but your web user only needs to browse the root, css, images, and if used the podcast folder.
 
