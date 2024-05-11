@@ -1,6 +1,6 @@
-# Avacado CMS is an easy to install and use CMS, written in PHP
+# Avocado CMS is an easy to install and use CMS, written in PHP
 # About
-Avacdo CMS has been in developement for many years, trying to be simple to use, yet secure and functional.
+Avocado CMS has been in development for many years, trying to be simple to use, yet secure and functional.
 
 # Features
  - Content editing
@@ -28,12 +28,12 @@ I have now only recently published to contine learning and developing this tool.
 	HTMLPurifier 6.9.1
 
 # Install
-   - Copy the Avacado folder to your web server, you can rename this as needed. 
+   - Copy the Avocado folder to your web server, you can rename this as needed. 
    - Share this folder on your website
    - Ensure that your new folder can run PHP scrips
    - Your web server should be able to access all folders, but your web user only needs to browse the root, css, images, and if used the podcast folder.
 
-- Browse to the Avacado folder in your web browser. 
+- Browse to the Avocado folder in your web browser. 
 - You will be presented with a setup page
 enter the details.
 - here you will need your MySQL / MariaDB server details including
@@ -42,7 +42,7 @@ enter the details.
 
 - Choose your database name
 - Choose your database username and password
-- Choose your Avacado CMS username and password
+- Choose your Avocado CMS username and password
 
 system database encryption key's will be generated for you, you can change this, but you will loose any encrypted data, this is generated per install, and is not shared with any other site. 
 
@@ -51,4 +51,4 @@ You will by default have a calendar, homepage and login menu, once you login you
 
 Once complete click next, and you can login, and start playing. 
 
-Thank you for trying Avacado CMS and Enjoy.
+Thank you for trying Avocado CMS and Enjoy.

@@ -123,9 +123,9 @@ $credentials = getUNPW(validate($_POST['NUsername'],'h'), validate($_POST['Npass
 ?>
 
 <html>
-    <centre><h3>Setup Avacado CMS</h3></centre>
+    <centre><h3>Setup Avocado CMS</h3></centre>
     <p>
-        Thank you for choosing Avacado CMS, there are a few things we need to configure before we begin.
+        Thank you for choosing Avocado CMS, there are a few things we need to configure before we begin.
     </p>
     <p>
 <form name="SetupForm" method="post" />
