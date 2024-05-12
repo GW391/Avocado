@@ -1,4 +1,9 @@
+bug fix - build 20240331 Patch 2 - 12-05-2024
+ - /README.md
+ - /template/default/SettingsData.php
+ - /Avocado/Avocado/home.php
 
+bug fix and new theme - build 20240331 - 31-03-2024
  - /news/ListMail.php
  - /news/ListUnvarafiedMail.php
  - /news/SendMail.php

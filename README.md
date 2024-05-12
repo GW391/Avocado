@@ -25,7 +25,8 @@ I have now only recently published to contine learning and developing this tool.
 	TinyMCE  cloud account
 
 # Included pojects
-	HTMLPurifier 6.9.1
+	HTMLPurifier 4.14.0
+    PHP Mailer 6.9.1
 
 # Install
    - Copy the Avocado folder to your web server, you can rename this as needed. 

@@ -28,7 +28,7 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
 <a href=\"?\"><img src=\"images/logo_mobile.png\" width=\"40\" hspace=\"0\" vspace=\"0\" border=\"0\" alt=\":Organisation Logo\" title=\":Organisation Logo\" /></a>
 </div>
 
-<h1>:Organisation</h1>','',NULL,'',0,'1',50,'Please enter any HTML for the header','','General'),
+<h1>:Organisation</h1>','',NULL,'',0,'10',50,'Please enter any HTML for the header','','General'),
     (18,'Podcast_Title','','',NULL,'',0,'1',50,'Enter the title for the Podcast page','','Podcast'),
     (19,'Podcast_URL','','',NULL,'',0,'1',50,'URL for podcast, build automatically, use this to overrise the automatic URL','','Podcast'),
     (20,'Podcast_Folder','','',NULL,'',0,'1',50,'Enter a value here to overrise the default forlder for postacsts.  The default is Podcasts.','','Podcast'),
@@ -41,7 +41,7 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (32,'CalendarEditor','Calendar',' ',NULL,'',0,'D',20,'Security group that can create Calendar Entries','parameter:Security','Calendar'),
     (33,'CalendarRestrictedText','',' ',NULL,'',0,'1',20,'Enter text to appear on venue for restricted calendar items',' ','Calendar'),
     (34,'Style','Square_Menu',' ',NULL,'',0,'D',20,'Select the Style for the site','parameter:AvailableStyles','Style'),
-    (35,'AvailableStyles','Blue_Square_Menu\r\nWhite_Square_Menu\r\nWhite_Rounded_Steel_Menu\r\nSquare_Menu\r\n3colum_vertical_Menu\r\nTot_Right_Menu',' ',NULL,'',0,'10',20,'Available Styles, Sperate by Carraadge Return','parameter:AvailableStyles','Style'),
+    (35,'AvailableStyles','Blue_Square_Menu\r\nWhite_Square_Menu\r\nWhite_Rounded_Steel_Menu\r\nSquare_Menu\r\n3colum_vertical_Menu\r\nTop_Right_Menu',' ',NULL,'',0,'10',20,'Available Styles, Sperate by Carraadge Return','parameter:AvailableStyles','Style'),
     (36,'Breadcrumbs','0',' ',NULL,'',0,'B',0,'Show Breadcrums',' ','Style'),
     (37,'GoogleSearch','',' ',NULL,'',0,'D',20,'Show Google Search Box','Header\nFooter\nRight\nLeft\n','Style'),
     (38,'MainFont','Georgia, serif',' ',NULL,'',0,'F',30,'Which Font would you like to use','parameter:AvailableFonts','Style'),
