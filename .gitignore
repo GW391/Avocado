@@ -1,0 +1,11 @@
+*.$$$
+*.mp3
+*.kdev4
+/.gitignore
+/Avocado/template/config*.php
+Avocado/images/logo.png
+Avocado/images/logo_mobile.png
+Avocado/news/SendMail (copy).php
+Avocado/template/config*.php
+Avocado/template/config.php
+Avocado/template/config-old.php
