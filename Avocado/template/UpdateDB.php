@@ -109,7 +109,7 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     $limit = 1;
     $die = null;
 
-    $set = "Value='Blue_Square_Menu\r\nWhite_Square_Menu\r\nWhite_Rounded_Steel_Menu\r\nSquare_Menu\r\n3colum_vertical_Menu\r\nTop_right_Menu'";
+    $set = "Value='Blue_Square_Menu\r\nWhite_Square_Menu\r\nWhite_Rounded_Steel_Menu\r\nSquare_Menu\r\n3colum_vertical_Menu\r\nTop_Right_Menu'";
     $where = "UUID='35'";
 
     SQLU($update, $set, $where, $limit, $die);
@@ -133,6 +133,17 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     SQLU($update2, $set, $where, $limit, $die);
     echo "Settings Updatd<br />";
 
+}elseif ($build <= 20240831){
+
+    $update = "$DatabaseName.tblsettings";
+    $limit = 1;
+    $die = null;
+
+    $set = "Grouping='General Contact email'";
+    $where = "UUID='16'";
+
+    SQLU($update, $set, $where, $limit, $die);
+    echo "Settings Updatd<br />";
 }
 
 
@@ -244,16 +255,27 @@ updateColumns('tblattachment','duration','varchar(45)','NULL', '0');
 updateColumns('tblattachment','WhoUpdate','varchar(45)','NULL', '0');
 updateColumns('tblattachment','DateUpdate','date','NULL', '0');
 updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
-}elseif ($build <= 202400231){
+}elseif ($build <= 20240831){
+
 
 }
+
+// finally update the version number
+    $update = "$DatabaseName.tblsettings";
+    $limit = 1;
+    $die = null;
+
+    $set = "Value='1.24.2'";
+    $where = "UUID='88'";
+
+    SQLU($update, $set, $where, $limit, $die);
 
 // finally update the build number
     $update = "$DatabaseName.tblsettings";
     $limit = 1;
     $die = null;
 
-    $set = "Value='20240331'";
+    $set = "Value='20241208'";
     $where = "UUID='89'";
 
     SQLU($update, $set, $where, $limit, $die);

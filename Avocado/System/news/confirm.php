@@ -16,6 +16,10 @@ $result = SQLU($update, $set, $where, $limit, $die);
 
 //mysql_close($con);
 //TODO: ## Parameterise content 
-echo "Subscription complete <br />";
+
+	echo "<center>";
+	echo "<h2>News - Subscribe</h2>";
+	echo "</center>";
+    echo "Subscription complete <br />";
 
 ?>

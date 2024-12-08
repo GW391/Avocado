@@ -1,0 +1,13 @@
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="mercado-match">
+<title id="pleaseWait">Please Wait</title>
+  <circle cx="50" cy="50" r="25">
+<animate attributeName="r" begin="0" calcMode="spline" dur="10s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;25;25;0"/>
+ <animate
+      attributeName="cx"
+      begin="0s"
+      dur="20s"
+      from="-25"
+      to="225"
+      repeatCount="indefinite" />
+  Please Wait
+</svg>

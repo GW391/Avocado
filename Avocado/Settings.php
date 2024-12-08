@@ -2,24 +2,26 @@
 
 <?php
 $system = true;
-if(preg_match("/".'editor'."/i", $_SESSION['security'])){
+if(security_check(parameters('SettingsSecurity'))){
 $Select = "Grouping";
 $From = "tblsettings";
-$GROUP = "Grouping";
+$GROUP = "SUBSTRING_INDEX(Grouping, \" \", 1)";
 $die = "Sorry there is a problem on this page please, try again later";
 $where = null;
 $Limit = null;
 $sort = null;
 $result = SQL($Select, $From, $die, $where, $Limit, $GROUP, $sort);
 
-echo "<p>Limit: ";
+echo '<div id="edit">';
+echo "Limit: ";
 if (isset($_GET['limit'])){
-    echo "<a href=\"?target=Settings\"> All </a>: ";
+    echo "<a href=\"?target=Settings\"> All </a> ";
 }
         while ($row = fetch_array($result)){
-            echo "<a href=\"?target=Settings&limit=". validate($row['Grouping'],'hd') . "\">" . validate($row['Grouping'],'hd') . "</a>: ";
+            echo "<a href=\"?target=Settings&limit=". validate($row['Grouping'],'hd') . "\">" . validate($row['Grouping'],'hd') . "</a> ";
         }
-echo "</p>";
+//echo "</p>";
+echo '</div>';
 
 free_results($result);
 
@@ -36,7 +38,7 @@ if (isset($_REQUEST['limit']) || isset($Grouping)){
     if (isset($Grouping)){
     $limit = $Grouping;
   }
-    $where = "Grouping='$limit'";
+    $where = "Grouping like N'%$limit%'";
     //echo $where;
 }else{
    $where = null;
@@ -52,7 +54,12 @@ $result = SQL($select, $From, $die, $where, null, null, null);
         while ($row = fetch_array($result)){
             echo "<tr>\n\r";
             echo "<th>" . validate($row['Name'],'hd') . "</th>\n\r";
-            echo "<td>" . validate($row['Value'],'hd') . "</td>\n\r";
+            // check if data is a passowrd, is so Obfiscate.
+            if (strtoupper(validate($row['num_rows'],'hd')) == "P") {
+               echo "<td>********</td>\n\r";
+            }else{
+                echo "<td>" . validate($row['Value'],'hd') . "</td>\n\r";
+            }
          //   echo "<td>" . $row['uuid'] . "</td>\n\r";
          //   echo "<td>" . encryptfe($row['uuid']) . "</td>\n\r";
             ?>
@@ -61,23 +68,21 @@ $result = SQL($select, $From, $die, $where, null, null, null);
             // check if the parameter is read only, if not display edit buttons
             if (strtoupper(validate($row['num_rows'],'hd')) != "R"){
                 ?>
-                <form method="post" name="e<?php echo validate(encryptfe($row['uuid']),'hu')?>" action="?target=Settings&amp;section=edit">
+                <form method="post" name="e<?php echo validate(encryptfe($row['uuid']),'hd')?>" action="?target=Settings&amp;section=edit">
                 <?php if(isset($limit)){
                     ?>
                 <input type="hidden" name="Grouping" value="<?php echo $limit?>">
                 <?php }?>
 
-            <button class="custombutton" type="submit" name="Edit" value="<?php echo validate(encryptfe($row['uuid']),'hu')?>">
-            <img src="images/icons/edit.png" alt="Edit" name="Edit" title="Edit" />
+            <button class="custombutton" type="submit" name="Edit" value="<?php echo validate(encryptfe($row['uuid']),'hd')?>">
+            <?php new Icon("edit") ?>
+            <!--<img src="images/icons/edit.png" alt="Edit" name="Edit" title="Edit" />-->
         </button>
 	</form>
 	<?php
             }
             ?>
 
-<!--    	<form method="post" name="e<?php echo validate(encryptfe($row['uuid']),'hu')?>" action="?target=Settings&amp;section=edit">
-	<input type="image" SRC="images/icons/edit.png" value="<?php echo validate(encryptfe($row['uuid']),'hu')?>" alt="Edit" name="Edit" title="Edit" />
-	</form>-->
 </td>
 <?php
             echo "</tr>\n\r";

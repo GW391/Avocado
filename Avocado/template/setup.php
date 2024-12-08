@@ -42,8 +42,9 @@ if (isset($_POST['DatabaseType'])){
         // no Database type specified, assume MySQLi
         require 'template/SQL_MySQLi.php';
     }
-    
+    if(!isset($varsloaded)){
     require_once 'template/vars.php';
+    }
     $config = "
         <?php
     $" . "DatabaseType = \"" . validate($_POST['DatabaseType'],'hd') . "\";
@@ -52,8 +53,8 @@ if (isset($_POST['DatabaseType'])){
             if (isset($_POST['DatabaseServerPort']) & strlen($_POST['DatabaseServerPort']) !=0){
     $config .= "$" . "DatabaseServerPort = \"" . validate($_POST['DatabaseServerPort'],'hd') . "\";";
         }
-    $config .= "$" . "DatabaseUserName = \"" . validate($_POST['DatabaseUserName'],'hd') . "\";
-    $" . "DatabasePassword = \"" . validate($_POST['DatabasePassword'],'hd') . "\";
+    $config .= "$" . "DatabaseUserNameE = \"" . new Encrypt(validate($_POST['DatabaseUserName'],'hd')) . "\";
+    $" . "DatabasePasswordE = \"" . new Encrypt(validate($_POST['DatabasePassword'],'hd')) . "\";
     $" . "DataKey = \"" . $DataKey . "\";
     $" . "PostKey = \"" . $PostKey . "\";
     $" . "Salt = \"" . $Salt . "\";

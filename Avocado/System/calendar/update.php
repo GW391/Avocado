@@ -1,5 +1,10 @@
 <?php
 $system = true;
+
+if (null != (parameters('TinyMCEKey')) && strlen(trim(parameters('TinyMCEKey'))) != 0){
+require_once 'template/TinyMCECloud.php';
+}
+
 if(security_check(parameters('CalendarEditor'))){
     ?>
     

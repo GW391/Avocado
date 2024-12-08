@@ -30,7 +30,7 @@ if($count==1){
     $uid = $row['UUID'];
 
     // TODO: ## Paramaterise email details
-$curURL = curURL(parameters('SSL', 1));
+    $curURL = curURL(parameters('SSL', 1));
     $subject = parameters('Organisation') . " Registration Confirmation" ;
     $message = "Dear  " . validate($namea[0],'hd') . "
 Thank you for request a new copy of the email address confirmation email. \n\r
@@ -47,6 +47,8 @@ Members, Attendees and Guests. The additional portions of the site will not be v
 ";
 
     $mailfrom = parameters('UserRegistrationFromAddress');
+
+    // send regestration complete email
     mail($email, "Subject: $subject",
     $message, "From: $mailfrom " );
 }

@@ -1,10 +1,23 @@
 	<!--<meta http-equiv="content-type" content="text/html; charset=iso-8859-15" />-->
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <?php $URL = curURL(parameters('SSL'), 0);
+// build podcast URL for header link.
+$nofolder = 1;
+$PodCast = PodCastURL();
+$nofolder = 0;
+//add the xml
+$check_paramater = parameters('Podcast_URL');
+if (!isset($check_paramater) || strlen($check_paramater) == 0){
+    $PodCast .= 'rss.php?feed=podcast';
+}
+?>
+<link href="<?php echo $PodCast ?>" rel="self" type="application/rss+xml" title="<?php echo parameters('Podcast_Title'); ?>" />
 <?php
+
+
 // set meta tags
 
 $keywords = parameters('Keywords');
@@ -45,7 +58,6 @@ if (strlen(trim($author)) != 0){
 
 
 <?php
-
 
 // see if there is any special extra headers files.
 // todo: get this from databse
@@ -115,22 +127,30 @@ if (isset($_SESSION["font"])){
     --main-Font: <?php echo validate(parameters('MainFont'),'hd'); ?> ;
 }
 </style>
-        
+
      <?php
      //check for default colours file for this Theme
         $DefaultColours = 'css/' . parameters('style') . '/DefaultColours.php';
-  //      echo $DefaultColours;
+  //      if Theme colours exist include them, else enclude the global default
         if (file_exists($DefaultColours)){
-        include './'.$DefaultColours;
+            include './'.$DefaultColours;
+        }else{
+            if (file_exists('./css/DefaultColours.php')){ // just check if the default file is there
+                include './css/DefaultColours.php';
+            }
         }
         ?>
         
          <?php
          //check for default menu colours file for this theam
         $DefaultMenuColours = 'css/' . parameters('style') . '/DefaultMenuColours.php';
-//        echo $DefaultMenuColours;
+ //      if Theme colours exist include them, else enclude the global default
         if (file_exists($DefaultMenuColours)){
-        include './'.$DefaultMenuColours;
+            include './'.$DefaultMenuColours;
+        }else{
+            if (file_exists('./css/DefaultMenuColours.php')){ // just check if the default file is there
+                include './css/DefaultMenuColours.php';
+            }
         }
         ?>
 

@@ -60,21 +60,21 @@ while ($row = fetch_array($result)){
 echo "<tr>";
 echo "<td rowspan=\"2\">";
 
-if (isset($row['thumbnail'])){
-	if (strlen($row['thumbnail'])!=0){
+if (isset($row['thumbnail']) and strlen($row['thumbnail'])!=0) {
+//	if (strlen($row['thumbnail'])!=0){
         echo "<img src=\"" . validate($row['thumbnail'],'hd') . "\" width=\"75px\" alt=\"image - " . validate($row['thumbnail'],'hd') . " Thumbnail\" />";
-	}
-}else{
+//	}
+}
 
 	if (isset($_SESSION['security'])){
                     //if(stripos($_SESSION['security'], parameters('Calendar')) !== false || stripos($_SESSION['security'], 'Calendar') !== false){
-if(stripos($_SESSION['security'], parameters('CalendarEditor'))){
+            if(stripos($_SESSION['security'], parameters('CalendarEditor'))){
 			echo "<form method=\"post\" name=\"" . $row['UID'] . "\" action=\"?target=Settings&amp;section=chooseimage\">";
 			echo "<input type=\"hidden\" name=\"CALID\" value=\"" . $row['UID'] . "\" readonly=\"readonly\" />";
-			echo "<input type=\"image\" SRC=\"images/icons/edit.png\" value=\" Edit \" alt=\"Edit\" name=\"Edit\" title=\"Edit\" />";
+			//echo "<input type=\"image\" SRC=\"images/icons/edit.png\" value=\" Edit \" alt=\"Edit\" name=\"Edit\" title=\"Edit\" />";
+         echo  '<button type="submit">'; new Icon("image-add"); echo '</button>';
 			echo "</form>";
 }}
-}
 
 echo "</td>";
 //echo "<td valign=\"top\" colspan=\"3\">";
@@ -118,20 +118,23 @@ if(stripos($_SESSION['security'], parameters('CalendarEditor'))){
 			echo "<td rowspan=\"2\">";
 			echo "<form method=\"post\" name=\"" . $row['UID'] . "\" action=\"?target=calendar&amp;section=update\">";
 			echo "<input type=\"hidden\" name=\"CALID\" value=\"" . $row['UID'] . "\" readonly=\"readonly\" />";
-			echo "<input type=\"image\" SRC=\"images/icons/edit.png\" value=\" Edit \" alt=\"Edit\" name=\"Edit\" title=\"Edit\" />";
+            echo  '<button type="submit">'; new Icon("edit"); echo '</button>';
+			//echo "<input type=\"image\" SRC=\"images/icons/edit.png\" value=\" Edit \" alt=\"Edit\" name=\"Edit\" title=\"Edit\" />";
 			echo "</form>";
 			echo "</td>";
 			echo "<td rowspan=\"2\">";
 			echo "<form method=\"post\" name=\"" . $row['UID'] . "\" action=\"?target=calendar&amp;section=update\">";
 			echo "<input type=\"hidden\" name=\"DUP\" value=\"" . $row['UID'] . "\" readonly >";
 			echo "<input type=\"hidden\" name=\"CALID\" value=\"" . $row['UID'] . "\" readonly=\"readonly\" />";
-			echo "<input type=\"image\" SRC=\"images/icons/copy.png\" value=\" Copy \" alt=\"Copy\" name=\"Copy\" title=\"Copy\" />";
+            echo  '<button type="submit">'; new Icon("copy"); echo '</button>';
+			//echo "<input type=\"image\" SRC=\"images/icons/copy.png\" value=\" Copy \" alt=\"Copy\" name=\"Copy\" title=\"Copy\" />";
 			echo "</form>";
 			echo "</td>";
 			echo "<td rowspan=\"2\">";
 			echo "<form method=\"post\" name=\"" . $row['UID'] . "\" action=\"?target=calendar&amp;section=delete\">";
 			echo "<input type=\"hidden\" name=\"DEL\" value=\"" . $row['UID'] . "\" readonly=\"readonly\" />";
-			echo "<input type=\"image\" SRC=\"images/icons/delete.png\" value=\" Copy \" alt=\"Delete\" name=\"Delete\" title=\"Delete\" />";
+            echo  '<button type="submit">'; new Icon("delete"); echo '</button>';
+			//echo "<input type=\"image\" SRC=\"images/icons/delete.png\" value=\" Copy \" alt=\"Delete\" name=\"Delete\" title=\"Delete\" />";
 			echo "</form>";
 			echo "</td>";
 		}

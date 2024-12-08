@@ -1,6 +1,19 @@
 <br />
 <?php
 $system = true;
+
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//import PHPMailer files
+//echo getcwd();
+require 'template/PHPMailer/src/Exception.php';
+require 'template/PHPMailer/src/PHPMailer.php';
+require 'template/PHPMailer/src/SMTP.php';
+
 if (function_exists('spamcheck')){
 }else{
 function spamcheck($field)
@@ -52,10 +65,10 @@ function spamcheck($field)
                   echo "' readonly />
 <table>
 <tr>
-<td>Email:
+<td><label for='email'>Email:</label>
 </td>
 <td>
-<input name='email' type='text' size='30' value='";
+<input name='email' type='text' size='30' placeholder='email address' value='";
     if (isset($_REQUEST['email'])){
       echo validate($_REQUEST['email'],'hd');
     } 
@@ -63,12 +76,12 @@ function spamcheck($field)
 </td>
 </tr>
 <tr>
-<td>Subject:
+<td><label for='subject'>Subject:</label>
 </td>
 <td>
 ";
 
-echo "<input name='subject' type='text' size='30' value='";
+echo "<input name='subject' type='text' size='30' placeholder='Subject' value='";
     if (isset($_REQUEST['subject'])){
       echo validate($_REQUEST['subject'],'hd');
     }
@@ -79,10 +92,10 @@ echo "
 </tr>
 <tr>
 <td valign=top>
-Message:
+<label for='message'>Message:</label>
 </td>
 <td>
-<textarea name='message' rows='15' cols='40' required>";
+<textarea name='message' rows='15' cols='40' placeholder='Message' required>";
 
 if (isset($_REQUEST['message'])){
       echo validate($_REQUEST['message'],'hd');
@@ -99,7 +112,7 @@ if (isset($_POST['data'])){
 	}else{
 		echo "<input type=\"checkbox\" name=\"data\" required />";
 	}
-	echo "I agree that my data can be used for the provision of this service";
+	echo "<label for='data'>I agree that my data can be used for the provision of this service</label>";
 echo "</td>
     </tr>
 
@@ -127,6 +140,9 @@ echo "</td>
 //if "email" is filled out, send email
 if (isset($_REQUEST['email']))
   {
+
+
+
   //check if the email address is invalid
   $mailcheck = spamcheck($_REQUEST['email']);
   // check captcha 
@@ -135,9 +151,14 @@ if (isset($_REQUEST['email']))
   $message = validate($_REQUEST['message'],'hd');
   $subject = validate($_REQUEST['subject'],'hd');
   $orignialmessage = $message;
-  $Junk_Check = Junk_Check($message . " " . $subject);
+  $Junk_Check = new junkCheck($message . " " . $subject);
   $wordcount = str_word_count($orignialmessage,0);
   
+  // add from to message
+  $message = "From: " . validate($_REQUEST['email'],'hd') . "
+  " . $message;
+
+  // add Spam check info to message
    $message .= "
             Data: " . validate($_REQUEST['data'],'hd') . "  
             Captcha: " . validate($_REQUEST['Captcha'],'hd') . " : $captcha
@@ -174,9 +195,12 @@ if (isset($_REQUEST['email']))
    $message .= "
            SpamValue: " . $spamvalue;
         
-    if ($mailcheck==TRUE || $captcha=='Fail' || $Junk_Check==TRUE || $spamvalue >= 50 || $spamvalue >= $wordcount)
+    if ($mailcheck==TRUE || $captcha=='Fail'  || $spamvalue >= 50 || $spamvalue >= $wordcount)
     {
     echo parameters('JunkCheckFailMessage');
+      echo "mailcheck: " . $mailcheck;
+    echo "captcha: " . $captcha;
+   // echo $Junk_Check;
     // todo: update to log, pause and lock out junk users
     
     if (validate($_REQUEST['times'],0) >= 5){
@@ -189,13 +213,54 @@ if (isset($_REQUEST['email']))
   else
     { 
     //send email
-    $to = parameters('ContactEmail');
-    $email = validate($_REQUEST['email'],'hd');
-    $subject = validate($_REQUEST['subject'],'hd');
-    mail("$to", "Subject: $subject",
-    $message, "From: $email" );
-    echo "Thank you for using our mail form";
+
+   //TODO check if parameters exist, if not revert to default paramters
+   $from = parameters('ContactFromEmail');                //Get from address from parameters
+   $Username = parameters('ContactFromUsername');         //Get SMTP username from paramters
+   $Password = parameters('ContactFromPassword');         //SMTP password
+
+   $subject = validate($_REQUEST['subject'], 'hd');    // Get Subject
+      //  $message = validate($_REQUEST['message'], 'hd');    // Get News Message
+
+    $mail = new PHPMailer(true);
+
+    //import SMTP Server settings
+    require 'template/emailServerSettings.php';
+    /*
+    //    $mail->SMTPDebug = SMTP::DEBUG_SERVER;            //Enable verbose debug output
+    $mail->isSMTP();                                        //Send using SMTP
+    $mail->Host       = parameters('SMTPHost');             //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                               //Enable SMTP authentication
+    $mail->Username   = $Username;                          //SMTP username
+    $mail->Password   = $Password;                          //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;        //Enable implicit TLS encryption
+    //$mail->SMTPSecure = "ssl";
+    $mail->Port       = parameters('SMTPPort'); //465;       //TCP port to connect to; use 587 if you have set 'SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+*/
+    //Recipients
+
+    $mail->addAddress(parameters('ContactEmail')); // add to address from parameters
+
+    // add message to email
+    $mail->Body    = $message;
+    $mail->Subject = $subject;
+
+    // try sending message
+
+    try {
+      $mail->send();
+      echo "Thank you for using our mail form";
+    } catch (Exception $e) {
+
+    echo "Message could not be sent."; //. $mail->ErrorInfo;
+    displaycontactform();
+
+    // $email = validate($_REQUEST['email'],'hd');
+    // $subject = validate($_REQUEST['subject'],'hd');
+    // mail("$to", "Subject: $subject",     $message, "From: $email" );
+    // echo "Thank you for using our mail form";
     }
+  }
   }
 else
 //if "email" is not filled out, display the form

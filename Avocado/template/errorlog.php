@@ -1,16 +1,21 @@
 <?php
 // setup error and failure actions template
 function logerror($error){
-
     if ($error == '404') {
         require_once "template/content_404.php";
     }else {
         echo validate($error,'hd');
         //error in SQL, trying to run an update
+        if(!isset($DBUpdated) or $DBUpdated != 1){
         echo "<br />There is an error, trying to run an update <br />";
-        include "template/UpdateDB.php";
+                include "template/UpdateDB.php";
         echo "Update complete try relaoding the page <br />";
+        $DBUpdated = 1;
+        }else{
+               include("template/footer.php");
+               die;
         }
+    }
 
         global $con;
     if (isset($error)){
@@ -67,9 +72,9 @@ if (isset($_SERVER['HTTP_REFERER'])){
     if (!isset($logged)){
     $db = "tblelg";
     $die = " Sorry there has been an unrecoverable error please try again later. ...";
- //   if(parameters('developer_mode') == '1'){
- //   $die .= validate(sqlerror($con),'hd');
- //   }
+    if(parameters('developer_mode') == '1'){
+    $die .= validate(sqlerror($con),'hd');
+    }
     SQLI($db, $cols, $values, $die);
     $logged = true;
     }

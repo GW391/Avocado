@@ -34,7 +34,9 @@ div.desc {
 $system = true;
 
 //check security
-if(preg_match("/".'editor'."/i", $_SESSION['security'])){
+$security = new securityCheck(parameters('EditPodcastSecurity'));
+if ($security->output)
+{
 
   if (isset($_REQUEST['edit'])){
  // echo $_REQUEST['edit'];
@@ -74,24 +76,25 @@ Upload a new podcast file (Maximum file size <?php echo floor(parameters('maxfil
 <label for="file">Filename:</label>
         </td>
         <td>
-<input type="file" name="file" id="file"> <br />
+<input type="file" name="file" id="file" placeholder="Select a file to upload"> <br />
         </td>
     </tr>
   <tr>
-  <td colspan="2" align="center"><strong>Meta Data</strong></td>
+  <td colspan="2" align="center">
+  <strong>Meta Data</strong></td>
   </tr>
   <tr>
   <td>Name / Title</td> 
-  <td><input type="text" name="name" size="50" value="<?php if(isset($row['name'])){ echo validate($row['name'],'hd');} ?>"></td>
+  <td><input type="text" name="name" size="50" placeholder="Enter a Name / Title" value="<?php if(isset($row['name'])){ echo validate($row['name'],'hd');} ?>"></td>
   </tr>
     
   <tr>
   <td>Date</td> 
-  <td><input type="date" name="Date" value="<?php if(isset($row['Date'])){echo validate($row['Date'],'hd');}else{echo Date('Y-m-d');} ?>"></td>
+  <td><input type="date" name="Date" placeholder="Date" value="<?php if(isset($row['Date'])){echo validate($row['Date'],'hd');}else{echo Date('Y-m-d');} ?>"></td>
   </tr>
   <tr>
   <td>Duration</td>
-  <td><input type="text" name="Duration" value="<?php if(isset($row['Duration'])){echo validate($row['Duration'],'hd');} ?>"></td>
+  <td><input type="text" name="Duration" placeholder="Enter a Duration hh:mm:ss" value="<?php if(isset($row['Duration'])){echo validate($row['Duration'],'hd');} ?>"></td>
   </tr>
   
 
@@ -100,7 +103,7 @@ Upload a new podcast file (Maximum file size <?php echo floor(parameters('maxfil
     <tr>
 
   <td><?php echo parameters('Podcast_Meta_1')?></td>
-  <td><input type="text" name="Meta_1" value="<?php if(isset($row['Meta_1'])){ echo validate($row['Meta_1'],'hd');} ?>"></td>
+  <td><input type="text" name="Meta_1" placeholder="Enter a <?php echo parameters('Podcast_Meta_1')?>" value="<?php if(isset($row['Meta_1'])){ echo validate($row['Meta_1'],'hd');} ?>"></td>
   </tr>
   <?php }
 ?>
@@ -109,7 +112,7 @@ Upload a new podcast file (Maximum file size <?php echo floor(parameters('maxfil
     <tr>
 
   <td><?php echo parameters('Podcast_Meta_2')?></td>
-  <td><input type="text" name="Meta_2" value="<?php if(isset($row['Meta_2'])){ echo validate($row['Meta_2'],'hd');} ?>"></td>
+  <td><input type="text" name="Meta_2" placeholder="Enter a <?php echo parameters('Podcast_Meta_2')?>" value="<?php if(isset($row['Meta_2'])){ echo validate($row['Meta_2'],'hd');} ?>"></td>
   </tr>
   <?php }
 ?>
@@ -118,7 +121,7 @@ Upload a new podcast file (Maximum file size <?php echo floor(parameters('maxfil
     <tr>
 
   <td><?php echo parameters('Podcast_Meta_3')?></td>
-  <td><input type="text" name="Meta_3" value="<?php if(isset($row['Meta_3'])){ echo validate($row['Meta_3'],'hd');} ?>"></td>
+  <td><input type="text" name="Meta_3" placeholder="Enter a <?php echo parameters('Podcast_Meta_3')?>" value="<?php if(isset($row['Meta_3'])){ echo validate($row['Meta_3'],'hd');} ?>"></td>
   </tr>
   <?php }
 ?>
@@ -128,14 +131,14 @@ Upload a new podcast file (Maximum file size <?php echo floor(parameters('maxfil
     <tr>
 
   <td><?php echo parameters('Podcast_Meta_4')?></td>
-  <td><input type="text" name="Meta_4" value="<?php if(isset($row['Meta_4'])){ echo validate($row['Meta_4'],'hd');} ?>"></td>
+  <td><input type="text" name="Meta_4" placeholder="Enter a <?php echo parameters('Podcast_Meta_4')?>" value="<?php if(isset($row['Meta_4'])){ echo validate($row['Meta_4'],'hd');} ?>"></td>
   </tr>
   <?php }
 ?>
 
 <tr>
   <td>Description</td> 
-  <td><input type="Description" name="Description"  value="<?php if(isset($row['Description'])){ echo validate($row['Description'],'hd');} ?>"></td>
+  <td><input type="Description" name="Description"  placeholder="Enter a Description" value="<?php if(isset($row['Description'])){ echo validate($row['Description'],'hd');} ?>"></td>
   </tr>
     <tr>
         <td></td>

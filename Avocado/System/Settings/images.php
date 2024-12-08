@@ -122,8 +122,8 @@ Sorry you do not have the permission to view this page.
 
 function all_files($dir) {
     $files = Array();
-    $file_tmp1 = glob($dir."*.{jpg,png,gif,bmp,PNG,JPG,GIF,BMP}", GLOB_BRACE | GLOB_MARK | GLOB_NOSORT);
-    $file_tmp2 = glob($dir."*/*.{jpg,png,gif,bmp,BMP,PNG,JPG,GIF}", GLOB_BRACE | GLOB_MARK | GLOB_NOSORT);
+    $file_tmp1 = glob($dir."*.{jpg,png,gif,bmp,svg,PNG,JPG,GIF,BMP,SVG}", GLOB_BRACE | GLOB_MARK | GLOB_NOSORT);
+    $file_tmp2 = glob($dir."*/*.{jpg,png,gif,bmp,svg,BMP,PNG,JPG,GIF,SVG}", GLOB_BRACE | GLOB_MARK | GLOB_NOSORT);
  
 $file_tmp = array_merge($file_tmp1, $file_tmp2);
  

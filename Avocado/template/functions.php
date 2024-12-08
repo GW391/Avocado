@@ -44,7 +44,7 @@ function generateRandomString($length = 10) {
 function parameters($ParameterName)
 {
 global $con;
-    $ParameterSelect = "Name, Value";
+    $ParameterSelect = "Name, Value, num_rows";
     $ParameterFrom = "tblsettings";
     $Parameterwhere = "Name = '$ParameterName'";
     $ParameterLimit = "1";
@@ -61,7 +61,11 @@ global $con;
         }
     
     $ParameterRow=fetch_array($ParameterResult);
-    $ParameterReturnValue = validate(isset($ParameterRow['Value']) ? $ParameterRow['Value'] : NULL ,'hd');
+    if (strtoupper(validate($ParameterRow['num_rows'],'hd') == 'P')){
+        $ParameterReturnValue = new Decrypt(validate(isset($ParameterRow['Value']) ? $ParameterRow['Value'] : NULL ,'hd'));
+    }else{
+        $ParameterReturnValue = validate(isset($ParameterRow['Value']) ? $ParameterRow['Value'] : NULL ,'hd');
+    }
     return $ParameterReturnValue;
 }
 
@@ -250,7 +254,9 @@ function Displaycaptcha(){
 }
 
 function CheckCaptcha(){
-    if (isset($_REQUEST['Captcha']) && strlen($_REQUEST['Captcha'] !=0)){
+    if (!isset($_REQUEST['Captcha']) || strlen($_REQUEST['Captcha'] == 0)){
+        echo "Captchaisset: " . '"' . ($_REQUEST['Captcha']) . '"';
+        echo strlen($_REQUEST['Captcha']);
         return 'Fail';
     }else{
         return 'Pass';

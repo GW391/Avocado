@@ -1,4 +1,16 @@
 <?php
+$system = true;
+
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//import PHPMailer files
+require 'template/PHPMailer/src/Exception.php';
+require 'template/PHPMailer/src/PHPMailer.php';
+require 'template/PHPMailer/src/SMTP.php';
 
 function displayform() {
     echo "<div id=\"editbox\">";
@@ -287,10 +299,10 @@ else
 	$credentials = getUNPW(validate($_POST['NUsername'],'h'), validate($_POST['Npassword'],'h'),1000512);
 //   $credentials = getUNPW($_POST['NUsername'], $_POST['Npassword']);
 
-        $UNn = $credentials[0];
-        $PWn = $credentials[1];
-    	$RNn = encrypt(validate($_POST['RName'],'enc'));
-	$EMn = encrypt(validate(strtolower($_POST['Email']), 'enc'));
+    $UNn = $credentials[0];
+    $PWn = $credentials[1];
+    $RNn = new Encrypt(validate($_POST['RName'],'enc'));
+	$EMn = new Encrypt(validate(strtolower($_POST['Email']), 'enc'));
 	$Date = date("Y-m-d");
 
     
@@ -299,15 +311,21 @@ else
     $values = "'$UNn','$PWn','$RNn','$EMn','$Date','','$Date','$Date',''";
     $die = 'Error: Sorry an error has occured, please try again later' . mysqli_error();
     
-  $id=SQLI($db, $cols, $values, $die);
+	$id=SQLI($db, $cols, $values, $die);
   
-  echo $id;
+	//echo $id;
 
-$curURL = curURL(parameters('SSL', 1));
+	$curURL = curURL(parameters('SSL', 1));
 
-//TODO: ## Parametarise email message
+		//TODO: ## Parametarise email message
 
-    $email = validate(validate($_POST['Email'],'e'),'hd');
+	   //TODO check if parameters exist, if not revert to default paramters
+	   // use contact from email for registration conformation emails
+   $from = parameters('ContactFromEmail');                //Get from address from parameters
+   $Username = parameters('ContactFromUsername');         //Get SMTP username from paramters
+   $Password = parameters('ContactFromPassword');         //SMTP password
+
+   $email = validate(validate($_POST['Email'],'e'),'hd');
     
     
 
@@ -344,12 +362,55 @@ Please ignore this message if this user should not have one of the above privila
 
 ";
 
-// TODO: ## 01 Paramaertise email addresses
 
-$mailfrom = parameters('UserRegistrationFromAddress');
+
+// set up PHPMailer
+    $mail = new PHPMailer(true);
+
+    //import SMTP Server settings
+    require 'template/emailServerSettings.php';
+
+    // add message to email
+    $mail->Body    = $message;
+    $mail->Subject = $subject;
+
+
+
+	// send user email to welcome and get email address validated.
+	try {
+      $mail->send();
+      echo "Thank you for using our mail form";
+    } catch (Exception $e) {
+
+    echo "Message could not be sent."; //. $mail->ErrorInfo;
+    $mail->Body    = $message;;
+
+    // $email = validate($_REQUEST['email'],'hd');
+    // $subject = validate($_REQUEST['subject'],'hd');
+    // mail("$to", "Subject: $subject",     $message, "From: $email" );
+    // echo "Thank you for using our mail form";
+    }
+	$mailfrom = parameters('UserRegistrationFromAddress');
     mail($email, "Subject: $subject",
     $message, "From: $mailfrom " );
-mail("$mailfrom", "Subject: $subject",
+
+	// Send administrator email to approve registration.
+
+	$mail->Body    = $message;
+	   try {
+      $mail->send();
+      echo "Thank you for registering for an account";
+    } catch (Exception $e) {
+
+    echo "Message could not be sent."; //. $mail->ErrorInfo;
+	Displayform();
+
+    // $email = validate($_REQUEST['email'],'hd');
+    // $subject = validate($_REQUEST['subject'],'hd');
+    // mail("$to", "Subject: $subject",     $message, "From: $email" );
+    // echo "Thank you for using our mail form";
+    }
+	mail("$mailfrom", "Subject: $subject",
     $admmessage, "From: $email" );
 
 	echo "Thank you for registering, an email conformation will arrive shortly, before you can log in follow the instructions in the email";

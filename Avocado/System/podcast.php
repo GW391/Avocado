@@ -8,6 +8,15 @@ div.history {
   text-align: center;
 }
 
+div.IconLink {
+  margin: 0px;
+  border: 0px solid #ccc;
+  float: left;
+  width: 50%;
+  border-radius: 25px;
+  text-align: center;
+}
+
 div.history:hover {
   border: 1px solid #777;
 }
@@ -69,11 +78,28 @@ font-size: 1.1em;
 
 $system = true;
 
+$security = new securityCheck(parameters('EditPodcastSecurity'));
+if ($security->output)
+{
+    ?>
+    <style>
+    div.IconLink {
+          width: 25%;
+    }
+    </style>
+    <?php
 
-if(preg_match("/".'editor'."/i", $_SESSION['security'])){
+//if(security_check(parameters('EditPodcastSecurity'))){
 echo '<div id="edit">';
 echo '<a href="?target=System&amp;section=Settings&amp;subsection=podcastuploads">Upload file</a>';
+  // check if current user can edit parameters
+$security = new securityCheck(parameters('SettingsSecurity'));
+if ($security->output)
+{
+//  if(security_check(parameters('SettingsSecurity'))){
+    // if current user can edit parameters, display parameters link.
 echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="?target=Settings&amp;limit=podcast">Podcast Settings</a>';
+  }
 echo '</div>';
 
     //If the podcast is being deletd mark record as deleted.
@@ -155,6 +181,16 @@ if (isset($History)){
 $sort = "Date DESC";
 $PodcastResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 
+$Sortdate = new DateTime(date('Y-m-d'));
+$Adjust = 1;
+while ($Adjust <= 12) {
+    $Sortdate->modify("-1 month");
+    $SortMonth = $Sortdate->format("M");
+    $custsort=",'" . $SortMonth . "'";
+    $Adjust++;
+}
+$sort = 'FIELD(Date' . $custsort . ')';
+
 //get months for history
 $Select = "Month(Date) as Month";
 $Limit = 12;
@@ -231,18 +267,22 @@ if (isset($Title) && $Title !=NULL){
 </tr>
 <tr width="30%">
 <td>
-- <a href="download.php?target=podcast&amp;d=<?php echo $File_Name; ?>">Download</a><br />
-- <a href="?target=<?php echo $target; ?>&amp;section=play&amp;d=<?php echo encryptfe(validate($PodCastRow['UUID'],'hd')); ?>">Play</a><br />
+<a href="download.php?target=podcast&amp;d=<?php echo $File_Name; ?>"><?php new Icon("download")?></a><br />
+<a href="?target=<?php echo $target; ?>&amp;section=play&amp;d=<?php echo encryptfe(validate($PodCastRow['UUID'],'hd')); ?>"><?php new Icon("play")?></a><br />
 <?php
-if(preg_match("/".'editor'."/i", $_SESSION['security'])){
-    //echo '<p class="right">';
-    echo ' - <a href="?target=System&amp;section=Settings&amp;subsection=podcastuploads&amp;edit=' . encryptfe(validate($PodCastRow['UUID'],'hd')) . '">Edit</a><br />';
-    echo ' - <a href="?';
+// check if security allows for podcast edit, and if so display edit links.
+$security = new securityCheck(parameters('EditPodcastSecurity'));
+if ($security->output)
+{
+//if(security_check(parameters('EditPodcastSecurity'))){
+    echo '<a href="?target=System&amp;section=Settings&amp;subsection=podcastuploads&amp;edit=' . encryptfe(validate($PodCastRow['UUID'],'hd')) . '">';
+    new Icon("edit");
+    echo '</a><br />';
+    echo '<a href="?';
     if(isset($target)){ echo 'target=' . $target;}
     if(isset($section)){ echo '&amp;section=' . $section;}
     if(isset($subsection)){ echo '&amp;subsection=' . $subsection;}
-    echo '&amp;delete=' . encryptfe(validate($PodCastRow['UUID'],'hd')) . '">Delete</a>';
-    //echo '</p>';
+    echo '&amp;delete=' . encryptfe(validate($PodCastRow['UUID'],'hd')) . '">';new Icon("delete"); echo '</a>';
 }
 ?>
 
@@ -250,6 +290,7 @@ if(preg_match("/".'editor'."/i", $_SESSION['security'])){
 <td align="right" width="70%">
 <?php
 echo "<table border='0' width='100%'>";
+
 if (isset($Title) && $Title !=NULL){
     echo "<tr>";
     echo "<td><strong>Title: </strong></td><td width='60%'>" . $Title . "</td>";
@@ -285,6 +326,35 @@ if (isset($fsize) && $fsize !=NULL){
     echo "<td><strong> Size: </strong></td><td>" . $fsize . "MB</td>";
         echo "</tr>";
 }
+
+?>
+<tr>
+<td colspan = "2" align="center">
+<div class='IconLink'>
+<a href="download.php?target=podcast&amp;d=<?php echo $File_Name; ?>"><?php new Icon("download")?></a>
+</div>
+<div class='IconLink'>
+<a href="?target=<?php echo $target; ?>&amp;section=play&amp;d=<?php echo encryptfe(validate($PodCastRow['UUID'],'hd')); ?>"><?php new Icon("play")?></a>
+</div>
+<?php
+// check if security allows for podcast edit, and if so display edit links.
+$security = new securityCheck(parameters('EditPodcastSecurity'));
+if ($security->output)
+{
+//if(security_check(parameters('EditPodcastSecurity'))){
+    echo '<div class=\'IconLink\'><a href="?target=System&amp;section=Settings&amp;subsection=podcastuploads&amp;edit=' . encryptfe(validate($PodCastRow['UUID'],'hd')) . '">';
+    new Icon("edit");
+    echo '</a></div>';
+    echo '<div class=\'IconLink\'><a href="?';
+    if(isset($target)){ echo 'target=' . $target;}
+    if(isset($section)){ echo '&amp;section=' . $section;}
+    if(isset($subsection)){ echo '&amp;subsection=' . $subsection;}
+    echo '&amp;delete=' . encryptfe(validate($PodCastRow['UUID'],'hd')) . '">';new Icon("delete"); echo '</a></div>';
+}
+?>
+
+</td>
+<?php
 echo "</table>";
 ?>
 </td>

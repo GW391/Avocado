@@ -79,7 +79,8 @@ $sort = "target, sortorder";
                         }
                         ?>
 		    <button class="custombutton" type="submit" name="New" value="New">
-                    <img src="images/icons/new.png" alt="New" name="New" title="New" />
+		    <?php new Icon("new") ?>
+                    <!--<img src="images/icons/new.png" alt="New" name="New" title="New" />-->
                 </button>
 
 	</form>
@@ -103,7 +104,7 @@ $sort = "target, sortorder";
                     <?php // echo validate(($row['uuid'])); ?>
         <form method="post" name="e<?php echo validate(encryptfe($row['uuid']),'enc')?>" action="?target=<?php echo $target?>&amp;section=<?php echo $section?>&amp;subsection=edit">
 		<button class="custombutton" type="submit" name="Edit" value="<?php echo validate(encryptfe($row['uuid']),'hu')?>">
-                    <img src="images/icons/edit.png" alt="Edit" name="Edit" title="Edit" />
+                    <?php new Icon("edit") ?><!--<img src="images/icons/edit.png" alt="Edit" name="Edit" title="Edit" />-->
                 </button>
 	<img SRC="images/icons/delete_g.png" alt="Can't Delete System Menu" name="Can't Delete System Menu" title="Can't Delete System Menu" />
 	</form>
@@ -116,12 +117,12 @@ $sort = "target, sortorder";
     <td width="120px">
         <form method="post" name="e<?php echo validate(encryptfe($row['uuid']),'enc')?>" action="?target=<?php echo $target?>&amp;section=<?php echo $section?>&amp;subsection=edit">
 	<button class="custombutton" type="submit" name="Edit" value="<?php echo validate(encryptfe($row['uuid']),'hu')?>">
-            <img src="images/icons/edit.png" alt="Edit" name="Edit" title="Edit" />
+            <?php new Icon("new") ?><!--<img src="images/icons/edit.png" alt="Edit" name="Edit" title="Edit" />-->
         </button>
 <!--            <input type="image" SRC="images/icons/edit.png" value="<?php echo validate(encryptfe($row['uuid']),'hu')?>" alt="Edit" name="Edit" title="Edit" />-->
 
 <button class="custombutton" type="submit" name="Delete" value="<?php echo validate(encryptfe($row['uuid']),'hu')?>">
-      <img src="images/icons/delete.png" alt="Delete" name="Delete" title="Delete" />
+      <?php new Icon("delete") ?><!--<img src="images/icons/delete.png" alt="Delete" name="Delete" title="Delete" />-->
     </button>
             <!--<input type="image" SRC="images/icons/delete.png" value="<?php echo validate(encryptfe($row['uuid']),'hu')?>" alt="Delete" name="Delete" title="Delete" />-->
 	</form>
@@ -130,7 +131,7 @@ $sort = "target, sortorder";
             <input type="hidden" name="esection" value="<?php echo validate($row['section'],'hd')?>" />
             <input type="hidden" name="esubsection" value="<?php echo validate($row['subsection'],'hd')?>" />
 	<button class="custombutton" type="submit" name="Add Article" value="New">
-            <img src="images/icons/detail.png" alt="Add Article" name="Add Article" title="Add Article" />
+	<?php new Icon("new") ?><!--            <img src="images/icons/detail.png" alt="Add Article" name="Add Article" title="Add Article" />-->
         </button>
         </form>
             <form method="post" name="view<?php echo validate(encryptfe($row['uuid']),'enc')?>" action="?">
@@ -144,7 +145,7 @@ $sort = "target, sortorder";
             <input type="hidden" name="subsection" value="<?php echo validate($row['subsection'],'hd')?>" />
             <?php } ?>
 	<button class="custombutton" type="submit">
-            <img src="images/icons/view.png" alt="View Page" name="View Page" title="View Page" />
+            <?php new Icon("view") ?><!--<img src="images/icons/view.png" alt="View Page" name="View Page" title="View Page" />-->
         </button>
             </form>
     </td>

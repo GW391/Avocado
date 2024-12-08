@@ -2,6 +2,20 @@
 
 //set up database connection
 
+if (isset($DatabaseUserNameE)){
+  $DatabaseUserName = new Decrypt($DatabaseUserNameE);
+}else{
+  $DatabaseUserNameE = new Encrypt($DatabaseUserName);
+  $SaveConfig = True;
+}
+
+if (isset($DatabasePasswordE)){
+  $DatabasePassword = new Decrypt($DatabasePasswordE);
+}else{
+  $DatabasePasswordE = new Encrypt($DatabasePassword);
+  $SaveConfig = True;
+}
+
 $con = mysqli_connect($DatabaseServerName . ":" . $DatabaseServerPort, $DatabaseAdminName, $DatabaseAdminPassword);
 
 // Create Database

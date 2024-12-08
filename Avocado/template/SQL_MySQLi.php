@@ -39,12 +39,17 @@ if (isset($limit)){
 //echo $query;
 global $con;
 try{
-    $result = mysqli_query($con, "$query"); //or die(logerror($die));
+    $result = mysqli_query($con, $query); //or die(logerror($die));
 }
 
 catch (mysqli_sql_exception $e) {
+    if(parameters('developer_mode') == '1'){
   echo "Error quering database: " . $e->getMessage();
   logerror($die);
+  }else{
+      echo "Something has gone wrong, please try again later";
+      logerror($die);
+  }
 }
 
 /*if (!$result){
@@ -62,8 +67,13 @@ try{
     mysqli_query($con,"INSERT INTO $db ($cols) VALUES ($values)"); // or die(logerror($die));
 }
 catch (mysqli_sql_exception $e) {
-  echo "Error Updating database: " . $e->getMessage();
+  if(parameters('developer_mode') == '1'){
+    echo "Error Updating database: " . $e->getMessage();
   logerror($die);
+  }else{
+      echo "Something has gone wrong, please try again later";
+      logerror($die);
+  }
 }
 return mysqli_insert_id($con);
 }
@@ -84,8 +94,13 @@ try{
     $result = mysqli_query($con,"$update"); // or die(logerror($die));
 }
 catch (mysqli_sql_exception $e) {
+      if(parameters('developer_mode') == '1'){
   echo "Error Updating database: " . $e->getMessage();
   logerror($die);
+    }else{
+      echo "Something has gone wrong, please try again later";
+      logerror($die);
+  }
 }
 }
 

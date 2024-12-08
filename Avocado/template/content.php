@@ -22,7 +22,7 @@ $die = "404 ...  " ;
 if (isset($_GET['Article'])){
     $where = "UUID = " . validate(decryptfe($_GET['Article']),'enc');
     $Limit = "1";
-    $Sort = null;
+    $sort = null;
     //echo "Article";
 }else{
 // check parameters

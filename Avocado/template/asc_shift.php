@@ -49,9 +49,9 @@ $ciphering = getCipher();
 //    echo "crypttext = " . $isnew;
 //    echo $isnew;
    if($isnew < 23){
- //  echo "23 or above not found, use old encryption";
-//   global $DataKey;
-//   $key = $DataKey;
+   echo "23 or above not found, use old encryption";
+   global $DataKey;
+   $key = $DataKey;
    $decrypttext = openssl_decrypt($crypttext, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
    }else{
       // which key has been used in the encryption

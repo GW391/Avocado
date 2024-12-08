@@ -1,3 +1,36 @@
+
+css/3colum_vertical_Menu/DefaultColours.php
+css/3colum_vertical_Menu/style.css
+css/Square_Menu/DefaultColours.php
+css/Square_Menu/DefaultMenuColours.php
+css/Top_right_Menu/DefaultColours.php
+css/Top_Right_Menu/DefaultColours.php
+css/Top_right_Menu/DefaultMenuColours.php
+css/Top_Right_Menu/DefaultMenuColours.php
+css/Top_right_Menu/menu.css
+css/Top_Right_Menu/menu.css
+css/Top_right_Menu/mobilemenu.css
+css/Top_Right_Menu/mobilemenu.css
+css/Top_right_Menu/style.css
+css/Top_Right_Menu/style.css
+System.php
+System/Bible_Gateway.php
+System/calendar/CompactListView.php
+System/calendar/List2View.php
+System/calendar/rssView.php
+System/calendar/update.php
+System/contact.php
+System/DownloadNews.php
+System/login.php
+System/login/register.php
+System/login/validate.php
+news.php -> System/news.php
+news/Mail.php
+news/SendMail.php
+template/rssCalendar.php
+template/rsspodcast.php
+
+
 bug fix - build 20240331 Patch 2 - 12-05-2024
  - /README.md
  - /template/default/SettingsData.php

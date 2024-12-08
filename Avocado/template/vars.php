@@ -1,10 +1,26 @@
 <?php
 
 $system = false;
+$varsloaded = True;
+
+//TODO: Paramatrise this array so it is customisable
+// selection of characters I don't want in the URL strings
+//this is an extra layer and not really needed as validate covers
+$badstringarray = ['%27',"'","(","!","%"];
+
+function str_contains_any(string $haystack, array $needles): bool
+{
+    return array_reduce($needles, fn($a, $n) => $a || str_contains($haystack, $n), false);
+}
 
 if (isset($_REQUEST["target"])){
 
     $target=validate($_REQUEST["target"],'h');
+    //drop target if badstringarray is in it
+    //this is an extra layer and not really needed as validate covers
+    if (str_contains_any($target, $badstringarray)) {
+        $target=404;
+    }
     if(isset($_SESSION["target"])){
             $_SESSION['ptarget'] = $_SESSION["target"];
     }
@@ -12,8 +28,13 @@ if (isset($_REQUEST["target"])){
 
 }
 
-if (isset($_REQUEST["section"])){
+if (isset($_REQUEST["section"]) && isset($target)){
 	$section=validate($_REQUEST["section"],'h');
+    //drop section if badstringarray is in it
+    //this is an extra layer and not really needed as validate covers
+        if (str_contains_any($section, $badstringarray)) {
+        $section=404;
+    }
             if(isset($_SESSION["section"])){
             $_SESSION['psection'] = $_SESSION["section"];
 
@@ -21,8 +42,13 @@ if (isset($_REQUEST["section"])){
                 $_SESSION["section"] = $section;
 }
 
-if (isset($_REQUEST["subsection"])){
+if (isset($_REQUEST["subsection"]) && isset($target) && isset($section)){
 	$subsection=validate($_REQUEST["subsection"],'h');
+    //drop subsection if badstringarray is in it
+    //this is an extra layer and not really needed as validate covers
+        if (str_contains_any($subsection, $badstringarray)) {
+        $subsection=404;
+    }
             if(isset($_SESSION["subsection"])){
             $_SESSION['psubsection'] = $_SESSION["subsection"];
 
@@ -41,7 +67,7 @@ switch ($param) {
         // input is HTML
 	$purifier = new HTMLPurifier();
 	$string = $purifier->purify($string);
-        $string = escape_string($string);
+    $string = escape_string($string);
         break;
     case "hd":
         // input is HTML - for display

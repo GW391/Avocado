@@ -59,7 +59,7 @@ function welcome($result, $Old){
     $row=fetch_array($result);
     //echo "count = $count";
  global $namea;
-     $namea = str_word_count(decrypt($row['PRNME']), 1);
+     $namea = str_word_count(New Decrypt($row['PRNME']), 1);
     $_SESSION['security'] = validate($row['PSY'],'hd');
     $_SESSION['securty_array'] = explode(" ", validate($row['PSY'],'hd'));
     $_SESSION['user'] = ucfirst($namea[0]);
@@ -195,8 +195,9 @@ include("./template/content.php");
             $HTTP_REFERER =validate($_SERVER['HTTP_REFERER'],'hd');
 $ref= explode("?",$HTTP_REFERER);
 		?>
-		<form method="post" action="?target=login" spellcheck="false">
+		<form method="post" action="?target=login" spellcheck="false" onsubmit="pleaseWait()">
                     <div id="loginbox">
+                        <div id="loginInnerBox">
         <input type="hidden" name="ref" value="<?php echo $ref[1]; ?>">
 		<table class="loginbox">
 		<tr>
@@ -244,6 +245,9 @@ if(parameters('SSL')){
                 }
 ?>
                 <p class="small"><a href="?target=login&amp;section=retrieve">Forgotten Username or Password</a></p>
+                </div>
+<div id="wait"> </div>
+<div id="waitIcon"  hidden><?php new Icon("pleaseWait")?></div>
 </div>
  		<?php
  
@@ -267,7 +271,8 @@ echo ' You are currently logged in and do not need to again ';
     }
 ?>
                 <div id="loginbox">
-<form method="post" action="?target=login" spellcheck="false">
+                    <div id="loginInnerBox">
+<form method="post" action="?target=login" spellcheck="false" onsubmit="pleaseWait()">
 
 <input type="hidden" name="ref" value="<?php if (isset($ref[1])){ echo $ref[1];} ?>">
 <table class="loginbox">
@@ -312,8 +317,20 @@ if(parameters('SSL')){
 
 <p class="small"><a href="?target=login&amp;section=retrieve">Forgotten Username or Password</a></p>
 
-            </div>
+</div>
+<div id="wait"> </div>
+<div id="waitIcon"  hidden><?php new Icon("pleaseWait")?></div>
+</div>
 <?php
 }
 }
 ?>
+<script>
+function pleaseWait() {
+
+document.getElementById("wait").innerHTML = 'Please wait while we check your login details';
+loginInnerBox.style.display = 'none';
+// waitIcon.style.display = 'block';
+
+}
+</script>

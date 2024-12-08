@@ -23,13 +23,25 @@ date_default_timezone_set('Europe/London');
 $time = 3600;
 $ses = 'Session';
 $httpolny = true;
-session_set_cookie_params($time, $path=null, $domain=null, $secure=true, $httponly=true);
+if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on"){
+    //Use secure cookies when SSL is on
+    session_set_cookie_params($time, $path=null, $domain=$_SERVER['HTTP_HOST'], $secure=true, $httponly=true);
+}else{
+    //dont use secure cookies when SSL is not on
+    session_set_cookie_params($time, $path=null, $domain=$_SERVER['HTTP_HOST'], $secure=false, $httponly=true);
+}
 session_name($ses);
 session_start();
 
 // Reset the expiration time upon page load
 if (isset($_COOKIE[$ses])){
-	setcookie($ses, $_COOKIE[$ses], time() + $time, "/");
+	if (isset($_COOKIE[$ses])){
+    if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on"){
+	    setcookie($ses, $_COOKIE[$ses], time() + $time, "/", $domain=$_SERVER['HTTP_HOST'], $secure=true, $httponly=true);
+    }else{
+        setcookie($ses, $_COOKIE[$ses], time() + $time, "/", $domain=$_SERVER['HTTP_HOST'], $secure=false, $httponly=true);
+    }
+}
 }
 ?>
 
@@ -93,7 +105,7 @@ require_once 'template/asc_shift.php';
             include("System/mp3.php");
             break;
         case "news":
-            include("System/news.php");
+            include("System/DownloadNews.php");
             break;
         default:
             echo "Sorry content type incorrect";

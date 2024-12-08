@@ -129,7 +129,11 @@ color: <?php echo $BackgroundColour ?>;
 
 .small {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    color: #687864;
+    color: #283824;
+}
+div#small ul li{
+    font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
+    color: #283824;
 }
 
 a.small {
@@ -139,7 +143,7 @@ a.small {
 
 p.small {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    color: #687864;
+    color: #283824;
 }
 
 h2 {

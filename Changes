@@ -1,3 +1,31 @@
+Email update - Version 1.24.2 - ??-12-2024
+   - square Menu now using colours from DB    
+    - improved SQL Injection protection
+        a bug forced the upgrade procedure to run when an SQL injection was attempted. this no longer happens
+        activly block some special charactes in target, section and subsection URL entries.
+    - new icons
+    - icon management
+    - Minor podcast update
+        Set Podcast edit security
+        Use PodcastContact Email, if not empty for contact email
+    - news letter updated to use PHPMailer instead of mail
+    - news letter sign-up updated to use PHPMailer instead of mail
+    - news now stored in database
+    - contact us form now using PHPMailer instead of mail
+    - user registration useing PHPMailer instead of mail
+    - Calander RSS Feed
+    - New Settings added
+        EditPodcastSecurity
+        SettingsSecurity
+        SMTPHost
+        SMTPPort
+        NewsFromUsername
+        NewsFromPassword
+        PodcastContactEmail
+        ContactFromEmail
+        ContactFromUsername
+        ContactFromPassword
+
 bug fix - build 20240331 Patch 2 - 12-05-2024
     - bug fix in install process
 
@@ -7,7 +35,7 @@ bug fix and new theme - build 20240331 - 31-03-2024
     - fixed bug in decrypting old encrypted data
     - added new theme - Top_right_Menu
     - enabled menu colours to be chosen in parametrs (only new theme)
-    - move site header to paramater : note will dete current header
+    - move site header to paramater : note will delete current header
 
 Podcast - Version 1.24.1 - 29-01-2024
     - Minor podcast changes bugfixes and updates

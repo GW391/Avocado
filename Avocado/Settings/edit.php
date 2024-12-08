@@ -46,8 +46,16 @@ $result = SQL($select, $From, $die, $Where, null, null, null);
 
 
 while ($row = fetch_array($result)){
-echo "Rows " . $row['num_rows'];
+    $num_rows = validate($row['num_rows'],'hd');
+    echo "Rows " . $num_rows;
+
+if (strtoupper($num_rows) == 'P'){
+    ?>
+    <input type="hidden" name="num_rows" value="<?php echo $num_rows ?>">
+<?php }
+
 ?>
+
     <tr>
     <td>
         <input type="hidden" value="<?php echo validate(encryptfe($row['UUID']),'hd') ?>" name="ID" readonly />
@@ -69,6 +77,12 @@ echo "Rows " . $row['num_rows'];
         <input type="text" size="<?php echo validate($row['cols'],'n') ?>" name="value" value="<?php echo validate($row['value'],'hd') ?>" />
 <?php
         break;
+    case 'P':
+        ?>
+        <input type="password" size="<?php echo validate($row['cols'],'n') ?>" name="value" value="<?php echo new Decrypt(validate($row['value'],'hd')) ?>" />
+<?php
+        break;
+
     case 'D':
 //((!preg_match("/_thm/i",$item))
         if (preg_match("/parameter/i", $row['Options'])){
@@ -222,11 +236,7 @@ echo "</select>";
 }
         ?>
 
-
-        </td>
-
-        <td>
-            <?php echo validate($row['help'],'hd') ?>
+<div class='small'><?php echo validate($row['help'],'hd') ?></div>
         </td>
     </tr>
 <?php

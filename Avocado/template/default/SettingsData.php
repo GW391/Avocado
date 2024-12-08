@@ -19,7 +19,7 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
     (11,'SSL','1','',NULL,'',0,'B',0,'Can you use SSL','','Security'),(12,'SSLURL','','',NULL,'',0,'1',50,'If your SSL URL is not the https version of the primary URL, enter the SSL URL here., please enclude https:// infront of the URL.','','Security'),
     (13,'ArticleEditor','Editor','',NULL,'',0,'D',20,'Who has permission to edit Artiles.\nOnly enter a single security group','parameter:Security','Security'),
     (14,'ArticleApproval','Editor','',NULL,'',0,'D',20,'Assign who can approve / activate articles','parameter:Security','Security'),
-    (16,'ContactEmail','','',NULL,'',0,'1',50,'Enter the email address for the Contact Us form','','General'),
+    (16,'ContactEmail','','',NULL,'',0,'1',50,'Enter the email address for the Contact Us form','','General Contact email'),
     (17,'Header','<div class=\"logo\">
 <a href=\"?\"><img src=\"images/logo_mobile.png\" height=\"50\" hspace=\"0\" vspace=\"0\" border=\"0\" alt=\":Organisation Logo\" title=\":Organisation Logo\" /></a>
 </div>
@@ -128,8 +128,21 @@ Please click the link below to reset your account details
 (100, 'TextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Main Body Text Colour', NULL, 'Style'),
 (101, 'H1TextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Main Body Text Colour', NULL, 'Style'),
 (102, 'AlertTopBackgroundColour', '#8FC1E3', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style'),
-(103, 'AlertTopTextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style')
-
+(103, 'AlertTopTextColour', '#000000', NULL, NULL, NULL, '0', 'C', '50', 'Select Alert Top Background Colour', NULL, 'Style'),
+(104, 'EditPodcastSecurity','Editor','',NULL,'',0,'D',20,'Assign who can edit Podcasts','parameter:Security','Podcast Security'),
+(105, 'SettingsSecurity','Admin','',NULL,'',0,'D',20,'Assign who can modify Settings','parameter:Security','Security'),
+(106, 'SMTPHost','','',NULL,'',0,'1',50,'Enter SMTP host','null','email'),
+(107, 'SMTPPort','587','',NULL,'',0,'1',50,'Enter TCP port to connect to; use 587 if you have set \'SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS\' otherwise use 465','null','email'),
+(108, 'NewsFromUsername','','',NULL,'',0,'1',50,'Username for News from email address','null','email news Security'),
+(109, 'NewsFromPassword','','',NULL,'',0,'P',50,'Password for News From email address','null','news email Security'),
+(110, 'PodcastContactEmail','','',NULL,'',0,'1',50,'email for podcast contact, leave blank to use ContactEmail','null','podcast email'),
+(111, 'News_Folder','','',NULL,'',0,'1',50,'Enter a value here to overrise the default forlder for postacsts.  The default is news.','','news'),
+(112, 'News_Limit', '4', NULL, NULL, NULL, '0', 'N', '4', 'Number of Pocast Episodes to diaply, this limit is not applied when another limit / search is used.', NULL, 'news'),
+(113, 'Junk_Check_Tolerance', '1', NULL, NULL, NULL, '0', 'N', '4', 'Number of junk Words allowed in cotact emials ', NULL, 'Security Contact email'),
+(114, 'Spam_Score_Words', '    \r\n   \r\n  \r\nhttps\r\n!\r\nearning', NULL, NULL, NULL, '0', 'N', '4', 'Words to add to Spam Score for contact emial, each word or phrase on a new line will will add 1 to the Spam Score.', NULL, 'Security Contact email'),
+(115, 'SpamValue', '50', NULL, NULL, NULL, '0', 'N', '4', 'Treat as SPAM any Contact message who\'s SPAM Value reaches the SpamValue', NULL, 'Security Contact email'),
+(116,'ContactFromEmail','','',NULL,'',0,'1',50,'Enter the From email address for the Contact Us form','','General Contact email'),
+(117,'ContactFromPassword','','',NULL,'',0,'P',50,'Enter the Password for the From email address for the Contact Us form','','General Contact email Security'),
+(118,'ContactFromUsername','','',NULL,'',0,'1',50,'Enter the Username for the From email address for the Contact Us form','','General Contact email Security')
 ";
-
 ?>

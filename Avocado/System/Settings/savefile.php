@@ -2,7 +2,28 @@
 $system = true;
 
 //check security
-if(preg_match("/".'editor'."/i", $_SESSION['security'])){
+
+if (isset($_POST['type'])){
+    if(strlen(trim($_POST['type'])) != 0){
+        $type = validate($_POST['type'],'h');
+    }
+}
+
+// set securoty type
+switch ($type){
+    case "news":
+        $SecurityType = 'SendNewsSecurity';
+        break;
+    default:
+        $SecurityType = 'Edit' . ucfirst($type) . 'Security';
+        break;
+}
+
+
+$security = new securityCheck(parameters($SecurityType));
+if ($security->output)
+{
+//if(preg_match("/".'editor'."/i", $_SESSION['security'])){
 
 if(isset($_POST['UUID'])){
     // editing record
@@ -15,34 +36,34 @@ if(isset($_POST['UUID'])){
  // adding new record
 }
 if (isset($_FILES["file"]["name"]) and strlen(trim($_FILES["file"]["name"])) != 0){
-if (upload_check()){
-
-$file_name = validate($_FILES["file"]["name"],'h');
-$file_type = validate($_FILES["file"]["type"],'h');
-//$file_type = validate($_POST['FileType'],'h');
-$Size = validate($_FILES["file"]["size"],'n') / 1024;
-}}
+    if (upload_check()){
+        $file_name = validate($_FILES["file"]["name"],'h');
+        $file_type = validate($_FILES["file"]["type"],'h');
+        $Size = validate($_FILES["file"]["size"],'n') / 1024;
+    }
+}
 
 if (isset($_POST['type'])){
     if(strlen(trim($_POST['type'])) != 0){
-    $type = validate($_POST['type'],'h');
-}}
-
+        $type = validate($_POST['type'],'h');
+    }
+}
 if (isset($_POST['name'])){
     if(strlen(trim($_POST['name'])) != 0){
-$name = validate($_POST['name'],'h');
-echo "Name: " . $name ;
-}}
-
+        $name = validate($_POST['name'],'h');
+        echo "Name: " . $name ;
+    }
+}
 if (isset($_POST['Meta_1'])){
     if(strlen(trim($_POST['Meta_1'])) != 0){
-$Meta_1 = validate($_POST['Meta_1'],'h');
-}}
-
+        $Meta_1 = validate($_POST['Meta_1'],'h');
+    }
+}
 if (isset($_POST['Meta_2'])){
     if(strlen(trim($_POST['Meta_2'])) != 0){
-$Meta_2 = validate($_POST['Meta_2'],'h');
-}}
+        $Meta_2 = validate($_POST['Meta_2'],'h');
+    }
+}
 if (isset($_POST['Meta_3'])){
     if(strlen(trim($_POST['Meta_3'])) != 0){
 $Meta_3 = validate($_POST['Meta_3'],'h');
@@ -364,7 +385,6 @@ if (!isset ($filetime) || strlen(trim($filetime)) == 0){
 
 // end security check
 }else{
-
 echo parameters('PermissionsMessage');
 }
 ?> 

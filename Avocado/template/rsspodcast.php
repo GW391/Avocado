@@ -20,14 +20,21 @@ if (!isset($check_paramater) || strlen($check_paramater) == 0){
       <copyright>&#169; <?php echo Date("Y") . " " . parameters('Organisation'); ?></copyright>
       <?php // TODO: need to paramertarise image file ?>
       <image>
-	<url><?php echo $URL; ?>/images/albumart.png</url>
+	<url><?php echo $URL; ?>/images/albumart.jpg</url>
 	<width>144</width>
 	<height>130</height>
       <title><?php echo parameters('Podcast_Title'); ?></title>
       <link><?php echo $URL ?></link>
       </image>
 <?php //itunes specific tags ?>
-
+<itunes:owner>
+<?php // set podcast contact email and use contactemail if podcast email does not exist ?>
+<?php if (null != (parameters('PodcastContactEmail')) && strlen(trim(parameters('PodcastContactEmail'))) != 0){?>
+<itunes:email><?php echo parameters('ContactEmail'); ?></itunes:email>
+    <?php }else{?>
+<itunes:email><?php echo parameters('ContactEmail'); ?></itunes:email>
+<?php }?>
+</itunes:owner>
 <?php
     // Get Podcast Category's from parameters
         $category = nl2br(parameters('Podcast_Category'));
@@ -48,9 +55,9 @@ if (!isset($check_paramater) || strlen($check_paramater) == 0){
 	<itunes:summary><?php echo parameters('Podcast_Title'); ?></itunes:summary>
 	<itunes:author><?php echo parameters('Organisation'); ?></itunes:author>
 <itunes:image 
-	href="<?php echo $URL; ?>/images/albumartFull.png"
+	href="<?php echo $URL; ?>/images/albumartFull.jpg"
 />
-<itunes:explicit><?php if (parameters('Podcast_Explicit') == 0 or parameters('Podcast_Explicit') == null ){echo 'false';}else{echo 'true';}?> </itunes:explicit>
+<itunes:explicit><?php if (parameters('Podcast_Explicit') == 0 or parameters('Podcast_Explicit') == null){echo 'false';}else{echo 'true';}?></itunes:explicit>
 <?php
 
 // check if podcasts can be located in Database

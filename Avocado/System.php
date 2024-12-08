@@ -64,6 +64,18 @@ echo "Active Podcast: " . num_rows($PodcastActiveResult) . "<br>";
 echo "Inactive Podcast: " . num_rows($PodcastInactiveResult) . "<br></div>";
 
 $Select = "UUID";
+$From = "tblattachment";
+$die = "Sorry something went wrong, please try again later";
+$where = "type = 'news' && deleted != 1";
+$NewsletterActiveResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+$where = "type = 'news' && deleted = 1";
+$NewsletterInactiveResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+
+echo "<div class='Settings'><h2>Newsletters </h2>";
+echo "Active Newsletters: " . num_rows($NewsletterActiveResult) . "<br>";
+echo "Inactive Newsletteds: " . num_rows($NewsletterInactiveResult) . "<br></div>";
+
+$Select = "UUID";
 $From = "tblpdu";
 $die = "Sorry something went wrong, please try again later";
 $where = "Deleted != 1 && PVD = 1";
@@ -78,7 +90,20 @@ echo "Active Users: " . num_rows($UsersActiveResult) . "<br>";
 echo "Deleted Users: " . num_rows($UsersDeletedResult) . "<br>";
 echo "Unvarified Users: " . num_rows($UsersUnvarifiedResult) . "<br></div>";
 
+$Select = "idtblnewsletter";
+$From = "tblnewsletter";
+$die = "Sorry something went wrong, please try again later";
+$where = "Deleted != 1 && PVD = 1";
+$SubscribersActiveResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+$where = "Deleted = 1";
+$SubscribersDeletedResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+$where = "Deleted != 1 && PVD != 1";
+$SubscribersUnvarifiedResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 
+echo "<div class='Settings'><h2>News Subscribers </h2>";
+echo "Active Subscribers: " . num_rows($SubscribersActiveResult) . "<br>";
+echo "Deleted Subscribers: " . num_rows($SubscribersDeletedResult) . "<br>";
+echo "Unvarified Subscribers: " . num_rows($SubscribersUnvarifiedResult) . "<br></div>";
 
 ?>
 <?php

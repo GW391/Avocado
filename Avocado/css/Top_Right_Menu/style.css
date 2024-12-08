@@ -68,10 +68,22 @@ position: absolute;
 padding: 0;
 text-align: justify;
 width: 100%;
-top: 60px;
+top: 85px;
 left: 0%;
 clear: both;
 }
+
+
+div#small ul li{
+font-size: 8pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+}
+
 @media only screen and (min-width: 1800px) {  
 div#maincontent {
 top: 60px;
@@ -351,6 +363,17 @@ font-variant: normal;
 text-transform: none;
 text-decoration: none;
 }
+
+.small .ul .li{
+font-size: 8pt;
+font-style: normal;
+line-height: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+}
+
 
 h2 {
 font-size: 16pt;

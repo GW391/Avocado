@@ -36,11 +36,15 @@ $DataBaseName = $DatabaseName;
   mysqli_query($con, $sql_pcalder);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
-    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
+      echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+      echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
     exit;
 }else{
-    echo "Caledar Table Crated <br />";
+  if(parameters('developer_mode') == '1'){
+    echo "Calendar Table Crated <br />";
+  }
 }
 
 // Create Settings Table
@@ -65,11 +69,15 @@ $sql_tblsettings="CREATE TABLE IF NOT EXISTS $DataBaseName.tblsettings(
   mysqli_query($con, $sql_tblsettings);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
-    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
+      echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+      echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
     exit;
 }else{
+  if(parameters('developer_mode') == '1'){
     echo "Settings Table Crated <br />";
+  }
 }
  // Create Content Table
 
@@ -96,11 +104,15 @@ $sql_tblsettings="CREATE TABLE IF NOT EXISTS $DataBaseName.tblsettings(
   mysqli_query($con, $sql_tblcontent);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
-    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
+      echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+      echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
     exit;
 }else{
+  if(parameters('developer_mode') == '1'){
     echo "Content Table Crated <br />";
+  }
 }
 
 // Create Menu Table
@@ -134,11 +146,15 @@ $sql_tblMenu="CREATE TABLE IF NOT EXISTS $DataBaseName.tblmenu (
 mysqli_query($con, $sql_tblMenu);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
     exit;
 }else{
+  if(parameters('developer_mode') == '1'){
     echo "Menu Table Crated <br />";
+  }
 }
 
 
@@ -165,11 +181,15 @@ $sql_tblUsers="CREATE TABLE IF NOT EXISTS $DataBaseName.tblpdu (
 mysqli_query($con, $sql_tblUsers);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
     exit;
 }else{
+  if(parameters('developer_mode') == '1'){
     echo "Users Table Crated <br />";
+  }
 }
 
 $sql_tblnewsletter = "CREATE TABLE IF NOT EXISTS $DataBaseName.tblnewsletter (
@@ -187,11 +207,15 @@ $sql_tblnewsletter = "CREATE TABLE IF NOT EXISTS $DataBaseName.tblnewsletter (
 mysqli_query($con, $sql_tblnewsletter);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
     exit;
 }else{
+  if(parameters('developer_mode') == '1'){
     echo "News Letter Subscriber list Table Crated <br />";
+  }
 }
 
 // Create Error Log Table
@@ -212,11 +236,15 @@ $sql_tblErrorLog="CREATE TABLE IF NOT EXISTS $DataBaseName.tblelg (
 mysqli_query($con, $sql_tblErrorLog);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
     exit;
 }else{
+  if(parameters('developer_mode') == '1'){
     echo "Error Log Table Crated <br />";
+  }
 }
 
 // Create Attachemnts table
@@ -248,10 +276,14 @@ $sql_tblattachment="CREATE TABLE IF NOT EXISTS $DataBaseName.tblattachment (
 mysqli_query($con, $sql_tblattachment);
       if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
     exit;
 }else{
+  if(parameters('developer_mode') == '1'){
     echo "Attachment Table Crated <br />";
+  }
 }
 ?>

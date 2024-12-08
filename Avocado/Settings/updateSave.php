@@ -19,6 +19,11 @@ $ID = validate(decryptfe($_POST['ID']),'h');
  $value = validate($_POST['value'],'h');
     }
 
+    if (isset($_POST['num_rows']) and (strtoupper(validate($_POST['num_rows'],'hd')) == 'P')){
+        $value = new Encrypt($value);
+    }
+
+
 $WhoCreate = validate($_SESSION['puid'],'h');
 $DateUpdate = Date('Ymd');
 $WhoUpdate = validate($_SESSION['puid'],'h');

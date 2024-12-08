@@ -1,5 +1,18 @@
 <?php
 
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//import PHPMailer files
+//echo getcwd();
+require 'template/PHPMailer/src/Exception.php';
+require 'template/PHPMailer/src/PHPMailer.php';
+require 'template/PHPMailer/src/SMTP.php';
+
+
 function displayform() {
     echo "<div id=\"editbox\">";
 	echo "<form method=\"post\" action=\"?target=news&section=subscribe\">";
@@ -57,7 +70,8 @@ echo "<tr>";
 	echo "</table>";
 
 	echo "<input type=\"submit\" name=\"Submit\" value=\"Subscribe\">";
-	echo "<input type=\"submit\" name=\"Submit\" value=\"Unsubscribe\">";
+	// changeing encryption breaks this unsubscribe method. uses must now unsubscribe only from the email link.
+	// echo "<input type=\"submit\" name=\"Submit\" value=\"Unsubscribe\">";
 
 	echo "</form>";
         echo "</div>";
@@ -66,11 +80,11 @@ echo "<tr>";
 if (isset($shiftloaded)){
 	if ($shiftloaded){
 	}else{
-                require ("template/config.php");
+		require ("template/config.php");
 		require ("template/asc_shift.php");
 	}
 }else{
-        require ("template/config.php");
+	require ("template/config.php");
 	require ("template/asc_shift.php");
 }
 
@@ -139,8 +153,8 @@ if (isset($FAIL)){
 }else{
 if ($_POST['Submit'] == 'Subscribe'){
   
-    $RNn = encrypt(validate($_POST['RName'],'enc'));
-	$EMn = encrypt(validate(strtolower($_POST['Email']), 'enc'));
+    $RNn = new Encrypt(validate($_POST['RName'],'enc'));
+	$EMn = new Encrypt(validate(strtolower($_POST['Email']), 'enc'));
 	$Date = date("Y-m-d");
     $GData = '1';
     $db = 'tblnewsletter';
@@ -163,11 +177,57 @@ $subject = parameters('NewsSubscribeConformationSubject');
 $message = str_ireplace(":NAME",validate($_POST['RName'],'hd'), parameters('NewsSubscriptionDefaultMessage'));
 $message .= "\n\r$curURL?target=news/confirm&confirm=$id \n\r";
 
-    mail($email, "Subject: $subject", 
-    $message, "From: " . parameters('NewsFromEmail'));
-	echo "Thank you for subscribing, an email conformation will arrive shortly, <br /> before you receve our news letters please follow the instructions in the email";
+        //TODO check if parameters exist, if not revert to default paramters
+        $from = parameters('NewsFromEmail');                //Get from address from parameters
+        $Username = parameters('NewsFromUsername');         //Get SMTP username from paramters
+        $Password = parameters('NewsFromPassword');         //SMTP password
+
+		$mail = new PHPMailer(true);
+
+		//Server settings
+		require 'template/emailServerSettings.php';
+
+    //Recipients
+    $mail->setFrom($from);      //set from address
+    $mail->addReplyTo($from);   //set reply to address, same as from TODO: Get reply to from paramters instead of using from address
+
+    //Content
+    if (null != (parameters('TinyMCEKey')) && strlen(trim(parameters('TinyMCEKey'))) != 0){
+        $mail->isHTML(true);                    //Set email format to HTML
+    }else
+        $mail->isHTML(false);                    //Set email format to not HTML
+    }
+    $mail->Subject = $subject;
+
+		echo "<center>";
+	echo "<h2>News - Subscribe</h2>";
+//	echo "Failed to sign up " . $FAIL;
+	echo "</center>";
+
+	try {
+
+    $email = decrypt($EMn);
+	$name = decrypt($RNn);
+    $mail->addAddress($email, $name);     //Add a recipient
+
+    // Body is currently text only so no need for AltBody.  TODO: Support HTML body and AltBody,
+    // probably should use msgHTML instead.
+    $mail->Body    = $message;
+ //   $mail->AltBody = $updatedmessage;
+
+    $mail->send();
+//    echo 'Message has been sent';
+    			echo "Thank you for subscribing, an email conformation will arrive shortly, <br /> before you receve our news letters please follow the instructions in the email";
+
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+	}
+
+//    mail($email, "Subject: $subject",
+//    $message, "From: " . parameters('NewsFromEmail'));
+//	echo "Thank you for subscribing, an email conformation will arrive shortly, <br /> before you receve our news letters please follow the instructions in the email";
 }
-}
+//}
 } elseif (isset($_POST['Submit']) && $_POST['Submit'] == 'Unsubscribe'){
 
 $EMn = encrypt(validate(strtolower($_POST['Email']), 'enc'));
@@ -216,10 +276,9 @@ SQLU($update, $set, $where, $limit, $die);
 
 echo $ID . " Unsubscribed";
 
-}
-
-else
-{
+}else{
+	// dispaly the form
+//	displayform();
 ?>
 
 
@@ -272,6 +331,6 @@ I agree that my <a href="?target=login&amp;section=data" target="_child">data</a
 
 }
 }else{
-  echo "User subscription is not allowed";
+  echo "<p>User subscription is not allowed</p>";
 }
 ?>

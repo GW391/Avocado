@@ -4,16 +4,23 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 08-Feb-2020, 21:44:50
     Author     : Gregor
 */
 ?>
+
+  <?php $BackgroundColour = validate(parameters('BackgroundColour'),'hd'); //#F7F9FB;?>
+  <?php $TextColour = validate(parameters('TextColour'),'hd'); ?>
+  <?php $H1TextColour = validate(parameters('H1TextColour'),'hd'); //#000000 ?>
+  <?php $AlertTopBackgroundColour = validate(parameters('AlertTopBackgroundColour'),'hd'); //#8FC1E3;?>
+  <?php $AlertTopTextColour = validate(parameters('AlertTopTextColour'),'hd'); //#8FC1E3;?>
+
 <style>
 
 /*  set colours & Fonts */
 body {
-    background-color: #F7F9FB;
+    background-color: <?php echo $BackgroundColour ?>;
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
 }
 
@@ -22,11 +29,11 @@ table {
 }
 
 .header {
-            background-color: #F7F9FB;
+            background-color: <?php echo $BackgroundColour ?>;
 }
 .header h1 {
     font: bold <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    color: #31708E;
+    color: <?php echo $H1TextColour ?>;
 }
 
 div#breadcrumbs {
@@ -35,22 +42,22 @@ div#breadcrumbs {
 
 div#maincontent {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    background-color: #F7F9FB;
+    background-color: <?php echo $BackgroundColour ?>;
 }
 
 div#footer {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    background-color: #F7F9FB;
-    color: #000000;
+    background-color: <?php echo $BackgroundColour ?>;
+    color: <?php echo $TextColour ?>;
 }
 
 .loginbox table {
-    background-color: #F7F9FB;
+    background-color: <?php echo $BackgroundColour ?>;
     color: #8FC183;
 }
 
 div#loginbox {
-    background: #F7F9FB;
+    background: <?php echo $BackgroundColour ?>;
     border-color: #5085A5;
 }
 
@@ -75,11 +82,11 @@ div#editbox input[type=submit]:hover {
   background-color: #8FC1E3;
 }
 div#editbox textarea {
-    
+
 }
 div#edit a {
     border-color: #5085A5;
-    background: #F7F9FB;
+    background: <?php echo $BackgroundColour ?>;
 }
 div#edit a:hover {
    background: #8FC1E3;
@@ -87,25 +94,25 @@ div#edit a:hover {
 }
 
 div#editbox textarea:focus {
-  background-color: #F7F9FB;
+  background-color: <?php echo $BackgroundColour ?>;
 }
 
 p {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    color: #000000;
+    color: <?php echo $TextColour ?>;
 }
 
 li {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    color: #000000;
+    color: <?php echo $TextColour ?>;
 }
 ul {
 font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-color: #000000;
+color: <?php echo $TextColour ?>;
 }
 a:hover span {
 background: #5085A5;
-color: #F7F9FB;
+color: <?php echo $BackgroundColour ?>;
 border-color: #687864;
 }
 a.link {
@@ -117,12 +124,16 @@ a.visited {
     color: #8FC1E3;
 }
 a.hover {
-color: #F7F9FB;
+color: <?php echo $BackgroundColour ?>;
 }
 
 .small {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    color: #687864;
+    color: #283824;
+}
+div#small ul li{
+    font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
+    color: #283824;
 }
 
 a.small {
@@ -132,7 +143,7 @@ a.small {
 
 p.small {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    color: #687864;
+    color: #283824;
 }
 
 h2 {
@@ -141,37 +152,37 @@ h2 {
 
 div#alerts .txt {
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
-    background-color: #8FC1E3;
-    color: #000000;
+    background-color: <?php echo $AlertTopBackgroundColour ?>;
+    color: <?php echo $TextColour ?>;
     border-color: #5085A5;
 }
 
 .alerts .top {
-    background: #8FC1E3;
-    color: #000000;
+    background: <?php echo $AlertTopBackgroundColour ?>;
+    color: <?php echo $AlertTopTextColour ?>;
 }
 .alerts .top a {
-    color: #F7F9FB;
+    color: <?php echo $BackgroundColour ?>;
 }
 
 .alerts .top a:hover {
-    color: #F7F9FB;
+    color: <?php echo $BackgroundColour ?>;
 }
 
 #article{
-    background-color: #F7F9FB;
+    background-color: <?php echo $BackgroundColour ?>;
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
 }
 
 #articlenarrow{
-    background-color: #F7F9FB;
+    background-color: <?php echo $BackgroundColour ?>;
     border-bottom-color: #687864;
 }
 
 div#inactive{
         float: left;
     	background-color: #eeeeee;
-	color: #3C578C;
+        color: #3C578C;
         font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
         border-bottom-color: #687864;
 }
@@ -179,18 +190,18 @@ div#inactive{
 div#inactivenarrow{
         float: left;
     	background-color: #eeeeee;
-	color: #3C578C;
+        color: #3C578C;
         font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
         border-bottom-color: #687864;
 }
 
 #article p{
-    background-color: #F7F9FB;
+    background-color: <?php echo $BackgroundColour ?>;
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
 }
 
 #article p{
-    background-color: #F7F9FB;
+    background-color: <?php echo $BackgroundColour ?>;
     font-family: <?php echo validate(parameters('MainFont'),'hd'); ?>;
 }
 
@@ -205,31 +216,31 @@ div#inactivenarrow{
 }
 
 .content-lb{
-	background-color: #F7F9FB; /*background color of content*/
-	color: #000; /*text color of content*/
+	background-color: <?php echo $BackgroundColour ?>; /*background color of content*/
+	color: <?php echo $TextColour ?>; /*text color of content*/
 	border-color: #687864; /*border color*/
 }
 .content-db{
-	background-color: #F7F9FB; /*background color of content*/
-	color: #000; /*text color of content*/
+	background-color: <?php echo $BackgroundColour ?>; /*background color of content*/
+	color: <?php echo $TextColour ?>; /*text color of content*/
 	border-color: #687864; /*border color*/
 }
 
 #highlight tr:hover{
-	background-color: #8FC1E3;
+	background-color: <?php echo $AlertTopBackgroundColour ?>;
 }
 
 .custombutton {
-    
+
 }
 
 img {
-    
+
 }
 
 .container {
-  color: #F7F9FB;
-  background-color: #F7F9FB;
+  color: <?php echo $BackgroundColour ?>;
+  background-color: <?php echo $BackgroundColour ?>;
 }
 
 .centered {

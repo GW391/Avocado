@@ -25,17 +25,21 @@ $ses = 'Session';
 $httpolny = true;
 if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on"){
     //Use secure cookies when SSL is on
-    session_set_cookie_params($time, $path=null, $domain=null, $secure=true, $httponly=true);
+    session_set_cookie_params($time, $path=null, $domain=$_SERVER['HTTP_HOST'], $secure=true, $httponly=true);
 }else{
     //dont use secure cookies when SSL is not on
-    session_set_cookie_params($time, $path=null, $domain=null, $secure=false, $httponly=true);
+    session_set_cookie_params($time, $path=null, $domain=$_SERVER['HTTP_HOST'], $secure=false, $httponly=true);
 }
 session_name($ses);
 session_start();
 
 // Reset the expiration time upon page load
 if (isset($_COOKIE[$ses])){
-	setcookie($ses, $_COOKIE[$ses], time() + $time, "/");
+    if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on"){
+	    setcookie($ses, $_COOKIE[$ses], time() + $time, "/", $domain=$_SERVER['HTTP_HOST'], $secure=true, $httponly=true);
+    }else{
+        setcookie($ses, $_COOKIE[$ses], time() + $time, "/", $domain=$_SERVER['HTTP_HOST'], $secure=false, $httponly=true);
+    }
 }
 ?>
 
@@ -82,12 +86,14 @@ if (file_exists($filename)) {
 
 //echo "config loaded";
 
+require_once 'template/asc_shift.php';
 require_once 'template/hotsprings_'.$DatabaseType.'.php';
 //echo "databse loaded";
 require_once 'template/SQL_'.$DatabaseType.'.php';
+
 require_once 'template/vars.php';
 require_once 'template/errorlog.php';
-require_once 'template/asc_shift.php';
+
 
 //echo "templates loaded";
 ?>

@@ -7,16 +7,18 @@ image picker in editor
 style thumnail
 style editor
 skin/style uploader
-rss feed
+rss feed - What's new
 Enable editing series in Calendar
 pick podcast album art in settings
 pick default timezone in settings
 change settings UID to the Setting name
-News to DB
+Add Colour palet loader
 
 Completed:
-System parameteres (read only) - Completed
-Podcasts to DB - Complete
-editable Header - Complete
-colour chooser - new theme only
+News to DB - Completed - Version 1.24.2
+rss feed - Calander - Completed - Version 1.24.2
+System parameteres (read only) - Completed - Version 1.24.1
+Podcasts to DB - Complete - Pre Version 1.24.1
+editable Header - Complete - build 20240331 
+colour chooser - new theme only - build 20240331 
 
