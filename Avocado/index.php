@@ -65,9 +65,10 @@ if(isset($_SERVER['HTTP_REFERER'])){
 
 <?php
 
-//echo "//setup imports";
-
+//setup imports";
+// import HTML Purifier
 require_once 'template/library/HTMLPurifier.auto.php';
+// import main functions
 require_once 'template/functions.php';
 
 //echo "functions loaded";
@@ -86,12 +87,16 @@ if (file_exists($filename)) {
 
 //echo "config loaded";
 
+// import old encryption functions
 require_once 'template/asc_shift.php';
+// import SQL Connection functions
 require_once 'template/hotsprings_'.$DatabaseType.'.php';
 //echo "databse loaded";
+// Import SQL functions
 require_once 'template/SQL_'.$DatabaseType.'.php';
-
+// import functions for user input validation, and URL string processing
 require_once 'template/vars.php';
+// import funions for error logging
 require_once 'template/errorlog.php';
 
 
@@ -109,7 +114,7 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
 
 ?>
     <?php
-    // get parameters
+    // get parameters, and put into session variable / cookie
     if (!isset($_session['Organisation'])){
         $Organisation = parameters('Organisation');
         $_session['Organisation'] = $Organisation;
@@ -134,16 +139,6 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
     }
 
 ?>
-
-<?php
- // 
-
-//<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-//        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
- ?>
-			 
-
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -175,10 +170,6 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
       <?php } ?>
         </div>
     </div>
-
-    
-    
-
 
     <div id="footer">
     <?php // insert page footer 

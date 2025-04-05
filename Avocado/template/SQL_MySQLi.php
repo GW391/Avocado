@@ -36,6 +36,8 @@ if (isset($limit)){
 }
 //$query .= ";";
 
+
+
 //echo $query;
 global $con;
 try{
@@ -56,6 +58,10 @@ catch (mysqli_sql_exception $e) {
     $die .= sqlerror($con);
     logerror($die);
 }*/
+
+        //I have results unset vars no longer needed
+        unset($Select, $From, $die, $where, $Limit, $group, $sort, $query, $e);
+
 return $result;
 }
 
@@ -125,7 +131,7 @@ function num_rows($row) {
 
 function escape_string($string) {
     global $con;
-$result = mysqli_escape_string($con, $string);
+    $result = mysqli_escape_string($con, $string);
 return $result;
 }
 

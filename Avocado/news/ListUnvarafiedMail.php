@@ -17,11 +17,13 @@ if (isset($shiftloaded)){
 if(stripos($_SESSION['security'], parameters('SendNewsSecurity')) !== FALSE){
 // clear any open SQL
 //mysql_free_result($result);
-//echo "security cleared";
+// security cleared
+	// Select the data from the DB
 $Select = "Email, RName, Deleted, PVD, fails, data";
 $From = "tblnewsletter";
 $GROUP = null;
 $die = "Sorry there is a problem on this page please, try again later";
+// select only records that have not validated, or have been deleted.
 $where = "Deleted = 1 or (PVD is null or PVD = 0)";
 $Limit = null;
 $sort = null;
@@ -43,7 +45,7 @@ th {
 }
 
 #managerTable {
-    max-height: 300px;
+    max-height: 900px;
     overflow: auto;
 }
 </style>
@@ -59,6 +61,8 @@ th {
 	<th>Varified</th>
 	</tr>
 	<?php
+
+		// dispaly the deleted or unvarified subscribers
 while ($row = fetch_array($result)){
 		$Name = validate(decrypt($row['RName']),'hd');
 		$email = validate(decrypt($row['Email']),'hd');

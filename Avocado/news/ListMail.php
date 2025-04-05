@@ -12,16 +12,17 @@ if (isset($shiftloaded)){
 	require ("template/asc_shift.php");
 }
 
-//echo "33";
-// set security
+// Check security
 if(stripos($_SESSION['security'], parameters('SendNewsSecurity')) !== FALSE){
 // clear any open SQL
 //mysql_free_result($result);
-echo "security cleared";
+// security cleared
+	// Select the data from the DB
 $Select = "Email, RName, Deleted, PVD, fails, data, Test";
 $From = "tblnewsletter";
 $GROUP = null;
 $die = "Sorry there is a problem on this page please, try again later";
+// select only records that have validated, and not been deleted.
 $where = "Deleted = 0 AND PVD = 1";
 $Limit = null;
 $sort = null;
@@ -44,7 +45,7 @@ th {
 }
 
 #managerTable {
-    max-height: 300px;
+    max-height: 900px;
     overflow: auto;
 }
 </style>
@@ -60,6 +61,7 @@ th {
 	</tr>
 	<?php
 
+	// dispaly the subscribed users
 while ($row = fetch_array($result)){
 		$Name = validate(decrypt($row['RName']),'hd');
 		$email = validate(decrypt($row['Email']),'hd');
@@ -74,11 +76,6 @@ while ($row = fetch_array($result)){
 		echo "<td>" . validate($row['data'],'hd')  . "</td>";
 		echo "<td>" . validate($row['Test'],'hd')  . "</td>";
 		echo "</tr>";
-
-/*        $to = validate(decrypt($row['RName']),'hd') . "&lt;" . validate(decrypt($row['Email']),'hd') . "&gt;";
-        
-	echo $to;
-	echo "<br />";*/
 }
 }
 free_results($result);

@@ -167,6 +167,8 @@ if ($passwd == null){
     $PWn = null;
 }
     $creds = [$UNn, $PWn];
+    // I have creds, unset variables no longer needed.
+    unset($passwd, $SEASALT, $PWn, $UNn, $username, $password);
     return $creds;
 }
 

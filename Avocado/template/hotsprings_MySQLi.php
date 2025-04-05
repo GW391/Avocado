@@ -10,20 +10,26 @@ if (isset($DatabaseServerPort)){
 }
 //check if DB username and password are Encrypted, if not re-write the settings file with encrypted values.
 $SaveConfig = False;
+// if DB username is encrypted decrypt is for use
 if (isset($DatabaseUserNameE)){
   $DatabaseUserName = new Decrypt($DatabaseUserNameE);
 }else{
+  // if not encrypted encrypt it, and set system to re-write cinfig file.
   $DatabaseUserNameE = new Encrypt($DatabaseUserName);
   $SaveConfig = True;
 }
 
+// if DB Password is encrypted decrypt is for use
 if (isset($DatabasePasswordE)){
   $DatabasePassword = new Decrypt($DatabasePasswordE);
 }else{
+  // if not encrypted encrypt it, and set system to re-write cinfig file.
   $DatabasePasswordE = new Encrypt($DatabasePassword);
   $SaveConfig = True;
 }
 
+// if DB username or password was not encrypted, re-write the Config file with the encrypted
+// DB username and password
 if($SaveConfig){
   echo "It has been detected your config needs an update, updating now";
 
@@ -46,14 +52,16 @@ if($SaveConfig){
     $" . "Salt = \"" . $Salt . "\";
 ?>
 ";
+    // write config file
     file_put_contents($filename, $config);
+    //write backup config file
     file_put_contents($backupFile, $config);
 }
 
-
+// try to connect to Database
 $con = mysqli_connect($DatabaseServerName, $DatabaseUserName, $DatabasePassword, $DatabaseName);
-//$this->con = new mysqli( $this->$DatabaseServerName, $this->$DatabaseUserName, $this->$DatabasePassword, $this->db_name );
 
+// cleanly fail if database is not connected
 if (!$con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
@@ -65,7 +73,5 @@ if (!$con)
   {
   die(sqlerror('Sorry an unknown error has occured please try again later'));
   }
-
-//mysql_select_db($DatabaseName, $con);
 
 ?>

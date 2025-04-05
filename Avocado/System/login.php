@@ -1,6 +1,7 @@
 <?php
 // set as system page
 $system = true;
+flush();
 
 // have we logged in already
 

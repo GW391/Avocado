@@ -3,6 +3,8 @@
 // To detect if functions are availble to page
 $shiftloaded = True;
 
+// Function for loading the cipher
+// Function deprecated, use Object getCipher
 function getCipher(){
 //old $ciphering BF-ECB
    if (!isset($ciphering)){
@@ -12,10 +14,11 @@ function getCipher(){
 }
 
 // Encrypt Data for saving
+// Function Deprecated - use Object Encrypt
 function encrypt($value){
    if(!$value){return false;}
       // Store the cipher method
-$ciphering = getCipher();
+   $ciphering = getCipher();
    global $DataKey;
    $key = $DataKey;
    $text = $value;
@@ -36,6 +39,7 @@ $ciphering = getCipher();
 }
 
 // Decrypt Saved Data
+// Function Deprecated - use Object Decrypt
 function decrypt($value){
    if(!$value){return false;}
       // Store the cipher method

@@ -63,6 +63,8 @@
 	$group = NULL;
 
         $secresult = SQL($Select, $From, $die, $where, $Limit, $group, $sort);
+        //I have results unset vars no longer needed
+        unset($Select, $From, $die, $where, $Limit, $group, $sort);
         if (num_rows($secresult) >= 1){
 ?>
         
@@ -169,6 +171,8 @@ function subsection($target, $section){
         $die = "Sorry there is a problem on the page, please try again later.";
         $sort = "sortorder";
         $ssecresult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+        //I have results unset vars no longer needed
+        unset($Select, $From, $die, $where, $Limit, $sort);
         if (num_rows($ssecresult) >= 1){
     ?>
 <label for="<?php echo trim(validate($section,'hd')) ?>">&lt;<!--<img src="images/icons/left_arrow.png" width="32px" />--></label><input type="checkbox" id="<?php echo trim(validate($section,'hd')) ?>" />

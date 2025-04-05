@@ -9,14 +9,10 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //import PHPMailer files
-//echo getcwd();
 require 'template/PHPMailer/src/Exception.php';
 require 'template/PHPMailer/src/PHPMailer.php';
 require 'template/PHPMailer/src/SMTP.php';
 
-// echo $_REQUEST['test'];
-// echo $_REQUEST['send'];
-// echo $_REQUEST['upload'];
 
 // set security
 if(security_check(parameters('SendNewsSecurity'))){
@@ -94,16 +90,7 @@ if(isset($_REQUEST['send']) && (validate($_REQUEST['send'],'hd') == 'send')){
 
     //Server settings
     require 'template/emailServerSettings.php';
-/*
-    //    $mail->SMTPDebug = SMTP::DEBUG_SERVER;            //Enable verbose debug output
-    $mail->isSMTP();                                        //Send using SMTP
-    $mail->Host       = parameters('SMTPHost');             //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                               //Enable SMTP authentication
-    $mail->Username   = $Username;                          //SMTP username
-    $mail->Password   = $Password;                          //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;        //Enable implicit TLS encryption
-    $mail->Port       = parameters('SMTPPort'); //465;       //TCP port to connect to; use 587 if you have set 'SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-*/
+
     //Recipients
     $mail->setFrom($from);      //set from address
     $mail->addReplyTo($from);   //set reply to address, same as from TODO: Get reply to from paramters instead of using from address
@@ -131,43 +118,6 @@ while ($row = fetch_array($result)){
     $replace = array($Name, $URL, parameters('Organisation'), parameters('IncYear'));
     $updatedmessage = str_ireplace($find, $replace, $message);
 
-    /*  OLD mail() method
-    $headers[] = "From: $from";
-        // boundary 
-        $semi_rand = md5(time()); 
-        $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x"; 
-
-        // headers for attachment 
-        $headers[]  = "MIME-Version: 1.0";
-        $headers[] = "Content-Type: multipart/mixed;";
-        $headers[] = " boundary=\"{$mime_boundary}";
-
-        // multipart boundary 
-        $emessage = "This is a multi-part message in MIME format.\n\n" . "--{$mime_boundary}\n" . "Content-Type: text/plain; charset=\"iso-8859-1\"\n" . "Content-Transfer-Encoding: 7bit\n\n" . $updatedmessage . "\n\n"; 
-        $emessage .= "--{$mime_boundary}\n";
-
-        // preparing attachments            
-            $file = fopen($filename,"rb");
-            $data = fread($file,filesize($filename));
-            fclose($file);
-            $base64data = chunk_split(base64_encode($data));
-            $emessage .= "Content-Type: {\"application/octet-stream\"};\n" . " name=\"".$fname."\"\n" . 
-            "Content-Disposition: attachment;\n" . " filename=\"$fname\"\n" . 
-            "Content-Transfer-Encoding: base64\n\n" . $base64data . "\n\n";
-            $emessage .= "--{$mime_boundary}--\n";
-    
-           // echo "EMessage: " . $emessage;
- //            if ($build <= 20240128){
- //               $email = validate(decrypt_20240128($row['Email']),'hd');
- //            }else{
-                 $email = validate(decrypt($row['Email']),'hd');
- //            }
-        $to = $Name . " <" . $email . ">";
-        $ok = mail($to, $subject, $emessage, implode("\r\n", $headers));
-	echo "<strong>" .  $Name . ": ";
-	if ($ok) {
-		echo '<img src="images/icons/greentick.png" alt="success" name="success" />';
-*/
 try {
 
     $email = validate(decrypt($row['Email']),'hd');
@@ -231,12 +181,6 @@ try {
 	echo " </strong><br />";
 
     
-
-    // close while loop
- //   }
-    // close if send
-//}
-
         //Reset the connection to abort sending this message
         //The loop will continue trying to send to the rest of the list
         $mail->getSMTPInstance()->reset();

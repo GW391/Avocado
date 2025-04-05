@@ -5,7 +5,8 @@ $varsloaded = True;
 
 //TODO: Paramatrise this array so it is customisable
 // selection of characters I don't want in the URL strings
-//this is an extra layer and not really needed as validate covers
+// this is an extra layer and not really needed as validate covers
+// but used to speed up processing, and simply drops the Target, section or subsection if detected.
 $badstringarray = ['%27',"'","(","!","%"];
 
 function str_contains_any(string $haystack, array $needles): bool
@@ -13,6 +14,7 @@ function str_contains_any(string $haystack, array $needles): bool
     return array_reduce($needles, fn($a, $n) => $a || str_contains($haystack, $n), false);
 }
 
+// see if a Target is set
 if (isset($_REQUEST["target"])){
 
     $target=validate($_REQUEST["target"],'h');
@@ -21,6 +23,8 @@ if (isset($_REQUEST["target"])){
     if (str_contains_any($target, $badstringarray)) {
         $target=404;
     }
+    // see if target is in session, if so set a previous target
+    // then assign new target to session
     if(isset($_SESSION["target"])){
             $_SESSION['ptarget'] = $_SESSION["target"];
     }
@@ -28,6 +32,7 @@ if (isset($_REQUEST["target"])){
 
 }
 
+// see if a section is set
 if (isset($_REQUEST["section"]) && isset($target)){
 	$section=validate($_REQUEST["section"],'h');
     //drop section if badstringarray is in it
@@ -35,6 +40,8 @@ if (isset($_REQUEST["section"]) && isset($target)){
         if (str_contains_any($section, $badstringarray)) {
         $section=404;
     }
+    // see if section is in session, if so set a previous target
+    // then assign new section to session
             if(isset($_SESSION["section"])){
             $_SESSION['psection'] = $_SESSION["section"];
 
@@ -42,6 +49,7 @@ if (isset($_REQUEST["section"]) && isset($target)){
                 $_SESSION["section"] = $section;
 }
 
+// see if a subsection is set
 if (isset($_REQUEST["subsection"]) && isset($target) && isset($section)){
 	$subsection=validate($_REQUEST["subsection"],'h');
     //drop subsection if badstringarray is in it
@@ -49,6 +57,8 @@ if (isset($_REQUEST["subsection"]) && isset($target) && isset($section)){
         if (str_contains_any($subsection, $badstringarray)) {
         $subsection=404;
     }
+    // see if subsection is in session, if so set a previous target
+    // then assign new subsection to session
             if(isset($_SESSION["subsection"])){
             $_SESSION['psubsection'] = $_SESSION["subsection"];
 
@@ -60,6 +70,8 @@ if (isset($_REQUEST["subsection"]) && isset($target) && isset($section)){
 
 <?php
 
+// function for validating user input to protect against malitious user input
+// from causing damage to the stystem or releasing sensitive data
 function validate($string, $param){
 global $con;
 switch ($param) {

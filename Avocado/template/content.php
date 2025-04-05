@@ -105,8 +105,10 @@ if (isset($rowmenu['ContName'])){
 //echo $where;
 
 $ContentResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+//I have results unset vars no longer needed
+unset($Select, $From, $die, $where, $Limit, $sort);
 
-$ContentRows = num_rows($ContentResult);
+$ContentRows = num_rows($ContentResult); // set number of rows
 
 // is there a databse record for parameters
 

@@ -1,4 +1,4 @@
-Email update - Version 1.24.2 - ??-12-2024
+Email update - Version 1.24.2 - 08-12-2024
    - square Menu now using colours from DB    
     - improved SQL Injection protection
         a bug forced the upgrade procedure to run when an SQL injection was attempted. this no longer happens
