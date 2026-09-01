@@ -165,8 +165,9 @@ $news = $date->format("My") . "w.pdf";
 	}
 	}
 }
+if(file_exists("news/" . $news)){
 ?>
 <a href="news/<?php echo $news?>" name="<?php echo $news?>">view</a><br /> <a href="download.php?target=News&amp;d=<?php echo $news?>" name="<?php echo $news?>">download</a><br />
 <embed src="news/<?php echo $news?>" width="98%" height="600" scrolling="auto" border="0" marginwidth="0"  src="news/<?php echo $news?>" style="border:none;" frameborder="0" type="application/pdf"></embed>
 
-<?php } ?>
+<?php } } ?>

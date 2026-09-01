@@ -58,7 +58,7 @@ mysqli_query($con, $sql_UpdateSettingsData);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "Settings Updatd<br />";
+    echo "Settings Updated<br />";
 }*/
 
 $sql_UpdateSettingsData2 = "UPDATE $DatabaseName.tblsettings SET `Options`='parameter:AvailableFonts' WHERE UUID='38';";
@@ -69,7 +69,7 @@ mysqli_query($con, $sql_UpdateSettingsData2);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "Settings Updatd<br />";
+    echo "Settings Updated<br />";
 }
 $sql_UpdateSettingsData4 = "UPDATE $DatabaseName.tblsettings SET `Options`='List\r\nCompact List\r\nCalendar\r\nDay\r\nWeek\r\nThree Month\r\nrss\r\nList2' WHERE UUID='57';";
 mysqli_query($con, $sql_UpdateSettingsData4);
@@ -79,7 +79,7 @@ mysqli_query($con, $sql_UpdateSettingsData4);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "Settings Updatd<br />";
+    echo "Settings Updated<br />";
 }
 $sql_UpdateSettingsData5 = "UPDATE $DatabaseName.tblsettings SET `Options`='List\r\nCompactList\r\nCalendar\r\nDay\r\nWeek\r\nThreeMonth\r\nrss\r\nList2' WHERE UUID='22';";
 mysqli_query($con, $sql_UpdateSettingsData5);
@@ -89,7 +89,7 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "Settings Updatd<br />";
+    echo "Settings Updated<br />";
 }
 
 $sql_UpdateSettingsData6 = "UPDATE $DatabaseName.tblsettings SET `num_rows`='5' WHERE UUID='21';";
@@ -100,7 +100,7 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "Settings Updatd<br />";
+    echo "Settings Updated<br />";
 }
 
 }elseif ($build <= 20240331){
@@ -113,7 +113,7 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     $where = "UUID='35'";
 
     SQLU($update, $set, $where, $limit, $die);
-    echo "Settings Updatd<br />";
+    echo "Settings Updated<br />";
 
     $update2 = "$DatabaseName.tblsettings";
     $limit = 1;
@@ -131,7 +131,7 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     $where = "UUID='17'";
 
     SQLU($update2, $set, $where, $limit, $die);
-    echo "Settings Updatd<br />";
+    echo "Settings Updated<br />";
 
 }elseif ($build <= 20240831){
 
@@ -143,7 +143,29 @@ mysqli_query($con, $sql_UpdateSettingsData5);
     $where = "UUID='16'";
 
     SQLU($update, $set, $where, $limit, $die);
-    echo "Settings Updatd<br />";
+    echo "Settings Updated<br />";
+}elseif ($build <= 20250831){
+    $update = "$DatabaseName.tblsettings";
+    $limit = 1;
+    $die = null;
+
+    $set = "num_rows='10', cols='30'";
+    $where = "UUID='114'";
+
+    SQLU($update, $set, $where, $limit, $die);
+    echo "Settings Updated<br />";
+
+}elseif ($build <= 20260831){
+    $update = "$DatabaseName.tblsettings";
+    $limit = null;
+    $die = "Something went wrong while updating the record";
+
+    $set = "num_rows='H', cols='50'";
+    $where = "UUID IN ('17', '21', '62', '60')";
+
+    SQLU($update, $set, $where, $limit, $die);
+    echo "Settings Updated<br />";
+
 }
 
 
@@ -242,7 +264,7 @@ if (function_exists('updateColumns')){
 
 
 // add / update columns
-echo "checking Database Structure";
+echo "Checking Database Structure <br>";
 if ($build <= 20240128){
 updateColumns('tblmenu','sitemap','tinyint(1)','NOT NULL', '1');
 updateColumns('tblcontent','sortorder','INT','NULL', '0');
@@ -255,9 +277,31 @@ updateColumns('tblattachment','duration','varchar(45)','NULL', '0');
 updateColumns('tblattachment','WhoUpdate','varchar(45)','NULL', '0');
 updateColumns('tblattachment','DateUpdate','date','NULL', '0');
 updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
-}elseif ($build <= 20240831){
+}elseif ($build <= 20250831){
 
 
+}
+
+
+/*
+
+ALTER TABLE AvodaoDev.tblsettings DROP INDEX Name;
+CREATE UNIQUE INDEX Name USING BTREE ON AvodaoDev.tblsettings (Name);
+
+ALTER TABLE AvodaoDev.tblsettings MODIFY COLUMN UUID bigint(20) NOT NULL;
+ALTER TABLE AvodaoDev.tblsettings DROP INDEX `PRIMARY`;
+
+
+*/
+
+// delete original copy of moved files
+echo "checking for files to remove <br>";
+if ($build <= 20250831){
+    // moved news.php to System/news.php in build 20241208
+    if(file_exists("news.php") and file_exists("System/news.php")){
+        echo "remove news.php";
+        unlink("news.php"); // remove file associate with record
+    }
 }
 
 // finally update the version number
@@ -265,7 +309,7 @@ updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
     $limit = 1;
     $die = null;
 
-    $set = "Value='1.24.2'";
+    $set = "Value='1.26.1'";
     $where = "UUID='88'";
 
     SQLU($update, $set, $where, $limit, $die);
@@ -275,7 +319,7 @@ updateColumns('tblnewsletter','Test','binary(1)','NOT NULL', '0');
     $limit = 1;
     $die = null;
 
-    $set = "Value='20241208'";
+    $set = "Value='20260831'";
     $where = "UUID='89'";
 
     SQLU($update, $set, $where, $limit, $die);

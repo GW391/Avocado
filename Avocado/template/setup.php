@@ -30,18 +30,20 @@ if (file_exists($filename)) {
 
 
 if (isset($_POST['DatabaseType'])){
+    // as we are setting up, set session level Developer mode.
+    $_SESSION['developer_mode'] = 1;
 
     $Salt = generateRandomString(20);
     $DataKey = generateRandomString(55);
     $PostKey = generateRandomString(33);
     $sqltypes = ['MySQLi', 'MySQL'];
         
-    if (in_array($_POST['DatabaseType'], $sqltypes, true)){
+ /*   if (in_array($_POST['DatabaseType'], $sqltypes, true)){
         require 'template/SQL_'.$_POST['DatabaseType'].'.php';
     }else{
         // no Database type specified, assume MySQLi
         require 'template/SQL_MySQLi.php';
-    }
+    }*/
     if(!isset($varsloaded)){
     require_once 'template/vars.php';
     }
@@ -49,9 +51,11 @@ if (isset($_POST['DatabaseType'])){
         <?php
     $" . "DatabaseType = \"" . validate($_POST['DatabaseType'],'hd') . "\";
     $" . "DatabaseName = \"" . validate($_POST['DatabaseName'],'hd') . "\";
-    $" . "DatabaseServerName = \"" . validate($_POST['DatabaseServerName'],'hd') . "\";";
+    $" . "DatabaseServerName = \"" . validate($_POST['DatabaseServerName'],'hd') . "\";
+    ";
             if (isset($_POST['DatabaseServerPort']) & strlen($_POST['DatabaseServerPort']) !=0){
-    $config .= "$" . "DatabaseServerPort = \"" . validate($_POST['DatabaseServerPort'],'hd') . "\";";
+    $config .= "$" . "DatabaseServerPort = \"" . validate($_POST['DatabaseServerPort'],'hd') . "\";
+    ";
         }
     $config .= "$" . "DatabaseUserNameE = \"" . new Encrypt(validate($_POST['DatabaseUserName'],'hd')) . "\";
     $" . "DatabasePasswordE = \"" . new Encrypt(validate($_POST['DatabasePassword'],'hd')) . "\";

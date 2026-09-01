@@ -1,4 +1,5 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="http://search.yahoo.com/mrss/" xmlns:podaccess="https://access.acast.com/schema/1.0/" xmlns:acast="https://schema.acast.com/1.0/">
+
 <?php $URL = curURL(parameters('SSL'), 0);
 // build podcast folder to check through for podcast files.
 $nofolder = 1;
@@ -7,6 +8,10 @@ $nofolder = 0;
 //add the xml
 $check_paramater = parameters('Podcast_URL');
 if (!isset($check_paramater) || strlen($check_paramater) == 0){
+    if (substr($PodCast, -1) != '/') {
+       // no '/' found in PodCast add it;
+       $PodCast .= '/';
+    }
     $PodCast .= 'rss.php?feed=podcast';
 }
 ?>
@@ -20,7 +25,7 @@ if (!isset($check_paramater) || strlen($check_paramater) == 0){
       <copyright>&#169; <?php echo Date("Y") . " " . parameters('Organisation'); ?></copyright>
       <?php // TODO: need to paramertarise image file ?>
       <image>
-	<url><?php echo $URL; ?>/images/albumart.jpg</url>
+	<url><?php echo $URL; if (substr($URL, -1) != "/") {/* no '/' found i,at end of URL add it;*/ echo '/'; }?>images/albumart.jpg</url>
 	<width>144</width>
 	<height>130</height>
       <title><?php echo parameters('Podcast_Title'); ?></title>
@@ -55,19 +60,32 @@ if (!isset($check_paramater) || strlen($check_paramater) == 0){
 	<itunes:summary><?php echo parameters('Podcast_Title'); ?></itunes:summary>
 	<itunes:author><?php echo parameters('Organisation'); ?></itunes:author>
 <itunes:image 
-	href="<?php echo $URL; ?>/images/albumartFull.jpg"
+	href="<?php echo $URL; if (substr($URL, -1) != "/") {/* no '/' found in URL add it;*/ echo '/'; }?>images/albumartFull.jpg"
 />
 <itunes:explicit><?php if (parameters('Podcast_Explicit') == 0 or parameters('Podcast_Explicit') == null){echo 'false';}else{echo 'true';}?></itunes:explicit>
 <?php
 
 // check if podcasts can be located in Database
-$Select = "UUID, name, file_name, duration, type, size, file_type, Meta_1, Meta_2, Meta_3, Meta_4, Description, Date, FileTime";
+
+/*
+SELECT tblattachment.UUID, name, tblattachment.file_name, tblattachment.duration, tblattachment.type, tblattachment.size, tblattachment.file_type, Meta_1, Meta_2, Meta_3, Meta_4, Description, tblattachment.Date, tblattachment.FileTime,tblattachmentItems.file_name, tblattachmentItems.FileTime, tblattachmentItems.deleted
+FROM AvodaoDev.tblattachment
+left JOIN AvodaoDev.tblattachmentItems
+on AvodaoDev.tblattachment.UUID = AvodaoDev.tblattachmentItems.AttachmentUUID
+where tblattachment.type = 'podcast' && (tblattachment.deleted != 1 && tblattachmentItems.deleted != 1)
+	and  (AvodaoDev.tblattachment.file_type = 'audio/mpeg' or AvodaoDev.tblattachmentItems.file_type = 'audio/mpeg')  and (AvodaoDev.tblattachmentItems.file_type = 'audio/mpeg' or AvodaoDev.tblattachmentItems.file_type = null)
+    */
+
+$Select = "tblattachment.UUID, name, tblattachment.file_name, tblattachment.duration, tblattachment.type, tblattachment.size, tblattachment.file_type, Meta_1, Meta_2, Meta_3, Meta_4, Description, tblattachment.Date, tblattachment.FileTime,tblattachmentItems.file_name, tblattachmentItems.FileTime, tblattachmentItems.deleted";
 $From = "tblattachment";
 $die = "Sorry something went wrong, please try again later";
-$where = "type = 'podcast' && deleted != 1";
+$where = "tblattachment.type = 'podcast' && tblattachment.deleted != 1
+	and  (tblattachment.file_type = 'audio/mpeg' or tblattachmentItems.file_type = 'audio/mpeg')  and (tblattachmentItems.file_type = 'audio/mpeg' or tblattachmentItems.file_type IS null)";
 $Limit = null;
-$sort = "Date DESC";
-$PodcastResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+$sort = "tblattachment.Date DESC";
+$left = "tblattachmentItems";
+$on = "tblattachment.UUID = tblattachmentItems.AttachmentUUID AND tblattachmentItems.deleted != 1";
+$PodcastResult = SQL($Select, $From, $die, $where, $Limit, null, $sort, $left, $on);
 
 
 if ($PodCastRow = fetch_array($PodcastResult)){

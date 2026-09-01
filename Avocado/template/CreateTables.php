@@ -7,7 +7,7 @@ $DataBaseName = $DatabaseName;
 
 // Create Calendar Table
 
-  $sql_pcalder="CREATE TABLE IF NOT EXISTS $DataBaseName.Pcalder(
+  $sql_pcalder="CREATE TABLE IF NOT EXISTS `$DataBaseName`.Pcalder(
   UID bigint(20) NOT NULL AUTO_INCREMENT,
   Date date NOT NULL,
   Event text NOT NULL,
@@ -48,7 +48,7 @@ $DataBaseName = $DatabaseName;
 }
 
 // Create Settings Table
-$sql_tblsettings="CREATE TABLE IF NOT EXISTS $DataBaseName.tblsettings(
+$sql_tblsettings="CREATE TABLE IF NOT EXISTS `$DataBaseName`.tblsettings(
     UUID bigint(20) NOT NULL AUTO_INCREMENT,
     Name varchar(45) NOT NULL,
     Value longtext DEFAULT NULL,
@@ -81,7 +81,7 @@ $sql_tblsettings="CREATE TABLE IF NOT EXISTS $DataBaseName.tblsettings(
 }
  // Create Content Table
 
- $sql_tblcontent="CREATE TABLE IF NOT EXISTS $DataBaseName.tblcontent (
+ $sql_tblcontent="CREATE TABLE IF NOT EXISTS `$DataBaseName`.tblcontent (
   UUID bigint(20) NOT NULL AUTO_INCREMENT,
   menuid bigint(20) DEFAULT NULL,
   target varchar(45) NOT NULL,
@@ -116,7 +116,7 @@ $sql_tblsettings="CREATE TABLE IF NOT EXISTS $DataBaseName.tblsettings(
 }
 
 // Create Menu Table
-$sql_tblMenu="CREATE TABLE IF NOT EXISTS $DataBaseName.tblmenu (
+$sql_tblMenu="CREATE TABLE IF NOT EXISTS `$DataBaseName`.tblmenu (
   UUID bigint(20) NOT NULL AUTO_INCREMENT,
   target varchar(45) NOT NULL,
   section varchar(45) DEFAULT NULL,
@@ -159,7 +159,7 @@ mysqli_query($con, $sql_tblMenu);
 
 
 // Create Users Table
-$sql_tblUsers="CREATE TABLE IF NOT EXISTS $DataBaseName.tblpdu (
+$sql_tblUsers="CREATE TABLE IF NOT EXISTS `$DataBaseName`.tblpdu (
   UUID bigint(20) NOT NULL AUTO_INCREMENT,
   PUME varchar(500) NOT NULL,
   PRD varchar(500) NOT NULL,
@@ -192,7 +192,7 @@ mysqli_query($con, $sql_tblUsers);
   }
 }
 
-$sql_tblnewsletter = "CREATE TABLE IF NOT EXISTS $DataBaseName.tblnewsletter (
+$sql_tblnewsletter = "CREATE TABLE IF NOT EXISTS `$DataBaseName`.tblnewsletter (
   idtblnewsletter bigint(11) NOT NULL AUTO_INCREMENT,
   Email varchar(255) DEFAULT NULL,
   RName varchar(500) DEFAULT NULL,
@@ -219,7 +219,7 @@ mysqli_query($con, $sql_tblnewsletter);
 }
 
 // Create Error Log Table
-$sql_tblErrorLog="CREATE TABLE IF NOT EXISTS $DataBaseName.tblelg (
+$sql_tblErrorLog="CREATE TABLE IF NOT EXISTS `$DataBaseName`.tblelg (
   idtblelg int(10) unsigned NOT NULL AUTO_INCREMENT,
   uname varchar(45) DEFAULT NULL,
   pword varchar(45) DEFAULT NULL,
@@ -248,7 +248,7 @@ mysqli_query($con, $sql_tblErrorLog);
 }
 
 // Create Attachemnts table
-$sql_tblattachment="CREATE TABLE IF NOT EXISTS $DataBaseName.tblattachment (
+$sql_tblattachment="CREATE TABLE IF NOT EXISTS `$DataBaseName`.tblattachment (
   UUID int(10) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(250) DEFAULT NULL,
   type varchar(45) DEFAULT NULL,
@@ -284,6 +284,40 @@ mysqli_query($con, $sql_tblattachment);
 }else{
   if(parameters('developer_mode') == '1'){
     echo "Attachment Table Crated <br />";
+  }
+}
+
+// Create AttachemntsItems table
+$sql_tblattachmentItems="CREATE TABLE IF NOT EXISTS `$DataBaseName`.tblattachmentItems (
+  UUID int(10) unsigned NOT NULL AUTO_INCREMENT,
+  AttachmentUUID int(10) unsigned NOT NULL,
+  type varchar(45) DEFAULT NULL,
+  size float(50) NOT NULL,
+  file_name varchar(45) DEFAULT NULL,
+  file_type varchar(45) DEFAULT NULL,
+  duration varchar(45) DEFAULT NULL,
+  WhoCreate varchar(45) NOT NULL,
+  DateCreate date NOT NULL,
+  WhoUpdate varchar(45) DEFAULT NULL,
+  DateUpdate date  DEFAULT NULL,
+  Date date DEFAULT NULL,
+  FileTime varchar(15) DEFAULT NULL,
+  deleted binary(1) DEFAULT 0,
+  PRIMARY KEY (UUID),
+  KEY (AttachmentUUID)
+)";
+
+mysqli_query($con, $sql_tblattachmentItems);
+      if (!$con) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    if(parameters('developer_mode') == '1'){
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    }
+    exit;
+}else{
+  if(parameters('developer_mode') == '1'){
+    echo "Attachment Items Table Crated <br />";
   }
 }
 ?>

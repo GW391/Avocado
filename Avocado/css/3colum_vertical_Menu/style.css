@@ -39,8 +39,9 @@ font-size: 1.1em;
 }
 
 .header h1 {
-    font-size: 40px;
-    font-size: 3.1vw;
+    /*font-size: 40px;
+    font-size: 3.1vw;*/
+    font-size: 6.5vh;
 }
 
 .header form {

@@ -11,6 +11,10 @@ $nofolder = 0;
 //add the xml
 $check_paramater = parameters('Podcast_URL');
 if (!isset($check_paramater) || strlen($check_paramater) == 0){
+    if (substr($PodCast, -1) != "/") {
+       // no '/' found in PodCast add it;
+       $PodCast .= '/';
+    }
     $PodCast .= 'rss.php?feed=podcast';
 }
 ?>
@@ -130,7 +134,7 @@ if (isset($_SESSION["font"])){
 
      <?php
      //check for default colours file for this Theme
-        $DefaultColours = 'css/' . parameters('style') . '/DefaultColours.php';
+        $DefaultColours = 'css/' . parameters('Style') . '/DefaultColours.php';
   //      if Theme colours exist include them, else enclude the global default
         if (file_exists($DefaultColours)){
             include './'.$DefaultColours;
@@ -143,7 +147,7 @@ if (isset($_SESSION["font"])){
         
          <?php
          //check for default menu colours file for this theam
-        $DefaultMenuColours = 'css/' . parameters('style') . '/DefaultMenuColours.php';
+        $DefaultMenuColours = 'css/' . parameters('Style') . '/DefaultMenuColours.php';
  //      if Theme colours exist include them, else enclude the global default
         if (file_exists($DefaultMenuColours)){
             include './'.$DefaultMenuColours;
@@ -154,7 +158,7 @@ if (isset($_SESSION["font"])){
         }
         ?>
 
-<link rel="stylesheet" href="./css/<?php echo parameters('style')?>/menu.css" type="text/css" />
+<link rel="stylesheet" href="./css/<?php echo parameters('Style')?>/menu.css" type="text/css" />
 <!--// Fix for IE!-->
 
 <!--[if IE]>
@@ -177,4 +181,4 @@ font: bold 0.7em/1.4em arial, helvetica, sans-serif;
 </style>
 <![endif]-->
 
-        <link rel="stylesheet" href="./css/<?php echo parameters('style')?>/style.css" media="all" type="text/css" />
+        <link rel="stylesheet" href="./css/<?php echo parameters('Style')?>/style.css" media="all" type="text/css" />

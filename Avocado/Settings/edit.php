@@ -220,17 +220,26 @@ echo "</select>";
            <input type="number" size="<?php echo validate($row['cols'],'n') ?>" name="value" value="<?php echo validate($row['value'],'hd') ?>" />
         <?php
         break;
-        default:
-        ?>
-
-       <textarea rows="<?php echo validate($row['num_rows'],'n') ?>" cols="<?php echo validate($row['cols'],'n') ?>" name="value">
-<?php echo validate($row['value'],'hd') ?>
-        </textarea>
-        <?php
-        break;
         case 'C':
             ?>
         <input type="color" name="value" value="<?php echo validate($row['value'],'hd') ?>" />
+        <?php
+        break;
+
+        //keep at end, do not break to then flow into default
+        case 'H':
+            // check if TinyMCEKey existis if so import TinyMCE for use.
+            if (null != (parameters('TinyMCEKey')) && strlen(trim(parameters('TinyMCEKey'))) != 0){
+                require_once 'template/TinyMCECloud.php';
+            }
+            $num_rows = 20;
+
+        default:
+        ?>
+
+       <textarea rows="<?php echo validate($num_rows,'n') ?>" cols="<?php echo validate($row['cols'],'n') ?>" name="value">
+<?php echo validate($row['value'],'hd') ?>
+        </textarea>
         <?php
         break;
 }

@@ -42,31 +42,42 @@ function generateRandomString($length = 10) {
 }
 
 function parameters($ParameterName)
-{
-global $con;
-    $ParameterSelect = "Name, Value, num_rows";
-    $ParameterFrom = "tblsettings";
-    $Parameterwhere = "Name = '$ParameterName'";
-    $ParameterLimit = "1";
-    $Parameterdie = "Sorry there is a problem on the page, please try again later.";
 
-    $ParameterResult = SQL($ParameterSelect, $ParameterFrom, $Parameterdie, $Parameterwhere, $ParameterLimit, null, null);
-    // check for a result
-    $count=num_rows($ParameterResult);
-    if ($count===0){
-        // no parameters, run upgrade
-        include 'template/UpdateDB.php';
-        // re-find the parameter, assume it was in the update
+/*
+ * function to check parameters and add them to the session
+ */
+
+{
+    if (!isset($_SESSION[$ParameterName])){
+        global $con;
+        $ParameterSelect = "Name, Value, num_rows";
+        $ParameterFrom = "tblsettings";
+        $Parameterwhere = "Name = '$ParameterName'";
+        $ParameterLimit = "1";
+        $Parameterdie = "Sorry there is a problem on the page, please try again later.";
+
         $ParameterResult = SQL($ParameterSelect, $ParameterFrom, $Parameterdie, $Parameterwhere, $ParameterLimit, null, null);
+        // check for a result
+        $count=num_rows($ParameterResult);
+        if ($count===0){
+            // no parameters, run upgrade
+            include 'template/UpdateDB.php';
+            // re-find the parameter, assume it was in the update
+            $ParameterResult = SQL($ParameterSelect, $ParameterFrom, $Parameterdie, $Parameterwhere, $ParameterLimit, null, null);
         }
     
-    $ParameterRow=fetch_array($ParameterResult);
-    if (strtoupper(validate($ParameterRow['num_rows'],'hd') == 'P')){
-        $ParameterReturnValue = new Decrypt(validate(isset($ParameterRow['Value']) ? $ParameterRow['Value'] : NULL ,'hd'));
+        $ParameterRow=fetch_array($ParameterResult);
+        if (strtoupper(validate($ParameterRow['num_rows'],'hd')) == 'P'){
+            $ParameterReturnValue = new Decrypt(validate(isset($ParameterRow['Value']) ? $ParameterRow['Value'] : NULL ,'hd'));
+        }else{
+            $ParameterReturnValue = validate(isset($ParameterRow['Value']) ? $ParameterRow['Value'] : NULL ,'hd');
+            $_SESSION[$ParameterName] = $ParameterReturnValue;
+        }
+        return $ParameterReturnValue;
     }else{
-        $ParameterReturnValue = validate(isset($ParameterRow['Value']) ? $ParameterRow['Value'] : NULL ,'hd');
+        $ParameterReturnValue = validate($_SESSION[$ParameterName],'hd');
+        return $ParameterReturnValue;
     }
-    return $ParameterReturnValue;
 }
 
 // why do I have 2 of these ???
@@ -91,14 +102,17 @@ function curURL($ssl, $uri) {
  if ($ssl) {$pageURL .= "s";}
  $pageURL .= "://";
   if ($_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443") {
-  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"];
+  $pageURL .= validate($_SERVER["SERVER_NAME"],'hd').":".validate($_SERVER["SERVER_PORT"],'hd');
  } else {
-  $pageURL .= $_SERVER["SERVER_NAME"];
+  $pageURL .= validate($_SERVER["SERVER_NAME"],'hd');
  }
  if ($uri || !isset($uri)){
-    $pageURL .= $_SERVER["PHP_SELF"];
-    }
+    $pageURL .= validate($_SERVER["PHP_SELF"],'hd');
+    }else{
+        //TODO: Need to check this does not break anything, it's needed for PodCasts,
 
+    $pageURL .= validate(dirname($_SERVER['PHP_SELF']),'hd');
+    }
  return $pageURL;
 }
 
@@ -188,9 +202,9 @@ function security_check($required_security){
 }
 
 function upload_check(){
-$allowedExts = array("gif", "jpeg", "jpg", "png", "pdf" , "mp3");
-$allowedTypes = array("image/gif", "image/jpeg", "image/jpg", "image/pjpeg", "image/x-png", "image/png", "application/pdf", "audio/mpeg");
-$temp = explode(".", $_FILES["file"]["name"]);
+$allowedExts = array("gif", "jpeg", "jpg", "png", "pdf" , "mp3", "mp4");
+$allowedTypes = array("image/gif", "image/jpeg", "image/jpg", "image/pjpeg", "image/x-png", "image/png", "application/pdf", "audio/mpeg", "video/mp4");
+//$temp = explode(".", $_FILES["file"]["name"]);
 //print_r ($temp);
 
 // todo: can't make mime_content_type work need it to make sure file uploads are secure.
@@ -202,20 +216,66 @@ $temp = explode(".", $_FILES["file"]["name"]);
 //echo "mime type: " . $ext;
 
 //echo "mime_content_type: " . mime_content_type("news\17-05-2020.pdf");
-$_FILES["file"]["name"];
-$extension = strtolower(end($temp));
-if ( in_array($_FILES["file"]["type"], $allowedTypes)
+if (!isset($_FILES['file']) || !is_array($_FILES['file'])) {
+    echo "No File uploaded" . "<br>";
+    return false;
+}
+
+$file = $_FILES['file'];
+
+if (!isset($file['error']) || $file['error'] !== UPLOAD_ERR_OK){
+    echo "Return Code: " . $file['error'] . "<br>";
+    return false;
+}
+
+//$_FILES["file"]["name"];
+
+//$extension = strtolower(end($temp));
+
+    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    if (!in_array($extension, $allowedExts, true)) {
+        echo "File type not allowed: " . $extension . "<br>";
+        return false;
+    }
+
+    if ($file['size'] > parameters('maxfileuploadsize')) {
+        echo "File too big: " . $file['size']/1024/1024  . "<br>";
+        return false;
+    }
+
+    $mime = null;
+    if (function_exists('finfo_open')) {
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime = $finfo->file($file['tmp_name']);
+    } elseif (function_exists('mime_content_type')) {
+        $mime = mime_content_type($file['tmp_name']);
+    }
+
+    if ($mime === false || $mime === null) {
+        echo "No MIME type";
+        return false;
+    }
+
+    if (!in_array($mime, $allowedTypes, true)) {
+        echo "MIME type invalid " . $mime . "<br>";
+        return false;
+    }
+
+    return true;
+
+
+/* if ( in_array($_FILES["file"]["type"], $allowedTypes)
 && ($_FILES["file"]["size"] < parameters('maxfileuploadsize')) // 20000000
 && in_array($extension, $allowedExts)
 //&& in_array(mime_content_type($_FILES["file"]["tmp_name"]), $allowedTypes)  
         )
   {
-  if ($_FILES["file"]["error"] > 0)
+/*  if ($_FILES["file"]["error"] > 0)
     {
     echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
     }else{
     return true;
-    }
+    }*//*
 }else
   {
   echo "Invalid file: " . $_FILES["file"]["type"] . "<br />";
@@ -223,7 +283,7 @@ if ( in_array($_FILES["file"]["type"], $allowedTypes)
   echo "Extention: " . $extension;
   echo "mime_content_type: " . $_FILES["file"]["tmp_name"];
 return FALSE;
-  }
+  }*/
 }
 
 function PodCastURL(){

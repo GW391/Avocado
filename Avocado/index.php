@@ -73,7 +73,7 @@ require_once 'template/functions.php';
 
 //echo "functions loaded";
 
-//Check Configuration is set-up
+//Check Configuration is set-up if not run setup
 $filename = 'template/config.php';
 
 if (file_exists($filename)) {
@@ -82,6 +82,7 @@ if (file_exists($filename)) {
 } else {
  // echo "The file $filename does not exist";
     require_once 'template/setup.php';
+    //without config we can't continue so die
     die();
 }
 
@@ -104,7 +105,16 @@ require_once 'template/errorlog.php';
 ?>
 
 <?php
-
+// check version number
+require 'template/version.php';
+if (parameters('build') < $build) {
+    // build number of DB is lass than files, force upgrade
+    //easy way is to call spurious parameter
+    if (parameters('developer_mode')){
+        echo 'Database is lower version than files, forcing an upgrade';
+    }
+    parameters('UPGRADENEEDED');
+}
 
 // check if the user has logged out
 if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
@@ -115,29 +125,32 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
 ?>
     <?php
     // get parameters, and put into session variable / cookie
-    if (!isset($_session['Organisation'])){
+    if (!isset($_SESSION['Organisation'])){
         $Organisation = parameters('Organisation');
-        $_session['Organisation'] = $Organisation;
+        $_SESSION['Organisation'] = $Organisation;
     }else{
-        $Organisation = validate($_session['Organisation'],'hd');
+        $Organisation = validate($_SESSION['Organisation'],'hd');
     }
     // get parameters
-    if (!isset($_session['IncDate'])){
+    if (!isset($_SESSION['IncDate'])){
         $incdate = parameters('IncYear');
-        $_session['Incdate'] = $incdate;
+        $_SESSION['Incdate'] = $incdate;
     }else{
-        $incdate = validate($_session['incdate'],'hd');
+        $incdate = validate($_SESSION['incdate'],'hd');
     }
-    if (!isset($_session['ArticleEditor'])){
+    if (!isset($_SESSION['ArticleEditor'])){
         $ArticleEditor = parameters('ArticleEditor');
-        $_session['ArticleEditor'] = $ArticleEditor;
+        $_SESSION['ArticleEditor'] = $ArticleEditor;
     }else{
-        $ArticleEditor = validate($_session['ArticleEditor'],'hd');
+        $ArticleEditor = validate($_SESSION['ArticleEditor'],'hd');
     }
     if (!isset($_SESSION['security'])){
         $_SESSION['security'] = "none";
     }
 
+ if (parameters('developer_mode')){
+    print_r ($_SESSION);
+ }
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -145,7 +158,6 @@ if (isset($_GET['Logout']) || isset($_GET['logout']) || !$referrer){
 <?php include("template/htmlhead.php");?>
 </head>
 <body>
-
         <div id="maincontent">
 
      <?php // insert page content

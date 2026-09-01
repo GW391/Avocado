@@ -28,7 +28,10 @@ if ($security->output)
 
 echo "<div class='Settings'><h2>About </h2>";
 echo "Version: " . parameters('version') . "<br>";
-echo "Build: " . parameters('build') . "<br></div>";
+echo "Build: " . parameters('build') . "<br>";
+echo '<a href="?target=System&amp;section=ForceUpgrade"> Upgrade Settings </a>';
+echo "</div>";
+
 
 $Group = null;
 $Limit = null;
@@ -59,9 +62,40 @@ $PodcastActiveResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 $where = "type = 'podcast' && deleted = 1";
 $PodcastInactiveResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 
+
+$Select = "TIME_FORMAT(SEC_TO_TIME(avg(substr(duration,1,LOCATE(':',duration)-1)*60+right(duration,2))), \"%H:%i:%s\") as AverageDuration";
+$from =  'tblattachment';
+$where = "type = 'podcast' && deleted != 1 && duration is not NULL && duration != 0";
+$PodcastAverageDuration = SQL($Select, $From, $die, $where, $Limit, null, $sort);
+
 echo "<div class='Settings'><h2>Podcasts </h2>";
+
+// if user is podcast editior add upload file link
+$EditPodcastSecurity = new securityCheck(parameters('EditPodcastSecurity'));
+  // check if current user can edit parameters
+$Settingssecurity = new securityCheck(parameters('SettingsSecurity'));
+
+if ($EditPodcastSecurity->output || $Settingssecurity->output){
+
+if ($EditPodcastSecurity->output){
+  // if current user can add podcast, display upload link.
+  echo '<a href="?target=System&amp;section=Settings&amp;subsection=podcastuploads">'; new Icon("upload"); echo '</a>';
+}
+
+if ($security->output)
+{
+    // if current user can edit parameters, display parameters link.
+  echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="?target=Settings&amp;limit=podcast">'; new Icon("settings"); echo '</a>';
+  }
+echo '<br>';
+}
+
 echo "Active Podcast: " . num_rows($PodcastActiveResult) . "<br>";
-echo "Inactive Podcast: " . num_rows($PodcastInactiveResult) . "<br></div>";
+echo "Inactive Podcast: " . num_rows($PodcastInactiveResult) . "<br>";
+while ($AverageDuration = fetch_array($PodcastAverageDuration)){
+echo "Average Duration: " . $AverageDuration['AverageDuration'] . "<br>";
+}
+echo "</div>";
 
 $Select = "UUID";
 $From = "tblattachment";
@@ -72,8 +106,30 @@ $where = "type = 'news' && deleted = 1";
 $NewsletterInactiveResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 
 echo "<div class='Settings'><h2>Newsletters </h2>";
+// if user is News Sender add Send News link
+$SendNewsSecurity = new securityCheck(parameters('SendNewsSecurity'));
+  // check if current user can edit parameters
+$Settingssecurity = new securityCheck(parameters('SettingsSecurity'));
+if ($SendNewsSecurity->output || $Settingssecurity->output){
+
+if ($SendNewsSecurity->output){
+  // if current user can add podcast, display upload link.
+  echo '<a href="?target=news&amp;section=Mail">'; new Icon("upload"); echo '</a>';
+}
+
+if ($security->output)
+{
+    // if current user can edit parameters, display parameters link.
+  echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="?target=Settings&amp;limit=News">'; new Icon("settings"); echo '</a>';
+  }
+echo '<br>';
+}
+
+
 echo "Active Newsletters: " . num_rows($NewsletterActiveResult) . "<br>";
-echo "Inactive Newsletteds: " . num_rows($NewsletterInactiveResult) . "<br></div>";
+echo "Inactive Newsletters: " . num_rows($NewsletterInactiveResult) . "<br></div>";
+
+
 
 $Select = "UUID";
 $From = "tblpdu";

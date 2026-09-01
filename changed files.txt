@@ -1,35 +1,131 @@
 
-css/3colum_vertical_Menu/DefaultColours.php
-css/3colum_vertical_Menu/style.css
-css/Square_Menu/DefaultColours.php
-css/Square_Menu/DefaultMenuColours.php
-css/Top_right_Menu/DefaultColours.php
-css/Top_Right_Menu/DefaultColours.php
-css/Top_right_Menu/DefaultMenuColours.php
-css/Top_Right_Menu/DefaultMenuColours.php
-css/Top_right_Menu/menu.css
-css/Top_Right_Menu/menu.css
-css/Top_right_Menu/mobilemenu.css
-css/Top_Right_Menu/mobilemenu.css
-css/Top_right_Menu/style.css
-css/Top_Right_Menu/style.css
-System.php
-System/Bible_Gateway.php
-System/calendar/CompactListView.php
-System/calendar/List2View.php
-System/calendar/rssView.php
-System/calendar/update.php
-System/contact.php
-System/DownloadNews.php
-System/login.php
-System/login/register.php
-System/login/validate.php
-news.php -> System/news.php
-news/Mail.php
-news/SendMail.php
-template/rssCalendar.php
-template/rsspodcast.php
+ - Avocado/ajax-Section.php
+ - Avocado/ajax-Target.php
+ - Avocado/css/3colum_vertical_Menu/menu.css
+ - Avocado/css/3colum_vertical_Menu/style.css
+ - Avocado/css/Square_Menu/DefaultColours.php
+ - Avocado/css/Square_Menu/style.css
+ - Avocado/images/icons/download.svg
+ - Avocado/images/icons/downloadaudio.svg
+ - Avocado/images/icons/downloadvideo.svg
+ - Avocado/images/icons/playaudio.svg
+ - Avocado/images/icons/playvideo.svg
+ - Avocado/images/icons/pleaseWait_2.png
+ - Avocado/images/icons/settings.svg
+ - Avocado/images/icons/test.svg
+ - Avocado/images/icons/upload.svg
+ - Avocado/index.php
+ - Avocado/news/ListUnvarafiedMail.php
+ - Avocado/news/Mail.php
+ - Avocado/rss.php
+ - Avocado/rss.xsl
+ - Avocado/Settings/edit.php
+ - Avocado/Settings/updateSave.php
+ - Avocado/styles.css
+ - Avocado/System.php
+ - Avocado/System/ForceUpgrade.php
+ - Avocado/System/news.php
+ - Avocado/System/play.php
+ - Avocado/System/podcast.php
+ - Avocado/System/Settings/podcastuploads.php
+ - Avocado/System/Settings/savefile.php
+ - Avocado/template/content.php
+ - Avocado/template/CreateDB.php
+ - Avocado/template/CreateTables.php
+ - Avocado/template/default/SettingsData.php
+ - Avocado/template/functions.php
+ - Avocado/template/htmlhead.php
+ - Avocado/template/PHPMailer/.editorconfig
+ - Avocado/template/PHPMailer/composer.json
+ - Avocado/template/PHPMailer/get_oauth_token.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-da.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-eo.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-es.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-ja.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-ku.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-nb.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-nl.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-pl.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-pt.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-ru.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-tr.php
+ - Avocado/template/PHPMailer/language/phpmailer.lang-ur.php
+ - Avocado/template/PHPMailer/README.md
+ - Avocado/template/PHPMailer/SECURITY.md
+ - Avocado/template/PHPMailer/SMTPUTF8.md
+ - Avocado/template/PHPMailer/src/PHPMailer.php
+ - Avocado/template/PHPMailer/src/POP3.php
+ - Avocado/template/PHPMailer/src/SMTP.php
+ - Avocado/template/PHPMailer/VERSION
+ - Avocado/template/rsspodcast.php
+ - Avocado/template/setup.php
+ - Avocado/template/SQL_MySQLi.php
+ - Avocado/template/UpdateDB.php
+ - Avocado/template/vars.php
+ - Avocado/template/version.php
+ - changed files.txt
+ - CHANGELOG.md
+ - Changes
+ - README.md
+ - ToDo.txt
 
+
+Bugfixes - Version 1.25.1 - 31-08-2025
+ - readme.md
+ - template/CreateTables.php
+ - template/CreateDB.php
+ - template/hotsprings_MySQLi.php
+ - template/setup.php
+ - template/sql_MySQLi.php
+ - template/functions.php
+ - System.php
+ - System/podcast.php
+ - Settings/updateSave.php
+ - news/Mail.php
+ - index.php
+ - System.php
+ - System/news.php
+ - template/default/SettingsData.php
+ - template/htmlhead.php
+ - template/rsspodcast.php
+ - template/updateDB.php
+ - template/default/SettingsData.php
+ - index.php
+ - version.php
+
+
+
+Email update - Version 1.24.2 - 08-12-2024
+ - css/3colum_vertical_Menu/DefaultColours.php
+ - css/3colum_vertical_Menu/style.css
+ - css/Square_Menu/DefaultColours.php
+ - css/Square_Menu/DefaultMenuColours.php
+ - css/Top_right_Menu/DefaultColours.php
+ - css/Top_Right_Menu/DefaultColours.php
+ - css/Top_right_Menu/DefaultMenuColours.php
+ - css/Top_Right_Menu/DefaultMenuColours.php
+ - css/Top_right_Menu/menu.css
+ - css/Top_Right_Menu/menu.css
+ - css/Top_right_Menu/mobilemenu.css
+ - css/Top_Right_Menu/mobilemenu.css
+ - css/Top_right_Menu/style.css
+ - css/Top_Right_Menu/style.css
+ - System.php
+ - System/Bible_Gateway.php
+ - System/calendar/CompactListView.php
+ - System/calendar/List2View.php
+ - System/calendar/rssView.php
+ - System/calendar/update.php
+ - System/contact.php
+ - System/DownloadNews.php
+ - System/login.php
+ - System/login/register.php
+ - System/login/validate.php
+ - news.php -> System/news.php
+ - news/Mail.php
+ - news/SendMail.php
+ - template/rssCalendar.php
+ - template/rsspodcast.php
 
 bug fix - build 20240331 Patch 2 - 12-05-2024
  - /README.md

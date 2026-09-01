@@ -13,6 +13,7 @@ pick podcast album art in settings
 pick default timezone in settings
 change settings UID to the Setting name
 Add Colour palet loader
+Add aditional formats to attachments
 
 Completed:
 News to DB - Completed - Version 1.24.2

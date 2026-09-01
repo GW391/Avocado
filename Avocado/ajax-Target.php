@@ -35,7 +35,7 @@ require_once 'template/asc_shift.php';
    // Retrieve data from Query String
 //   $age = $_GET['age'];
 
-$target = $_GET['target'];
+$target = validate($_GET['target'],'hd');
 
 //   $wpm = $_GET['wpm'];
    

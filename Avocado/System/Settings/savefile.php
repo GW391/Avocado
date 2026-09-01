@@ -2,11 +2,20 @@
 $system = true;
 
 //check security
+if(parameters('developer_mode')){
+    print_r($_REQUEST);
+    print_r($_POST);
+}
 
 if (isset($_POST['type'])){
     if(strlen(trim($_POST['type'])) != 0){
         $type = validate($_POST['type'],'h');
-    }
+        echo "Type :" . $type;
+    }else{
+ echo "Data has not posted, check your upload_max_filesize and post_max_size";
+}
+}else{
+ echo "Data has not posted, check your upload_max_filesize and post_max_size";
 }
 
 // set securoty type
@@ -31,6 +40,7 @@ if(isset($_POST['UUID'])){
     $ID = validate(decryptfe($_POST['UUID']),'h');
     $edit = true;
     $set ="";
+    $Itemset ="";
 }else{
     $edit = false;
  // adding new record
@@ -87,13 +97,13 @@ if (isset($_POST['Duration'])){
     $Duration = validate($_POST['Duration'],'h');
 }}
 
-if (!$edit){
-$WhoCreate = validate($_SESSION['puid'],'h');
-$DateCreate = Date('Ymd');
-}
+//if (!$edit){
+    $WhoCreate = validate($_SESSION['puid'],'h');
+    $DateCreate = Date('Ymd');
+//}
 if ($edit){
-$DateUpdate = Date('Ymd');
-$WhoUpdate = validate($_SESSION['puid'],'h');
+    $DateUpdate = Date('Ymd');
+    $WhoUpdate = validate($_SESSION['puid'],'h');
 }
 
 echo "type: ". $type;
@@ -148,6 +158,11 @@ if (!isset ($Size) || strlen(trim($Size)) == 0){
     }
 if (!isset ($file_name) || strlen(trim($file_name)) == 0){
 }else{
+    if (file_exists("$location/" . $file_name)){
+        $file_exist = TRUE;
+    }else{
+        $file_exist = FALSE;
+    }
     if (file_exists("$location/" . $file_name) && !$edit)
       {
       echo $file_name . " already exists. ";
@@ -167,9 +182,22 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
                 $set .= ', ';
             }
             $set .= "file_name = '$file_name'";
+            if (isset($file_name)){
+                if($file_exist){
+                    if (isset($Itemset) && strlen(trim($Itemset)) != 0){
+                        $Itemset .= ', ';
+                    }
+                    $Itemset .= "file_name = '$file_name'";
+                }else{
+                    $Itemcols = "file_name";
+                    $Itemvals = "'$file_name'";
+                }
+            }
     }else{
         $cols = "file_name";
         $vals = "'$file_name'";
+        $Itemcols = "file_name";
+        $Itemvals = "'$file_name'";
     }
 }
     
@@ -182,9 +210,10 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
             }
             $set .= "name = '$name'";
         }else{
-        $cols .= ", name";
-        $vals .= ", '$name'";
-    }}
+            $cols .= ", name";
+            $vals .= ", '$name'";
+        }
+    }
     
     if (!isset ($Size) || strlen(trim($Size)) == 0){
 
@@ -194,22 +223,50 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
                 $set .= ', ';
             }
             $set .= "size = '$Size'";
+            if (isset($file_name)){
+                if($file_exist){
+                    if (isset($Itemset) && strlen(trim($Itemset)) != 0){
+                        $Itemset .= ', ';
+                    }
+                    $Itemset .= "size = '$Size'";
+                }else{
+                    $Itemcols .= ", size";
+                    $Itemvals .= ", '$Size'";
+                }
+            }
         }else{
-        $cols .= ", size";
-        $vals .= ", '$Size'";
-    }}
+            $cols .= ", size";
+            $vals .= ", '$Size'";
+            $Itemcols .= ", size";
+            $Itemvals .= ", '$Size'";
+        }
+    }
     if (!isset ($type) || strlen(trim($type)) == 0){
 
     }else{
         if ($edit){
             if (isset($set) && strlen(trim($set)) != 0){
                 $set .= ', ';
+                if (isset($file_name)){
+                    if($file_exist){
+                        if (isset($Itemset) && strlen(trim($Itemset)) != 0){
+                            $Itemset .= ', ';
+                        }
+                        $Itemset .= "type = '$type'";
+                    }else{
+                        $Itemcols .= ", type";
+                        $Itemvals .= ", '$type'";
+                    }
+                }
             }
             $set .= "type = '$type'";
         }else{
-        $cols .= ", type";
-        $vals .= ", '$type'";
-    }}
+            $cols .= ", type";
+            $vals .= ", '$type'";
+            $Itemcols .= ", type";
+            $Itemvals .= ", '$type'";
+        }
+    }
     
     if (!isset ($file_type) || strlen(trim($file_type)) == 0){
 
@@ -217,12 +274,26 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
         if ($edit){
             if (isset($set) && strlen(trim($set)) != 0){
                 $set .= ', ';
+                if (isset($file_name)){
+                    if($file_exist){
+                        if (isset($Itemset) && strlen(trim($Itemset)) != 0){
+                            $Itemset .= ', ';
+                        }
+                        $Itemset .= "file_type = '$file_type'";
+                    }else{
+                        $Itemcols .= ", file_type";
+                        $Itemvals .= ", '$file_type'";
+                    }
+                }
+                $set .= "file_type = '$file_type'";
             }
-            $set .= "file_type = '$file_type'";
         }else{
-        $cols .= ", file_type";
-        $vals .= ", '$file_type'";
-    }}
+            $cols .= ", file_type";
+            $vals .= ", '$file_type'";
+            $Itemcols .= ", file_type";
+            $Itemvals .= ", '$file_type'";
+        }
+    }
     
 
     if (!isset ($Meta_1) || strlen(trim($Meta_1)) == 0){
@@ -234,9 +305,10 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
             }
             $set .= "Meta_1 = '$Meta_1'";
         }else{
-        $cols .= ", Meta_1";
-        $vals .= ", '$Meta_1'";
-    }}
+            $cols .= ", Meta_1";
+            $vals .= ", '$Meta_1'";
+        }
+    }
     
     if (!isset ($Meta_2) || strlen(trim($Meta_2)) == 0){
 
@@ -247,9 +319,10 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
             }
             $set .= "Meta_2 = '$Meta_2'";
         }else{
-        $cols .= ", Meta_2";
-        $vals .= ", '$Meta_2'";
-    }}
+            $cols .= ", Meta_2";
+            $vals .= ", '$Meta_2'";
+        }
+    }
     
     if (!isset ($Meta_3) || strlen(trim($Meta_3)) == 0){
 
@@ -260,9 +333,10 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
             }
             $set .= "Meta_3 = '$Meta_3'";
         }else{
-        $cols .= ", Meta_3";
-        $vals .= ", '$Meta_3'";
-    }}
+            $cols .= ", Meta_3";
+            $vals .= ", '$Meta_3'";
+        }
+    }
     
     if (!isset ($Meta_4) || strlen(trim($Meta_4)) == 0){
 
@@ -273,9 +347,10 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
             }
             $set .= "Meta_4 = '$Meta_4'";
         }else{
-        $cols .= ", Meta_4";
-        $vals .= ", '$Meta_4'";
-    }}
+            $cols .= ", Meta_4";
+            $vals .= ", '$Meta_4'";
+        }
+    }
     if (!isset ($Description) || strlen(trim($Description)) == 0){
 
     }else{
@@ -285,27 +360,49 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
             }
             $set .= "Description = '$Description'";
         }else{
-        $cols .= ", Description";
-        $vals .= ", '$Description'";
-    }}
+            $cols .= ", Description";
+            $vals .= ", '$Description'";
+        }
+    }
     if (!isset ($WhoCreate) || strlen(trim($WhoCreate)) == 0){
 
     }else{
         if ($edit){
+            if (isset($file_name)){
+                if($file_exist){
+                    // do nothing, filed only used when creating.
+                }else{
+                    $Itemcols .= ", WhoCreate";
+                    $Itemvals .= ", '$WhoCreate'";
+                }
+            }
             // do nothing, filed only used when creating.
         }else{
-        $cols .= ", WhoCreate";
-        $vals .= ", '$WhoCreate'";
-    }}
+            $cols .= ", WhoCreate";
+            $vals .= ", '$WhoCreate'";
+            $Itemcols .= ", WhoCreate";
+            $Itemvals .= ", '$WhoCreate'";
+        }
+    }
     if (!isset ($DateCreate) || strlen(trim($DateCreate)) == 0){
 
     }else{
         if ($edit){
+            if (isset($file_name)){
+                if($file_exist){
+                    // do nothing, filed only used when creating.
+                }else{
+                $Itemcols .= ", DateCreate";
+                $Itemvals .= ", '$DateCreate'";
+            }}
             // do nothing, filed only used when creating.
         }else{
-        $cols .= ", DateCreate";
-        $vals .= ", '$DateCreate'";
-    }}
+            $cols .= ", DateCreate";
+            $vals .= ", '$DateCreate'";
+            $Itemcols .= ", DateCreate";
+            $Itemvals .= ", '$DateCreate'";
+        }
+    }
 
         if (!isset ($WhoUpdate) || strlen(trim($WhoUpdate)) == 0){
 
@@ -315,9 +412,20 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
                 $set .= ', ';
             }
             $set .= "WhoUpdate = '$WhoUpdate'";
+            if (isset($file_name)){
+                if($file_exist){
+                    if (isset($Itemset) && strlen(trim($Itemset)) != 0){
+                        $Itemset .= ', ';
+                    }
+                    $Itemset .= "WhoUpdate = '$WhoUpdate'";
+                }else{
+                    // do nothing, filed not used when creating.
+                }
+            }
         }else{
-            // do nothing, filed only used when creating.
-    }}
+            // do nothing, filed not used when creating.
+        }
+    }
     if (!isset ($DateUpdate) || strlen(trim($DateUpdate)) == 0){
 
     }else{
@@ -326,9 +434,20 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
                 $set .= ', ';
             }
             $set .= "DateUpdate = '$DateUpdate'";
+                        if (isset($file_name)){
+                if($file_exist){
+                    if (isset($Itemset) && strlen(trim($Itemset)) != 0){
+                        $Itemset .= ', ';
+                    }
+                    $Itemset .= "DateUpdate = '$DateUpdate'";
+                }else{
+                    // do nothing, filed not used when creating.
+                }
+            }
         }else{
-            // do nothing, filed only used when creating.
-    }}
+            // do nothing, filed not used when creating.
+        }
+    }
 
 
     if (!isset ($Date) || strlen(trim($Date)) == 0){
@@ -340,11 +459,12 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
             }
             $set .= "Date = '$Date'";
         }else{
-        $cols .= ", Date";
-        $vals .= ", '$Date'";
-    }}
+            $cols .= ", Date";
+            $vals .= ", '$Date'";
+        }
+    }
 
-        if (!isset ($Duration) || strlen(trim($Duration)) == 0){
+    if (!isset ($Duration) || strlen(trim($Duration)) == 0){
 
     }else{
         if ($edit){
@@ -353,9 +473,10 @@ if (!isset ($file_name) || strlen(trim($file_name)) == 0){
             }
             $set .= "Duration = '$Duration'";
         }else{
-        $cols .= ", Duration";
-        $vals .= ", '$Duration'";
-    }}
+            $cols .= ", Duration";
+            $vals .= ", '$Duration'";
+        }
+    }
 
 if (!isset ($filetime) || strlen(trim($filetime)) == 0){
 
@@ -365,10 +486,24 @@ if (!isset ($filetime) || strlen(trim($filetime)) == 0){
                 $set .= ', ';
             }
             $set .= "FileTime = '$filetime'";
+            if (isset($file_name)){
+                if($file_exist){
+                    if (isset($Itemset) && strlen(trim($Itemset)) != 0){
+                        $Itemset .= ', ';
+                    }
+                    $Itemset .= "FileTime = '$filetime'";
+                }else{
+                    $Itemcols .= ", FileTime";
+                    $Itemvals .= ", '$filetime'";
+                }
+            }
         }else{
-        $cols .= ", FileTime";
-        $vals .= ", '$filetime'";
-    }}
+            $cols .= ", FileTime";
+            $vals .= ", '$filetime'";
+            $Itemcols .= ", FileTime";
+            $Itemvals .= ", '$filetime'";
+        }
+    }
  
 // Add / update file to databse :
     $db = "tblattachment";
@@ -379,15 +514,29 @@ if (!isset ($filetime) || strlen(trim($filetime)) == 0){
         $where = "UUID = '$ID'";
         $limit = '1';
         $result = SQLU($db, $set, $where, $limit, $die);
+        if (isset($file_name)){
+            $Itemdb = "tblattachmentItems";
+            if($file_exist){
+                //update attachemnt
+                $itemwhere = "file_name = '$file_name'";
+                $resultItem = SQLU($Itemdb, $Itemset, $itemwhere, $limit, $die);
+            }else{
+                //add new attachemnt
+                $Itemcols .= ", AttachmentUUID";
+                $Itemvals .= ", '$ID'";
+                $resultItem = SQLI($Itemdb, $Itemcols, $Itemvals, $die, null, null, null);
+            }
+        }
     }else{
         $result = SQLI($db, $cols, $vals, $die, null, null, null);
+        $Itemcols .= ", AttachmentUUID";
+        $Itemvals .= ", '$result'";
+        $Itemdb = "tblattachmentItems";
+        $resultItem = SQLI($Itemdb, $Itemcols, $Itemvals, $die, null, null, null);
     }
 
 // end security check
 }else{
-echo parameters('PermissionsMessage');
+    echo parameters('PermissionsMessage');
 }
-?> 
-
-
-
+?>

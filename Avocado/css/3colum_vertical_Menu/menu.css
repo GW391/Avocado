@@ -1,407 +1,334 @@
-/*large screen */
+/* =========================================================
+   LARGE SCREENS (Desktop)
+   ========================================================= */
 @media only screen and (min-width: 1025px) {
-#Menucontainer {
-  width: 19%;
-  position: fixed;
-  text-align: left;
-  top: 50px;
-  display: block;
-  float: left;
-  overflow: visible;
- /* background: rgba(255, 165, 0, 1);*/
-  background: rgba(247, 249, 251, 1.1);
-}
 
-#menu {
-    /*background: rgba(255, 165, 0, 0.73);*/
-    background: rgba(247, 249, 251, 1.1);
+  #Menucontainer {
+    width: 15%;
+    position: fixed;
+    text-align: left;
+    top: 50px;
+    display: block;
+    float: left;
+    overflow: visible;
+    background: rgba(247, 249, 251, 1); /* FIX: alpha must be 0–1 */
+  }
+
+  #menu {
+    background: rgba(247, 249, 251, 1); /* FIX: alpha must be 0–1 */
     position: fixed;
     top: 100px;
     left: 1%;
-   /*transform: translate(-25%, -25%);
-    border-radius: 0px;
-    margin-left: auto;
-    margin-right: auto;*/
     z-index: 10;
-    display:block;
+    display: block;
     overflow: visible;
-    /*border: black;
-    border-style: solid;
-    border-width: 2px;
-    white-space: nowrap;*/
     float: left;
-}
+  }
 
-#menu ul {
+  #menu ul {
     list-style: none;
-  /*  margin: auto;*/
     margin-top: 1vw;
     margin-bottom: 1vw;
-    padding: 0vw;
- /* width: 11px;*/
+    padding: 0;
     border-radius: 15px;
-/*  transition: 200ms ease all;*/
-/*background: rgba(255, 165, 0, 0.1);*/
-background: rgba(247, 249, 251, 1.1);
-}
-
-#menu a, #menu h2 {
-    font-weight: bold;
-    font-size: 20px;
-    font-size: 2vw;
-    display: block;
-    border-width: 2px 2px 2px 2px;
-    border-style: hidden;
-    margin: auto;
-    padding-right: 50px;
-    margin: 0px;
-    border-radius: 30px;
-}
-
-#menu h2 {
-    text-transform: uppercase;
-    border-radius: 15px;
-}
-
-#menu a {
-    text-decoration: none;
-    text-align: justify;
-    border-radius: 0px;
-}
-
-#menu a:hover {
-    transition: 300ms ease-in;
-
-}
-
-#menu #selected a {
-    transition: 300ms ease-in;
-}
-
-/* position the popout */
-
-#menu li {position: initial;}
-
-#menu ul {
+    background: rgba(247, 249, 251, 1); /* FIX */
     z-index: 1;
     width: 103%;
-}
+  }
 
-#menu ul ul {
-  position: absolute;
-  margin-left: 80%;
-  margin-top: -2.2vw; /*-22*/
-    z-index: 500;
-   /* left: 100%;
-    float: outside;
-    top: -20px;*/
-    width: 230%;
-   filter:alpha(opacity=95);
-    -moz-opacity:0.95;
-    -khtml-opacity: 0.95;
-    opacity: 0.95;
-}
-#menu ul ul a {
+  #menu a,
+  #menu h2 {
+    font-weight: bold;
+    font-size: 30px; /* keep one; you had 20px + 2vw */
+    display: block;
+    border-style: hidden;
+    margin: 0;
+    padding-right: 50px;
+    border-radius: 30px;
+  }
 
-}
+  #menu h2 {
+    text-transform: uppercase;
+    border-radius: 15px;
+  }
 
-#menu ul ul a:hover {
+  #menu a {
+    text-decoration: none;
+    text-align: justify;
+    border-radius: 0;
+  }
+
+  #menu a:hover,
+  #menu #selected a {
     transition: 300ms ease-in;
-}
+  }
 
-#menu ul ul ul {
-    /*top: -20px;*/
+  /* Desktop popout submenus */
+  #menu li { position: initial; }
+
+  #menu ul ul {
+    position: absolute;
+    margin-left: 80%;
+    margin-top: -2.2vw;
+    z-index: 500;
+    width: 230%;
+    opacity: 0.95;
+  }
+
+  #menu ul ul ul {
     left: -20%;
     width: 100%;
-}
-
-/* hiding the Hovers */
-
-div#menu ul ul,
-div#menu ul li:hover ul ul,
-div#menu ul ul li:hover ul ul
-{display: none;
-transition: 300ms ease-in;
-}
-
-div#menu ul li:hover ul,
-div#menu ul ul li:hover ul,
-div#menu ul ul ul li:hover ul
-{display: block;
-transition: 300ms ease-in;
-}
-
-.box {
-  display: none;
-}
-#menu .close {
-  display: none;
-}
-
-.collapsibleList label {
-  display: none;
-}
-
-.collapsibleList li > input + * {
- display: none;
-}
-.collapsibleList li > input {
- display: none;
-}
-
-/*Close large screen */
-}
-
-/*Small screen */
-
-@media only screen and (max-device-width: 1024px) and (orientation: landscape), (max-width: 1025px){
-    
-    #menu1{
-
-    }
-h1 {
-  text-align: center;
-  margin: 10px 0;
-}
-
-.box {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 5px;
-  border-width: 1px; 
-  border-style: solid;
-  text-align: right;
-  z-index: -1;
-}
-
-.menuicon_container {
-  position: absolute;
-  cursor: pointer;
-  opacity: 100;
-  width: 35px;
-  transition: 0.8s;
-  top: 0px;
-  left: 3px;
-}
-.menuicon_menu-Line {
-  width: 35px;
-  height: 5px;
-  margin: 6px 0;
-  border-radius: 50px/50px;
- }
-
-.menuicon_container:hover {
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
-.menucloseicon_container {
-  position: fixed;
-  cursor: pointer;
-  opacity: 100;
-  width: 35px;
-  transition: 0.8s;
-  top: -25px;
-  left: -10px;
-   
-}
-.menucloseicon_menu-Line1 {
-  width: 35px;
-  height: 5px;
-  margin: 6px 0;
-  border-radius: 50px/50px;
-  -webkit-transform:
-            translateY(-20px)
-            translateX(7px)
-            rotate(45deg); 
-  position: absolute;
-  top: 15px;
-  left: 5px;
- }
-
- .menucloseicon_menu-Line2 {
-     float: top;
-    position: absolute;
-    top: 0px;
-  width: 35px;
-  height: 5px;
-  margin: 6px 0;
-  border-radius: 50px/50px;
-  -webkit-transform:
-            translateY(-20px)
-            translateX(7px)
-            rotate(-45deg); 
-  top: 15px;
-  left: 5px;
-  position: absolute;
- }
-
-.button {
-  position: relative;
-  top: 0px;
-  right: 98%;
-  padding: 8px;
-  border-width: 0px;
-  border-style: solid;
-  border-radius: 20px/50px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.1s ease-out;
-  font-size: 20px;
-  font-weight: bold;
-}
-.button:hover {
-}
-
-.Menucontainer {
-  position: absolute;
-  top: 40px;
-  bottom: 0px;
-  left: 0;
-  display: none;
-  opacity: 0;
-  z-index: 1;
-  width:30%;
-}
-.Menucontainer:target {
-  display: block;
-  opacity: 1;
-}
-
-#menu {
-  margin: 0px;
-  padding: 0px;
-  border-radius: 5px;
-  width: 100%;
-  position: relative;
-  transition: all .1s ease-in-out;
-  font-size: 20px;
-  font-weight: bold;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-.menu ul a:hover {
-}
-.collapsibleList label:hover {
-}
-
-
-@media only screen and (max-device-width: 700px), (max-width: 700px){
-  .box{
-    width: 100%;
   }
-  .Menucontainer {
-      width: 100%;
+
+  /* Desktop hover hide/show */
+  div#menu ul ul,
+  div#menu ul li:hover ul ul,
+  div#menu ul ul li:hover ul ul {
+    display: none;
+    transition: 300ms ease-in;
+  }
+
+  div#menu ul li:hover ul,
+  div#menu ul ul li:hover ul,
+  div#menu ul ul ul li:hover ul {
+    display: block;
+    transition: 300ms ease-in;
+  }
+
+  /* Desktop-only hidden UI */
+  .box,
+  #menu .close,
+  .collapsibleList label,
+  .collapsibleList li > input,
+  .collapsibleList li > input + * {
+    display: none;
   }
 }
 
-@media only screen and (max-device-width:900px) and (min-device-width: 700px), (max-width: 900px) and (min-width: 700px){
-  .box{
-    width: 100%;
-  }
-  #menu{
-    width: 100%;
-    
-  }
-  .Menucontainer {
-    width: 50%;
-   
-  }
-}
 
-#menu ul a {
-    font-weight: bold;
-    font-size: 20px;
-    top: 0%;
-    left: 0%;
-    /*transform: translate(-50%, -50%);*/
-    z-index: 10;
+/* =========================================================
+   SMALL SCREENS (Mobile/Tablet)  <= 1025px
+   ========================================================= */
+@media only screen and (max-device-width: 1024px) and (orientation: landscape),
+       (max-width: 1025px) {
+
+  h1 {
     text-align: center;
+    margin: 10px 0;
+    z-index: 1000000;
+    font-size: 3.1vh;
+  }
+
+  /* Top bar */
+  .box {
+    position: fixed;          /* FIX: was absolute with z-index:-1 (easy to lose) */
+    top: 0;
+    left: 0;
     width: 100%;
-    text-decoration: none;
-}
+    margin: 0;
+    padding: 5px;
+    border: 1px solid;
+    text-align: right;
+    z-index: 10;
+    min-height: 35x;
+    display: flex
+    padding: 14px 10px !important;
+  }
 
-#menu ul{
-  margin: 0px auto;
-  padding: 1px;
-  border-radius: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  list-style: none;  
-  width: 100%;
-}
+  /* Hamburger (open) icon */
+  .menuicon_container {
+    position: fixed;
+    cursor: pointer;
+    opacity: 1;               /* FIX: was 100 (invalid) */
+    width: 35px;
+    transition: 0.8s;
+    top: 8px;
+    left: 8px;
+    z-index: 1000;
+    display: block;
+  }
 
-#menu li{
-  margin: 0px auto;
-  padding: 1px;
-  border-radius: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  width: 100%;
-}
+  .menuicon_menu-Line {
+    width: 35px;
+    height: 5px;
+    margin: 6px 0;
+    border-radius: 50px/50px;
+  }
 
-#menu li:hover {
-}
+  .menuicon_container:hover {
+    transform: rotate(90deg);
+  }
 
-#menu li li{
-  margin: 0px auto;
-  padding: 0px;
-  border-radius: 0px;
- /* background-image: linear-gradient(to bottom, #6941E0 0%, #41B9E0 100%);*/
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-}
+  /* Close (X) icon container */
+  .menucloseicon_container {
+    position: fixed;
+    cursor: pointer;
+    opacity: 1;               /* FIX: was 100 (invalid) */
+    width: 35px;
+    transition: 0.8s;
+    top: 24px;                 /* FIX: was -25px (off-screen on some sizes) */
+    left: -10px;                /* FIX: was -10px */
+    z-index: 2000;
+    display: none;            /* shown when menu open */
+  }
 
+  .menucloseicon_menu-Line1,
+  .menucloseicon_menu-Line2 {
+    width: 35px;
+    height: 5px;
+    margin: 6px 0;
+    border-radius: 50px/50px;
+    position: absolute;
+    top: 15px;
+    left: 5px;
+  }
 
-#menu ul li li a {
+  .menucloseicon_menu-Line1 {
+    transform: translateY(-20px) translateX(7px) rotate(45deg);
+  }
+
+  .menucloseicon_menu-Line2 {
+    transform: translateY(-20px) translateX(7px) rotate(-45deg);
+  }
+
+  /* Menu open/close container (your mobile uses .Menucontainer) */
+  .Menucontainer {
+    position: fixed;     /* FIX: pin to viewport */
+    top: 40px;           /* below the .box bar */
+    bottom: 0;
+    left: 0;
+    display: none;
+    opacity: 0;
+    z-index: 999;
+    width: 30%;
+    overflow: auto;
+  }
+
+  .Menucontainer:target {
+    display: block;
+    opacity: 1;
+  }
+
+  /* Pin the menu to the corner (remove drift from left:50% translate) */
+  #menu {
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    width: 100%;
+    position: relative;
+    transition: all .1s ease-in-out;
+    font-size: 20px;
+    font-weight: bold;
+    left: 0;                 /* FIX */
+    transform: none;         /* FIX */
+  }
+
+  /* Base list styling */
+  #menu ul {
+    margin: 0 auto;
+    padding: 1px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    list-style: none;
+    width: 100%;
+  }
+
+  #menu li {
+    margin: 0 auto;
+    padding: 1px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+  }
+
+  /* Links */
+  #menu ul a {
     font-weight: bold;
     font-size: 20px;
-    top: 0%;
-    left: 0%;
-    transform: translate(0%, 0%);
+    z-index: 10;
+    text-align: left;          /* FIX: more stable with toggle on right */
+    width: 100%;
     text-decoration: none;
-}
+    display: block;
+    padding: 10px 3rem 10px 10px; /* FIX: reserve space for the toggle */
+  }
 
-#menu h2 {
-  margin-top: 0;
-}
+  /* Sub-items */
+  #menu li li {
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+  }
 
-#menu .close {
-  position: absolute;
-  top: -40px;
-  left: -2px;
-  width: 45px;
-  height: 45px;
-  transition: all 10ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  z-index: 0;
+  #menu ul li li a {
+    font-weight: bold;
+    font-size: 20px;
+    transform: translate(0, 0);
+    text-decoration: none;
+  }
 
-  
-}
-#menu .close:hover {
-}
-#menu .content {
-  max-height: 100%;
+  #menu h2 {
+    margin-top: 0;
+  }
 
-}
-.collapsibleList li > img:checked + * {
+  /* Close link inside menu (if you use it) */
+  #menu .close {
+    position: fixed;     /* FIX: keep visible in the corner */
+    top: 8px;
+    left: 8px;
+    width: 45px;
+    height: 35px;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 3000;
+    display: none;       /* shown when menu open */
+    line-height: 45px;
+    text-align: center;
+  }
+
+  #menu .content {
+    max-height: 100%;
+  }
+
+  /* ---------------------------------------------------------
+     MOBILE SUBMENU ALIGNMENT FIX (the important part)
+     - Stop nested ULs acting like popouts
+     - Put the toggle label at a consistent right position
+     --------------------------------------------------------- */
+
+  /* Let nested menus flow (no absolute popout behaviour) */
+  #menu ul ul,
+  #menu ul ul ul {
+    position: static;
+    width: 100%;
+    margin: 0;
+    padding-left: 1rem;  /* indent */
+  }
+
+  #menu ul ul ul {
+    padding-left: 2rem;
+  }
+
+  /* Collapsible logic: hide/show based on checkbox */
+  .collapsibleList li > input { display: none; }
+  .collapsibleList li > input + * { display: none; }
+  .collapsibleList li > input:checked + * { display: block; }
+
+  .collapsibleList li > img:checked + * {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-  
+
 .collapsibleList li > input + * {
  display: none;
 }
- 
+
 .collapsibleList li > input:checked + * {
  display: block;
 }
@@ -420,42 +347,68 @@ h1 {
  display: none;
 }
 
-.collapsibleList label {
-  position: relative;
-  top: 0px;
-  float: right;
-  padding-right: 10%;
-  padding-left: 75%;
-  transition: all 20ms;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  list-style: none;
-  transform: translate(0%, -100%);
-  overflow:hidden;
-}
-.collapsibleList label:hover {
+  /* FIX: remove drift from percentage padding + translate */
+  .collapsibleList li {
+    position: relative;
+  }
 
-}
-.collapsibleList a:hover {
+  .collapsibleList label {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    float: none;
+    padding: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: grab;
+    overflow: visible;
+    z-index: 1500;
+  }
 
+  .dheader { display: none; }
+
+  /* ---------------------------------------------------------
+     ICON TOGGLING WHEN MENU IS OPEN
+     - hide hamburger, show close when .Menucontainer is :target
+     --------------------------------------------------------- */
+
+  /* menu open => hide hamburger (covers both inside + sibling cases) */
+  .Menucontainer:target .menuicon_container,
+  .Menucontainer:target ~ .menuicon_container {
+    display: none !important;
+  }
+
+  /* menu open => show close icon(s) */
+  .Menucontainer:target .menucloseicon_container,
+  .Menucontainer:target #menu .close {
+    display: block !important;
+  }
 }
 
-.collapsibleList li li> input + * {
- display: none;
-}
- 
-.collapsibleList li li> input:checked + * {
- display: block;
+
+/* =========================================================
+   BREAKPOINTS (MUST NOT be nested inside another @media)
+   ========================================================= */
+
+/* Phones */
+@media only screen and (max-device-width: 700px), (max-width: 700px) {
+  .box { width: 100%; }
+  .Menucontainer { width: 100%; }
 }
 
-.collapsibleList li li> input {
- display: none;
+/* Small tablets */
+@media only screen and (max-device-width: 900px) and (min-device-width: 700px),
+       (max-width: 900px) and (min-width: 700px) {
+  .box { width: 100%; }
+  #menu { width: 100%; }
+  .Menucontainer { width: 50%; }
 }
 
-.dheader {
-    display: none;
-}
-}
+/* Mobile: make the top bar deeper + keep the menu pushed below it */
+@media only screen and (max-width: 1025px) {
 
+  .box{
+    min-height: 35px !important;     /* set a consistent bar height */
+  }
+}

@@ -16,10 +16,18 @@ if (isset($DatabasePasswordE)){
   $SaveConfig = True;
 }
 
+$DataBaseName = validate($_POST['DatabaseName'],'hd');
+$DatabaseAdminName = validate($_POST['DatabaseAdminUserName'],'hd');
+$DatabaseAdminPassword = validate($_POST['DatabaseAdminPassword'],'hd');
+
+echo "DataBaseName: " . $DataBaseName . "<br />";
+echo "DatabaseServerName: " . $DatabaseServerName . "<br />";
+echo "DataBaseServerPort: " . $DatabaseServerPort . "<br />";
+
 $con = mysqli_connect($DatabaseServerName . ":" . $DatabaseServerPort, $DatabaseAdminName, $DatabaseAdminPassword);
 
 // Create Database
-        $sql="CREATE DATABASE IF NOT EXISTS $DataBaseName /*!40100 DEFAULT CHARACTER SET latin1 */";
+        $sql="CREATE DATABASE /*!32312 IF NOT EXISTS*/ `$DataBaseName` /*!40100 DEFAULT CHARACTER SET latin1*/";
 
         mysqli_query($con, $sql);
       if (!$con) {
@@ -28,7 +36,7 @@ $con = mysqli_connect($DatabaseServerName . ":" . $DatabaseServerPort, $Database
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "DB Crated <br />";
+    echo "Database $DataBaseName Crated <br />";
 }
 
 // insert tables into Database
@@ -36,6 +44,7 @@ require 'template/CreateTables.php';
 
 // Create new user for new Database
 
+// $sql_CreateUser = "CREATE USER $DatabaseUserName@localhost IDENTIFIED BY $DatabasePassword;";
 $sql_CreateUser = "CREATE USER '$DatabaseUserName'@'localhost' IDENTIFIED BY '$DatabasePassword';";
 
 mysqli_query($con, $sql_CreateUser);
@@ -45,10 +54,10 @@ mysqli_query($con, $sql_CreateUser);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "DB user Crated <br />";
+    echo "Database user $DatabaseUserName Crated <br />";
 }
 
-$sql_SetPermissions = "GRANT ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, EXECUTE, INDEX, INSERT, LOCK TABLES, REFERENCES, SELECT, SHOW VIEW, UPDATE ON $DataBaseName.* TO '$DatabaseUserName'@'localhost'";
+$sql_SetPermissions = "GRANT ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, EXECUTE, INDEX, INSERT, LOCK TABLES, REFERENCES, SELECT, SHOW VIEW, UPDATE ON `$DataBaseName`.* TO '$DatabaseUserName'@'localhost'";
 
 // 
 
@@ -59,12 +68,12 @@ mysqli_query($con, $sql_SetPermissions);
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }else{
-    echo "User Permissions set<br />";
+    echo "User Permissions for user $DatabaseUserName set<br />";
 }
 
 // Add default Data
 include 'template/default/SettingsData.php';
-$sql_InsertSettingsData = "INSERT INTO $DataBaseName.tblsettings VALUES " . $tblSettingsData;
+$sql_InsertSettingsData = "INSERT INTO `$DataBaseName`.tblsettings VALUES " . $tblSettingsData;
 
 mysqli_query($con, $sql_InsertSettingsData);
       if (!$con) {
@@ -77,7 +86,7 @@ mysqli_query($con, $sql_InsertSettingsData);
 }
 
 include 'template/default/MenuData.php';
-$sql_InsertMenuData = "INSERT INTO $DataBaseName.tblmenu VALUES " . $tblMenuData;
+$sql_InsertMenuData = "INSERT INTO `$DataBaseName`.tblmenu VALUES " . $tblMenuData;
 
 mysqli_query($con, $sql_InsertMenuData);
       if (!$con) {

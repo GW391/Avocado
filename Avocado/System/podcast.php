@@ -12,7 +12,7 @@ div.IconLink {
   margin: 0px;
   border: 0px solid #ccc;
   float: left;
-  width: 50%;
+ /* width: 25%;*/
   border-radius: 25px;
   text-align: center;
 }
@@ -107,6 +107,13 @@ if(isset($_REQUEST['delete']) && $_REQUEST['delete'] !=null){
     // get reocrd ID from delete
     $UUIDDelete = validate(decryptfe($_REQUEST['delete']),'hd');
 
+    // get podcast folder
+    if (null == (parameters('Podcast_Folder')) || strlen(parameters('Podcast_Folder')) == 0){
+        $locationDelete = "podcast";
+    }else{
+        $locationDelete = parameters('Podcast_Folder');
+    }
+
     //Find Filename
     $SelectDelete = "UUID, name, file_name, type, size, file_type, Meta_1, Meta_2, Meta_3, Meta_4, Description, Date, deleted";
     $FromDelete = "tblattachment";
@@ -116,6 +123,31 @@ if(isset($_REQUEST['delete']) && $_REQUEST['delete'] !=null){
     $sortDelete = null;
     $PodcastDeleteResult = SQL($SelectDelete, $FromDelete, $dieDelete, $whereDelete, $LimitDelete, null, $sortDelete);
 
+    //Find Filename
+    $SelectItemDelete = "UUID, AttachmentUUID, file_name, type, size, file_type, deleted";
+    $FromItemDelete = "tblattachmentItems";
+    $whereItemDelete = "AttachmentUUID = $UUIDDelete";
+    $LimitItemDelete = null;
+    $PodcastItemDeleteResult = SQL($SelectItemDelete, $FromItemDelete, $dieDelete, $whereItemDelete, $LimitItemDelete, null, $sortDelete);
+    $PotcastItemDelete_Rows = num_rows($PodcastItemDeleteResult);
+
+        //echo $Potcast_Rows;
+        if ($PotcastItemDelete_Rows > 0){
+
+            // find file location
+            while ($PodCastItemDeleteRow = fetch_array($PodcastItemDeleteResult)){
+                $File_NameItemDelete = validate($PodCastItemDeleteRow['file_name'],'hd');
+
+                // remove associated files
+                unlink("$locationDelete/" . $File_NameItemDelete); // remove file associate with record
+                $deleted = "1";
+                $whereDelete = "AttachmentUUID = '$UUIDDelete'";
+                $setItemDelete = "Deleted = '$deleted'";
+                // update database with delete flag
+                SQLU($FromItemDelete, $setItemDelete, $whereItemDelete, $LimitItemDelete, $dieDelete);  // update SQL to delete record
+            }
+        }
+
     $PotcastDelete_Rows = num_rows($PodcastDeleteResult);
     //echo $Potcast_Rows;
     if ($PotcastDelete_Rows > 0){
@@ -123,18 +155,14 @@ if(isset($_REQUEST['delete']) && $_REQUEST['delete'] !=null){
         // find file location
         while ($PodCastDeleteRow = fetch_array($PodcastDeleteResult)){
             $File_NameDelete = validate($PodCastDeleteRow['file_name'],'hd');
-        if (null == (parameters('Podcast_Folder')) || strlen(parameters('Podcast_Folder')) == 0){
-            $locationDelete = "podcast";
-        }else{
-            $locationDelete = parameters('Podcast_Folder');
-        }
 
-        unlink("$locationDelete/" . $File_NameDelete); // remove file associate with record
-        $deleted = "1";
-        $whereDelete = "UUID = '$UUIDDelete'";
-        $setDelete = "Deleted = '$deleted'";
-        SQLU($FromDelete, $setDelete, $whereDelete, $LimitDelete, $dieDelete);  // update SQL to delete record
-
+            // remove associated files
+            unlink("$locationDelete/" . $File_NameDelete); // remove file associate with record
+            $deleted = "1";
+            $whereDelete = "UUID = '$UUIDDelete'";
+            $setDelete = "Deleted = '$deleted'";
+            // update database with delete flag
+            SQLU($FromDelete, $setDelete, $whereDelete, $LimitDelete, $dieDelete);  // update SQL to delete record
         }
     }
 }
@@ -147,21 +175,34 @@ if(isset($_REQUEST['delete']) && $_REQUEST['delete'] !=null){
 if(isset($_REQUEST['Month']) && $_REQUEST['Month'] !=null){
     $History = validate($_REQUEST['Month'],'n');
 }
+if(isset($_REQUEST['Filter1']) && $_REQUEST['Filter1'] !=null){
+    $Filter1 = validate($_REQUEST['Filter1'],'hd');
+}
+
 // build podcast URL
 $URL = curURL(parameters('SSL'), 0);
-//$PodCast = PodCastURL();
+
+ if (parameters('developer_mode')){
+    var_dump(parse_url($URL));
+ }
+
+
 $PodCast = $URL;
 //add the xml 
 $check_paramater = parameters('Podcast_URL');
 if (!isset($check_paramater) || strlen($check_paramater) == 0){
-    $PodCast .= '/rss.php?feed=podcast';
+    if (substr($PodCast, -1) != "/") {
+       // no '/' found in PodCast add it;
+       $PodCast .= '/';
+    }
+    $PodCast .= 'rss.php?feed=podcast';
 }
 //display podcast URL
 ?>
 Podcast URL:  <a href="<?php echo validate($PodCast, 'hd'); ?>"><?php echo validate($PodCast, 'hd'); ?></a><br />
 </p>
 <?php 
-// display podcast text paraaeter
+// display podcast text parameter
 if (parameters('Podcast_Text')){
     echo "<p>";
     echo validate(parameters('Podcast_Text'),'hd');
@@ -177,11 +218,16 @@ $Select = "UUID, name, file_name, duration, type, size, file_type, Meta_1, Meta_
 $From = "tblattachment";
 $die = "Sorry something went wrong, please try again later";
 $where = "type = 'podcast' && deleted != 1";
+    $Limit = parameters('Podcast_Limit');
 if (isset($History)){
  $where .= " and Month(Date) = $History";
-}else{
-    $Limit = parameters('Podcast_Limit');
+ $Limit = null;
 }
+if (isset($Filter1)){
+ $where .= " and Meta_1 = $Filter1";
+ $Limit = null;
+}
+
 $sort = "Date DESC";
 $PodcastResult = SQL($Select, $From, $die, $where, $Limit, null, $sort);
 
@@ -216,16 +262,25 @@ while ($PodCastHistory = fetch_array($HistoryResult)){
 //    echo $monthNum;
     $monthName = date('M', mktime(0, 0, 0, $monthNum, 10)); // March
 //    echo $monthName;
-    echo "<a href=\"?target=$target";
+    echo "<a href=\"?";
+    if(isset($target)){echo "target=$target";}
     if(isset($section)){echo "&amp;section=$section";}
     if(isset($subsection)){echo "&amp;subsection=$subsection";}
     if (isset($History) && $History == $monthNum ){
-      echo "&amp;Month=\">" . $monthName . "<sup>x</sup></a> ";
-    }else{
-    echo "&amp;Month=$monthNum\">" . $monthName . "</a> ";
-}}
+        echo "&amp;Month=\">" . $monthName . "<sup>x</sup></a> ";
+        }else{
+        echo "&amp;Month=$monthNum\">" . $monthName . "</a> ";
+        }
+}
 echo "</td></tr></table></div>";
 echo "<br />";
+/*
+echo '<div id="edit">';
+echo "<table><tr><th>Filters: </th><th>" . parameters('Podcast_Meta_1') . " </th><td>";
+
+echo "</td></tr></table></div>";
+echo "<br />";
+*/
 if (isset($PodcastResult)){
 $Potcast_Rows = num_rows($PodcastResult);
 //echo $Potcast_Rows;
@@ -253,12 +308,30 @@ if (null == (parameters('Podcast_Folder')) || strlen(parameters('Podcast_Folder'
     $location = parameters('Podcast_Folder');
 }
 // check if the podcast file exists and only show if it does
-if(file_exists("$location/" . $File_Name )){
+$File_Exists = file_exists("$location/" . $File_Name );
+
+$UUID = $PodCastRow['UUID'];
+$SelectItem = "UUID, AttachmentUUID, file_name, type, size, file_type";
+$FromItem = "tblattachmentItems";
+$whereItem = "AttachmentUUID = '$UUID' && deleted != 1";
+$LimitItem = null;
+$PodcastItemResult = SQL($SelectItem, $FromItem, $die, $whereItem, $LimitItem, null, $sort);
+
+if (num_rows($PodcastItemResult) > 0 && !$File_Exists){
+    echo "File not exist checking items table";
+while ($PodCastItemRow = fetch_array($PodcastItemResult)){
+    $file_type = validate($PodCastItemRow['file_type'],'hd');
+    $Item_file_name = validate($PodCastItemRow['file_name'],'hd');
+    $ftype = substr($file_type,0,strpos($file_type,"/"));
+    $File_Exists = file_exists("$location/" . $Item_file_name );
+}
+}
+if($File_Exists){
 ?>
 
 <div class="podcastInfoDiv">
 
-<table width="100%"> <!--class="sermons"-->
+<table width="100%" border="0">
 <tr>
 <td colspan="2" align="center">
 <strong>
@@ -270,16 +343,45 @@ echo $DateTime->format('d-m-Y');
 if (isset($Title) && $Title !=NULL){
     echo " - ". $Title;
 }
+
+$UUID = $PodCastRow['UUID'];
+$SelectItem = "UUID, AttachmentUUID, file_name, type, size, file_type";
+$FromItem = "tblattachmentItems";
+$whereItem = "AttachmentUUID = '$UUID' && deleted !=1";
+$LimitItem = null;
+$PodcastItemResult = SQL($SelectItem, $FromItem, $die, $whereItem, $LimitItem, null, $sort);
+
 ?>
 
 </strong>
 
 </td>
 </tr>
-<tr width="30%">
+<tr width="20%">
 <td>
-<a href="download.php?target=podcast&amp;d=<?php echo $File_Name; ?>"><?php new Icon("download")?></a><br />
+
+<?php
+
+if (num_rows($PodcastItemResult) > 0){
+while ($PodCastItemRow = fetch_array($PodcastItemResult)){
+    $file_type = validate($PodCastItemRow['file_type'],'hd');
+    $file_name = validate($PodCastItemRow['file_name'],'hd');
+    $ftype = substr($file_type,0,strpos($file_type,"/"));
+    if(file_exists("$location/" . $file_name )){
+    ?>
+    <a href="download.php?target=podcast&amp;d=<?php echo $file_name; ?>"><?php new Icon("download". $ftype)?></a><br />
+       <a href="?target=<?php echo $target; ?>&amp;section=play&amp;i=<?php echo urlencode(encryptfe(validate($PodCastItemRow['UUID'],'hd'))); ?>"><?php new Icon("play" . $ftype)?></a><br />
+    <?php
+    }
+}
+}else{
+?>
+<a href="download.php?target=podcast&amp;d=<?php echo $file_name; ?>"><?php new Icon("download")?></a><br />
 <a href="?target=<?php echo $target; ?>&amp;section=play&amp;d=<?php echo urlencode(encryptfe(validate($PodCastRow['UUID'],'hd'))); ?>"><?php new Icon("play")?></a><br />
+<?php
+
+}
+?>
 <?php
 // check if security allows for podcast edit, and if so display edit links.
 $security = new securityCheck(parameters('EditPodcastSecurity'));
@@ -338,29 +440,84 @@ if (isset($fsize) && $fsize !=NULL){
         echo "</tr>";
 }
 
+$UUID = $PodCastRow['UUID'];
+$SelectItem = "UUID, AttachmentUUID, file_name, type, size, file_type";
+$FromItem = "tblattachmentItems";
+$whereItem = "AttachmentUUID = '$UUID' && deleted != 1";
+$LimitItem = null;
+$PodcastItemResult = SQL($SelectItem, $FromItem, $die, $whereItem, $LimitItem, null, $sort);
+
+if (num_rows($PodcastItemResult) > 0){
+    $num_icons = num_rows($PodcastItemResult);
+    $security = new securityCheck(parameters('EditPodcastSecurity'));
+    if ($security->output)
+    {
+        $IconLinkWidth = (100/($num_icons+4))-$num_icons;
+    }else{
+        $IconLinkWidth = (100/($num_icons+2))-$num_icons;
+    }
+}else{
+    $security = new securityCheck(parameters('EditPodcastSecurity'));
+    if ($security->output)
+    {
+        $IconLinkWidth = 20;
+    }else{
+        $IconLinkWidth = 20;
+    }
+}
 ?>
 <tr>
 <td colspan = "2" align="center">
-<div class='IconLink'>
+
+<?php
+
+
+
+if (num_rows($PodcastItemResult) > 0){
+while ($PodCastItemRow = fetch_array($PodcastItemResult)){
+    $file_type = validate($PodCastItemRow['file_type'],'hd');
+    $file_name = validate($PodCastItemRow['file_name'],'hd');
+    $ftype = substr($file_type,0,strpos($file_type,"/"));
+    if(file_exists("$location/" . $file_name )){
+    ?>
+    <div class='IconLink' style="width: <?php echo $IconLinkWidth . "%"; ?>">
+        <a href="download.php?target=podcast&amp;d=<?php echo $file_name; ?>"><?php new Icon("download". $ftype)?></a><br />
+        </div>
+    <div class='IconLink' style="width: <?php echo $IconLinkWidth . "%"; ?>">
+       <a href="?target=<?php echo $target; ?>&amp;section=play&amp;i=<?php echo urlencode(encryptfe(validate($PodCastItemRow['UUID'],'hd'))); ?>"><?php new Icon("play" . $ftype)?></a>
+    </div>
+    <?php
+    }
+}
+}else{
+?>
+<div class='IconLink' style="width: <?php echo $IconLinkWidth . "%"; ?>">
 <a href="download.php?target=podcast&amp;d=<?php echo $File_Name; ?>"><?php new Icon("download")?></a>
 </div>
-<div class='IconLink'>
-<a href="?target=<?php echo $target; ?>&amp;section=play&amp;d=<?php echo urlencode(encryptfe(validate($PodCastRow['UUID'],'hd'))); ?>"><?php new Icon("play")?></a>
-</div>
+    <div class='IconLink' style="width: <?php echo $IconLinkWidth . "%"; ?>">
+        <a href="?target=<?php echo $target; ?>&amp;section=play&amp;d=<?php echo urlencode(encryptfe(validate($PodCastRow['UUID'],'hd'))); ?>"><?php new Icon("play")?></a>
+    </div>
+<?php
+
+}
+?>
+
+
+
 <?php
 // check if security allows for podcast edit, and if so display edit links.
 $security = new securityCheck(parameters('EditPodcastSecurity'));
 if ($security->output)
 {
 //if(security_check(parameters('EditPodcastSecurity'))){
-    echo '<div class=\'IconLink\'><a href="?target=System&amp;section=Settings&amp;subsection=podcastuploads&amp;edit=' . urlencode(encryptfe(validate($PodCastRow['UUID'],'hd'))) . '">';
+    echo '<div class=\'IconLink\'  style="width: ' . $IconLinkWidth . '%"><a href="?target=System&amp;section=Settings&amp;subsection=podcastuploads&amp;edit=' . urlencode(encryptfe(validate($PodCastRow['UUID'],'hd'))) . '">';
     new Icon("edit");
     echo '</a></div>';
-    echo '<div class=\'IconLink\'><a href="?';
+    echo '<div class=\'IconLink\'   style="width: ' . $IconLinkWidth . '%"><a href="?';
     if(isset($target)){ echo 'target=' . $target;}
     if(isset($section)){ echo '&amp;section=' . $section;}
     if(isset($subsection)){ echo '&amp;subsection=' . $subsection;}
-    echo '&amp;delete=' . urlencode((validate($PodCastRow['UUID'],'hd'))) . '">';new Icon("delete"); echo '</a></div>';
+    echo '&amp;delete=' . urlencode(encryptfe(validate($PodCastRow['UUID'],'hd'))) . '">';new Icon("delete"); echo '</a>';
 }
 ?>
 
@@ -390,7 +547,9 @@ echo "</table>";
 }
 }
 else{
+ //   OLD CODE - Commented out as I would like to make it work again
 
+/*
 //check for podcast files, specified by the filename being a date for the podcast file. 
 $today = new DateTime(date('d-m-Y'));
 $today->modify("+1 day");
@@ -414,6 +573,7 @@ if(file_exists($location . "/" . $var_sermon . ".mp3")){
 
 $Adjust++;
 }
+*/
 }
 
 ?>

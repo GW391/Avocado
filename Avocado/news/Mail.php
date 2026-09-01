@@ -83,7 +83,7 @@ echo "
 <div class='small' id='small'> Please enter the details of the message, you can use
   <ul>
     <li>:name to enter the subscribers names.</li>
-    <li>:unsubscribe to enter there personal unsubscribe link.</li>
+    <li>:unsubscribe to enter their personal unsubscribe link.</li>
     <li>:Organisation to enter your Organisation name.</li>
     <li>:IncYear to enter your Incorporated / Copyright year.</li>
   </ul>

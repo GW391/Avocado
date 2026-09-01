@@ -53,6 +53,7 @@ $die = 'Sorry there has been a problem please try again ';
 
 $result = SQLU($update, $set, $where, $limit, $die);
 
+    unset ($_SESSION[$name]);
 	echo "$name Updated <br />";
 }else{
 

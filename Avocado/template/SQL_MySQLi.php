@@ -1,6 +1,6 @@
 <?php
 // Read SQL Data
-function SQL($select, $from, $die, $where, $limit, $Group, $sort){
+function SQL($select, $from, $die="Sorry something went wrong, please try again later", $where=null, $limit=null, $Group=null, $sort=null, $left=null, $on=null){
 
 //if(parameters('developer_mode') == '1'){
 //    $die .= sqlerror($con);
@@ -45,12 +45,12 @@ try{
 }
 
 catch (mysqli_sql_exception $e) {
-    if(parameters('developer_mode') == '1'){
+    if(parameters('developer_mode')){
   echo "Error quering database: " . $e->getMessage();
-  logerror($die);
+ // logerror($die);
   }else{
       echo "Something has gone wrong, please try again later";
-      logerror($die);
+  //    logerror($die);
   }
 }
 
@@ -73,7 +73,7 @@ try{
     mysqli_query($con,"INSERT INTO $db ($cols) VALUES ($values)"); // or die(logerror($die));
 }
 catch (mysqli_sql_exception $e) {
-  if(parameters('developer_mode') == '1'){
+  if(parameters('developer_mode')){
     echo "Error Updating database: " . $e->getMessage();
   logerror($die);
   }else{
@@ -100,7 +100,7 @@ try{
     $result = mysqli_query($con,"$update"); // or die(logerror($die));
 }
 catch (mysqli_sql_exception $e) {
-      if(parameters('developer_mode') == '1'){
+      if(parameters('developer_mode')){
   echo "Error Updating database: " . $e->getMessage();
   logerror($die);
     }else{

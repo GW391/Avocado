@@ -28,11 +28,11 @@ $tblSettingsData = "(1,'IncYear','','',NULL,'',0,'1',10,'Organisation founding y
 <a href=\"?\"><img src=\"images/logo_mobile.png\" width=\"40\" hspace=\"0\" vspace=\"0\" border=\"0\" alt=\":Organisation Logo\" title=\":Organisation Logo\" /></a>
 </div>
 
-<h1>:Organisation</h1>','',NULL,'',0,'10',50,'Please enter any HTML for the header','','General'),
+<h1>:Organisation</h1>','',NULL,'',0,'H',50,'Please enter any HTML for the header','','General'),
     (18,'Podcast_Title','','',NULL,'',0,'1',50,'Enter the title for the Podcast page','','Podcast'),
     (19,'Podcast_URL','','',NULL,'',0,'1',50,'URL for podcast, build automatically, use this to overrise the automatic URL','','Podcast'),
     (20,'Podcast_Folder','','',NULL,'',0,'1',50,'Enter a value here to overrise the default forlder for postacsts.  The default is Podcasts.','','Podcast'),
-    (21,'Podcast_Text','','',NULL,'',0,'5',50,'Enter some informative test to descibe the podcast','','Podcast'),
+    (21,'Podcast_Text','','',NULL,'',0,'H',50,'Enter some informative test to descibe the podcast','','Podcast'),
     (22,'CalendarStyle','Week','',NULL,'',0,'D',10,'Select the default Calendar view','List\nCompactList\nCalendar\nDay\nWeek\nThreeMonth\nrss\nList2','Calendar'),
     (23,'SendNewsSecurity','Admin','',NULL,'',0,'D',20,'Assign who can Send News letters / See the news letter subscription list','parameter:Security','News'),
     (25,'NewsReg','0','',NULL,'',0,'B',0,'Can users sign up for news letter.','','News'),
@@ -77,9 +77,9 @@ All data is encrypted, and stored on a shared hosting server which is not contro
 For more information see our Privicy Notice
 </div>
 
-', NULL, NULL, NULL, '0', '10', '50', 'Enter a Data Usage Details', ' ', 'General'),
+', NULL, NULL, NULL, '0', 'H', '50', 'Enter a Data Usage Details', ' ', 'General'),
 (61, 'NewsDefaultSubject', NULL, NULL, NULL, NULL, '0', '1', '30', 'Enter the default subject to use for news letters', NULL, 'News'),
-(62, 'NewsDefaultMessage', NULL, NULL, NULL, NULL, '0', '10', '30', 'Enter the default message to use for news letters, use :name to enter the name of the recipient', NULL, 'News'),
+(62, 'NewsDefaultMessage', NULL, NULL, NULL, NULL, '0', 'H', '30', 'Enter the default message to use for news letters, use :name to enter the name of the recipient', NULL, 'News'),
 (63, 'NewsSubscribeConformationSubject', NULL, NULL, NULL, NULL, '0', '1', '30', NULL, ' ', 'News'),
 (64, 'NewsSubscriptionDefaultMessage', 'Dear  :name,
 
@@ -113,8 +113,8 @@ Please click the link below to reset your account details
 (85, 'Podcast_Explicit', '0', NULL, NULL, NULL, '0', 'B', '0', 'Is the podcast explicit.', NULL, 'Podcast'),
 (86, 'Podcast_category', '', NULL, NULL, NULL, '0', '3', '50', 'podcast category, add multiple categorys to new lines .', NULL, 'Podcast'),
 (87, 'Podcast_Language', '', NULL, NULL, NULL, '0', '1', '50', 'Enter the standard ISO lanage code for the podacst language, e.g. zh-hk for Hong Kong, en-gb for English Great Britain, etc. .', NULL, 'Podcast'),
-(88, 'version', '1.24.1', NULL, NULL, NULL, '0', 'R', '50', 'NULL', NULL, 'System'),
-(89, 'build', '2400331', NULL, NULL, NULL, '0', 'R', '50', 'NULL', NULL, 'System'),
+(88, 'version', '1.26.1', NULL, NULL, NULL, '0', 'R', '50', 'NULL', NULL, 'System'),
+(89, 'build', '20260831', NULL, NULL, NULL, '0', 'R', '50', 'NULL', NULL, 'System'),
 (90, 'MenuBackgroundColour', '#0000cc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Background Colour', NULL, 'Style'),
 (91, 'MenuBorderColour', '#cccccc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Background Colour', NULL, 'Style'),
 (92, 'MenuItemBackgroundColour', '#0000cc', NULL, NULL, NULL, '0', 'C', '50', 'Select Menu Item Background Colour', NULL, 'Style'),
@@ -139,7 +139,7 @@ Please click the link below to reset your account details
 (111, 'News_Folder','','',NULL,'',0,'1',50,'Enter a value here to overrise the default forlder for postacsts.  The default is news.','','news'),
 (112, 'News_Limit', '4', NULL, NULL, NULL, '0', 'N', '4', 'Number of Pocast Episodes to diaply, this limit is not applied when another limit / search is used.', NULL, 'news'),
 (113, 'Junk_Check_Tolerance', '1', NULL, NULL, NULL, '0', 'N', '4', 'Number of junk Words allowed in cotact emials ', NULL, 'Security Contact email'),
-(114, 'Spam_Score_Words', '    \r\n   \r\n  \r\nhttps\r\n!\r\nearning', NULL, NULL, NULL, '0', 'N', '4', 'Words to add to Spam Score for contact emial, each word or phrase on a new line will will add 1 to the Spam Score.', NULL, 'Security Contact email'),
+(114, 'Spam_Score_Words', '    \r\n   \r\n  \r\nhttps\r\n!\r\nearning', NULL, NULL, NULL, '0', '10', '50', 'Words to add to Spam Score for contact emial, each word or phrase on a new line will will add 1 to the Spam Score.', NULL, 'Security Contact email'),
 (115, 'SpamValue', '50', NULL, NULL, NULL, '0', 'N', '4', 'Treat as SPAM any Contact message who\'s SPAM Value reaches the SpamValue', NULL, 'Security Contact email'),
 (116,'ContactFromEmail','','',NULL,'',0,'1',50,'Enter the From email address for the Contact Us form','','General Contact email'),
 (117,'ContactFromPassword','','',NULL,'',0,'P',50,'Enter the Password for the From email address for the Contact Us form','','General Contact email Security'),

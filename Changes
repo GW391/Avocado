@@ -1,3 +1,36 @@
+
+Podcast/Media upgrade - Version 1.26.1 - 31-08-2026
+    - Added Settings and action cons to appropriate System widgets (Newsletter and Podcasts) 
+    - Updated podcast rss feed to include Podcast namespace to meet PSP-1 Standard
+    - added video support for podcasts
+    - fixed server side MIME type validation on file uploads
+    - fixed missing input validation in AJAX files
+    - Create Manual force upgrade option in settings
+    - added abbility for settings to use HTML where needed
+    - changed podcast text to enable HTML content in settings previously plain text
+    - Changed Header to be HTML content in settings previously plain text
+    - Changed NewsDefaultMessage to be HTML content in settings previously plain text
+    - Changed DataUsage parameter to be HTML content in settings previously plain text
+    - upgraded PHPMailier to 7.1.1
+    - fixed bug where passwords parameters were being stored in session unencrypted
+    - fixed bug where password parameters may not be decrypted correctly when called
+
+
+    
+
+
+Bug fixes - Version 1.25.1 - 31-08-2024
+    - fixed bug in install that caused allocated memory size exhasted (issue #1)
+    - Fixed bug in delete podcast button
+    - fixed bug that did not store used parameters in session
+    - fixed bug in podcast URL when stored in subfolder
+    - fixed bug preventing development flag working
+    - fixed bug causing news to create link to invalid file
+    - fixed bug in Spam_Score_Words parameter assigned as number, should be text
+    - added file vs database version check for auto upgrade
+        not strictly a bug fix, but needed to force the DB to upgrade for some of the fixes here
+
+
 Email update - Version 1.24.2 - 08-12-2024
    - square Menu now using colours from DB    
     - improved SQL Injection protection
